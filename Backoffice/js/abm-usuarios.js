@@ -31,6 +31,10 @@ btnAddUser.addEventListener("click", () => {
 
 	modalUsers.getElementsByClassName("modal-title")[0].innerHTML =
 		"Agregar usuario";
+
+	formAbm.attributes.item(
+		2
+	).value = `../src/modules/users/abm-usuarios.php?action=add`;
 });
 
 //Editar usuario
