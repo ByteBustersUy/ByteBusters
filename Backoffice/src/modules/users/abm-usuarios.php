@@ -89,7 +89,6 @@ function addUser()
     if (!varchar45($nombre . $apellido) || !varchar45($email)) {
         die("ERROR: " . $error_messages['!valid_length45']);
     }
-
     
     $firstLetterName = substr($nombre, 0, 1);
     $restOfName = substr($nombre,1, strlen($nombre));

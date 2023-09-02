@@ -5,6 +5,7 @@ const btnDeleteUser = document.getElementById("btnDeleteUser");
 const btnSubmitModal = document.getElementById("btnSubmitModal");
 const formAbm = document.getElementById("formAbmUser");
 let selectedRow;
+let selectedModal;
 
 const validEmails = [
 	"vera.com.uy",
@@ -21,6 +22,7 @@ const validators = {
 	containWitheSpaces: (str) => new RegExp("\\s+").test(str) ? true : false,
 	isValidEmail: (str) => new RegExp(`^[a-z0-9\._-]+@(?:${validEmails.join("|")})$`).test(str) ? true : false,
 	isValidCi: (str) => new RegExp("^[1-9]{1}[0-9]{7}$").test(str) ? true : false,
+	isValidPass: (str) => new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+").test(str) && str.length >= 8 ? true : false,
 };
 
 //Agregar usuario
@@ -35,6 +37,7 @@ btnAddUser.addEventListener("click", () => {
 	formAbm.attributes.item(
 		2
 	).value = `../src/modules/users/abm-usuarios.php?action=add`;
+	selectedModal = "add";
 });
 
 //Editar usuario
@@ -45,6 +48,7 @@ btnEditUser.addEventListener("click", () => {
 		formAbm.attributes.item(
 			2
 		).value = `../src/modules/users/abm-usuarios.php?action=edit&ci=${userCi}`;
+		selectedModal = "edit";
 
 		modalUsers.getElementsByClassName("modal-title")[0].innerHTML =
 			"Editar usuario ";
@@ -176,10 +180,11 @@ formAbm.addEventListener("change", () => {
 	const apellido = document.getElementById("apellido");
 	const cedula = document.getElementById("cedula");
 	const email = document.getElementById("email");
+	const pass = document.getElementById("contrasenia");
 
 	messageError.innerHTML = "";
 
-	const { isEmpty, containWitheSpaces, isValidEmail, isValidCi } = validators;
+	const { isEmpty, containWitheSpaces, isValidEmail, isValidCi, isValidPass } = validators;
 	let validForm = true;
 	
 	if (
@@ -203,6 +208,14 @@ formAbm.addEventListener("change", () => {
 			messageError.innerHTML = "La cédula no es válida";
 			validForm = false;
 		}
+
+		if(selectedModal == "add"){
+			if (!isValidPass(pass.value)) {
+				messageError.innerHTML = "La contraseña no es válida.<br><br>Requiere: <br>Mayúsculas, Minúsculas,<br>Números y 8 caractéres";
+				validForm = false;
+			}
+		}
+
 	} else {
 		validForm = false;
 		messageError.innerHTML = "Todos los campos son obligatorios";
