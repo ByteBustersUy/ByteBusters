@@ -13,11 +13,11 @@ function findOneUser(string $ci): array
     }
 }
 
-function findAllUsers(): array
+function findAllUsers(string $searchValue = ""): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive ORDER BY nombre ASC" );
+        $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive AND nombre LIKE '%$searchValue%' ORDER BY nombre ASC" );
         $statement->execute(array(":isActive" => 1));
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
