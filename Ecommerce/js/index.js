@@ -17,6 +17,16 @@ window.addEventListener("load", function () {
     </div>`;
 			}
 		});
+
+	fetch("../api/datos-empresa.php")
+		.then((response) => response.json())
+		.then((data) => {
+			const divDatosEmpresa = document.getElementById("divDatosEmpresa");
+			divDatosEmpresa.innerHTML += `
+            <p>${data[0].calle} ${data[0].numero} - ${data[0].ciudad}</p>
+			`;
+		
+    });
 });
 
 setTimeout(() => {
