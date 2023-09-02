@@ -57,8 +57,7 @@ function loadFooter() {
 	let footerHTML = `
     <footer class="footer">
       <div>
-        <div class="datos-emp">
-          <p>Aconcagua 1277 - Montevideo</p>
+        <div id="divDatosEmpresa" class="datos-emp">
         </div>
         <div class="footer-icons mb-2">
           <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>
