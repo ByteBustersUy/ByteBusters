@@ -1,0 +1,873 @@
+:root {
+    /* ---- COLORS ---- */
+    --bytebusters-color: #1fb300;
+    --color-1: #181818;
+    --color-2: #5a5a5a3b;
+    --color-3: #cecece;
+    --color-4: #000000;
+    --color-5: #b8b8b878;
+    --error-color: #e01818;
+    --transparent-color: #00000000;
+
+    /* ---- BACKGROUNDS ---- */
+    --primary-background-color: var(--color-1);
+    --secondary-background-color: var(--color-2);
+    --background-color-light: var(--color-3);
+    --footer-background-color: var(--color-4);
+
+    /* ---- BUTTONS ---- */
+    --pressed-button: var(--color-2);
+
+    /* ---- TEXT ---- */
+    --primary-text-color: var(--color-1);
+    --secondary-text-color: var(--color-5);
+    --text-button-color: var(--color-1);
+    --light-text-color: var(--color-3);
+
+    /* ---- BORDERS ---- */
+    --primary-border-color: var(--bytebusters-color);
+    --secondary-border-color: var(--color-3);
+
+    /* ---- FONTS ---- */
+    --font-family-h1: Verdana, Geneva, Tahoma, sans-serif;
+    --primary-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+button:hover {
+    filter: brightness(85%);
+}
+
+button:active {
+    filter: brightness(60%);
+    box-shadow: inset 1px 1px var(--color-1);
+}
+
+#btnUploadImage{
+    display: none;
+}
+
+#errorMessageModal{
+    color: var(--error-color);
+    font-size: .8rem;
+    font-family: var(--primary-font-family);
+    display: flex;
+    justify-content: center;
+    padding-top: .5rem;
+}
+
+
+input:focus {
+    outline: none;
+}
+
+h1 {
+    display: inline-flex;
+    color: var(--light-text-color);
+    margin: 2rem 1rem 0 1rem;
+    font-size: 3rem;
+    font-family: var(--font-family-h1);
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 3rem;
+}
+
+html {
+    position: relative;
+    min-height: 100vh;
+}
+
+body {
+    background: var(--primary-background-color);
+}
+
+input {
+    height: 2.3rem;
+    outline: none;
+    text-indent: .5rem;
+    border-radius: .3rem;
+    border: 1px solid var(--color-4);
+    background-color: var(--background-color-light);
+}
+
+textarea {
+    outline: none;
+    text-indent: .5rem;
+    resize: none;
+    border-radius: .3rem;
+    border: 1px solid var(--color-4);
+    background-color: var(--background-color-light);
+}
+
+select {
+    outline: none;
+    text-indent: .5rem;
+    border-radius: .3rem;
+    border: 1px solid var(--color-4);
+    background-color: var(--background-color-light);
+}
+
+th {
+    overflow-y: none;
+    text-indent: .5rem;
+    text-align: center;
+    padding: 1rem 0 !important;
+    border: 1px solid var(--secondary-border-color);
+    background-color: var(--primary-background-color) !important;
+    filter: contrast(80%);
+}
+
+td {
+    text-align: center;
+    padding: .5rem;
+    border: 1px solid var(--secondary-border-color);
+    background-color: var(--primary-background-color) !important;
+    border-bottom: 1px solid var(--secondary-border-color);
+    filter: contrast(105%);
+}
+
+a {
+    text-decoration: none;
+}
+
+.frame {
+    margin: 3rem auto 2rem auto;
+}
+
+.table>:not(caption)>*>* {
+    padding: .5rem;
+}
+
+thead tr {
+    font-size: 1.1rem;
+}
+
+.link-options {
+    position: relative;
+    display: inline-block;
+    margin: 1rem 2rem;
+    color: var(--primary-text-color);
+    border-radius: .3rem;
+    background-color: var(--background-color-light);
+    box-shadow: inset -1px -2px .2rem ;
+    filter: drop-shadow(1px 1px .1rem var(--bytebusters-color));
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: .3rem 1.2rem;
+}
+
+.link-options:hover{
+    filter: brightness(110%) drop-shadow(1px 1px .5rem var(--bytebusters-color));
+}
+
+.link-options:active{
+    box-shadow: inset 0 0 .15rem ;
+    filter: brightness(50%);
+}
+
+.link-options-div {
+    position: absolute;
+    right: 0;
+    height: auto;
+    background-color: var(--color-1);
+    border-bottom-left-radius: 1rem;
+    filter: drop-shadow(-.2rem .2rem 4px var(--color-5));
+}
+
+.form-login {
+    width: 40vw;
+    min-width: 20rem;
+    height: fit-content;
+    margin: 2rem auto 0;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    border: 1.2px solid var(--primary-border-color);
+    background-color: var(--secondary-background-color);
+}
+
+.img-login {
+    display: flex;
+    width: 10rem;
+    margin: 1rem auto 2rem;
+    border-radius: 2rem;
+    background-color: var(--background-color-light);
+    filter: drop-shadow(.5rem .4rem .5rem var(--color-4));
+    animation: rotate 2s 1;
+}
+
+
+/* --------- FORM --------- */
+
+.form-login label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-login input {
+    display: block;
+    font-size: 1.2rem;
+    text-indent: .5rem;
+    width: 20rem;
+    margin: .5rem 0;
+    border: 1px solid;
+    border-radius: 5px;
+    color: var(--primary-text-color);
+    background-color: var(--background-color-light);
+}
+
+.form-login input:focus {
+    outline: none;
+}
+
+.form-login i {
+    transform: scale(130%);
+    padding: 0 .5rem 0 0;
+    color: var(--bytebusters-color);
+}
+
+.form-login a {
+    display: flex;
+    margin-top: .5rem;
+    justify-content: center;
+    color: var(--secondary-text-color);
+}
+
+.form-login .btn-submit {
+    text-indent: 0;
+    text-align: center;
+    width: 10rem;
+    height: 2.5rem;
+    margin: 3rem auto 2rem;
+    cursor: pointer;
+    color: var(--text-button-color);
+    background-color: var(--bytebusters-color);
+    border-radius: .3rem;
+    border: 1.2px solid var(--bytebusters-color);
+    box-shadow: inset -1px -2px .1rem ;
+    filter: drop-shadow(1px 1px .1rem var(--bytebusters-color));
+    font-size: 1.2rem;
+    padding: auto 1rem;
+}
+
+.btn-submit:hover{
+    filter: brightness(110%) drop-shadow(1px 1px .5rem var(--bytebusters-color));
+}
+
+.btn-submit:active{
+    box-shadow: inset 0 0 .15rem ;
+    filter: brightness(50%);
+}
+
+.profile {
+    display: flex;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 8rem;
+    height: 3rem;
+    border: 1px solid var(--bytebusters-color);
+    border-radius: 5rem;
+    text-align: center;
+    color: var(--color-3);
+    background-color: var(--transparent-color);
+}
+
+.profile:focus-visible {
+    outline: none;
+}
+
+
+
+
+/* --------- MENU --------- */
+
+.menu-cards {
+    height: 15rem;
+    min-width: 13rem;
+    max-width: 15rem;
+    text-align: center;
+    margin: 0rem auto;
+    margin-bottom: 1rem;
+    border-radius: .7rem;
+    border: 2px solid var(--color-4);
+    background-color: var(--background-color-light);
+    filter: drop-shadow(4px 4px 4px var(--color-5));
+    filter: brightness(85%);
+}
+
+.menu-cards a {
+    color: var(--primary-text-color);
+}
+
+.menu-cards:hover {
+    scale: 106%;
+    border: 4px solid var(--bytebusters-color);
+    filter: brightness(100%);
+    filter: drop-shadow(.1rem .1rem .5rem var(--bytebusters-color));
+}
+
+.menu-cards i {
+    scale: 400%;
+    margin: 4rem auto 3rem auto;
+    color: var(--primary-text-color);
+}
+
+.menu-cards h4 {
+    font-family: var(--primary-font-family);
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.menu-cards p {
+    font-family: var(--primary-font-family);
+    font-size: .8rem;
+    margin-top: 1rem;
+    padding: 0 2rem;
+}
+
+/*---------ABM PERMISSIONS-----*/
+
+.table-permissions{
+    margin-top: 5.3rem !important;
+}
+
+thead tr .nombre{
+    width: 15rem;
+}
+
+thead tr .ruta{
+    width: 20rem;
+}
+
+thead tr .roles{
+    width: 7rem;
+}
+
+/* 15 20 10 10 */
+
+
+/* --------- ABM USUARIOS --------- */
+
+.table-frame {
+    height: 29.5rem;
+    margin: auto;
+    margin-bottom: 10rem;
+    overflow-x: none;
+    overflow-y: scroll;
+    border: 2px ridge var(--color-3);
+    background-color: var(--primary-background-color);
+}
+
+.table-options {
+    display: flex;
+    margin: 2rem 0 1rem 0;
+}
+
+.table-options select {
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.first-in-table {
+    text-align: start;
+}
+
+.btn-eye {
+    width: 1.5rem;
+    height: auto;
+    text-align: center;
+    border-radius: 1rem;
+    border: 0;
+    padding: 2px;
+    background-color: var(--transparent-color);
+}
+
+.btn-eye i {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-3);
+}
+
+.filter-list {
+    width: 10rem;
+}
+
+.order-list {
+    width: 7rem;
+}
+
+.table-options input {
+    width: 14rem;
+}
+
+.table-options button {
+    width: 5rem;
+    margin-left: 1rem;
+    margin-right: auto;
+    border-radius: .3rem;
+    border: 1px solid var(--color-4);
+    background-color: var(--background-color-light);
+}
+
+.btn-abm {
+    display: inline-flex;
+    width: 6rem;
+    height: 6rem;
+    margin: 0 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: .7rem;
+    border: 3px solid var(--color-4);
+    background-color: var(--background-color-light);
+}
+
+.enabled-button {
+    filter: drop-shadow(.1rem .1rem 2rem var(--bytebusters-color));
+}
+
+.btn-abm i {
+    scale: 300%;
+    padding-top: 1px;
+    color: var(--color-4)
+}
+
+.items {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.modal-content {
+    width: 100%;
+    color: var(--bs-modal-color);
+    border: 1.2px solid var(--bytebusters-color);
+    background-color: var(--color-1);
+}
+
+.form-abm {
+    margin-top: 2rem;
+}
+
+.form-abm input {
+    display: flex;
+    min-width: 15rem;
+    margin: auto;
+    margin-top: .5rem;
+}
+
+.form-abm #uploadLabel {
+    outline: none;
+    width: 15rem;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.3rem;
+    margin-top: 0.5rem;
+    border-radius: .3rem;
+    border: 4px double var(--color-1);
+    background-color: var(--background-color-light);
+}
+
+
+.form-abm textarea {
+    display: flex;
+    min-width: 15rem;
+    height: 10rem;
+    margin: auto;
+    margin-top: .5rem;
+}
+
+
+.form-abm select {
+    display: flex;
+    min-width: 15rem;
+    height: 2.5rem;
+    margin: auto;
+    margin-top: .5rem;
+    appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+}
+
+.chkbox-labels {
+    display: flex;
+    margin: auto;
+    margin-top: 1rem;
+    width: fit-content;
+    color: var(--light-text-color);
+}
+
+.form-abm .chkbox-roles {
+    appearance: none;
+    margin-top: 0 !important;
+    height: 1.5rem;
+    width: 1.5rem;
+    min-width: 5rem;
+}
+
+.chkbox-roles:checked {
+    border: none;
+    filter: drop-shadow(.1rem .1rem .3rem var(--bytebusters-color));
+    background-color: var(--bytebusters-color);
+}
+
+.form-abm .buttons {
+    display: flex;
+    margin-top: 3rem;
+    justify-content: space-between;
+}
+
+.form-abm .chkbox-div {
+    width: 9rem;
+}
+
+.buttons button {
+    width: 8rem;
+    height: 2rem;
+    text-indent: 0;
+    cursor: pointer;
+    text-align: center;
+    margin: 2rem 1rem 1rem;
+    border-radius: .3rem;
+    border: 1px solid var(--color-4);
+    color: var(--text-button-color);
+    background-color: var(--background-color-light);
+}
+
+
+/*---------CONFIG EMPRESA------*/
+
+.form-emp {
+    display: inline-flex;
+}
+
+.form-emp div {
+    margin: 0 auto;
+}
+
+.form-emp input {
+    display: flex;
+    justify-content: center;
+    margin: auto 1rem;
+    min-width: 15rem;
+    margin-top: .1rem;
+}
+
+.form-emp label {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--light-text-color);
+}
+
+.btn-emp {
+    margin: .2rem;
+    width: 10rem;
+}
+
+.data-emp {
+    display: grid;
+    margin: auto;
+    margin-top: 1rem;
+    width: 25rem;
+}
+.data-label{
+    display: flex;
+    margin-bottom: 2px;
+    border-bottom: 1px solid white;
+    font-family: h1;
+    color: white;
+}
+
+
+.data-emp img {
+    width: inherit;
+    margin: 1rem auto;
+    border: .3rem ridge var(--secondary-border-color);
+    box-shadow: inset .1rem .1rem var(--color-5);
+    filter: drop-shadow(.1rem .1rem .1rem var(--color-5));
+}
+
+.data-label {
+    margin-bottom: 2px;
+    color: var(--light-text-color);
+    border-bottom: 1px solid var(--secondary-border-color);
+}
+
+
+.img-empresa {
+    display: flex;
+    width: 30rem;
+    min-width: 20rem;
+    height: 20rem;
+    margin: auto;
+    margin-top: 5rem;
+}
+
+/* --------- ERRORS --------- */
+.login-msg-error {
+    display: flex;
+    color: var(--light-text-color);
+    width: 15rem;
+    height: 2rem;
+    margin: auto;
+}
+
+.img-error {
+    display: flex;
+    margin: auto;
+}
+
+
+/* --------- GENERICS --------- */
+
+.align-end {
+    align-items: end;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.bottom-10 {
+    bottom: 10rem;
+}
+
+.border-test {
+    border: 1px solid red;
+}
+
+.disabled {
+    filter: brightness(50%);
+    z-index: -10;
+}
+
+.selected {
+    filter: contrast(200%);
+    border-top: 1.5px solid var(--bytebusters-color);
+    border-bottom: 1.5px solid var(--bytebusters-color);
+}
+
+/* cambia color del autocompletado en inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #e2e2e2 inset;
+}
+
+
+
+/* ---------  FOOTER --------- */
+footer {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100vw;
+    height: 12vh;
+    border-top: 1.2px solid var(--primary-border-color);
+    background-color: var(--footer-background-color);
+}
+
+footer .copyright {
+    position: absolute;
+    right: 0;
+    bottom: .5rem;
+    font-size: .5rem;
+    padding-right: 1rem;
+    color: var(--secondary-text-color);
+}
+
+footer img {
+    display: flex;
+    position: relative;
+    height: 80%;
+    margin: .5rem -1rem;
+}
+
+/* --------- BOOSTRAP --------- */
+
+.container {
+    max-width: 95vw;
+}
+
+.row {
+    min-height: 60vh
+}
+
+.sticky-top {
+    top: -6px;
+}
+
+.modal-title {
+    color: var(--light-text-color);
+}
+
+.modal-dialog {
+    margin-top: 8rem;
+}
+
+.btn-close {
+    transform: scale(110%);
+    border-radius: 1rem;
+    background-color: var(--light-text-color);
+    margin: 0 !important;
+}
+
+
+
+
+/* --------- DESKTOP -------- */
+@media only screen and (min-width: 992px) {
+
+    html {
+        min-height: 100vh;
+    }
+
+    body {
+        min-height: 80vh;
+    }
+
+    h1 {
+        text-align: start;
+        padding: 0;
+    }
+
+    .frame {
+        min-width: 95vw;
+        min-height: 60vh;
+        margin: 2rem auto 8rem auto;
+        border: 0 solid var(--color-5);
+    }
+
+    .btn-back {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        width: 5rem;
+        padding: .2rem;
+        border-radius: 2rem;
+        color: var(--color-3);
+        background-color: var(--transparent-color);
+    }
+
+    .form-login {
+        min-width: 25rem;
+        margin: 5rem auto 0;
+    }
+
+    .profile {
+        width: 8rem;
+    }
+
+
+    /* --------- MENU --------- */
+
+    .menu-cards {
+        margin: 8rem auto 0 auto;
+        height: 22rem;
+        min-width: 13rem;
+        width: 14rem;
+    }
+
+    .menu-cards i {
+        margin: 5rem auto;
+        margin-bottom: 4rem;
+        color: var(--primary-text-color);
+        scale: 450%;
+    }
+
+    .menu-cards h4 {
+        font-size: 1.5rem;
+        padding: 0;
+    }
+
+    .menu-cards p {
+        font-size: .8rem;
+        padding: 0 2rem;
+        margin-top: 5rem;
+    }
+
+    footer img {
+        margin: .5rem;
+        scale: 120%;
+    }
+
+    footer .copyright {
+        font-size: .8rem;
+    }
+
+    /* --------- ABM USUARIOS --------- */
+
+    .btn-abm {
+        margin: 4rem 2rem 0 2rem;
+        scale: 110%;
+    }
+/* 
+    .items {
+        text-align: center;
+        margin-top: 5rem;
+    } */
+
+    .btn-abm i {
+        scale: 300%;
+        color: var(--color-4)
+    }
+
+    .form-abm input {
+        width: 13rem;
+    }
+
+
+    .form-abm select {
+        width: 13rem;
+    }
+
+    .table-frame {
+        margin: auto;
+    }
+
+
+
+    /* --------- EMPRESA ---------  {*/
+    .img-empresa {
+        margin-top: 0;
+        width: 12rem;
+        height: 10rem;
+    }
+
+    /* --------- ERRORS --------- */
+    .body-error {
+        background-color: var(--primary-background-color);
+    }
+
+    .body-error img {
+        margin: auto;
+    }
+
+}
+
+/* --------- ANIMATIONS ---------  */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(35deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
