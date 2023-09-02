@@ -90,8 +90,13 @@ function addUser()
         die("ERROR: " . $error_messages['!valid_length45']);
     }
 
+    
+    $firstLetterName = substr($nombre, 0, 1);
+    $restOfName = substr($nombre,1, strlen($nombre));
+    $parsedName = strtoupper($firstLetterName).$restOfName;
+
     $newUser = [
-        "nombre" => $nombre,
+        "nombre" => $parsedName,
         "apellido" => $apellido,
         "cedula" => $cedula,
         "email" => $email,

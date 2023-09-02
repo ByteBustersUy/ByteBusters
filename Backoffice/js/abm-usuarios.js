@@ -179,7 +179,7 @@ formAbm.addEventListener("change", () => {
 
 	messageError.innerHTML = "";
 
-	const { isEmpty, startWithUpperCase, containWitheSpaces, isValidEmail, isValidCi } = validators;
+	const { isEmpty, containWitheSpaces, isValidEmail, isValidCi } = validators;
 	let validForm = true;
 	
 	if (
@@ -188,11 +188,6 @@ formAbm.addEventListener("change", () => {
 		!isEmpty(email.value) &&
 		!isEmpty(cedula.value)
 	) {
-
-		if (!startWithUpperCase(nombre.value)) {
-			messageError.innerHTML = "El nombre debe comenzar con mayúscula";
-			validForm = false;
-		}
 
 		if (containWitheSpaces(nombre.value)) {
 			messageError.innerHTML = "El nombre no puede contener espacios";
