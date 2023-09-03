@@ -38,6 +38,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            require "../src/modules/users/abm-permisos.php";
+                            echo getAllPermissionsDataTableHTML();
+                            ?>
                         </tbody>
                     </table>
                 </div>

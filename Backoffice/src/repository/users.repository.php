@@ -167,9 +167,21 @@ function deleteUser(string $userCi)
         $statement = $con->prepare("UPDATE USUARIOS
                                     SET activo = 0
                                     WHERE ci = :ci ");
-        $res = $statement->execute([":ci" => $userCi, ':isActive' => 0]);
+        $res = $statement->execute([":ci" => $userCi]);
         return $res;
     } catch (Exception $e) {
         die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+    }
+}
+
+function findAllPermissions() {
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion ASC" );
+        $statement->execute([]);
+        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $reg ? $reg : [];
+    } catch (Exception $e) {
+        die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
     }
 }
