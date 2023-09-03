@@ -1,19 +1,16 @@
 <?php
 require realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
 
-function getAllPermissionsDataTableHTML() {
+function getAllPermissionsDataTableHTML()
+{
     $permissions = findAllPermissions();
     $totalOfPermissions = count($permissions);
-    $actions = "";
-    for($i = 0; $i < $totalOfPermissions; $i++){
-        $actions .= $permissions[$i]["accion"];
-    }
 
     $data = "";
-    for($i = 0; $i < $totalOfPermissions; $i++){
+    for ($i = 0; $i < $totalOfPermissions; $i++) {
         $data .= '<tr class="user-select-none align-middle">
-                    <td class="first-in-table">'.$permissions[$i]["accion"].'</td>
-                    <td>'.$permissions[$i]["ruta"].'</td>
+                    <td class="first-in-table">' . $permissions[$i]["accion"] . '</td>
+                    <td>' . $permissions[$i]["ruta"] . '</td>
                     <td>
                         <input type="checkbox" class="chkbox-roles" name="checkAdmin" id="checkAdmin">
                     </td>
