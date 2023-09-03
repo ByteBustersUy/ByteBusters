@@ -59,6 +59,7 @@ function findPathByAction(string $action, array $rolesId): string
         $statement = $con->prepare("SELECT p.ruta, rp.ROLES_id
                                     FROM PERMISOS p
                                     JOIN ROLES_has_PERMISOS rp
+                                    ON p.accion = rp.PERMISOS_accion
                                     WHERE p.accion = :accion");
         $statement->execute(array(':accion' => $action));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
@@ -177,10 +178,31 @@ function deleteUser(string $userCi)
 function findAllPermissions() {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion ASC" );
+        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion DESC" );
         $statement->execute([]);
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
+    } catch (Exception $e) {
+        die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
+    }
+}
+
+function findAllRolesWithPermissions(string $action): string {
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+
+    try {
+        $statement = $con->prepare("SELECT ROLES_id 
+                                    FROM ROLES_has_PERMISOS
+                                    WHERE PERMISOS_accion = :accion" );
+        $statement->execute([":accion" => $action]);
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        $rolesId = '';
+
+        while($reg = $statement->fetch(PDO::FETCH_ASSOC)){
+            $rolesId .= $reg["ROLES_id"];
+        }
+
+        return $reg ? $rolesId : [];
     } catch (Exception $e) {
         die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
     }
