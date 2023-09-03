@@ -13,11 +13,11 @@ function findOneUser(string $ci): array
     }
 }
 
-function findAllUsers(): array
+function findAllUsers(string $searchValue = ""): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive ORDER BY nombre ASC" );
+        $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive AND nombre LIKE '%$searchValue%' ORDER BY nombre ASC" );
         $statement->execute(array(":isActive" => 1));
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
@@ -59,6 +59,7 @@ function findPathByAction(string $action, array $rolesId): string
         $statement = $con->prepare("SELECT p.ruta, rp.ROLES_id
                                     FROM PERMISOS p
                                     JOIN ROLES_has_PERMISOS rp
+                                    ON p.accion = rp.PERMISOS_accion
                                     WHERE p.accion = :accion");
         $statement->execute(array(':accion' => $action));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
@@ -167,9 +168,42 @@ function deleteUser(string $userCi)
         $statement = $con->prepare("UPDATE USUARIOS
                                     SET activo = 0
                                     WHERE ci = :ci ");
-        $res = $statement->execute([":ci" => $userCi, ':isActive' => 0]);
+        $res = $statement->execute([":ci" => $userCi]);
         return $res;
     } catch (Exception $e) {
         die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+    }
+}
+
+function findAllPermissions() {
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion DESC" );
+        $statement->execute([]);
+        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $reg ? $reg : [];
+    } catch (Exception $e) {
+        die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
+    }
+}
+
+function findAllRolesWithPermissions(string $action): string {
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+
+    try {
+        $statement = $con->prepare("SELECT ROLES_id 
+                                    FROM ROLES_has_PERMISOS
+                                    WHERE PERMISOS_accion = :accion" );
+        $statement->execute([":accion" => $action]);
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        $rolesId = '';
+
+        while($reg = $statement->fetch(PDO::FETCH_ASSOC)){
+            $rolesId .= $reg["ROLES_id"];
+        }
+
+        return $reg ? $rolesId : [];
+    } catch (Exception $e) {
+        die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
     }
 }
