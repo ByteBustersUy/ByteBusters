@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
 				divPrducPromo.innerHTML += `
     <div>
         <div class="card h-100 produc-promo" >
-            <img src="./imagenes-productos/${data[id].imagen}" class="card-img-top" alt="...">
+            <img src="./images/${data[id].imagen}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4>$${data[id].precio}</h4>
                 <h5>${data[id].nombre}</h5>
@@ -17,6 +17,16 @@ window.addEventListener("load", function () {
     </div>`;
 			}
 		});
+
+	fetch("../api/datos-empresa.php")
+		.then((response) => response.json())
+		.then((data) => {
+			const divDatosEmpresa = document.getElementById("divDatosEmpresa");
+			divDatosEmpresa.innerHTML += `
+            <p>${data[0].calle} ${data[0].numero} - ${data[0].ciudad}</p>
+			`;
+		
+    });
 });
 
 setTimeout(() => {

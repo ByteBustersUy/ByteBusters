@@ -1,8 +1,16 @@
+const currentURL = window.location.href;
+const urlParts = currentURL.split("/");
+const currentDir = urlParts[urlParts.length - 2];
+let relativePath;
+if(currentDir == "pages") relativePath = "..";
+if(currentDir == "Ecommerce") relativePath = ".";
+
 function loadNav() {
+
 	let navHTML = `
   <nav class="navbar navbar-light bg-light">
   <div class="d-flex m-auto">
-    <a href="index.html" id="logo"><img class="logo" src="./assets/logoecomerse1.png" alt=""/></a>
+    <a href="index.html" id="logo"><img class="logo" src="${relativePath}/assets/logoecomerse1.png" alt=""/></a>
     <button id="btnNavOption" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarMenu" aria-controls="offcanvasNavbarMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,8 +28,8 @@ function loadNav() {
       <input id="navSearch" class="form-control search" type="search" placeholder="Buscar en Digitalmarket" aria-label="Search"/>
       <button id="btnNavSearch" class="btn btn-outline-secondary" type="submit">Buscar</button>
     </form>
-    <a id="btnCarrito" href="./pages/carrito.html">
-      <img class="carrito" src="./assets/Carts_Icons.png" alt="logo carrito de compras" />
+    <a id="btnCarrito" href="${relativePath}/pages/carrito.html">
+      <img class="carrito" src="${relativePath}/assets/Carts_Icons.png" alt="logo carrito de compras" />
     </a>
   </div>
 </nav>
@@ -57,8 +65,7 @@ function loadFooter() {
 	let footerHTML = `
     <footer class="footer">
       <div>
-        <div class="datos-emp">
-          <p>Aconcagua 1277 - Montevideo</p>
+        <div id="divDatosEmpresa" class="datos-emp">
         </div>
         <div class="footer-icons mb-2">
           <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>
@@ -76,7 +83,7 @@ function loadFooter() {
 }
 
 function loadCategories() {
-  return `
+	return `
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Almacen</a>
@@ -104,9 +111,9 @@ function loadCategories() {
 }
 
 function loadLinks() {
-  return `
+	return `
       <ul>
-        <li><a href="./index.html">Inicio</a></li>
+        <li><a href="${relativePath}/index.html">Inicio</a></li>
         <li><a href="#">Acerca de</a></li>
         <li><a href="#">Servicios</a></li>
         <li><a href="#">Contacto</a></li>

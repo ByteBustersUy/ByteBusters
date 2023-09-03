@@ -2,9 +2,9 @@
 
 function isValidPass(string $var): bool
 {
-    $lowerCase = "/[a-z]{1,}/";
-    $upperCase = "/[A-Z]{1,}/";
-    $number = "/[0-9]{1,}/";
+    $lowerCase = "/[a-z]+/";
+    $upperCase = "/[A-Z]+/";
+    $number = "/[0-9]+/";
 
     return 
         strlen($var) >= 8 &&

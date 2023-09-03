@@ -5,21 +5,28 @@ require realpath(dirname(__FILE__)) . "/../../utils/validators/isValidEmail.php"
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
 require realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
 
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
 
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == "add") {
-            addUser();
-        } else if ($_GET['action'] == "edit" && isset($_GET['ci'])) {
-            editUser($_GET['ci']);
-        } else if ($_GET['action'] == "delete") {
-            if ($_POST["deleteUserCi"] != $_SESSION['userCi']) {
-                return deleteUser($_POST["deleteUserCi"]);
-            }
-        } else {
-            die("Invalid action requested");
+        $action = $_GET['action'];
+
+        switch ($action) {
+            case "add":
+                addUser();
+                break;
+
+            case "edit":
+                if (isset($_GET['ci']))
+                    editUser(htmlspecialchars($_GET['ci']));
+                break;
+
+            case "delete":
+                if (htmlspecialchars($_POST["deleteUserCi"]) != $_SESSION['userCi'])
+                    return deleteUser($_POST["deleteUserCi"]);
+                break;
+            default:
+                die("Invalid action requested");
         }
     }
 }
@@ -29,9 +36,9 @@ function hashPass(string $pass): string
     return password_hash($pass, PASSWORD_DEFAULT);
 }
 
-function getUsersTableDataHTML(): string
+function getUsersTableDataHTML(string $name = ""): string
 {
-    $usersData = findAllUsers();
+    $usersData = findAllUsers($name);
     $usersList = '';
     foreach ($usersData as $user) {
         $rolesList = findRoles($user['ci']);
@@ -90,8 +97,12 @@ function addUser()
         die("ERROR: " . $error_messages['!valid_length45']);
     }
 
+    $firstLetterName = substr($nombre, 0, 1);
+    $restOfName = substr($nombre, 1, strlen($nombre));
+    $parsedName = strtoupper($firstLetterName) . $restOfName;
+
     $newUser = [
-        "nombre" => $nombre,
+        "nombre" => $parsedName,
         "apellido" => $apellido,
         "cedula" => $cedula,
         "email" => $email,
@@ -165,10 +176,9 @@ function editUser(string $userCi)
             "rolesId" => $rolesId
         ];
 
-        
+
         updateOneUser($newUser);
         header("Location:../../../pages/abm-usuarios.php");
-
     } catch (Exception $e) {
         throw new ErrorException($e->getMessage());
     }

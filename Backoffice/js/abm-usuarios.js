@@ -1,10 +1,10 @@
-//Elementos
 const btnAddUser = document.getElementById("btnAddUser");
 const btnEditUser = document.getElementById("btnEditUser");
 const btnDeleteUser = document.getElementById("btnDeleteUser");
 const btnSubmitModal = document.getElementById("btnSubmitModal");
 const formAbm = document.getElementById("formAbmUser");
 let selectedRow;
+let selectedModal;
 
 const validEmails = [
 	"vera.com.uy",
@@ -17,10 +17,18 @@ const validators = {
 	isSame: (a, b) => a === b,
 	isEqual: (a, b) => a == b,
 	isEmpty: (a) => a.length === 0,
-	startWithUpperCase: (str) => new RegExp("^[A-Z]+").test(str) ? true : false,
-	containWitheSpaces: (str) => new RegExp("\\s+").test(str) ? true : false,
-	isValidEmail: (str) => new RegExp(`^[a-z0-9\._-]+@(?:${validEmails.join("|")})$`).test(str) ? true : false,
-	isValidCi: (str) => new RegExp("^[1-9]{1}[0-9]{7}$").test(str) ? true : false,
+	startWithUpperCase: (str) => (new RegExp("^[A-Z]+").test(str) ? true : false),
+	containWitheSpaces: (str) => (new RegExp("\\s+").test(str) ? true : false),
+	isValidEmail: (str) =>
+		new RegExp(`^[a-z0-9\._-]+@(?:${validEmails.join("|")})$`).test(str)
+			? true
+			: false,
+	isValidCi: (str) =>
+		new RegExp("^[1-9]{1}[0-9]{7}$").test(str) ? true : false,
+	isValidPass: (str) =>
+		new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*d).+").test(str) && str.length >= 8
+			? true
+			: false,
 };
 
 //Agregar usuario
@@ -28,9 +36,13 @@ btnAddUser.addEventListener("click", () => {
 	btnAddUser.setAttribute("class", "enabled-button");
 	btnSubmitModal.disabled = true;
 	btnSubmitModal.setAttribute("style", "filter:brightness(30%);");
-
 	modalUsers.getElementsByClassName("modal-title")[0].innerHTML =
 		"Agregar usuario";
+
+	formAbm.attributes.item(
+		2
+	).value = `../src/modules/users/abm-usuarios.php?action=add`;
+	selectedModal = "add";
 });
 
 //Editar usuario
@@ -41,6 +53,7 @@ btnEditUser.addEventListener("click", () => {
 		formAbm.attributes.item(
 			2
 		).value = `../src/modules/users/abm-usuarios.php?action=edit&ci=${userCi}`;
+		selectedModal = "edit";
 
 		modalUsers.getElementsByClassName("modal-title")[0].innerHTML =
 			"Editar usuario ";
@@ -172,24 +185,20 @@ formAbm.addEventListener("change", () => {
 	const apellido = document.getElementById("apellido");
 	const cedula = document.getElementById("cedula");
 	const email = document.getElementById("email");
+	const pass = document.getElementById("contrasenia");
 
 	messageError.innerHTML = "";
 
-	const { isEmpty, startWithUpperCase, containWitheSpaces, isValidEmail, isValidCi } = validators;
+	const { isEmpty, containWitheSpaces, isValidEmail, isValidCi, isValidPass } =
+		validators;
 	let validForm = true;
-	
+
 	if (
 		!isEmpty(nombre.value) &&
 		!isEmpty(apellido.value) &&
 		!isEmpty(email.value) &&
 		!isEmpty(cedula.value)
 	) {
-
-		if (!startWithUpperCase(nombre.value)) {
-			messageError.innerHTML = "El nombre debe comenzar con mayúscula";
-			validForm = false;
-		}
-
 		if (containWitheSpaces(nombre.value)) {
 			messageError.innerHTML = "El nombre no puede contener espacios";
 			validForm = false;
@@ -203,6 +212,20 @@ formAbm.addEventListener("change", () => {
 		if (!isValidCi(cedula.value)) {
 			messageError.innerHTML = "La cédula no es válida";
 			validForm = false;
+		}
+
+		if (selectedModal == "add") {
+			if (!isValidPass(pass.value)) {
+				messageError.innerHTML = `La contraseña no es válida.
+					<br><br>
+					Requiere:
+					<br>
+					Mayúsculas, Minúsculas,
+					<br>
+					Números y 8 caractéres.
+					`;
+				validForm = false;
+			}
 		}
 	} else {
 		validForm = false;
