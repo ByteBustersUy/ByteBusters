@@ -32,7 +32,7 @@
                             <i class="fa-solid fa-square-plus"></i>
                         </div>
                     </a>
-                    <a id="btnEditUser" class="disabled" >
+                    <a id="btnEditUser" class="disabled">
                         <div class="btn-abm">
                             <i class="fa-solid fa-pen"></i>
                         </div>
@@ -46,8 +46,8 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                    <input type="search" name="search" placeholder="Nombre" autocomplete="off">
-                    <button type="button">Buscar</button>
+                        <input id="userSearch" type="search" name="search" placeholder="Nombre" autocomplete="off">
+                        <button id="btnUserSearch" type="submit">Buscar</button>
                     <select class="order-list" name="order" id="order">
                         <option selected hidden value="">Ordenar</option>
                         <option value="az">A-Z</option>
@@ -69,7 +69,7 @@
                                 <th class="user-select-none" scope="col">Roles</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="bodyUsersTable">
                             <?php
                             require "../src/modules/users/abm-usuarios.php";
                             echo getUsersTableDataHTML();
