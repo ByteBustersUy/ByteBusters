@@ -7,9 +7,7 @@ function getAllPermissionsDataTableHTML()
     $totalOfPermissions = count($permissions);
 
     $data = "";
-    $rolesId = "";
     for ($i = 0; $i < $totalOfPermissions; $i++) {
-        $rolesId .= findAllRolesWithPermissions($permissions[$i]["accion"]);
         $data .= '<tr class="user-select-none align-middle">
                     <td class="first-in-table">' . $permissions[$i]["accion"] . '</td>
                     <td>' . $permissions[$i]["ruta"] . '</td>
@@ -21,6 +19,5 @@ function getAllPermissionsDataTableHTML()
                     </td>
                 </tr>';
     }
-    echo $rolesId;
     return $data;
 }
