@@ -285,7 +285,7 @@ INSERT INTO `bytebusters2_db`.`USUARIOS_has_ROLES` (`USUARIOS_ci`, `ROLES_id`) V
 INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/config-empresa.php', 'Configurar datos de empresa');
 INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/descargas.php', 'Descargar documentos PDF');
 INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-permisos.php', 'Gestionar permisos de usuario');
-INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-productos.php', 'Gestionar Productos');
+INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-productos.php', 'Gestionar productos');
 INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-promociones.php', 'Gestionar promociónes');
 INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-usuarios.php', 'Gestionar usuarios');
 /*
@@ -296,7 +296,7 @@ INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-u
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Configurar datos de empresa', '1');
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Descargar documentos PDF', '2');
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar permisos de usuario', '1');
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar Productos', '2');
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar productos', '2');
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar promociónes', '2');
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar usuarios', '1');
 /* 

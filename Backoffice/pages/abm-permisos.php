@@ -31,7 +31,7 @@
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th class="user-select-none first-in-table nombre" scope="col">Nombre</th>
+                                <th class="user-select-none first-in-table nombre" scope="col">Acción</th>
                                 <th class="user-select-none ruta" scope="col">Ruta</th>
                                 <th class="user-select-none roles" scope="col">Administrador</th>
                                 <th class="user-select-none roles" scope="col">Vendedor</th>

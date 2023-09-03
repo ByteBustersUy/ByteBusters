@@ -32,7 +32,7 @@ window.addEventListener('load', function() {
       
         //AGREGO PROPIEDADES A LOS ELEMENTOS 
         nombreProduc.textContent = data[id].nombre;
-        imgproducto.src = "./../imagenes-productos/"+data[id].imagen;
+        imgproducto.src = "./../images/"+data[id].imagen;
         inputbtnmenos.type="button";
         inputbtnmenos.value="-";
         inputnum.type="number";
