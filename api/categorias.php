@@ -1,7 +1,7 @@
 <?php
 include "./db/conexion.php";
 
-$res = $con->query("SELECT * FROM productos LIMIT 12; WHERE activo = 1 ");
+$res = $con->query("SELECT * FROM categorias ");
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 
 
