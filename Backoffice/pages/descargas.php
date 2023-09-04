@@ -16,6 +16,7 @@
     <div>
         <div class="link-options-div">
             <?php
+            require "./../src/modules/downloads/pdfDownload.php";
             require "./components/options.php";
             echo $options;
             ?>
