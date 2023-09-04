@@ -3,8 +3,8 @@ window.addEventListener("load", function () {
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
-				const divPrducPromo = document.getElementById("productos-sin-promo");
-				divPrducPromo.innerHTML += `
+				const divPrductoSinPromo = document.getElementById("productos-sin-promo");
+				divPrductoSinPromo.innerHTML += `
         <div class="list-group"> 
     <div class="d-flex list-body">
     <img class="img-list" src="./images/${data[id].imagen}" class="card-img-top" alt="...">
