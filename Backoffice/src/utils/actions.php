@@ -1,13 +1,13 @@
 <?php
 
-//El valor de cada clave corresponde a cada acción en la tabla PERMISOS
+//El value de cada key corresponde a cada acción en la tabla PERMISOS
 
 $actions = 
 [
-    "gestionar-usuarios" => "gestion_usuarios",
-    "gestionar-permisos" => "gestion_permisos",
-    "gestionar-productos" => "gestion_productos",
-    "gestionar-promociones" => "gestion_promociones",
-    "descargar-documentos" => "descargas_documentos",
-    "configurar-empresa" => "config_empresa",
+    "gestionar-usuarios" => "Gestionar usuarios",
+    "gestionar-permisos" => "Gestionar permisos de usuario",
+    "gestionar-productos" => "Gestionar productos",
+    "gestionar-promociones" => "Gestionar promociónes",
+    "descargar-documentos" => "Descargar documentos PDF",
+    "configurar-empresa" => "Configurar datos de empresa",
 ];

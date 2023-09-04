@@ -1,11 +1,9 @@
-//Elementos
 const btnAddProduct = document.getElementById("btnAddProduct");
 const btnEditProduct = document.getElementById("btnEditProduct");
 const btnDeleteProduct = document.getElementById("btnDeleteProduct");
 const formAbm = document.getElementById("formAbmProduct");
 const btnSubmitModal = document.getElementById("btnSubmitModal");
 const btnUploadImage = document.getElementById("btnUploadImage");
-
 let selectedRow;
 
 const validators = {
@@ -45,6 +43,7 @@ btnUploadImage.addEventListener("change", () => {
 	}
 });
 
+
 //Editar Producto
 btnEditProduct.addEventListener("click", () => {
 	if (!btnEditProduct.classList.contains("disabled")) {
@@ -66,7 +65,7 @@ btnEditProduct.addEventListener("click", () => {
 			//...
 		};
 
-		//refill inputs with selected user data
+		//refill inputs with selected product data
 		inputsForm.nombre.value = selectedUserData.nombre;
 		//...
 
@@ -76,6 +75,7 @@ btnEditProduct.addEventListener("click", () => {
 	}
 });
 
+
 // Eliminar producto
 btnDeleteProduct.addEventListener("click", () => {
 	if (!btnDeleteProduct.classList.contains("disabled")) {
@@ -83,7 +83,7 @@ btnDeleteProduct.addEventListener("click", () => {
 		const productRow = document.getElementsByClassName("selected")[0];
 		const productId = productRow.id;
 		const category = productRow.getElementsByTagName("td")[1].innerHTML;
-		const promoId = ""; //TODO: obtener id de promo
+		const promoId = "";
 		const response = prompt(
 			`Se eliminará el producto con id ${productId} \n\nIngrese el id para confirmar`
 		);
@@ -123,6 +123,7 @@ btnDeleteProduct.addEventListener("click", () => {
 		document.getElementById("btnEditProduct").setAttribute("class", "disabled");
 	}
 });
+
 
 //Modal
 const modalProducts = document.getElementById("moddalProducts");
@@ -181,6 +182,7 @@ formAbm.addEventListener("change", () => {
 		btnSubmitModal.setAttribute("style", "filter:brightness(30%);");
 	}
 });
+
 
 function selectProductRow(productId) {
 	const btnDeleteProduct = document.getElementById("btnDeleteProduct");
