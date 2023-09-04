@@ -132,4 +132,4 @@ window.onload = function () {
 };
 
 const btnNavOption = document.getElementById("btnNavOption");
-btnNavOption.addEventListener("click",loadCategories());
+//btnNavOption.addEventListener("click",loadCategories());

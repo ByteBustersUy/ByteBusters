@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
                 <h4>$${data[id].precio}</h4>
                 <h5>${data[id].nombre}</h5>
             </div>
-            <a id="agregar-carrito" href="#" class="btn btn-agregar">Agregar al carrito</a>
+            <a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         </div>
     </div>`;
 			}
