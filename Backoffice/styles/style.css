@@ -501,12 +501,15 @@ thead tr .roles{
     color: var(--light-text-color);
 }
 
-.form-abm .chkbox-roles {
+.form-abm .chkbox-roles, .chkbox-roles {
+    align-items: center;
     appearance: none;
     margin-top: 0 !important;
     height: 1.5rem;
     width: 1.5rem;
     min-width: 5rem;
+    display: flex;
+    margin: auto
 }
 
 .chkbox-roles:checked {
