@@ -10,7 +10,7 @@ function loadNav() {
 	let navHTML = `
   <nav class="navbar navbar-light bg-light">
   <div class="d-flex m-auto">
-    <a href="index.html" id="logo"><img class="logo" src="${relativePath}/assets/logoecomerse1.png" alt=""/></a>
+    <a href="${relativePath}/index.html" id="logo"><img class="logo" src="${relativePath}/assets/logoecomerse1.png" alt=""/></a>
     <button id="btnNavOption" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarMenu" aria-controls="offcanvasNavbarMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,7 +48,12 @@ function loadNav() {
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          ${loadCategories()}
+        <ul id="list-categoris" class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        </ul>
+      <form class="d-flex mt-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
         </div>
       </div>
   </div>
@@ -83,33 +88,33 @@ function loadFooter() {
 }
 
 function loadCategories() {
-	return `
+
+  fetch("../api/categorias.php")
+		.then((response) => response.json())
+		.then((data) => {
+			for (let id = 0; id < data.length; id++) {
+
+	    const listcategoris=document.getElementById("list-categoris");
+          listcategoris.innerHTML=` 
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">${data[id].nombre}</a>
+          </li>`;
+          
+}
+});
+}
+
+
+/*return `
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Almacen</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Desayuno, merienda y postres</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Aguas y Bebidas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Frutas y verduyras</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lacteos y quesos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Otras cosas</a>
             </li>
           </ul>
           <form class="d-flex mt-3" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>`;
-}
-
+            </form>`;*/
 function loadLinks() {
 	return `
       <ul>
@@ -125,3 +130,6 @@ window.onload = function () {
 	loadNav();
 	loadFooter();
 };
+
+const btnNavOption = document.getElementById("btnNavOption");
+btnNavOption.addEventListener("click",loadCategories());
