@@ -1,7 +1,7 @@
 <?php
 include "./db/conexion.php";
 
-$res = $con->query("SELECT * FROM productos_has_categorias  WHERE categorias_id=3");
+$res = $con->query("SELECT * FROM categorias ");
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 
 
