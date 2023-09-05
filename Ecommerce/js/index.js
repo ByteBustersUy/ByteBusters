@@ -53,4 +53,4 @@ setTimeout(() => {
 				console.log(sugerencias);
 			});
 	});
-}, 100);
+}, 500);
