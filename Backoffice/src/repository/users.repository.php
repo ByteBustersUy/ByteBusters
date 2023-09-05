@@ -17,7 +17,7 @@ function findAllUsers(string $searchValue = ""): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive AND nombre LIKE '%$searchValue%' ORDER BY nombre ASC" );
+        $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive AND nombre LIKE '%$searchValue%' ORDER BY nombre ASC");
         $statement->execute(array(":isActive" => 1));
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
@@ -46,7 +46,7 @@ function findRoles(string $ci): array
             }
         }
 
-        return [ $rolesIdsList, $rolNamesList ];
+        return [$rolesIdsList, $rolNamesList];
     } catch (Exception $e) {
         die("ERROR SQL in findRoles(): " . $e->getMessage());
     }
@@ -100,7 +100,7 @@ function findActionsByRolesId(array $rolesId): array
     return $actions;
 }
 
-function saveOneUser(array $newUser)
+function saveOneUser(array $newUser): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     require realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
@@ -122,12 +122,14 @@ function saveOneUser(array $newUser)
         } else {
             die("ERROR: " . $error_messages['!user_add']);
         }
+        return true;
     } catch (Exception $e) {
-        die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        echo ("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        return false;
     }
 }
 
-function updateOneUser(array $newUser)
+function updateOneUser(array $newUser): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     require realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
@@ -155,15 +157,17 @@ function updateOneUser(array $newUser)
                 $statement->execute(array(':ci' => $newUser['cedula'], ':rolId' => $rolId));
             }
         }
+        return true;
     } catch (Exception $e) {
-        die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        echo ("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        return false;
     }
 }
 
 function deleteUser(string $userCi)
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-    
+
     try {
         $statement = $con->prepare("UPDATE USUARIOS
                                     SET activo = 0
@@ -175,10 +179,11 @@ function deleteUser(string $userCi)
     }
 }
 
-function findAllPermissions() {
+function findAllPermissions(): array
+{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion DESC" );
+        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion DESC");
         $statement->execute([]);
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
@@ -187,18 +192,19 @@ function findAllPermissions() {
     }
 }
 
-function findAllRolesWithPermissions(string $action): string {
+function findAllRolesWithPermissions(string $action): string
+{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
 
     try {
         $statement = $con->prepare("SELECT ROLES_id 
                                     FROM ROLES_has_PERMISOS
-                                    WHERE PERMISOS_accion = :accion" );
+                                    WHERE PERMISOS_accion = :accion");
         $statement->execute([":accion" => $action]);
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
         $rolesId = '';
 
-        while($reg = $statement->fetch(PDO::FETCH_ASSOC)){
+        while ($reg = $statement->fetch(PDO::FETCH_ASSOC)) {
             $rolesId .= $reg["ROLES_id"];
         }
 

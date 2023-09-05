@@ -128,11 +128,12 @@ function saveOneProduct(array $newProduct): bool
         return true;
     } catch (Exception $e) {
         $con->rollback();
-        die("ERROR SQL in saveOneProduct(): " . $e->getMessage());
+        echo ("ERROR SQL in saveOneProduct(): " . $e->getMessage());
+        return false;
     }
 }
 
-function deleteProduct(string $productId, bool $isPromo = false)
+function deleteProduct(string $productId, bool $isPromo = false): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
@@ -156,10 +157,12 @@ function deleteProduct(string $productId, bool $isPromo = false)
         $statement->execute([':id' => $productId]);
 
         $con->commit();
+        return true;
     } catch (Exception $e) {
 
         $con->rollback();
-        die("ERROR SQL in Delete Product(): " . $e->getMessage());
+        echo("ERROR SQL in Delete Product(): " . $e->getMessage());
+        return false;
     }
 }
 

@@ -57,7 +57,7 @@ function getUsersTableDataHTML(string $name = ""): string
     return $usersList;
 }
 
-function addUser()
+function addUser(): void
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
@@ -119,7 +119,7 @@ function addUser()
 }
 
 
-function editUser(string $userCi)
+function editUser(string $userCi): void
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
     try {

@@ -1,7 +1,7 @@
 <?php
 require realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
 
-function getAllPermissionsDataTableHTML()
+function getAllPermissionsDataTableHTML(): string
 {
     $permissions = findAllPermissions();
     $totalOfPermissions = count($permissions);
