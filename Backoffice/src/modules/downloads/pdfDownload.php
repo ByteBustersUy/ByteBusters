@@ -1,10 +1,13 @@
 <?php
 ob_end_clean();
-//require  '/../../repository/download.repository.php';
+
+require realpath(dirname(__FILE__)). '/../../repository/download.repository.php';
 require('FPDF/fpdf.php');
-require realpath(dirname(__FILE__)) . "/../../db/conexion.php";
+
 class pdfDownload extends FPDF
 {
+
+
 // Cabecera de página
 function Header()
 {
@@ -36,16 +39,13 @@ function Footer()
 }
 }
 
-$resultado = $con->query("SELECT nombre,descripcion,precio FROM PRODUCTOS");
-$registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
 $pdf = new pdfDownload();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 
 //$data = findAllDataProduct();
-
+$registros = findAllDataProduct();
 foreach($registros as $reg) { 
     $productname = '';
     $productdesc = '';
@@ -55,7 +55,6 @@ foreach($registros as $reg) {
     $recortedesc =substr($reg["descripcion"],0,40);
     $productdesc .= "  ". $recortedesc;
     $productpresi .= $reg["precio"];
-
 
     $pdf->Ln();
    
