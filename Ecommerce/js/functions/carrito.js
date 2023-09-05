@@ -1,6 +1,6 @@
 
 window.addEventListener('load', function() {
-   console.log("funciona")
+   
    fetch("../../api/mostrar.php")
    .then(response => response.json()) 
    .then(data => {
@@ -61,5 +61,13 @@ window.addEventListener('load', function() {
    .catch(error => {
        console.error("error",error)
    });
+
+    
+
+     const carritoGuardado = localStorage.getItem("carrito");
+     if (carritoGuardado) {
+       carrito = JSON.parse(carritoGuardado);
+       console.log(carritoGuardado);
+     }
 });
 

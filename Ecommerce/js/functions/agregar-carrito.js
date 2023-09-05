@@ -7,13 +7,14 @@ if (carritoGuardado) {
   carrito = JSON.parse(carritoGuardado);
 }*/
 
+
 document.addEventListener("DOMContentLoaded", function () {
   //Guarda el carrito en el LocalStorage
   setTimeout(() => {
     document.querySelectorAll(".agregar-carrito").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = btn.id;
-        console.log(id);
+        
         const cantidad = 1;
         agregarProducoAlCarrito(id, cantidad);
       });
@@ -30,9 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
         cantidad: cantidad,
       });
     }
-    console.log(carrito);
+    
 
     const carritoJSON = JSON.stringify(carrito);
     localStorage.setItem("carrito", carritoJSON);
+  }
+
+  function obtener_carrito() {
+    let carrito = localStorage.getItem("carrito");
+    console.log(carrito);
   }
 });
