@@ -5,14 +5,14 @@
   --color-2: #424242;
   --color-3: #a6a6a6;
   --color-3: #b7b7b7;
-  --color-4: #d4d4d5;
+  --color-4: #dbdbdb;
   --color-5: #ffffff;
   --color-6: #0000ff;
   --color-background: #fdfbfb;
 }
 
 body {
-  background-color: var(--color-background);
+  background-color: var(--color-4);
 }
 
 .logo {
@@ -436,5 +436,32 @@ input[type="button"]{
   height: 13rem;
   margin: 5rem 0;
 }
+
+
+
+
+}
+
+.imgprod{
+  margin: 2px;
+  background-color: var(--color-2);
+}
+
+
+
+  .cardProd{
+    box-shadow: 10px 10px 15px var(--color-3);
+    background-color: var(--color-5);
+    margin-top: 3%;
+  }
+.selFilt{
+  margin: 1%;
+  
+}
+
+.subFoot{
+  text-align: right;
+  background-color: var(--color-5);
+  margin-top: 0%;
 
 }
