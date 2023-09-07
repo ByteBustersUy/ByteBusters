@@ -52,15 +52,17 @@ function findRoles(string $ci): array
     }
 }
 
-function findOneRolIdByAction(string $action): int{
+function findRolesIdByAction(string $action): array{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    $rolesId = [];
     try {
         $statement = $con->prepare("SELECT ROLES_id
                                     FROM ROLES_has_PERMISOS 
                                     WHERE PERMISOS_accion = :accion");
         $statement->execute(array(':accion' => $action));
-        $reg = $statement->fetch(PDO::FETCH_ASSOC);
-        return $reg? $reg["ROLES_id"] : 0;
+        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //array_push($rolesId, $reg["ROLES_id"]);
+        return $reg? $reg : 0;
 
     } catch (Exception $e) {
         die("ERROR SQL in findOneRolIdByAction(): " . $e->getMessage());
