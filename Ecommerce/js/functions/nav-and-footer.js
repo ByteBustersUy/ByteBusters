@@ -48,10 +48,10 @@ function loadNav() {
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-        <ul id="list-categoris" class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul id="list-categories" class="navbar-nav justify-content-end flex-grow-1 pe-3">
         </ul>
-      <form class="d-flex mt-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         </div>
@@ -88,20 +88,20 @@ function loadFooter() {
 }
 
 function loadCategories() {
-
   fetch("../api/categorias.php")
 		.then((response) => response.json())
 		.then((data) => {
+      const listCategories=document.getElementById("list-categories");
+      listCategories.innerHTML = "";
 			for (let id = 0; id < data.length; id++) {
 
-	    const listcategoris=document.getElementById("list-categoris");
-          listcategoris.innerHTML=` 
-          <li class="nav-item">
+	    
+          listCategories.innerHTML +=
+          `<li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">${data[id].nombre}</a>
-          </li>`;
-          
-}
-});
+          </li>`; 
+    }
+  });
 }
 
 
@@ -131,5 +131,5 @@ window.onload = function () {
 	loadFooter();
 };
 
-const btnNavOption = document.getElementById("btnNavOption");
-btnNavOption.addEventListener("click",loadCategories());
+
+

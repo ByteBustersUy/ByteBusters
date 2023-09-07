@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
                 <h4>$${data[id].precio}</h4>
                 <h5>${data[id].nombre}</h5>
             </div>
-            <a href="#" class="btn btn-agregar">Agregar al carrito</a>
+            <a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         </div>
     </div>`;
 			}
@@ -34,7 +34,7 @@ setTimeout(() => {
 	//const btnNavSearch = document.getElementById("btnNavSearch");
 
 	inputSearch.addEventListener("keyup", () => {
-		fetch(`../api/search.php`, {
+		fetch(`./api/search.php`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -53,4 +53,4 @@ setTimeout(() => {
 				console.log(sugerencias);
 			});
 	});
-}, 100);
+}, 500);
