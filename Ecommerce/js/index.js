@@ -7,11 +7,13 @@ window.addEventListener("load", function () {
 				divPrducPromo.innerHTML += `
     <div>
         <div class="card h-100 produc-promo" >
+			<a class="detalle" href="pages/carrito.html">
             <img src="./images/${data[id].imagen}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4>$${data[id].precio}</h4>
                 <h5>${data[id].nombre}</h5>
             </div>
+			</a>
             <a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         </div>
     </div>`;

@@ -140,7 +140,12 @@ span {
 .card-body{
   padding: .4rem;
 }
-
+.card h4{
+  color: black;
+}
+.card h5{
+  color: black;
+}
 .btn-agregar{
   height: 2rem;
   background-color: var(--ecommerce-color);
@@ -152,7 +157,9 @@ span {
   background-color: var(--color-1);
   color: var(--color-5);
 }
-
+.detalle{
+height: 85%;
+}
 .card a{
   margin: .5rem;
   font-size: .8rem;
