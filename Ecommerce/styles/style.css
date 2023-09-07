@@ -8,11 +8,12 @@
   --color-4: #dbdbdb;
   --color-5: #ffffff;
   --color-6: #0000ff;
+  --color-7: #eeeded;
   --color-background: #fdfbfb;
 }
 
 body {
-  background-color: var(--color-4);
+  background-color: var(--color-7);
 }
 
 .logo {
@@ -157,6 +158,12 @@ span {
   margin: .5rem;
   font-size: .8rem;
   color: var(--color-5);
+}
+.buttonAdd{
+  margin: 0;
+  font-size: .8rem;
+  color: var(--color-5);
+
 }
 
 /* banner */
@@ -437,31 +444,28 @@ input[type="button"]{
   margin: 5rem 0;
 }
 
-
-
-
 }
-
 .imgprod{
   margin: 2px;
   background-color: var(--color-2);
 }
-
-
-
   .cardProd{
     box-shadow: 10px 10px 15px var(--color-3);
     background-color: var(--color-5);
     margin-top: 3%;
   }
 .selFilt{
-  margin: 1%;
-  
-}
+  margin-top: 10px;
+  margin-right: 3%;
 
+}
 .subFoot{
   text-align: right;
   background-color: var(--color-5);
   margin-top: 0%;
 
+}
+
+.result{
+  margin-top: 3%;
 }
