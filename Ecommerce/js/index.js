@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
 				divPrducPromo.innerHTML += `
     <div>
         <div class="card h-100 produc-promo" >
-			<a class="detalle" href="pages/carrito.html">
+			<a class="ir-detalle-producto" href="pages/carrito.html">
             <img src="./images/${data[id].imagen}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4>$${data[id].precio}</h4>

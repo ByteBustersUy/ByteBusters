@@ -1,9 +1,30 @@
 window.addEventListener('load', function() {
-    var productos = $.parseJSON(localStorage.getItem(localStorage.key(0)))
 
-    for(var i = 0; i < localStorage.length; i++) {              
-      var clave = localStorage.key(i);
-      var data = $.parseJSON(localStorage.getItem(clave));
+    let productos = JSON.parse(localStorage.getItem("id"));
+    let consulta=[];
+    let texto = "";
+    
+    
+    for (let index = 0; index < productos.length; index++) {
+        consulta.push(productos[index]["id"]); 
+        if (index==productos.length -1) {
+            texto += productos[index]["id"];
+        }else  {
+        texto += productos[index]["id"]+",";
+        }
+    }
+    let ruta="./../../api/carrito.php?c="+texto;
+   /* console.log(ruta);
+    console.log(consulta);
+    console.log(texto);*/
+        
+           
+    fetch(ruta)
+    .then((response) => response.json())
+    .then((data) => {
+    
+    for(var id = 0; id < data.length; id++) {              
+      
 
       const newElement = document.createElement("div");
       const divnombreproduc = document.createElement("div");
@@ -61,7 +82,7 @@ window.addEventListener('load', function() {
      console.error("error",error)
  });
     
-//});
+});
 
 
 /*window.addEventListener('load', function() {
