@@ -36,7 +36,7 @@ setTimeout(() => {
 	//const btnNavSearch = document.getElementById("btnNavSearch");
 
 	inputSearch.addEventListener("keyup", () => {
-		fetch(`./api/search.php`, {
+		fetch(`../api/search.php`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
