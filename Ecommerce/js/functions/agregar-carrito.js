@@ -7,34 +7,34 @@ document.addEventListener("DOMContentLoaded", function(){
         btn.addEventListener("click", () => {
             var id = btn.id;
             console.log(id);
-            var cantidad = 1;
-            agregarProducoAlCarrito(id, cantidad)
+            agregarProducoAlCarrito(id)
         });
     });
 
 }, 500);
 
     //carga carrito del localStorage
-   /* var carritoGuardado = localStorage.getItem("carrito");
+    var carritoGuardado = localStorage.getItem("id");
     if(carritoGuardado){
         carrito = JSON.parse(carritoGuardado);
         
 
-    }*/
-
-    function agregarProducoAlCarrito(id, cantidad){
-        var productoExistente = carrito.find((producto) => producto.id === id);
-        if(productoExistente){
-            productoExistente.cantidad += cantidad;
-        }else{
-            carrito.push({
-                id: id,
-                cantidad: cantidad,
-            });
-        }
-        console.log(carrito)
     }
 
+    function agregarProducoAlCarrito(id){
+        var productoExistente = carrito.find((producto) => producto.id === id);
+        if(productoExistente){
+            productoExistente.cantidad ++;
+        }else{
+            carrito.push({
+                id,
+                cantidad:1 
+            });
+        }
+        console.log(carrito);
+        localStorage.setItem("id",JSON.stringify(carrito));
+    }
+   
 });
 
 

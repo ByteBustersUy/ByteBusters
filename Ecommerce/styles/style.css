@@ -140,7 +140,12 @@ span {
 .card-body{
   padding: .4rem;
 }
-
+.card h4{
+  color: black;
+}
+.card h5{
+  color: black;
+}
 .btn-agregar{
   height: 2rem;
   background-color: var(--ecommerce-color);
@@ -152,7 +157,9 @@ span {
   background-color: var(--color-1);
   color: var(--color-5);
 }
-
+.ir-detalle-producto{
+height: 85%;
+}
 .card a{
   margin: .5rem;
   font-size: .8rem;
@@ -174,10 +181,13 @@ span {
   width: 100%;
   margin-top: .5rem;
   border-bottom: 1px solid var(--color-2);
+  align-items: center;
+  justify-content:start;
 }
 
 .img-list{
   margin: .5rem;
+  height: 8rem;
   width: 8rem;
   border: 1px solid var(--color-2);
   border-radius: .2rem;
@@ -190,13 +200,20 @@ span {
 
 .list-group a{
   color: var(--color-5);
-  margin: auto;
   font-size: .8rem;
+}
+.list-group h4 {
+  color:black;
+  font-size: 1.1rem;
+  height: 2rem;
+  overflow: hidden;
+  margin-top: .5rem;
 }
 
 .list-group h5 {
+  color:black;
   font-size: 1.1rem;
-  height: 2.6rem;
+  height: 2rem;
   overflow: hidden;
   margin-top: .5rem;
 }
