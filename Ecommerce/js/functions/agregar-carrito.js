@@ -14,21 +14,21 @@ document.addEventListener("DOMContentLoaded", function(){
 }, 500);
 
     //carga carrito del localStorage
-   /* var carritoGuardado = localStorage.getItem("carrito");
+    var carritoGuardado = localStorage.getItem("id");
     if(carritoGuardado){
         carrito = JSON.parse(carritoGuardado);
         
 
-    }*/
+    }
 
     function agregarProducoAlCarrito(id){
         var productoExistente = carrito.find((producto) => producto.id === id);
         if(productoExistente){
-            //productoExistente.cantidad += cantidad;
+            productoExistente.cantidad ++;
         }else{
             carrito.push({
-                 id
-                //cantidad: cantidad,
+                id,
+                cantidad:1 
             });
         }
         console.log(carrito);
