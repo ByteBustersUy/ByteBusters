@@ -470,3 +470,41 @@ input[type="button"]{
 .result{
   margin-top: 3%;
 }
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+.aNomb:link {
+  color: var(--color-2);
+}
+
+.aNomb:visited {
+  color: var(--color-2);
+}
+
+.aNomb:focus {
+  border-bottom: 1px solid;
+  background: var(--color-2);
+}
+
+.aNomb:hover {
+  border-bottom: 1px solid;
+  background: var(--color-2);
+}
+
+.aNomb:active {
+  background: var(--color-2);
+  color: var(--color-2);
+}
+
+.img-producto-lista{
+  border-color:  brown;
+  border-width: 1px;
+  border-style: dotted;
+  width: 9rem;
+  height: 9rem;
+  margin: 0.5rem;
+  margin-right: 3rem;
+}
