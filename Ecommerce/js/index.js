@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
     <div>
         <div class="card h-100 produc-promo" >
 			<a class="ir-detalle-producto" href="pages/carrito.html">
-            <img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            <img src="./images/${data[id].imagen}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4>$${data[id].precio}</h4>
                 <h5>${data[id].nombre}</h5>

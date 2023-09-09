@@ -250,23 +250,20 @@ height: 85%;
   margin-bottom: 2rem;
 }
 
-/*carrito*/
+/*CARRITO*/
 .main{
-  display: flex;
+  display: block;
   height: auto;
   background-color: rgb(255, 255, 255);
 }
-.container{
-  width: 80%;
-padding-left: 1rem;
-}
+
 .region-producto{
-  display: inline;
   padding: 1rem;
-  
+  width: auto;
+  height: auto;
 }
 .div-producto{
-  border-color: brown;
+  border-color: var(--ecommerce-color);
   border-width: 3px;
   border-style: solid;
   height: 8rem;
@@ -275,28 +272,30 @@ padding-left: 1rem;
   padding: 0;
 }
 .region-compra{
-padding: 3rem;
-justify-content: center;
-align-content: center;
+background-color: rgba(255, 255, 255, 0.650);
+width: 100%;
+height: 4rem;
 display: flex;
-flex-wrap: wrap;
+position: fixed;
+bottom: 1rem;
+justify-content: center;
+align-items: center;
 }
-#div-comprar{
-  border-color:  brown;
+.div-comprar{
+  background-color: var(--color-5);
+  width: 50rem;
+  height: 90%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  justify-items: center;
+  border-color:  var(--ecommerce-color);
   border-width: 3px;
   border-style: solid;
-  border-radius: 25%;
-  width: 12% ;
-  height: 30%;
-  position: fixed;
-  text-align: center;
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 }
 .img-producto{
-  border-color:  brown;
+  border-color: var(--ecommerce-color);
   border-width: 1px;
   border-style: dotted;
   width: 7rem;
@@ -320,7 +319,6 @@ input[type="button"]{
   height: 2.5rem;
   width: 2.5rem;
   border-style: solid;
-  
 }
 .btn-eliminar:hover{
   background-color: red;
@@ -329,10 +327,7 @@ input[type="button"]{
   height: 4rem;
   width:100%;
   display: inline-flex;
-  
   align-items: center;
-  
-
 }
 .div-nombre-produc{
   display: flex;
@@ -340,7 +335,6 @@ input[type="button"]{
   height: 3.5rem;
   width: auto;
   margin-bottom: 0.2rem;
-
 }
 .div-dato-produc{
   position: relative;
@@ -351,12 +345,13 @@ input[type="button"]{
   width: auto;
   display: inline;
   position: absolute;
-  left: 5%;
+  left: 4%;
 }
 .precio-produc{
   position: absolute;
-  right: 40%;
-  width: 6rem;
+  right: 18%;
+  bottom: -1rem;
+  width: 4rem;
 }
 .nombre-produc{ 
   position: absolute;
@@ -366,6 +361,15 @@ input[type="button"]{
 .btn-comprar{
   border-style: solid;
 }
+.total-pagar{
+  margin-top:1.2rem;
+}
+.text-precio{
+  margin-top:1.2rem;
+  position: absolute;
+  right: 45%;
+}
+
 
 /* TABLET */
 
@@ -423,6 +427,14 @@ input[type="button"]{
   height: 15rem;
   }
 
+  .precio-produc{
+    right: 25%;
+    width: 8rem;
+    bottom: 0.5rem;
+  }
+  .text-precio{
+    right: 56%;
+  }
 }
 
 
@@ -452,6 +464,10 @@ input[type="button"]{
   .banner{
   height: 13rem;
   margin: 5rem 0;
-}
+  }
+
+  .precio-produc{
+    right: 40%;
+  }
 
 }
