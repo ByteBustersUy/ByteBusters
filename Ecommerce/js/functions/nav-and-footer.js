@@ -84,7 +84,7 @@ function loadFooter() {
 }
 
 function loadCategories() {
-  fetch("../api/categorias.php")
+  fetch(`${relativePath}/../api/categorias.php`)
 		.then((response) => response.json())
 		.then((data) => {
       const listCategories=document.getElementById("list-categories");

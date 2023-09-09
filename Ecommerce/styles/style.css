@@ -68,6 +68,10 @@ ul a {
   display: none;
 }
 
+#btnCategories:focus{
+  display: none;
+}
+
 #burgerCategories{
   display: none;
 }
@@ -418,6 +422,8 @@ input[type="button"]{
     margin-left: 1rem;
     color: var(--color-5);
   } 
+
+
 
   .carousel-inner img {
   height: 15rem;
