@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-	fetch("../api/mostrar.php")
+	fetch("../api/productos-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
