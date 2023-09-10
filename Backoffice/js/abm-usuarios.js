@@ -146,10 +146,10 @@ btnDeleteUser.addEventListener("click", async () => {
 						"border-top: 1.5px solid red;border-bottom: 1.5px solid #e01818;"
 					);
 					setTimeout(() => {
-						console.log(response.status);
-						if(response.status == 200){
+						if(response.status == 200) {
+							alert("Usuario eliminado con éxito!");
 							location.reload(true);
-						}else if( response.status == 400){
+						}else if(response.status > 400 && response.status < 499){
 							alert("No se puede eliminar el usuario actual");
 							location.reload(true);
 						}else{

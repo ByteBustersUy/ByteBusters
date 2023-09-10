@@ -4,20 +4,18 @@ require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
 
     if (isset($_GET['action'])) {
 
         if ($_GET['action'] == "add") {
             addProduct();
-
         } else if ($_GET['action'] == "edit" && isset($_GET['id'])) {
             editProduct($_GET['id']);
-
         } else if ($_GET['action'] == "delete" && isset($_POST["productId"])) {
             $isPromo = false; //TODO: check if product is promoted
             deleteProduct($_POST["productId"], $isPromo);
-
         } else {
             die("Invalid action requested");
         }
