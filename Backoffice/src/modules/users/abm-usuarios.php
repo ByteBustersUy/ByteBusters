@@ -22,8 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 break;
 
             case "delete":
-                if (htmlspecialchars($_POST["deleteUserCi"]) != $_SESSION['userCi'])
-                    return deleteUser($_POST["deleteUserCi"]);
+                if(isset($_POST["deleteUserCi"])){
+                    if (htmlspecialchars($_POST["deleteUserCi"]) != $_SESSION['userCi']){
+                        $userCi = $_POST["deleteUserCi"];
+                        deleteUser($userCi);
+                    }else{
+                        return http_response_code(400);
+                    }
+                }
                 break;
             default:
                 die("Invalid action requested");
