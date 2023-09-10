@@ -155,18 +155,14 @@ function editUser(string $userCi): void
 
         $data = [$nombre, $apellido, $email, $rolesId];
 
-        foreach ($data as $element) {
-            if (is_string($element) && preg_match('/(^\s+$)|(^\s+)|(\s+$)/', $element)) {
-                die("ERROR: " . $error_messages['!valid_chars']);
-            }
-        }
-
         if (!elementsHasData($data)) {
             die("ERROR: " . $error_messages['!form_data']);
         }
 
-        if (!elementsHasData([$nombre, $apellido, $email, $rolesId])) {
-            die("ERROR: " . $error_messages['!form_data']);
+        foreach ($data as $element) {
+            if (is_string($element) && preg_match('/(^\s+$)|(^\s+)|(\s+$)/', $element)) {
+                die("ERROR: " . $error_messages['!valid_chars']);
+            }
         }
 
         $userExist = findOneUser(htmlspecialchars($userCi));

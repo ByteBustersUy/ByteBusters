@@ -1,10 +1,10 @@
 <?php
 require realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
+require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
 
     if (isset($_GET['action'])) {
@@ -14,8 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else if ($_GET['action'] == "edit" && isset($_GET['id'])) {
             editProduct($_GET['id']);
         } else if ($_GET['action'] == "delete" && isset($_POST["productId"])) {
-            $isPromo = false; //TODO: check if product is promoted
-            deleteProduct($_POST["productId"], $isPromo);
+            deleteProduct($_POST["productId"]);
         } else {
             die("Invalid action requested");
         }
@@ -25,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 function addProduct()
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
-    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
@@ -72,7 +70,6 @@ function editProduct(string $productId)
 
 function getProductsTableData(): string
 {
-    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
     $productsData = findAllProducts();
     $productsList = '';
     foreach ($productsData as $product) {
