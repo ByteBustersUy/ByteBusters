@@ -77,8 +77,10 @@ html {
     min-height: 100vh;
 }
 
-body {
-    background: var(--primary-background-color);
+body{
+    /* background: var(--primary-background-color); */
+    background-image: url("backgroundGreen.jpg");
+
 }
 
 input {
@@ -149,10 +151,9 @@ thead tr {
     color: var(--primary-text-color);
     border-radius: .3rem;
     background-color: var(--background-color-light);
-    box-shadow: inset -1px -2px .2rem ;
+    box-shadow: inset -1px -1px .1rem ;
     filter: drop-shadow(1px 1px .1rem var(--bytebusters-color));
     font-weight: 600;
-    font-size: 1.2rem;
     padding: .3rem 1.2rem;
 }
 
@@ -244,7 +245,7 @@ thead tr {
     background-color: var(--bytebusters-color);
     border-radius: .3rem;
     border: 1.2px solid var(--bytebusters-color);
-    box-shadow: inset -1px -2px .1rem ;
+    box-shadow: inset -1px -1px .2rem ;
     filter: drop-shadow(1px 1px .1rem var(--bytebusters-color));
     font-size: 1.2rem;
     padding: auto 1rem;
