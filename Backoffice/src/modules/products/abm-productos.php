@@ -30,7 +30,7 @@ function addProduct()
         $imagen = htmlspecialchars($_POST['imagen']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
-        $precio = 500; //TODO: agregar input formulario
+        $precio = htmlspecialchars($_POST['precio']);
     } catch (Exception $e) {
         throw new ErrorException($e->getMessage());
     }
@@ -80,7 +80,7 @@ function getProductsTableData(): string
                             <tr id="' . $product['id'] . '" class="user-select-none align-middle" onclick="selectProductRow(' . $product['id'] . ')">
                                 <td class="first-in-table">' . $product['nombre'] . '</td>
                                 <td id="' . $category . '">' . $category . '</td>
-                                <td>' . $product['imagen'] . '</td>
+                                <td>$' . $product['precio'] . '</td>
                                 <td>' . $isPromo . '</td>
                                 <td><button class="btn-eye"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';

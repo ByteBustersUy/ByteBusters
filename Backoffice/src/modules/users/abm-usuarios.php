@@ -87,7 +87,7 @@ function addUser(): void
 
     if (!elementsHasData([$nombre, $apellido, $cedula, $email, $pass, $rolesId])) {
         die("ERROR: " . $error_messages['!form_data']);
-    } //TODO: check
+    }
 
     if (!isValidEmail($email)) {
         die("ERROR: " . $error_messages['!valid_email']);
