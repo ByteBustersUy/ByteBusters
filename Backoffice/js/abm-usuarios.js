@@ -122,7 +122,7 @@ btnEditUser.addEventListener("click", () => {
 });
 
 // Eliminar usuario
-btnDeleteUser.addEventListener("click", () => {
+btnDeleteUser.addEventListener("click", async () => {
 	if (!btnDeleteUser.classList.contains("disabled")) {
 		btnDeleteUser.setAttribute("class", "enabled-button");
 		const userCi = document.getElementsByClassName("selected")[0].id;
@@ -135,19 +135,26 @@ btnDeleteUser.addEventListener("click", () => {
 			fetch("../src/modules/users/abm-usuarios.php?action=delete", {
 				method: "POST",
 				headers: {
-					"Content-type": "application/text",
+					"Content-type": "application/x-www-form-urlencoded",
 				},
 				body: data,
 			})
-				.then((response) => response.status)
+				.then((response) => response)
 				.then((response) => {
 					selectedRow.setAttribute(
 						"style",
 						"border-top: 1.5px solid red;border-bottom: 1.5px solid #e01818;"
 					);
 					setTimeout(() => {
-						console.log(response);
-						location.reload(true);
+						console.log(response.status);
+						if(response.status == 200){
+							location.reload(true);
+						}else if( response.status == 400){
+							alert("No se puede eliminar el usuario actual");
+							location.reload(true);
+						}else{
+							alert("Error inesperado al intentar de eliminar usuario");
+						}
 					}, 1200);
 				})
 				.catch((error) => {

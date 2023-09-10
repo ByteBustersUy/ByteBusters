@@ -79,7 +79,7 @@ html {
 
 body{
     /* background: var(--primary-background-color); */
-    background-image: url("backgroundGreen.jpg");
+    background-image: url("../assets/backgroundGreen.jpg");
 
 }
 
