@@ -5,6 +5,8 @@ include "./db/conexion.php";
 $pagina = $_GET['p'];
 $lista = ($pagina * 20) - 20;
 
+
+
 $sql="SELECT id,nombre,precio,imagen  FROM productos limit $lista, 20";
 
 $res = $con->query($sql);
