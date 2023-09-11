@@ -5,7 +5,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     try {
         $data = json_decode(file_get_contents('php://input'), true);
         $value = $data['value'];
-        $res = $con->query("SELECT * FROM PRODUCTOS WHERE nombre LIKE '%$value%' ");
+        $res = $con->query("SELECT * FROM PRODUCTOS WHERE nombre LIKE '%$value%' LIMIT 12" );
         $reg = $res->fetchAll(PDO::FETCH_ASSOC);
         if (isset($reg)) {
             header("Content-Type: application/json");

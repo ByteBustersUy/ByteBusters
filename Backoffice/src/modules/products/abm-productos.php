@@ -1,6 +1,7 @@
 <?php
 require realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
+require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -10,14 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($_GET['action'] == "add") {
             addProduct();
-
         } else if ($_GET['action'] == "edit" && isset($_GET['id'])) {
             editProduct($_GET['id']);
-
         } else if ($_GET['action'] == "delete" && isset($_POST["productId"])) {
-            $isPromo = false; //TODO: check if product is promoted
-            deleteProduct($_POST["productId"], $isPromo);
-
+            deleteProduct($_POST["productId"]);
         } else {
             die("Invalid action requested");
         }
@@ -27,14 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 function addProduct()
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
-    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
         $imagen = htmlspecialchars($_POST['imagen']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
-        $precio = 500; //TODO: agregar input formulario
+        $precio = htmlspecialchars($_POST['precio']);
     } catch (Exception $e) {
         throw new ErrorException($e->getMessage());
     }
@@ -74,7 +70,6 @@ function editProduct(string $productId)
 
 function getProductsTableData(): string
 {
-    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
     $productsData = findAllProducts();
     $productsList = '';
     foreach ($productsData as $product) {
@@ -85,7 +80,7 @@ function getProductsTableData(): string
                             <tr id="' . $product['id'] . '" class="user-select-none align-middle" onclick="selectProductRow(' . $product['id'] . ')">
                                 <td class="first-in-table">' . $product['nombre'] . '</td>
                                 <td id="' . $category . '">' . $category . '</td>
-                                <td>' . $product['imagen'] . '</td>
+                                <td>$' . $product['precio'] . '</td>
                                 <td>' . $isPromo . '</td>
                                 <td><button class="btn-eye"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';

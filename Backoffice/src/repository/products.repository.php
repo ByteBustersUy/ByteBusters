@@ -16,7 +16,8 @@ function findAllProducts(): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $res = $con->query("SELECT * FROM PRODUCTOS ORDER BY nombre ASC");
+        $res = $con->prepare("SELECT * FROM PRODUCTOS WHERE activo = :isActive ORDER BY nombre ASC");
+        $res->execute([':isActive' => 1]);
         $reg = $res->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
     } catch (Exception $e) {
@@ -133,34 +134,19 @@ function saveOneProduct(array $newProduct): bool
     }
 }
 
-function deleteProduct(string $productId, bool $isPromo = false): bool
+function deleteProduct(string $productId): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
 
     try {
-        $con->beginTransaction();
-
-        if($isPromo){
-            $statement = $con->prepare("DELETE FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :id");
+            $statement = $con->prepare("UPDATE PRODUCTOS SET activo = :isActive WHERE id = :id");
             $statement->execute([
+                ':isActive' => 0,
                 ':id' => $productId
             ]);
-        }
-
-        $statement = $con->prepare("DELETE FROM PRODUCTOS_has_CATEGORIAS WHERE PRODUCTOS_id = :id");
-        $statement->execute([
-            ':id' => $productId
-        ]);
-
-        $statement = $con->prepare("DELETE FROM PRODUCTOS WHERE id = :id");
-        $statement->execute([':id' => $productId]);
-
-        $con->commit();
         return true;
     } catch (Exception $e) {
-
-        $con->rollback();
         echo("ERROR SQL in Delete Product(): " . $e->getMessage());
         return false;
     }

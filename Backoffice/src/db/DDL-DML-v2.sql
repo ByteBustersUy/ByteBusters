@@ -547,11 +547,7 @@ INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEG
 --INSERT DE LA TABLA PROMOCIONES--
 ----------------------------------
 */
-<<<<<<< HEAD
-INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`nombre`,`descuento`,`fechaInicio`,`fechaFin`,`activo`) VALUES ('1','revajas','100,50','7/7/23','14/9/23',1);
-=======
 INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`nombre`,`descuento`,`fechaInicio`,`fechaFin`,`activo`) VALUES ('1','rebajas','100,50','2023/7/23','2023/9/23',1);
->>>>>>> santi
 /*
 ------------------------------------------------
 --INSER RELACIONANDO PRODUCTOS CON PROMOCIONES--

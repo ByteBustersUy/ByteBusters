@@ -6,8 +6,8 @@ $reg=[];
 if (isset($_GET['id'])){
     $id = $_GET['id'];
 
-    $res = $con->prepare("SELECT * FROM productos WHERE id");
-    $res->execute([$id]);
+    $res = $con->prepare("SELECT * FROM productos WHERE id = :id");
+    $res->execute([":id" => $id]);
     $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 
 }

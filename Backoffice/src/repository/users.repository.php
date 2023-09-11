@@ -187,9 +187,9 @@ function deleteUser(string $userCi)
 
     try {
         $statement = $con->prepare("UPDATE USUARIOS
-                                    SET activo = 0
+                                    SET activo = :isActive
                                     WHERE ci = :ci ");
-        $res = $statement->execute([":ci" => $userCi]);
+        $res = $statement->execute([":ci" => $userCi, "isActive" => 0]);
         return $res;
     } catch (Exception $e) {
         die("ERROR SQL in saveOneUser(): " . $e->getMessage());

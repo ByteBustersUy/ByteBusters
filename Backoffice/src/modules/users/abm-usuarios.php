@@ -22,8 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 break;
 
             case "delete":
-                if (htmlspecialchars($_POST["deleteUserCi"]) != $_SESSION['userCi'])
-                    return deleteUser($_POST["deleteUserCi"]);
+                if(isset($_POST["deleteUserCi"])){
+                    if (htmlspecialchars($_POST["deleteUserCi"]) != $_SESSION['userCi']){
+                        $userCi = $_POST["deleteUserCi"];
+                        deleteUser($userCi);
+                    }else{
+                        return http_response_code(400);
+                    }
+                }
                 break;
             default:
                 die("Invalid action requested");
@@ -81,7 +87,7 @@ function addUser(): void
 
     if (!elementsHasData([$nombre, $apellido, $cedula, $email, $pass, $rolesId])) {
         die("ERROR: " . $error_messages['!form_data']);
-    } //TODO: check
+    }
 
     if (!isValidEmail($email)) {
         die("ERROR: " . $error_messages['!valid_email']);
@@ -149,18 +155,14 @@ function editUser(string $userCi): void
 
         $data = [$nombre, $apellido, $email, $rolesId];
 
-        foreach ($data as $element) {
-            if (is_string($element) && preg_match('/(^\s+$)|(^\s+)|(\s+$)/', $element)) {
-                die("ERROR: " . $error_messages['!valid_chars']);
-            }
-        }
-
         if (!elementsHasData($data)) {
             die("ERROR: " . $error_messages['!form_data']);
         }
 
-        if (!elementsHasData([$nombre, $apellido, $email, $rolesId])) {
-            die("ERROR: " . $error_messages['!form_data']);
+        foreach ($data as $element) {
+            if (is_string($element) && preg_match('/(^\s+$)|(^\s+)|(\s+$)/', $element)) {
+                die("ERROR: " . $error_messages['!valid_chars']);
+            }
         }
 
         $userExist = findOneUser(htmlspecialchars($userCi));
