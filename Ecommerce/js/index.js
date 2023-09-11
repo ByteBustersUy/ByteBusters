@@ -24,7 +24,9 @@ window.addEventListener("load", function () {
 			const divDatosEmpresa = document.getElementById("divDatosEmpresa");
 			divDatosEmpresa.innerHTML += `
             <p>${data[0].calle} ${data[0].numero} - ${data[0].ciudad}</p>
+			<p>${data[0].telefono} </p>
 			<p>${data[0].comentarios} </p>
+			
 			`;
 		
     });
