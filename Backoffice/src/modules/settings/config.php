@@ -53,7 +53,7 @@ function getLabelsEmpresaHTML(): string
         if (in_array($key, $processedKeys)) {
             continue; 
         }
-        $labelsEmpresa .= '<label class="data-label">' . strtoupper($key) . ': ----> ' . $data . '</label>';
+        $labelsEmpresa .= '<label class="data-label">' . strtoupper($key) . ': --> ' . $data . '</label>';
         array_push($processedKeys,$key);
     }
     return $labelsEmpresa;

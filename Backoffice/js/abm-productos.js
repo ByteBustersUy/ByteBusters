@@ -106,8 +106,15 @@ btnDeleteProduct.addEventListener("click", () => {
 						"border-top: 1.5px solid #e01818;border-bottom: 1.5px solid #e01818;"
 					);
 					setTimeout(() => {
-						alert("Producto eliminado con éxito!");
-						location.reload(true);
+						if(response.status == 200){
+							alert("Producto eliminado con éxito!");
+							location.reload(true);
+						}else if(response.status == 400){
+							alert("No se pudo eliminar el producto seleccionado");
+							location.reload(true);
+						}else{
+							alert("Error inesperado al intentar de eliminar el producto");
+						}
 					}, 1200);
 				})
 				.catch((error) => {

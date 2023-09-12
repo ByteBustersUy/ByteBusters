@@ -1,7 +1,10 @@
 <?php
 include "./db/conexion.php";
 
-$res = $con->query("SELECT * FROM productos WHERE activo = 1 LIMIT 6");
+$consulta = $_GET['c'];
+$sql="SELECT id,nombre,precio,imagen  FROM productos WHERE id in (".$consulta.")";
+
+$res = $con->query($sql);
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 
 
