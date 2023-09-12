@@ -79,10 +79,6 @@ function editProduct(string $productId)
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
 
-
-
-
-
         $updateProduct = [
             "id" => $productId,
             "nombre" => $nombre,
@@ -90,11 +86,10 @@ function editProduct(string $productId)
             "idCategoria" => $categoria,
             "descripcion" => $descripcion,
             "precio" => $precio,
-
         ];
 
         updateOneProduct($updateProduct);
-        header("Location:/../../pages/abm-productos.php");
+        header("Location:../../../pages/abm-productos.php");
     } catch (Exception $e) {
         throw new ErrorException($e->getMessage());
     }
