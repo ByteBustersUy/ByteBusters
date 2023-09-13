@@ -1,4 +1,4 @@
-document.addEventListener("click", function () {
+window.addEventListener("mousedown", function () {
 	var carrito = [];
 	//Guarda el carrito en el LocalStorage
 	document.querySelectorAll(".agregar-carrito").forEach((btn) => {
