@@ -49,19 +49,19 @@ function findLastProductId(): string
     }
 }
 
-function findCategoryIdByName(string $name): string
-{
+// function findCategoryIdByName(string $name): string
+// {
 
-    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-    try {
-        $statement = $con->prepare("SELECT id FROM CATEGORIAS WHERE nombre = :nombre");
-        $statement->execute(array(':nombre' => $name));
-        $reg = $statement->fetch(PDO::FETCH_ASSOC);
-        return $reg['id'] ? $reg['id'] : '';
-    } catch (Exception $e) {
-        die("ERROR SQL in findCategoryIdByName(): " . $e->getMessage());
-    }
-}
+//     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+//     try {
+//         $statement = $con->prepare("SELECT id FROM CATEGORIAS WHERE nombre = :nombre");
+//         $statement->execute(array(':nombre' => $name));
+//         $reg = $statement->fetch(PDO::FETCH_ASSOC);
+//         return $reg['id'] ? $reg['id'] : '';
+//     } catch (Exception $e) {
+//         die("ERROR SQL in findCategoryIdByName(): " . $e->getMessage());
+//     }
+// }
 
 
 function findProductCategoryByProductId(string $productId): string
