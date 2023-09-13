@@ -21,7 +21,7 @@ window.addEventListener("load", function () {
 		});
 
 	//Productos no promocionados
-	fetch("../api/productos.php")
+	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
