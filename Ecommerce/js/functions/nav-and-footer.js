@@ -46,8 +46,14 @@ function loadNav() {
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+<<<<<<< HEAD
+        <ul id="list-categories" class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        </ul>
+        
+=======
           <ul id="list-categories" class="navbar-nav justify-content-end flex-grow-1 pe-3">
           </ul>
+>>>>>>> 09c5a47fde173dd82bf251b2b67145b7ed38e7ae
         </div>
       </div>
     </div>

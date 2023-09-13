@@ -100,6 +100,37 @@ function findProductPromotionStatus(string $productId): bool
     }
 }
 
+function updateOneProduct(array $newProduct)
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+
+    try {
+        $statement = $con->prepare("UPDATE PRODUCTOS SET  nombre = :nombre,
+        descripcion = :descripcion, imagen = :imagen, precio = :precio WHERE id = :id
+        AND activo = :activo");
+
+        $reg = $statement->execute([
+            ':nombre' => $newProduct['nombre'],
+            ':descripcion' => $newProduct['descripcion'],
+            ':imagen' => $newProduct['imagen'],
+            ':precio' => $newProduct['precio'],
+            ':id' => $newProduct['id'],
+            ':activo' => 1,
+        ]);
+
+        $statement = $con->prepare("UPDATE PRODUCTOS_has_CATEGORIAS SET PRODUCTOS_id = :prodId, CATEGORIAS_id = :catId WHERE PRODUCTOS_id = :prodId");
+        $statement->execute([
+            ':prodId' => $newProduct['id'],
+            ':catId' => $newProduct['idCategoria']
+        ]);
+
+        return $reg ? true : false;
+    }catch(Exception $e){
+        die("ERROR SQL: " . $e->getMessage());
+    }
+    
+}
+
 function saveOneProduct(array $newProduct): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
