@@ -1,6 +1,10 @@
 window.addEventListener("load", function () {
+<<<<<<< HEAD
+	fetch("../api/productos-promo.php")
+=======
 	//Productos promocionados
 	fetch("../api/mostrar.php")
+>>>>>>> 09c5a47fde173dd82bf251b2b67145b7ed38e7ae
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
@@ -22,7 +26,7 @@ window.addEventListener("load", function () {
 		});
 
 	//Productos no promocionados
-	fetch("../api/productos.php")
+	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
 			const divDatosEmpresa = document.getElementById("divDatosEmpresa");
