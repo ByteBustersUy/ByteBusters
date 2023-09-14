@@ -67,7 +67,7 @@
                             <tr>
                                 <th class="user-select-none first-in-table" scope="col">Nombre del producto</th>
                                 <th class="user-select-none" scope="col">Categoría</th>
-                                <th class="user-select-none" scope="col">Imágen</th>
+                                <th class="user-select-none" scope="col">Precio</th>
                                 <th class="user-select-none" scope="col">Promo</th>
                                 <th class="user-select-none" scope="col">Detalle</th>
                             </tr>
@@ -93,7 +93,7 @@
                             <form id="formAbmProduct" class="form-abm" action="" method="post">
                                 <input id="nombre" type="text" name="nombre" placeholder="Nombre" required autocomplete="off">
                                 <select name="categoria" id="categoria" required>
-                                    <option selected hidden value="">Categoría</option>
+                                    <option selected hidden value="" disabled >Categoría</option>
                                     <?php
                                     $options = getOptionsCategoriesHTML();
                                     echo $options;
@@ -101,7 +101,7 @@
                                 </select>
                                 <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
                                 <input id="btnUploadImage" type="file" name="imagen" accept=".jpg, .jpeg, .png, .gif" required>
-                                <input id="precio" type="number" name="precio" placeholder="" required>
+                                <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
                                 <div class="buttons">

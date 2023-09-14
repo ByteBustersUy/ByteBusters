@@ -1,40 +1,51 @@
 window.addEventListener("load", function () {
-	fetch("../api/mostrar.php")
+	fetch("../api/productos-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
 				const divPrducPromo = document.getElementById("tarjetas");
 				divPrducPromo.innerHTML += `
-    <div>
-        <div class="card h-100 produc-promo" >
-			<a class="ir-detalle-producto" href="pages/carrito.html">
-            <img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
-            <div class="card-body">
-                <h4>$${data[id].precio}</h4>
-                <h5>${data[id].nombre}</h5>
-            </div>
-			</a>
-            <a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
-        </div>
-    </div>`;
+    			<div>
+        			<div class="card h-100 produc-promo" >
+						<a class="ir-detalle-producto" href="pages/carrito.html">
+            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<div class="card-body">
+                				<h4>$${data[id].precio}</h4>
+                				<h5>${data[id].nombre}</h5>
+            				</div>
+						</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+        			</div>
+    			</div>`;
 			}
 		});
 
-	fetch("../api/datos-empresa.php")
+	//Productos no promocionados
+	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
-			const divDatosEmpresa = document.getElementById("divDatosEmpresa");
-			divDatosEmpresa.innerHTML += `
-            <p>${data[0].calle} ${data[0].numero} - ${data[0].ciudad}</p>
-			`;
-		
-    });
-});
+			for (let id = 0; id < data.length; id++) {
+				const divPrductoSinPromo = document.getElementById(
+					"productos-sin-promo"
+				);
+				divPrductoSinPromo.innerHTML += `
+				<div class="list-group"> 
+        			<div class="d-flex list-body">
+        				<a class="" href="pages/carrito.html">
+            				<img class="img-list" src="./images/${data[id].imagen}" class="card-img-top" alt="...">
+            				<div class="d-block list-content">
+            					<h5>${data[id].nombre}</h5>
+            					<h4>$${data[id].precio}</h4>
+            					<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+            				</div>
+        				</a>
+       		 		</div>
+        		</div>`;
+			}
+		});
 
-setTimeout(() => {
+	//Buscador inteligente
 	const inputSearch = document.getElementById("navSearch");
-	//const btnNavSearch = document.getElementById("btnNavSearch");
-
 	inputSearch.addEventListener("keyup", () => {
 		fetch(`../api/search.php`, {
 			method: "POST",
@@ -47,7 +58,6 @@ setTimeout(() => {
 			.then((data) => {
 				const sugerencias = [];
 				for (let i = 0; i < 5; i++) {
-					//console.log(data[i])
 					if (data[i]) {
 						sugerencias.push(data[i].nombre);
 					}
@@ -55,4 +65,4 @@ setTimeout(() => {
 				console.log(sugerencias);
 			});
 	});
-}, 500);
+});
