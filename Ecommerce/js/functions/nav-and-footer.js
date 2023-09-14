@@ -77,7 +77,7 @@ function loadFooter() {
   </footer>`;
 
 	//Datos de empresa
-	fetch("../api/datos-empresa.php")
+	fetch(`${relativePath}/../api/datos-empresa.php`)
 		.then((response) => response.json())
 		.then((data) => {
 			const divDatosEmpresa = document.getElementById("divDatosEmpresa");
