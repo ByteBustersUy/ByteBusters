@@ -25,7 +25,7 @@ DivBtnPages.addEventListener("click", function(event){
 	if (event.target.tagName==="BUTTON") {
 		let numPage=(event.target.textContent)
 		const divProducPromo = document.getElementById("tarjetas");
-		fetch("../api/mostrar.php?p="+numPage)
+		fetch("../api/productos-promo.php?p="+numPage)
 		.then((response) => response.json())
 		.then((data) => {
 			let card='';
@@ -53,7 +53,7 @@ DivBtnPages.addEventListener("click", function(event){
 window.addEventListener("load", function () {
 	const divProducPromo = document.getElementById("tarjetas");
 	//Productos promocionados
-	fetch("../api/mostrar.php?p=1")
+	fetch("../api/productos-promo.php?p=1")
 		.then((response) => response.json())
 		.then((data) => {
 			let cards='';
