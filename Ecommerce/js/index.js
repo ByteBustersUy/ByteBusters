@@ -1,10 +1,5 @@
 window.addEventListener("load", function () {
-<<<<<<< HEAD
 	fetch("../api/productos-promo.php")
-=======
-	//Productos promocionados
-	fetch("../api/mostrar.php")
->>>>>>> 09c5a47fde173dd82bf251b2b67145b7ed38e7ae
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
@@ -36,9 +31,7 @@ window.addEventListener("load", function () {
 			<p>${data[0].comentarios} </p>
 			
 			`;
-		
-    });
-});
+		});
 
 	//Buscador inteligente
 	const inputSearch = document.getElementById("navSearch");
@@ -61,4 +54,4 @@ window.addEventListener("load", function () {
 				console.log(sugerencias);
 			});
 	});
-
+});
