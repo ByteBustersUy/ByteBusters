@@ -64,7 +64,31 @@ function addProduct()
 
 function editProduct(string $productId)
 {
-    die("eaaa");
+    require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
+    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
+
+
+    try {
+        $nombre = htmlspecialchars($_POST['nombre']);
+        $imagen = htmlspecialchars($_POST['imagen']);
+        $descripcion = htmlspecialchars($_POST['descripcion']);
+        $categoria = htmlspecialchars($_POST['categoria']);
+        $precio = htmlspecialchars($_POST['precio']);
+
+        $updateProduct = [
+            "id" => $productId,
+            "nombre" => $nombre,
+            "imagen" => $imagen,
+            "idCategoria" => $categoria,
+            "descripcion" => $descripcion,
+            "precio" => $precio,
+        ];
+
+        updateOneProduct($updateProduct);
+        header("Location:../../../pages/abm-productos.php");
+    } catch (Exception $e) {
+        throw new ErrorException($e->getMessage());
+    }
 }
 
 
