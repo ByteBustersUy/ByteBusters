@@ -230,3 +230,29 @@ function findAllRolesWithPermissions(string $action): string
         die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
     }
 }
+
+function updateOnePermission($data, string $command) {
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    require realpath(dirname(__FILE__)) . "/../utils/actions.php";
+    if($command == "insert"){
+        try {
+            $statement = $con->prepare("INSERT INTO ROLES_has_PERMISOS (ROLES_id, PERMISOS_accion) 
+                                        VALUES (:id, :accion)");
+            $res = $statement->execute(["id" => 2, ":accion" => "Gestionar usuarios"]);
+            return $res;
+        } catch (Exception $e) {
+            die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        }
+
+    }else if($command == "delete"){
+        try {
+            $statement = $con->prepare("UPDATE FROM ROLES_has_PERMISOS
+                                        WHERE PERMISOS_accion = :accion");
+            $res = $statement->execute([":accion" => "Gestionar usuarios"]);
+            return $res;
+        } catch (Exception $e) {
+            die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        }
+    }
+
+}

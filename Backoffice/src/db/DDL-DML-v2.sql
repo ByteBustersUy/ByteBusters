@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `bytebusters2_db`.`PERMISOS` (
 CREATE TABLE IF NOT EXISTS `bytebusters2_db`.`ROLES_has_PERMISOS`( 
  `PERMISOS_accion` varchar(255) NOT NULL,
  `ROLES_id` int(11) NOT NULL,
+  `activo` boolean NOT NULL,
  PRIMARY KEY (`ROLES_id`,`PERMISOS_accion`),
  FOREIGN KEY(`ROLES_id`)
  REFERENCES `bytebusters2_db`.`ROLES`(`id`),
@@ -293,12 +294,18 @@ INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-u
 -- INSERT RELACIONANDO ROLES CON PERMISOS --
 --------------------------------------------
 */
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Configurar datos de empresa', '1');
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Descargar documentos PDF', '2');
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar permisos de usuario', '1');
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar productos', '2');
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar promociónes', '2');
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`) VALUES('Gestionar usuarios', '1');
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Configurar datos de empresa', '1',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Configurar datos de empresa', '2',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '2',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar permisos de usuario', '1',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar permisos de usuario', '2',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '2',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '2',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar usuarios', '1',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar usuarios', '2',0);
 /* 
 -------------------------------
 --INSERT DE LA TABLA EMPRESA --
