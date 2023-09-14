@@ -1,10 +1,37 @@
-window.addEventListener("load", function () {
-	fetch("../api/productos-promo.php")
+const DivBtnPages = document.getElementById("div-btns-pages");
+function cargarBotones(da){
+	let ppp = 4;
+	console.log(da)
+
+	cantPages=da/ppp;
+if (da%ppp !=0) {
+	cantPages++;
+}
+
+if(cantPages <=0){
+	cantPages=1;
+}
+console.log(cantPages)
+
+   let btns='';
+	for (let i = 1; i <=cantPages; i++) {
+	btns+=`
+		<button type="button" class="btn btn-pages">${i}</button>
+        `}
+		DivBtnPages.innerHTML=btns;	
+}
+
+DivBtnPages.addEventListener("click", function(event){
+	if (event.target.tagName==="BUTTON") {
+		let numPage=(event.target.textContent)
+		const divProducPromo = document.getElementById("tarjetas");
+		fetch("../api/mostrar.php?p="+numPage)
 		.then((response) => response.json())
 		.then((data) => {
+			let card='';
 			for (let id = 0; id < data.length; id++) {
-				const divPrducPromo = document.getElementById("tarjetas");
-				divPrducPromo.innerHTML += `
+				
+				card+= `
     			<div>
         			<div class="card h-100 produc-promo" >
 						<a class="ir-detalle-producto" href="pages/carrito.html">
@@ -18,16 +45,43 @@ window.addEventListener("load", function () {
         			</div>
     			</div>`;
 			}
+			divProducPromo.innerHTML=card;
+		});
+	}
+});
+
+window.addEventListener("load", function () {
+	const divProducPromo = document.getElementById("tarjetas");
+	//Productos promocionados
+	fetch("../api/mostrar.php?p=1")
+		.then((response) => response.json())
+		.then((data) => {
+			let cards='';
+			for (let id = 0; id < data.length; id++) {
+				
+				cards+= `
+    			<div>
+        			<div class="card h-100 produc-promo" >
+						<a class="ir-detalle-producto" href="pages/carrito.html">
+            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<div class="card-body">
+                				<h4>$${data[id].precio}</h4>
+                				<h5>${data[id].nombre}</h5>
+            				</div>
+						</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+        			</div>
+    			</div>`;
+			}
+			divProducPromo.innerHTML=cards;
 		});
 
 	//Productos no promocionados
 	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
+			const divPrductoSinPromo = document.getElementById("productos-sin-promo");
 			for (let id = 0; id < data.length; id++) {
-				const divPrductoSinPromo = document.getElementById(
-					"productos-sin-promo"
-				);
 				divPrductoSinPromo.innerHTML += `
 				<div class="list-group"> 
         			<div class="d-flex list-body">
@@ -47,7 +101,8 @@ window.addEventListener("load", function () {
 	//Buscador inteligente
 	const inputSearch = document.getElementById("navSearch");
 	inputSearch.addEventListener("keyup", () => {
-		fetch(`../api/search.php`, {
+		let cantProduc;
+		fetch(`../api/search.php?p=`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -56,14 +111,27 @@ window.addEventListener("load", function () {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				const sugerencias = [];
-				for (let i = 0; i < 5; i++) {
-					if (data[i]) {
-						sugerencias.push(data[i].nombre);
-					}
+				
+				let contenido ='';
+				for (let id = 0; id <data.length; id++) {
+				contenido+=`
+    			<div>
+        			<div class="card h-100 produc-promo" >
+						<a class="ir-detalle-producto" href="pages/carrito.html">
+            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<div class="card-body">
+                				<h4>$${data[id].precio}</h4>
+                				<h5>${data[id].nombre}</h5>
+            				</div>
+						</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+        			</div>
+    			</div>`;
 				}
-				divPrducProm.innerHTML = contenido
-				console.log(contenido);
+				cantProduc=data.length;
+				divProducPromo.innerHTML = contenido
+				cargarBotones(cantProduc)
 			});
-	});
+		});
 });
+
