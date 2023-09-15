@@ -5,14 +5,15 @@
   --color-2: #424242;
   --color-3: #a6a6a6;
   --color-3: #b7b7b7;
-  --color-4: #d4d4d5;
+  --color-4: #dbdbdb;
   --color-5: #ffffff;
   --color-6: #0000ff;
+  --color-7: #eeeded;
   --color-background: #fdfbfb;
 }
 
 body {
-  background-color: var(--color-background);
+  background-color: var(--color-7);
 }
 
 .logo {
@@ -169,6 +170,12 @@ height: 85%;
   font-size: .8rem;
   color: var(--color-5);
 }
+.buttonAdd{
+  margin: 0;
+  font-size: .8rem;
+  color: var(--color-5);
+
+}
 
 /* banner */
 
@@ -254,53 +261,51 @@ height: 85%;
   margin-bottom: 2rem;
 }
 
-/*carrito*/
+/*CARRITO*/
 .main{
-  display: flex;
+  display: block;
   height: auto;
   background-color: rgb(255, 255, 255);
 }
-.container{
-  width: 80%;
-padding-left: 1rem;
-}
+
 .region-producto{
-  display: inline;
   padding: 1rem;
-  
+  width: auto;
+  height: auto;
 }
 .div-producto{
-  border-color: brown;
+  border-color: var(--ecommerce-color);
   border-width: 3px;
   border-style: solid;
   height: 8rem;
   margin-top: 1rem;
   display:inline-flex;
   padding: 0;
-}
-.region-compra{
-padding: 3rem;
-justify-content: center;
-align-content: center;
-display: flex;
-flex-wrap: wrap;
-}
-#div-comprar{
-  border-color:  brown;
-  border-width: 3px;
-  border-style: solid;
-  border-radius: 25%;
-  width: 12% ;
-  height: 30%;
-  position: fixed;
-  text-align: center;
-  display:flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
 }
+.region-compra{
+background-color:var(--color-3);
+height: 7rem;
+display: flex;
+position: fixed;
+bottom: 0rem;
+justify-content: center;
+align-items: center;
+}
+.div-comprar{
+  background-color: var(--color-5);
+  width: 50rem;
+  height: 50%;
+  display:flex;
+  align-items: center;
+  justify-content: start;
+  border-color:  var(--ecommerce-color);
+  border-width: 3px;
+  border-style: solid;
+}
 .img-producto{
-  border-color:  brown;
+  border-color: var(--ecommerce-color);
   border-width: 1px;
   border-style: dotted;
   width: 7rem;
@@ -308,23 +313,21 @@ flex-wrap: wrap;
   margin: 0.5rem;
 }
 .input-num{
-  width: 3rem;
+  width:1.7rem;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
 }
 input[type="button"]{
-  width: 2rem;
+  width: 1.5rem;
 }
 .btn-eliminar{
   position:absolute;
-  border-radius: 50%;
   right:0.5rem;
-  height: 2.5rem;
-  width: 2.5rem;
+  bottom: 0.8rem;
+  border-radius: 50%;
   border-style: solid;
-  
 }
 .btn-eliminar:hover{
   background-color: red;
@@ -333,10 +336,7 @@ input[type="button"]{
   height: 4rem;
   width:100%;
   display: inline-flex;
-  
   align-items: center;
-  
-
 }
 .div-nombre-produc{
   display: flex;
@@ -344,7 +344,6 @@ input[type="button"]{
   height: 3.5rem;
   width: auto;
   margin-bottom: 0.2rem;
-
 }
 .div-dato-produc{
   position: relative;
@@ -355,20 +354,53 @@ input[type="button"]{
   width: auto;
   display: inline;
   position: absolute;
-  left: 5%;
+  right: 25%;
+  bottom: 0.8rem;
 }
 .precio-produc{
-  position: absolute;
-  right: 40%;
-  width: 6rem;
-}
-.nombre-produc{ 
+  font-size: large;
+  font-weight: 600;
   position: absolute;
   left: 5%;
-  top: 20%;
+  bottom: 0rem;
+  width: 4rem;
+}
+.nombre-produc{ 
+  font-size: medium;
+  font-weight: 600;
+  position: absolute;
+  left: 5%;
+  top: 5%;
 }
 .btn-comprar{
+  margin-top:.3rem;
   border-style: solid;
+  position: absolute;
+  right: 10%;
+}
+.total-pagar{
+  margin-top:1.2rem;
+}
+.text-precio{
+  margin-top:1.2rem;
+  margin-left: 1rem;
+}
+
+#div-btns-pages{
+  display: flex;
+  margin-top: 3rem;
+  
+  justify-content:center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+}
+.btn-pages{
+  margin-left: .5rem;
+  margin-right: .5rem;
+  height: 3rem;
+  width: 3rem;
+  background-color: var(--color-3);
 }
 
 /* TABLET */
@@ -429,6 +461,31 @@ input[type="button"]{
   height: 15rem;
   }
 
+  .precio-produc{
+    right: 25%;
+    width: 8rem;
+    bottom: 0.5rem;
+  }
+  .text-precio{
+    left: 50%;
+  }
+  .btn-eliminar{
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+  .btns-cantidad{
+    right: 30%;
+  }
+  .nombre-produc{ 
+    font-size: larger;
+    font-weight: 600;
+  }
+  .btn-comprar{
+    right:10%;
+  }
+  .div-comprar{
+    justify-content:center;
+  }
 }
 
 
@@ -458,6 +515,73 @@ input[type="button"]{
   .banner{
   height: 13rem;
   margin: 5rem 0;
+  }
+
+  .btn-comprar{
+    right: 30%;
+  }
+
+}
+.imgprod{
+  margin: 2px;
+  background-color: var(--color-2);
+}
+  .cardProd{
+    box-shadow: 2.5px 2.5px 5px var(--color-3);
+    background-color: var(--color-5);
+    margin-top: 3%;
+  }
+.selFilt{
+  margin-top: 10px;
+  margin-right: 3%;
+
+}
+.subFoot{
+  text-align: right;
+  background-color: var(--color-5);
+  margin-top: 0%;
+  box-shadow: 2.5px 2.5px 5px var(--color-3);
+
 }
 
+.result{
+  margin-top: 3%;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+.aNomb:link {
+  color: var(--color-2);
+}
+
+.aNomb:visited {
+  color: var(--color-2);
+}
+
+.aNomb:focus {
+  border-bottom: 1px solid;
+  background: var(--color-2);
+}
+
+.aNomb:hover {
+  border-bottom: 1px solid;
+  background: var(--color-2);
+}
+
+.aNomb:active {
+  background: var(--color-2);
+  color: var(--color-2);
+}
+
+.img-producto-lista{
+  border-color:  brown;
+  border-width: 1px;
+  border-style: dotted;
+  width: 9rem;
+  height: 9rem;
+  margin: 0.5rem;
+  margin-right: 3rem;
 }
