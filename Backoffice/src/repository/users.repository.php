@@ -58,7 +58,7 @@ function findRolesIdByAction(string $action): array{
     try {
         $statement = $con->prepare("SELECT ROLES_id
                                     FROM ROLES_has_PERMISOS 
-                                    WHERE PERMISOS_accion = :accion");
+                                    WHERE PERMISOS_accion = :accion AND activo = 1");
         $statement->execute(array(':accion' => $action));
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         //array_push($rolesId, $reg["ROLES_id"]);
@@ -216,8 +216,8 @@ function findAllRolesWithPermissions(string $action): string
     try {
         $statement = $con->prepare("SELECT ROLES_id 
                                     FROM ROLES_has_PERMISOS
-                                    WHERE PERMISOS_accion = :accion");
-        $statement->execute([":accion" => $action]);
+                                    WHERE PERMISOS_accion = :accion AND activo = :isActive");
+        $statement->execute([":accion" => $action, ":isActive" => 1]);
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
         $rolesId = '';
 
@@ -231,28 +231,15 @@ function findAllRolesWithPermissions(string $action): string
     }
 }
 
-function updateOnePermission($data, string $command) {
+function updateOnePermission(array $data) {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     require realpath(dirname(__FILE__)) . "/../utils/actions.php";
-    if($command == "insert"){
         try {
-            $statement = $con->prepare("INSERT INTO ROLES_has_PERMISOS (ROLES_id, PERMISOS_accion) 
-                                        VALUES (:id, :accion)");
-            $res = $statement->execute(["id" => 2, ":accion" => "Gestionar usuarios"]);
+            $statement = $con->prepare("UPDATE FROM ROLES_has_PERMISOS SET activo = :isActive WHERE ROLES_id = :rolId AND PERMISOS_accion = :accion");
+            $res = $statement->execute([":isActive" => $data['activo'], ":rolId" => $data['rolId'], ":accion" => $data["accion"]]);
             return $res;
         } catch (Exception $e) {
             die("ERROR SQL in saveOneUser(): " . $e->getMessage());
         }
-
-    }else if($command == "delete"){
-        try {
-            $statement = $con->prepare("UPDATE FROM ROLES_has_PERMISOS
-                                        WHERE PERMISOS_accion = :accion");
-            $res = $statement->execute([":accion" => "Gestionar usuarios"]);
-            return $res;
-        } catch (Exception $e) {
-            die("ERROR SQL in saveOneUser(): " . $e->getMessage());
-        }
-    }
 
 }
