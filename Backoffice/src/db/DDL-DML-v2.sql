@@ -312,7 +312,7 @@ INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,
 -------------------------------
 */
 INSERT INTO `bytebusters2_db`.`empresa`(`logo`, `rubro`, `nombre`, `calle`, `numero`, `ciudad`, `telefono`, `instagram`, `whatsapp` , `email`, `pwd_email`, `comentarios`,`usuario_ci`) 
-VALUES ('logo-empresa' ,'Supermercado' , 'DigitalMarket' , '18 de julio' , '1' ,'Montevideo', '099084678', 'digital.ig', '+59899084678' , 'digitalmarket@gmail.com' , 'digital4321' , 'se usaran pesos uruguayos','55271656');
+VALUES ('logo-empresa' ,'Supermercado' , 'DigitalMarket' , '18 de julio' , '1' ,'Montevideo', '099084678', 'digital.ig', '+59899084678' , 'digitalmarket@gmail.com' , 'digital4321' , 'Todos los precios están expresados en pesos uruguayos e incluyen iva.','55271656');
 
 
 /*
