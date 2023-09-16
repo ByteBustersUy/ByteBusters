@@ -9,7 +9,9 @@ for (let row of rows) {
 			};
 			console.log(checksData);
 			const data = new URLSearchParams();
-			data.append("data", checksData);
+			data.append("id", checksData.id);
+			data.append("status", checksData.status);
+			data.append("action", checksData.action);
 			fetch("../src/modules/users/abm-permisos.php", {
 				method: "POST",
 				headers: {
