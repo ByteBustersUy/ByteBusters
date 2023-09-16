@@ -2,25 +2,18 @@
 require realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
 require realpath(dirname(__FILE__)) . "/../../utils/actions.php";
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
-    $permissionData = $_POST['data'];
-    if($permissionData->id === "checkAdmin") $permissionData->id = 1;
-    if($permissionData->id === "checkVendedor") $permissionData->id = 2;
-
-    if(isset($permissionData)){
-        $currentRolesId = [1];
-        if(in_array($permissionData->id, $currentRolesId)){
-            if($permissionData->status === false){
-                $command = "delete";
-            }
-        }else{
-            if($permissionData->status === true){
-                $command = "insert";
-            }else{
-                $command = "delete";
-            }
-        }
-        updateOnePermission($permissionData, $command);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if(isset($_POST['data'])){
+        $permissionData = $_POST['data'];
+        if ($permissionData->id === "checkAdmin") $permissionData->id = 1;
+        if ($permissionData->id === "checkVendedor") $permissionData->id = 2;
+    
+        $data = array(
+            "rolId" => $permissionData->id,
+            "accion" => $actions[$permissionData->action],
+            "activo" =>  $permissionData->status === true ? 1 : 0
+            );
+        updateOnePermission($data);
     }
 }
 
