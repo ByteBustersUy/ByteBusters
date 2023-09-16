@@ -37,7 +37,7 @@ function getAllPermissionsDataTableHTML(): string
         $data .= '<tr id=' . array_search($permissions[$i]["accion"], $actions) . ' class="user-select-none table-row align-middle">
                     <td class="first-in-table">' . $permissions[$i]["accion"] . '</td>
                     <td>' . $permissions[$i]["ruta"] . '</td>
-                    <td id="1">
+                    <td>
                         <input type="checkbox" class="chkbox-roles" ' . $activeAdmin . ' name="checkbox" id="checkAdmin">
                     </td>
                     <td>
