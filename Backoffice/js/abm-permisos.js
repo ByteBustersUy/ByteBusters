@@ -7,7 +7,6 @@ for (let row of rows) {
 				action: row.id,
 				status: event.target.checked,
 			};
-			console.log(checksData);
 			const data = new URLSearchParams();
 			data.append("id", checksData.id);
 			data.append("status", checksData.status);
