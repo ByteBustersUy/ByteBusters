@@ -14,6 +14,7 @@
 
 body {
   background-color: var(--color-7);
+  margin-top: 5rem;
 }
 
 .logo {
@@ -28,6 +29,17 @@ body {
 
 #btnNavSearch{
   display: none;
+}
+
+#navConSearch{
+  position: fixed;
+  margin-top: -4rem;
+  z-index: 10;
+}
+
+#navConBotones{
+  position: relative;
+  margin-top: -1rem;
 }
 
 h2 {
@@ -58,6 +70,10 @@ nav {
   justify-content: right;
   text-decoration: none;
   margin-bottom: 0;
+}
+
+.disabled{
+  display: none;
 }
 
 ul a {
@@ -500,7 +516,6 @@ margin-top: .5rem;
 
   #btnCategories {
     display: flex;
-    margin-top: 3px;
   }
 
   #btnNavOption{
