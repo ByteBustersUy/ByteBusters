@@ -99,7 +99,7 @@ function loadCategories() {
 			listCategories.innerHTML = "";
 			for (let id = 0; id < data.length; id++) {
 				listCategories.innerHTML += `<li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">${data[id].nombre}</a>
+            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="#">${data[id].nombre}</a>
           </li>`;
 			}
 		});
