@@ -22,7 +22,4 @@ window.addEventListener("load", function () {
         `;
 			}
 		});
-
-
-
     });

@@ -296,14 +296,14 @@ INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-u
 */
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Configurar datos de empresa', '1',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Configurar datos de empresa', '2',0);
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar permisos de usuario', '1',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar permisos de usuario', '2',0);
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '1',0);
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '2',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar usuarios', '1',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar usuarios', '2',0);
 /* 
