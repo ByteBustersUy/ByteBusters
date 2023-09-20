@@ -27,9 +27,6 @@ function getAllPermissionsDataTableHTML(): string
     for ($i = 0; $i < $totalOfPermissions; $i++) {
         $settedStatusAdmin = findStatusByActionAndRolesId($permissions[$i]["accion"], 1);
         $settedStatusVendedor = findStatusByActionAndRolesId($permissions[$i]["accion"], 2);
-        $activeAdmin = '';
-        $activeVendedor = '';
-
 
         $settedStatusAdmin ? $activeAdmin = 'checked' : $activeAdmin = '';
         $settedStatusVendedor ? $activeVendedor = 'checked' : $activeVendedor = '';
