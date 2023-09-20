@@ -52,7 +52,7 @@ function findRoles(string $ci): array
     }
 }
 
-function findStatusByActionAndRolesId(string $action, int $rolId){
+function findStatusByActionAndRolesId(string $action, int $rolId): bool{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
         $statement = $con->prepare("SELECT activo
@@ -60,7 +60,7 @@ function findStatusByActionAndRolesId(string $action, int $rolId){
                                     WHERE PERMISOS_accion = :accion AND ROLES_id = :rolId");
         $statement->execute(array(':accion' => $action, ':rolId' => $rolId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
-        return $reg ? $reg["activo"] : 0;
+        return $reg["activo"] ? true : false;
 
     } catch (Exception $e) {
         die("ERROR SQL in findOneRolIdByAction(): " . $e->getMessage());
