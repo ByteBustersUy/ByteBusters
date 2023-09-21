@@ -1,9 +1,9 @@
 const DivBtnPages = document.getElementById("div-btns-pages");
-function cargarBotones(da){
-	let ppp = 4;
+function cargarBotonesBuscar(cantidadProductos){
+	let producPorPage = 3;
 
-	cantPages=da/ppp;
-if (da%ppp !=0) {
+	cantPages=cantidadProductos/producPorPage;
+if (cantidadProductos%producPorPage !=0) {
 	cantPages++;
 }
 
@@ -11,12 +11,12 @@ if(cantPages <=0){
 	cantPages=1;
 }
 
-   let btns='';
+   let btnsPages='';
 	for (let i = 1; i <=cantPages; i++) {
-	btns+=`
+		btnsPages+=`
 		<button type="button" class="btn btn-pages">${i}</button>
         `}
-		DivBtnPages.innerHTML=btns;	
+		DivBtnPages.innerHTML=btnsPages;	
 }
 
 DivBtnPages.addEventListener("click", function(event){
@@ -128,7 +128,7 @@ window.addEventListener("load", function () {
 				}
 				cantProduc=data.length;
 				divProducPromo.innerHTML = contenido
-				cargarBotones(cantProduc)
+				cargarBotonesBuscar(cantProduc)
 			});
 		});
 });
