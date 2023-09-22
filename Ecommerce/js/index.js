@@ -139,7 +139,7 @@ window.addEventListener("load", function () {
 				const id = element.target.id;
 				console.log("id de categoría: ", id);
 
-				fetch("../api/productos-categorias.php?id=" + id, {
+				/*fetch("../api/productos-categorias.php" + id, {
 					method: "GET",
 					headers: {
 					  "Content-Type": "application/json",
@@ -173,7 +173,7 @@ window.addEventListener("load", function () {
 					})
 					.catch((error) => {
 						console.log(error);
-					});
+					});*/
 			});
 		}
 	});
