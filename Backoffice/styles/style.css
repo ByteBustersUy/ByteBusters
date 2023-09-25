@@ -603,7 +603,8 @@ thead tr .roles {
     margin: 1rem auto;
     border: .3rem ridge var(--secondary-border-color);
     box-shadow: inset .1rem .1rem var(--color-5);
-    filter: drop-shadow(.1rem .1rem .1rem var(--color-5));
+    filter: drop-shadow(.1rem .1rem .1rem var(--color-3));
+    background-color: var(--secondary-background-color);
 }
 
 .data-label {

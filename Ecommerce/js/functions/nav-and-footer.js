@@ -7,7 +7,7 @@ if (currentDir == "Ecommerce") relativePath = ".";
 
 function loadNav() {
 	let navHTML = `
-  <nav class="navbar navbar-light bg-light">
+  <nav id="navConSearch" class="navbar navbar-light bg-light">
     <div class="d-flex m-auto">
       <a href="${relativePath}/index.html" id="logo"><img class="logo" src="${relativePath}/assets/logoecomerse1.png" alt=""/></a>
       <button id="btnNavOption" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarMenu" aria-controls="offcanvasNavbarMenu" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@ function loadNav() {
       </a>
     </div>
   </nav>
-  <nav class="navbar" id="burgerCategories">
+  <nav id="navConBotones" class="navbar" id="burgerCategories">
     <button id="btnCategories" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarCat" aria-controls="offcanvasNavbarCat" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span><p id="categorias">CATEGORIAS</p>
     </button>
@@ -108,10 +108,10 @@ function loadCategories() {
 function loadLinks() {
 	return `
       <ul>
-        <li><a href="${relativePath}/index.html">Inicio</a></li>
-        <li><a href="#">Acerca de</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="${relativePath}/index.html" class="disabled">Inicio</a></li>
+        <li><a href="#" class="disabled">Acerca de</a></li>
+        <li><a href="#" class="disabled">Servicios</a></li>
+        <li><a href="#" class="disabled">Contacto</a></li>
       </ul>
       `;
 }

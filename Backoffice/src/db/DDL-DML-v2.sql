@@ -296,14 +296,14 @@ INSERT INTO `bytebusters2_db`.`PERMISOS` (`ruta`, `accion`) VALUES ('pages/abm-u
 */
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Configurar datos de empresa', '1',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Configurar datos de empresa', '2',0);
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Descargar documentos PDF', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar permisos de usuario', '1',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar permisos de usuario', '2',0);
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '1',0);
-INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '2',1);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar productos', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '1',0);
+INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar promociónes', '2',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar usuarios', '1',1);
 INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,`activo`) VALUES('Gestionar usuarios', '2',0);
 /* 
@@ -312,7 +312,7 @@ INSERT INTO `bytebusters2_db`.`ROLES_has_PERMISOS`(`PERMISOS_accion`,`ROLES_id`,
 -------------------------------
 */
 INSERT INTO `bytebusters2_db`.`empresa`(`logo`, `rubro`, `nombre`, `calle`, `numero`, `ciudad`, `telefono`, `instagram`, `whatsapp` , `email`, `pwd_email`, `comentarios`,`usuario_ci`) 
-VALUES ('logo-empresa' ,'Supermercado' , 'DigitalMarket' , '18 de julio' , '1' ,'Montevideo', '099084678', 'digital.ig', '+59899084678' , 'digitalmarket@gmail.com' , 'digital4321' , 'se usaran pesos uruguayos','55271656');
+VALUES ('logo-empresa' ,'Supermercado' , 'DigitalMarket' , '18 de julio' , '1' ,'Montevideo', '099084678', 'digital.ig', '+59899084678' , 'digitalmarket@gmail.com' , 'digital4321' , 'Todos los precios están expresados en pesos uruguayos e incluyen iva.','55271656');
 
 
 /*

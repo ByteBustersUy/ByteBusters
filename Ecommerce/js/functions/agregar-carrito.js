@@ -4,7 +4,6 @@ document.addEventListener("mousedown", function () {
 	document.querySelectorAll(".agregar-carrito").forEach((btn) => {
 		btn.addEventListener("click", () => {
 			var id = btn.id;
-			console.log(id);
 			agregarProducoAlCarrito(id);
 		});
 	});
@@ -25,7 +24,6 @@ document.addEventListener("mousedown", function () {
 				cantidad: 1,
 			});
 		}
-		console.log(carrito);
 		localStorage.setItem("id", JSON.stringify(carrito));
 	}
 });

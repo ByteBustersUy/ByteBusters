@@ -52,13 +52,28 @@ function findRoles(string $ci): array
     }
 }
 
-function findRolesIdByAction(string $action): array{
+function findStatusByActionAndRolesId(string $action, int $rolId): bool{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-    $rolesId = [];
+    try {
+        $statement = $con->prepare("SELECT activo
+                                    FROM ROLES_has_PERMISOS 
+                                    WHERE PERMISOS_accion = :accion AND ROLES_id = :rolId");
+        $statement->execute(array(':accion' => $action, ':rolId' => $rolId));
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        return $reg["activo"] ? true : false;
+
+    } catch (Exception $e) {
+        die("ERROR SQL in findOneRolIdByAction(): " . $e->getMessage());
+    }
+}
+
+function findStatusByAction(string $action): array{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    //$rolesId = [];
     try {
         $statement = $con->prepare("SELECT ROLES_id
                                     FROM ROLES_has_PERMISOS 
-                                    WHERE PERMISOS_accion = :accion AND activo = 1");
+                                    WHERE PERMISOS_accion = :accion");
         $statement->execute(array(':accion' => $action));
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         //array_push($rolesId, $reg["ROLES_id"]);
@@ -104,7 +119,8 @@ function findActionsByRolesId(array $rolesId): array
                 "SELECT p.accion 
                 FROM ROLES_has_PERMISOS rp
                 JOIN PERMISOS p ON rp.PERMISOS_accion = p.accion
-                WHERE rp.ROLES_id = :rolId"
+                WHERE rp.ROLES_id = :rolId
+                AND activo = 1"
             );
             $statement->execute(array(':rolId' => $rolId));
             while ($reg = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -200,8 +216,7 @@ function findAllPermissions(): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM PERMISOS ORDER BY accion DESC");
-        $statement->execute([]);
+        $statement = $con->query("SELECT * FROM PERMISOS ORDER BY accion DESC");
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $reg ? $reg : [];
     } catch (Exception $e) {
@@ -209,37 +224,38 @@ function findAllPermissions(): array
     }
 }
 
-function findAllRolesWithPermissions(string $action): string
-{
-    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+// function findAllRolesWithPermissions(string $action): string
+// {
+//     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
 
-    try {
-        $statement = $con->prepare("SELECT ROLES_id 
-                                    FROM ROLES_has_PERMISOS
-                                    WHERE PERMISOS_accion = :accion AND activo = :isActive");
-        $statement->execute([":accion" => $action, ":isActive" => 1]);
-        $reg = $statement->fetch(PDO::FETCH_ASSOC);
-        $rolesId = '';
+//     try {
+//         $statement = $con->prepare("SELECT ROLES_id 
+//                                     FROM ROLES_has_PERMISOS
+//                                     WHERE PERMISOS_accion = :accion AND activo = :isActive");
+//         $statement->execute([":accion" => $action]);
+//         $reg = $statement->fetch(PDO::FETCH_ASSOC);
+//         $rolesId = '';
 
-        while ($reg = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $rolesId .= $reg["ROLES_id"];
-        }
+//         while ($reg = $statement->fetch(PDO::FETCH_ASSOC)) {
+//             $rolesId .= $reg["ROLES_id"];
+//         }
 
-        return $reg ? $rolesId : [];
-    } catch (Exception $e) {
-        die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
-    }
-}
+//         return $reg ? $rolesId : [];
+//     } catch (Exception $e) {
+//         die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
+//     }
+// }
 
 function updateOnePermission(array $data) {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     require realpath(dirname(__FILE__)) . "/../utils/actions.php";
+    if($data["accion"] !== "Gestionar permisos de usuario"){
         try {
-            $statement = $con->prepare("UPDATE FROM ROLES_has_PERMISOS SET activo = :isActive WHERE ROLES_id = :rolId AND PERMISOS_accion = :accion");
+            $statement = $con->prepare("UPDATE ROLES_has_PERMISOS SET activo = :isActive WHERE ROLES_id = :rolId AND PERMISOS_accion = :accion");
             $res = $statement->execute([":isActive" => $data['activo'], ":rolId" => $data['rolId'], ":accion" => $data["accion"]]);
             return $res;
         } catch (Exception $e) {
             die("ERROR SQL in saveOneUser(): " . $e->getMessage());
         }
-
+    }
 }

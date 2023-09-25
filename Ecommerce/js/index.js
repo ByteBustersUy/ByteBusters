@@ -1,7 +1,6 @@
 const DivBtnPages = document.getElementById("div-btns-pages");
 function cargarBotones(da){
 	let ppp = 4;
-	console.log(da)
 
 	cantPages=da/ppp;
 if (da%ppp !=0) {
@@ -11,7 +10,6 @@ if (da%ppp !=0) {
 if(cantPages <=0){
 	cantPages=1;
 }
-console.log(cantPages)
 
    let btns='';
 	for (let i = 1; i <=cantPages; i++) {
