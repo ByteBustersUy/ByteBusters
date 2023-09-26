@@ -822,6 +822,7 @@ footer img {
 
     html {
         min-height: 100vh;
+        overflow: hidden;
     }
 
     body {
