@@ -33,7 +33,7 @@
             </div>
             <?php
             require "./../src/modules/promotions/abm-promotions.php";  
-            echo showAllPromotionCards();
+            echo getAllPromotionCards();
             ?>
         </div>
         <footer>

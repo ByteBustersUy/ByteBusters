@@ -6,7 +6,7 @@
     --color-3: #cecece;
     --color-4: #000000;
     --color-5: #b8b8b878;
-    --semi-transparent-color: #ffffff2d;
+    --semi-transparent-color: #ffffff50;
     --error-color: #e01818;
     --transparent-color: #00000000;
 
@@ -692,7 +692,6 @@ thead tr .roles {
 .card-buttons{
     position: absolute;
     top: 0;
-    
     right: 0;
 }
 
