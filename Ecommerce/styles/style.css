@@ -194,6 +194,11 @@ height: 85%;
   color: var(--color-5);
 
 }
+.producto-no-promo{
+  width: 80%;
+  margin: 0;
+  margin-left: 9.5%;
+}
 
 /* banner */
 
@@ -592,6 +597,12 @@ margin-top: .5rem;
   .list-group h4{
     margin-bottom:1rem ;
   } 
+
+  #productos-sin-promo {
+    
+    margin: auto;
+    width: 90vw;
+  }
 }
 
 
@@ -625,6 +636,11 @@ margin-top: .5rem;
 
   .btn-comprar{
     right: 30%;
+  }
+  .producto-no-promo{
+    width: 60%;
+    margin: 0;
+    margin-left: 9.5%;
   }
 
 }
