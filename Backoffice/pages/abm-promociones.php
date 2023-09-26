@@ -24,16 +24,25 @@
     </div>
     <div class="container frame">
         <div class="row">
-            <!-- columnas... -->
+            <div class="col-lg-3">
+                <a href="">
+                    <div class="card-add-promotion">
+                        <i id="addPromotionIcon" class="fa-solid fa-plus"></i>
+                    </div>
+                </a>
+            </div>
+            <?php
+            require "./../src/modules/promotions/abm-promotions.php";  
+            echo getAllPromotionCards();
+            ?>
         </div>
-    </div>
-    <footer>
-        <?php
-        require "./components/footer.php";
-        echo $footer;
-        ?>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <footer>
+            <?php
+            require "./components/footer.php";
+            echo $footer;
+            ?>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 
 </html>

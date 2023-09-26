@@ -65,8 +65,6 @@ function addProduct()
 function editProduct(string $productId)
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
-    require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
-
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);

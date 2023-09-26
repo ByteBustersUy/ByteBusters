@@ -49,26 +49,12 @@ function findLastProductId(): string
     }
 }
 
-// function findCategoryIdByName(string $name): string
-// {
-
-//     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-//     try {
-//         $statement = $con->prepare("SELECT id FROM CATEGORIAS WHERE nombre = :nombre");
-//         $statement->execute(array(':nombre' => $name));
-//         $reg = $statement->fetch(PDO::FETCH_ASSOC);
-//         return $reg['id'] ? $reg['id'] : '';
-//     } catch (Exception $e) {
-//         die("ERROR SQL in findCategoryIdByName(): " . $e->getMessage());
-//     }
-// }
-
-
 function findProductCategoryByProductId(string $productId): string
 {
 
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
+        $con->beginTransaction();
         $statement = $con->prepare("SELECT CATEGORIAS_id FROM PRODUCTOS_has_CATEGORIAS WHERE PRODUCTOS_id = :productId");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
@@ -77,17 +63,18 @@ function findProductCategoryByProductId(string $productId): string
             $statement = $con->prepare("SELECT nombre FROM CATEGORIAS WHERE id = :categoryId");
             $statement->execute(array(':categoryId' => $reg['CATEGORIAS_id']));
             $reg = $statement->fetch(PDO::FETCH_ASSOC);
+            $con->commit();
             return $reg['nombre'] ? $reg['nombre'] : '';
         }
 
         return '';
     } catch (Exception $e) {
+        $con->rollback();
         die("ERROR SQL in findProductCategoryByProductId(): " . $e->getMessage());
     }
 }
 function findProductPromotionStatus(string $productId): bool
 {
-
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
         $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
@@ -100,32 +87,34 @@ function findProductPromotionStatus(string $productId): bool
     }
 }
 
-function updateOneProduct(array $newProduct)
+function updateOneProduct(array $updatedData)
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
 
     try {
+        $con->beginTransaction();
         $statement = $con->prepare("UPDATE PRODUCTOS SET  nombre = :nombre,
         descripcion = :descripcion, imagen = :imagen, precio = :precio WHERE id = :id
         AND activo = :activo");
 
         $reg = $statement->execute([
-            ':nombre' => $newProduct['nombre'],
-            ':descripcion' => $newProduct['descripcion'],
-            ':imagen' => $newProduct['imagen'],
-            ':precio' => $newProduct['precio'],
-            ':id' => $newProduct['id'],
+            ':nombre' => $updatedData['nombre'],
+            ':descripcion' => $updatedData['descripcion'],
+            ':imagen' => $updatedData['imagen'],
+            ':precio' => $updatedData['precio'],
+            ':id' => $updatedData['id'],
             ':activo' => 1,
         ]);
 
         $statement = $con->prepare("UPDATE PRODUCTOS_has_CATEGORIAS SET PRODUCTOS_id = :prodId, CATEGORIAS_id = :catId WHERE PRODUCTOS_id = :prodId");
         $statement->execute([
-            ':prodId' => $newProduct['id'],
-            ':catId' => $newProduct['idCategoria']
+            ':prodId' => $updatedData['id'],
+            ':catId' => $updatedData['idCategoria']
         ]);
-
+        $con->commit();
         return $reg ? true : false;
     }catch(Exception $e){
+        $con->rollback();
         die("ERROR SQL: " . $e->getMessage());
     }
     
