@@ -53,7 +53,7 @@ h5{
 
 nav {
   height: 5rem;
-  width: 100vw;
+  width: 100%;
 }
 
 
@@ -170,10 +170,8 @@ span {
   color: black;
 }
 .btn-agregar{
-  height: 2rem;
   background-color: var(--ecommerce-color);
   text-align: center;
-  align-items: center;
 }
 
 .btn-agregar:hover{
@@ -663,7 +661,7 @@ margin-top: .5rem;
   background-color: var(--color-5);
   margin-top: 0%;
   box-shadow: 2.5px 2.5px 5px var(--color-3);
-
+  width: 100.5%;
 }
 
 .result{
