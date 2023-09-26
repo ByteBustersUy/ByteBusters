@@ -1,3 +1,3 @@
 <?php
 session_start();
-$userName = "<p id='userName'>User: ".$_SESSION['userName']."</p>";
+$userName = "<p id='userName'>- ".$_SESSION['userName']." -</p>";
