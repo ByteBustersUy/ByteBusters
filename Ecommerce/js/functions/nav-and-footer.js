@@ -37,7 +37,7 @@ function loadNav() {
     </button>
     <div class="menu">
       <div>
-        ${loadLinks()}
+        ...
       </div>
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarCat" aria-labelledby="offcanvasNavbarCatLabel">
         <div class="offcanvas-header">

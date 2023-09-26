@@ -21,6 +21,10 @@
             echo $options;
             ?>
         </div>
+        <?php
+            require "./components/userName.php";
+            echo $userName;
+            ?>
         <h1>CONFIGURACION DE EMPRESA</h1>
     </div>
     <div class="container frame">
