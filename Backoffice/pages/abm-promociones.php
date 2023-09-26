@@ -20,6 +20,10 @@
             echo $options;
             ?>
         </div>
+        <?php
+            require "./components/userName.php";
+            echo $userName;
+            ?>
         <h1>GESTIÓN DE PROMOCIONES</h1>
     </div>
     <div class="container frame">

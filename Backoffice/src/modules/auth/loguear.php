@@ -25,7 +25,7 @@ $hashedPass = $reg['pass'];
 
 if (passVerify($pass, $hashedPass)) {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
-    $_SESSION['userName'] = $reg['nombre'];
+    $_SESSION['userName'] = $reg['nombre'].' '.$reg['apellido'];
     $_SESSION['userCi'] = $reg['ci'];
     $_SESSION['userRolesIds'] = $roles[0];
     $_SESSION['userRolesName'] = $roles[1];

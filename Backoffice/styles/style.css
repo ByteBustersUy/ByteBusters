@@ -48,6 +48,12 @@ button:active {
     display: none;
 }
 
+#userName{
+    color: var(--color-5);
+    font-size: .8rem;
+    padding: .2rem;
+}
+
 #errorMessageModal {
     color: var(--error-color);
     font-size: .8rem;
@@ -72,7 +78,7 @@ input[type=number]::-webkit-outer-spin-button {
 h1 {
     display: inline-flex;
     color: var(--light-text-color);
-    margin: 2rem 1rem 1rem 1rem;
+    margin-left: 5rem;
     font-size: 2rem;
     font-family: var(--font-family-h1);
     font-weight: bolder;
@@ -655,9 +661,7 @@ thead tr .roles {
     align-items: center;
     border-radius: .7rem;
     border: 1px dashed var(--color-3);
-    background-color: var(--semi-transparent-color);
-    filter: drop-shadow(4px 4px 4px var(--color-5));
-    filter: brightness(85%);
+    background-color: var(--color-2);
 }
 
 .card-add-promotion i {
@@ -678,7 +682,7 @@ thead tr .roles {
     border-radius: .7rem;
     border: 1px solid var(--color-3);
     background-color: var(--semi-transparent-color);
-    filter: drop-shadow(4px 4px 4px var(--color-5));
+    filter: drop-shadow(1px 1px 1px var(--color-5));
     filter: brightness(85%);
 }
 
