@@ -43,26 +43,23 @@ exit;
 
 function login(string $userCi, string $pass): array
 {
-    require '../../utils/validators/isValidPass.php';
-    require '../../utils/validators/isValidUserCi.php';
-    require '../../repository/users.repository.php';
-    include '../../utils/messages/msg.php';
+    require_once '../../utils/validators/isValidPass.php';
+    require_once '../../utils/validators/isValidUserCi.php';
+    require_once '../../repository/users.repository.php';
+    include_once '../../utils/messages/msg.php';
 
-    if (!isValidUserCi($userCi)) {
+    if (!isValidUserCi($userCi) || !isValidPass($pass)) {
         header("Location:../../../index.php");
         exit;
     }
-
-    if (!isValidPass($pass)) {
-        header("Location:../../../index.php");
-        exit;
-    }
+    
     $reg = findOneUser($userCi);
 
     if (!$reg) {
         header("Location:../../../index.php");
         exit;
     }
+    
     return $reg;
 }
 

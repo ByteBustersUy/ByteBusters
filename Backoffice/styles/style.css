@@ -6,6 +6,7 @@
     --color-3: #cecece;
     --color-4: #000000;
     --color-5: #b8b8b878;
+    --semi-transparent-color: #ffffff50;
     --error-color: #e01818;
     --transparent-color: #00000000;
 
@@ -71,8 +72,8 @@ input[type=number]::-webkit-outer-spin-button {
 h1 {
     display: inline-flex;
     color: var(--light-text-color);
-    margin: 2rem 1rem 0 1rem;
-    font-size: 3rem;
+    margin: 2rem 1rem 1rem 1rem;
+    font-size: 2rem;
     font-family: var(--font-family-h1);
     font-weight: bolder;
     text-align: center;
@@ -87,6 +88,8 @@ html {
 body {
     /* background: var(--primary-background-color); */
     background-image: url("../assets/backgroundGreen.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 
 }
 
@@ -638,8 +641,71 @@ thead tr .roles {
 }
 
 
-/* --------- GENERICS --------- */
+/* --------- PROMOTIONS --------- */
 
+.card-add-promotion {
+    display: flex;
+    min-width: 12rem;
+    max-width: 18rem;
+    height: 12rem;
+    text-align: center;
+    margin: 0rem auto;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: .7rem;
+    border: 1px dashed var(--color-3);
+    background-color: var(--semi-transparent-color);
+    filter: drop-shadow(4px 4px 4px var(--color-5));
+    filter: brightness(85%);
+}
+
+.card-add-promotion i {
+    scale: 200%;
+    color: var(--color-3);
+}
+
+.card-promo{
+    display: flex;
+    min-width: 12rem;
+    max-width: 18rem;
+    height: 12rem;
+    text-align: center;
+    margin: 0rem auto;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: .7rem;
+    border: 1px solid var(--color-3);
+    background-color: var(--semi-transparent-color);
+    filter: drop-shadow(4px 4px 4px var(--color-5));
+    filter: brightness(85%);
+}
+
+.card-promo h2{
+    color: var(--bytebusters-color);
+    font-size: 3rem;
+    font-weight: bold;
+    filter: drop-shadow(2px 4px 6px var(--color-1));
+}
+
+.card-buttons{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.card-buttons button{
+    scale: 100%;
+    border-radius: 1rem;
+    color: var(--color-3);
+}
+
+.card-buttons button:hover{
+    color: var(--color-3);
+}
+
+/* --------- GENERICS --------- */
 .align-end {
     align-items: end;
 }
