@@ -6,9 +6,12 @@
     --color-3: #cecece;
     --color-4: #000000;
     --color-5: #b8b8b878;
+    --color-white: #ffffff;
+    --color-placeholder: #3b3b3bc1;;
     --semi-transparent-color: #ffffff50;
     --error-color: #e01818;
     --transparent-color: #00000000;
+    
 
     /* ---- BACKGROUNDS ---- */
     --primary-background-color: var(--color-1);
@@ -49,9 +52,11 @@ button:active {
 }
 
 #userName{
-    color: var(--color-5);
+    color: var(--color-3);
     font-size: .8rem;
-    padding: .2rem;
+    padding: .1rem;
+    position: absolute;
+    right: 2rem;
 }
 
 #errorMessageModal {
@@ -68,17 +73,24 @@ input:focus {
     outline: none;
 }
 
-/* ocultar flechas input number */
+/* ocultar/modificar iconos de inputs */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-right: .5rem;
+  }
+input[type="date"]{
+    color: var(--color-placeholder);
+  }
 
 h1 {
     display: inline-flex;
     color: var(--light-text-color);
-    margin-left: 5rem;
+    margin-left: 3rem;
+    margin-top: 3rem;
     font-size: 2rem;
     font-family: var(--font-family-h1);
     font-weight: bolder;
@@ -93,7 +105,7 @@ html {
 
 body {
     /* background: var(--primary-background-color); */
-    background-image: url("../assets/backgroundGreen.jpg");
+    background-image: url("../assets/backgroundGreen.png");
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -163,7 +175,7 @@ thead tr {
 .link-options {
     position: relative;
     display: inline-block;
-    margin: 1rem 2rem;
+    margin: 2rem 2rem 1rem 2rem;
     color: var(--primary-text-color);
     border-radius: .3rem;
     background-color: var(--background-color-light);
@@ -186,6 +198,9 @@ thead tr {
     position: absolute;
     right: 0;
     height: auto;
+    width: 27rem;
+    display: flex;
+    justify-content: end;
     background-color: var(--color-1);
     border-bottom-left-radius: 1rem;
     filter: drop-shadow(-.2rem .2rem 4px var(--color-5));
@@ -608,7 +623,6 @@ thead tr .roles {
 
 
 .data-emp img {
-    width: inherit;
     margin: 1rem auto;
     border: .3rem ridge var(--secondary-border-color);
     box-shadow: inset .1rem .1rem var(--color-5);
@@ -815,6 +829,7 @@ footer img {
 
     html {
         min-height: 100vh;
+        overflow: hidden;
     }
 
     body {

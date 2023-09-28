@@ -19,7 +19,6 @@ function loadNav() {
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" style="bg-color: black">
-          ${loadLinks()}
           ${loadCategories()}
         </div>
       </div>
@@ -37,9 +36,6 @@ function loadNav() {
       <span class="navbar-toggler-icon"></span><p id="categorias">CATEGORIAS</p>
     </button>
     <div class="menu">
-      <div>
-        ...
-      </div>
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarCat" aria-labelledby="offcanvasNavbarCatLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarCatLabel">CATEGORIAS</h5>
@@ -99,11 +95,13 @@ function loadCategories() {
 			listCategories.innerHTML = "";
 			for (let id = 0; id < data.length; id++) {
 				listCategories.innerHTML += `<li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">${data[id].nombre}</a>
+            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./pages/listar.html?cat=${id}">${data[id].nombre}</a>
           </li>`;
 			}
 		});
 }
+
+
 
 function loadLinks() {
 	return `
@@ -115,6 +113,7 @@ function loadLinks() {
       </ul>
       `;
 }
+
 
 window.onload = function () {
 	loadNav();

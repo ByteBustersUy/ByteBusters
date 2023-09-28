@@ -7,9 +7,9 @@ if (cantidadProductos%producPorPage !=0) {
 	cantPages++;
 }
 
-if(cantPages <=0){
-	cantPages=1;
-}
+	if (cantPages <= 0) {
+		cantPages = 1;
+	}
 
    let btnsPages='';
 	for (let i = 1; i <=cantPages; i++) {
@@ -19,17 +19,16 @@ if(cantPages <=0){
 		DivBtnPages.innerHTML=btnsPages;	
 }
 
-DivBtnPages.addEventListener("click", function(event){
-	if (event.target.tagName==="BUTTON") {
-		let numPage=(event.target.textContent)
+DivBtnPages.addEventListener("click", function (event) {
+	if (event.target.tagName === "BUTTON") {
+		let numPage = event.target.textContent;
 		const divProducPromo = document.getElementById("tarjetas");
-		fetch("../api/productos-promo.php?p="+numPage)
-		.then((response) => response.json())
-		.then((data) => {
-			let card='';
-			for (let id = 0; id < data.length; id++) {
-				
-				card+= `
+		fetch("../api/productos-promo.php?p=" + numPage)
+			.then((response) => response.json())
+			.then((data) => {
+				let card = "";
+				for (let id = 0; id < data.length; id++) {
+					card += `
     			<div>
         			<div class="card h-100 produc-promo" >
 						<a class="ir-detalle-producto" href="pages/carrito.html">
@@ -42,9 +41,9 @@ DivBtnPages.addEventListener("click", function(event){
             			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
-			}
-			divProducPromo.innerHTML=card;
-		});
+				}
+				divProducPromo.innerHTML = card;
+			});
 	}
 });
 
@@ -54,13 +53,12 @@ window.addEventListener("load", function () {
 	fetch("../api/productos-promo.php?p=1")
 		.then((response) => response.json())
 		.then((data) => {
-			let cards='';
+			let cards = "";
 			for (let id = 0; id < data.length; id++) {
-				
-				cards+= `
+				cards += `
     			<div>
         			<div class="card h-100 produc-promo" >
-						<a class="ir-detalle-producto" href="pages/carrito.html">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
                 				<h4>$${data[id].precio}</h4>
@@ -71,7 +69,7 @@ window.addEventListener("load", function () {
         			</div>
     			</div>`;
 			}
-			divProducPromo.innerHTML=cards;
+			divProducPromo.innerHTML = cards;
 		});
 
 	//Productos no promocionados
@@ -109,10 +107,9 @@ window.addEventListener("load", function () {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				
-				let contenido ='';
-				for (let id = 0; id <data.length; id++) {
-				contenido+=`
+				let contenido = "";
+				for (let id = 0; id < data.length; id++) {
+					contenido += `
     			<div>
         			<div class="card h-100 produc-promo" >
 						<a class="ir-detalle-producto" href="pages/carrito.html">
