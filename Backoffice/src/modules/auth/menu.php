@@ -14,7 +14,7 @@ $cardsList = [
         'action' => $actions['gestionar-permisos'],
         'i' => '<i class="fa-solid fa-shield"></i>',
         'h4' => '<h4>PERMISOS</h4>',
-        'p' =>  '<p>Agregar, editar o eliminar permisos</p>',
+        'p' =>  '<p>Asignar permisos a roles</p>',
     ],
     "productos" => [
         'action' => $actions['gestionar-productos'],
@@ -32,13 +32,13 @@ $cardsList = [
         'action' => $actions['configurar-empresa'],
         'i' => '<i class="fa-solid fa-gears"></i>',
         'h4' => '<h4>EMPRESA</h4>',
-        'p' => '<p>Agregar, editar datos de empresa</p>'
+        'p' => '<p>Modificar datos de empresa</p>'
     ],
     "descargas" => [
         'action' => $actions['descargar-documentos'],
         'i' => '<i class="fa-solid fa-file-arrow-down"></i>',
         'h4' => '<h4>DESCARGAS</h4>',
-        'p' => '<p>Catálogo de productos e informe de ventas</p>'
+        'p' => '<p>Catálogo de productos en PDF</p>'
     ],
 ];
 

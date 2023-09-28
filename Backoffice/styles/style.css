@@ -7,9 +7,11 @@
     --color-4: #000000;
     --color-5: #b8b8b878;
     --color-white: #ffffff;
+    --color-placeholder: #3b3b3bc1;;
     --semi-transparent-color: #ffffff50;
     --error-color: #e01818;
     --transparent-color: #00000000;
+    
 
     /* ---- BACKGROUNDS ---- */
     --primary-background-color: var(--color-1);
@@ -71,12 +73,18 @@ input:focus {
     outline: none;
 }
 
-/* ocultar flechas input number */
+/* ocultar/modificar iconos de inputs */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-right: .5rem;
+  }
+input[type="date"]{
+    color: var(--color-placeholder);
+  }
 
 h1 {
     display: inline-flex;
@@ -615,7 +623,6 @@ thead tr .roles {
 
 
 .data-emp img {
-    width: inherit;
     margin: 1rem auto;
     border: .3rem ridge var(--secondary-border-color);
     box-shadow: inset .1rem .1rem var(--color-5);
