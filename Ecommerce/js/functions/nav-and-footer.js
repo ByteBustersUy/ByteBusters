@@ -6,6 +6,8 @@ if (currentDir == "pages") relativePath = "..";
 if (currentDir == "Ecommerce") relativePath = ".";
 
 function loadNav() {
+  loadCategoriesDesktop();
+  loadCategoriesMobile();
 	let navHTML = `
   <nav id="navConSearch" class="navbar navbar-light bg-light">
     <div class="d-flex m-auto">
@@ -13,13 +15,14 @@ function loadNav() {
       <button id="btnNavOption" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarMenu" aria-controls="offcanvasNavbarMenu" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarMenu" aria-labelledby="offcanvasNavbarMenuLabel">
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarMenu" aria-labelledby="offcanvasNavbarMenu">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarMenuLabel">Menu</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarCatLabel">CATEGORIAS</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body" style="bg-color: black">
-          ${loadCategories()}
+        <div class="offcanvas-body">
+          <ul id="list-categories-mob" class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          </ul>
         </div>
       </div>
       <form class="d-flex">
@@ -42,7 +45,7 @@ function loadNav() {
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <ul id="list-categories" class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <ul id="list-categories-desk" class="navbar-nav justify-content-end flex-grow-1 pe-3">
           </ul>
         </div>
       </div>
@@ -87,15 +90,29 @@ function loadFooter() {
 	document.body.insertAdjacentHTML("beforeend", footerHTML);
 }
 
-function loadCategories() {
+function loadCategoriesDesktop() {
 	fetch(`${relativePath}/../api/categorias.php`)
 		.then((response) => response.json())
 		.then((data) => {
-			const listCategories = document.getElementById("list-categories");
+			const listCategories = document.getElementById("list-categories-desk");
 			listCategories.innerHTML = "";
 			for (let id = 0; id < data.length; id++) {
 				listCategories.innerHTML += `<li class="nav-item">
-            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./pages/listar.html?cat=${id}">${data[id].nombre}</a>
+            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./${relativePath}/pages/listar.html?cat=${id}">${data[id].nombre}</a>
+          </li>`;
+			}
+		});
+}
+
+function loadCategoriesMobile() {
+	fetch(`${relativePath}/../api/categorias.php`)
+		.then((response) => response.json())
+		.then((data) => {
+			const listCategories = document.getElementById("list-categories-mob");
+			listCategories.innerHTML = "";
+			for (let id = 0; id < data.length; id++) {
+				listCategories.innerHTML += `<li class="nav-item">
+            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./${relativePath}/pages/listar.html?cat=${id}">${data[id].nombre}</a>
           </li>`;
 			}
 		});
