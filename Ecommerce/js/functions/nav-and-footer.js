@@ -37,7 +37,7 @@ function loadNav() {
     </button>
     <div class="menu">
       <div>
-        ...
+        
       </div>
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarCat" aria-labelledby="offcanvasNavbarCatLabel">
         <div class="offcanvas-header">
@@ -98,7 +98,7 @@ function loadCategories() {
 			listCategories.innerHTML = "";
 			for (let id = 0; id < data.length; id++) {
 				listCategories.innerHTML += `<li class="nav-item">
-            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./pages/listar.html?cat=${id}">${data[id].nombre}</a>
+            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./${relativePath}/pages/listar.html?cat=${id}">${data[id].nombre}</a>
           </li>`;
 			}
 		});
