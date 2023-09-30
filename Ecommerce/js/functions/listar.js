@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('cat');
     console.log(id);
