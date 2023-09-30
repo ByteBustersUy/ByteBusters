@@ -7,11 +7,12 @@
     --color-4: #000000;
     --color-5: #b8b8b878;
     --color-white: #ffffff;
-    --color-placeholder: #3b3b3bc1;;
+    --color-placeholder: #3b3b3bc1;
+    ;
     --semi-transparent-color: #ffffff50;
     --error-color: #e01818;
     --transparent-color: #00000000;
-    
+
 
     /* ---- BACKGROUNDS ---- */
     --primary-background-color: var(--color-1);
@@ -51,7 +52,7 @@ button:active {
     display: none;
 }
 
-#userName{
+#userName {
     color: var(--color-3);
     font-size: .8rem;
     padding: .1rem;
@@ -79,12 +80,14 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     margin-right: .5rem;
-  }
-input[type="date"]{
+}
+
+input[type="date"] {
     color: var(--color-placeholder);
-  }
+}
 
 h1 {
     display: inline-flex;
@@ -683,7 +686,7 @@ thead tr .roles {
     color: var(--color-3);
 }
 
-.card-promo{
+.card-promo {
     display: flex;
     min-width: 12rem;
     max-width: 18rem;
@@ -700,26 +703,26 @@ thead tr .roles {
     filter: brightness(85%);
 }
 
-.card-promo h2{
+.card-promo h2 {
     color: var(--bytebusters-color);
     font-size: 3rem;
     font-weight: bold;
     filter: drop-shadow(2px 4px 6px var(--color-1));
 }
 
-.card-buttons{
+.card-buttons {
     position: absolute;
     top: 0;
     right: 0;
 }
 
-.card-buttons button{
+.card-buttons button {
     scale: 100%;
     border-radius: 1rem;
     color: var(--color-3);
 }
 
-.card-buttons button:hover{
+.card-buttons button:hover {
     color: var(--color-3);
 }
 

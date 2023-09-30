@@ -1,23 +1,24 @@
-var anchoVentana = window.innerWidth
+var anchoVentana = window.innerWidth;
 const DivBtnPages = document.getElementById("div-btns-pages");
-function cargarBotonesBuscar(cantidadProductos){
+function cargarBotonesBuscar(cantidadProductos) {
 	let producPorPage = 3;
 
-	cantPages=cantidadProductos/producPorPage;
-if (cantidadProductos%producPorPage !=0) {
-	cantPages++;
-}
+	cantPages = cantidadProductos / producPorPage;
+	if (cantidadProductos % producPorPage != 0) {
+		cantPages++;
+	}
 
 	if (cantPages <= 0) {
 		cantPages = 1;
 	}
 
-   let btnsPages='';
-	for (let i = 1; i <=cantPages; i++) {
-		btnsPages+=`
+	let btnsPages = "";
+	for (let i = 1; i <= cantPages; i++) {
+		btnsPages += `
 		<button type="button" class="btn btn-pages">${i}</button>
-        `}
-		DivBtnPages.innerHTML=btnsPages;	
+        `;
+	}
+	DivBtnPages.innerHTML = btnsPages;
 }
 
 DivBtnPages.addEventListener("click", function (event) {
@@ -124,43 +125,39 @@ window.addEventListener("load", function () {
         			</div>
     			</div>`;
 				}
-				cantProduc=data.length;
-				divProducPromo.innerHTML = contenido
-				cargarBotonesBuscar(cantProduc)
+				cantProduc = data.length;
+				divProducPromo.innerHTML = contenido;
+				cargarBotonesBuscar(cantProduc);
 			});
-		});
+	});
 
-		if (anchoVentana< 768) {
-			cargarListProductosNoPromo();
-		
-			}else if(anchoVentana>760){
-			cargarCardsproductosNoPromo();
-			}
+	if (anchoVentana < 768) {
+		cargarListProductosNoPromo();
+	} else if (anchoVentana > 760) {
+		cargarCardsproductosNoPromo();
+	}
 });
 const divProductoNoPromo = document.getElementById("productos-sin-promo");
 
-window.onresize = function(){
-anchoVentana = window.innerWidth;
-if (anchoVentana< 768) {
-	cargarListProductosNoPromo();
-
-}else if(anchoVentana>760){
-	cargarCardsproductosNoPromo();
-}
-
+window.onresize = function () {
+	anchoVentana = window.innerWidth;
+	if (anchoVentana < 768) {
+		cargarListProductosNoPromo();
+	} else if (anchoVentana > 760) {
+		cargarCardsproductosNoPromo();
+	}
 };
 
-
 function cargarCardsproductosNoPromo() {
-	console.log("tablet/desktop")
-	divProductoNoPromo.innerHTML='';
+	console.log("tablet/desktop");
+	divProductoNoPromo.innerHTML = "";
 	//Productos promocionados
 	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
-			let cards='';
+			let cards = "";
 			for (let id = 0; id < data.length; id++) {
-				cards+= `
+				cards += `
     			<div>
         			<div class="card h-100 producto-no-promo" >
 						<a class="ir-detalle-producto" href="pages/carrito.html">
@@ -174,18 +171,17 @@ function cargarCardsproductosNoPromo() {
         			</div>
     			</div>`;
 			}
-			divProductoNoPromo.classList.add("row")
-			divProductoNoPromo.classList.add("row-cols-3")
-		
-			divProductoNoPromo.innerHTML=cards;
+			divProductoNoPromo.classList.add("row");
+			divProductoNoPromo.classList.add("row-cols-3");
+
+			divProductoNoPromo.innerHTML = cards;
 		});
 }
 
-
 function cargarListProductosNoPromo() {
-	divProductoNoPromo.innerHTML='';
-	divProductoNoPromo.classList.remove("row")
-	divProductoNoPromo.classList.remove("row-cols-3")
+	divProductoNoPromo.innerHTML = "";
+	divProductoNoPromo.classList.remove("row");
+	divProductoNoPromo.classList.remove("row-cols-3");
 
 	console.log("movile");
 	//Productos no promocionados

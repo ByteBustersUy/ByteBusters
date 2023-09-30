@@ -10,10 +10,9 @@ const validators = {
 	isSame: (a, b) => a === b,
 	isEqual: (a, b) => a == b,
 	isEmpty: (a) => a.length === 0,
-	startWithUpperCase: (str) => new RegExp("^[A-Z]+").test(str) ? true : false,
-	containWitheSpaces: (str) => new RegExp("\\s+").test(str) ? true : false,
+	startWithUpperCase: (str) => (new RegExp("^[A-Z]+").test(str) ? true : false),
+	containWitheSpaces: (str) => (new RegExp("\\s+").test(str) ? true : false),
 };
-
 
 //Agregar Producto
 btnAddProduct.addEventListener("click", () => {
@@ -42,7 +41,6 @@ btnUploadImage.addEventListener("change", () => {
 			.slice(0, 22)}..."`;
 	}
 });
-
 
 //Editar Producto
 btnEditProduct.addEventListener("click", () => {
@@ -75,7 +73,6 @@ btnEditProduct.addEventListener("click", () => {
 	}
 });
 
-
 // Eliminar producto
 btnDeleteProduct.addEventListener("click", () => {
 	if (!btnDeleteProduct.classList.contains("disabled")) {
@@ -106,13 +103,13 @@ btnDeleteProduct.addEventListener("click", () => {
 						"border-top: 1.5px solid #e01818;border-bottom: 1.5px solid #e01818;"
 					);
 					setTimeout(() => {
-						if(response.status == 200){
+						if (response.status == 200) {
 							alert("Producto eliminado con éxito!");
 							location.reload(true);
-						}else if(response.status == 400){
+						} else if (response.status == 400) {
 							alert("No se pudo eliminar el producto seleccionado");
 							location.reload(true);
-						}else{
+						} else {
 							alert("Error inesperado al intentar de eliminar el producto");
 						}
 					}, 1200);
@@ -130,7 +127,6 @@ btnDeleteProduct.addEventListener("click", () => {
 		document.getElementById("btnEditProduct").setAttribute("class", "disabled");
 	}
 });
-
 
 //Modal
 const modalProducts = document.getElementById("moddalProducts");
@@ -156,26 +152,26 @@ formAbm.addEventListener("change", () => {
 
 	const { isEmpty, startWithUpperCase } = validators;
 	let validForm = true;
-	
-	if (
-		!isEmpty(nombre.value)
-	) {
 
+	if (!isEmpty(nombre.value)) {
 		if (!startWithUpperCase(nombre.value)) {
 			messageError.innerHTML = "El nombre debe comenzar con mayúscula";
 			validForm = false;
 		}
 
-		if(isEmpty(descripcion.value)){
+		if (isEmpty(descripcion.value)) {
 			messageError.innerHTML = "El productoDebe tener una descripción";
 			validForm = false;
 		}
 
-		if(isEmpty(descripcion.value) || isEmpty(categoria.value) || isEmpty(imagen.value)){
+		if (
+			isEmpty(descripcion.value) ||
+			isEmpty(categoria.value) ||
+			isEmpty(imagen.value)
+		) {
 			messageError.innerHTML = "Todos los campos son obligatorios";
 			validForm = false;
 		}
-
 	} else {
 		validForm = false;
 		messageError.innerHTML = "Todos los campos son obligatorios";
@@ -189,7 +185,6 @@ formAbm.addEventListener("change", () => {
 		btnSubmitModal.setAttribute("style", "filter:brightness(30%);");
 	}
 });
-
 
 function selectProductRow(productId) {
 	const btnDeleteProduct = document.getElementById("btnDeleteProduct");

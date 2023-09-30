@@ -21,9 +21,9 @@
             ?>
         </div>
         <?php
-            require "./components/userName.php";
-            echo $userName;
-            ?>
+        require "./components/userName.php";
+        echo $userName;
+        ?>
         <h1>GESTIÓN DE PERMISOS</h1>
     </div>
     <div class="container frame">

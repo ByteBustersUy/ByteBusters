@@ -22,5 +22,3 @@ $array = Array (
 $json = json_encode($array);
 $bytes = file_put_contents("./myfile.json", $json); 
 echo "The number of bytes written are $bytes.";
-
-?>

@@ -6,8 +6,8 @@ function hasData($var): bool
 
 function elementsHasData(array $var): bool
 {
-    foreach ($var as $element){
-        if(!isset($element) || empty($element)){
+    foreach ($var as $element) {
+        if (!isset($element) || empty($element)) {
             return false;
         }
     }

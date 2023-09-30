@@ -3,7 +3,9 @@ window.addEventListener("load", function () {
 		.then((response) => response.json())
 		.then((data) => {
 			for (let id = 0; id < data.length; id++) {
-				const divPrductoSinPromo = document.getElementById("productos-sin-promo");
+				const divPrductoSinPromo = document.getElementById(
+					"productos-sin-promo"
+				);
 				divPrductoSinPromo.innerHTML += `
         <div class="list-group"> 
     <div class="d-flex list-body">
@@ -19,5 +21,4 @@ window.addEventListener("load", function () {
   `;
 			}
 		});
-        
-        });
+});

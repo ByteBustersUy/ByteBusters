@@ -14,5 +14,3 @@ if (move_uploaded_file($fileTmpPath, $destino)) {
 
     echo "Error";
 }
-
-?>
