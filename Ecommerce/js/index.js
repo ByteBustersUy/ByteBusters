@@ -1,3 +1,4 @@
+var anchoVentana = window.innerWidth
 const DivBtnPages = document.getElementById("div-btns-pages");
 function cargarBotonesBuscar(cantidadProductos){
 	let producPorPage = 3;
@@ -128,20 +129,15 @@ window.addEventListener("load", function () {
 				cargarBotonesBuscar(cantProduc)
 			});
 		});
+
+		if (anchoVentana< 768) {
+			cargarListProductosNoPromo();
+		
+			}else if(anchoVentana>760){
+			cargarCardsproductosNoPromo();
+			}
 });
 const divProductoNoPromo = document.getElementById("productos-sin-promo");
-
-var anchoVentana = window.innerWidth
-
-window.addEventListener("load", function () {
-	
-	if (anchoVentana< 768) {
-	cargarListProductosNoPromo();
-
-	}else if(anchoVentana>760){
-	cargarCardsproductosNoPromo();
-	}
-})
 
 window.onresize = function(){
 anchoVentana = window.innerWidth;
