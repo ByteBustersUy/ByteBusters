@@ -53,7 +53,7 @@ h5{
 
 nav {
   height: 5rem;
-  width: 100vw;
+  width: 100%;
 }
 
 
@@ -170,10 +170,8 @@ span {
   color: black;
 }
 .btn-agregar{
-  height: 2rem;
   background-color: var(--ecommerce-color);
   text-align: center;
-  align-items: center;
 }
 
 .btn-agregar:hover{
@@ -194,6 +192,11 @@ height: 85%;
   color: var(--color-5);
 
 }
+.producto-no-promo{
+  width: 80%;
+  margin: 0;
+  margin-left: 9.5%;
+}
 
 /* banner */
 
@@ -203,8 +206,6 @@ height: 85%;
 }
 
 /* LISTADO */
-
-
 .list-body{
   height: 8.2rem;
   width: 100%;
@@ -230,21 +231,23 @@ height: 85%;
 .list-group a{
   color: var(--color-5);
   font-size: .8rem;
+  margin-bottom: .5rem;
 }
 .list-group h4 {
   color:black;
   font-size: 1.1rem;
-  height: 2rem;
+  height: 1.3rem;
   overflow: hidden;
-  margin-top: .5rem;
+  margin-bottom: .2rem;
+  margin-top: .3rem;
 }
-
 .list-group h5 {
   color:black;
   font-size: 1.1rem;
-  height: 2rem;
+  height: 3.8rem;
   overflow: hidden;
-  margin-top: .5rem;
+  margin-top: .2rem;
+  margin-bottom: .2rem;
 }
 
 
@@ -586,7 +589,18 @@ margin-top: .5rem;
   .container-img img {
     padding: 2rem;
   }
+  .list-group h5 {
+    height: 2.5rem;
+  }
+  .list-group h4{
+    margin-bottom:1rem ;
+  } 
 
+  #productos-sin-promo {
+    
+    margin: auto;
+    width: 90vw;
+  }
 }
 
 
@@ -621,6 +635,11 @@ margin-top: .5rem;
   .btn-comprar{
     right: 30%;
   }
+  .producto-no-promo{
+    width: 60%;
+    margin: 0;
+    margin-left: 9.5%;
+  }
 
 }
 .imgprod{
@@ -642,7 +661,7 @@ margin-top: .5rem;
   background-color: var(--color-5);
   margin-top: 0%;
   box-shadow: 2.5px 2.5px 5px var(--color-3);
-
+  width: 100.5%;
 }
 
 .result{
