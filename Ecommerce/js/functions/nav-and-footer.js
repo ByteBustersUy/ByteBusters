@@ -26,9 +26,10 @@ function loadNav() {
         </div>
       </div>
       <form class="d-flex">
-        <input id="navSearch" class="form-control search" type="search" placeholder="Buscar en Digitalmarket" aria-label="Search"/>
-        <button id="btnNavSearch" class="btn btn-outline-secondary" type="submit">Buscar</button>
-      </form>
+      <input id="navSearch" class="form-control search" type="search" placeholder="Buscar en Digitalmarket" aria-label="Search"/>
+      <button id="btnNavSearch" class="btn btn-outline-secondary" type="button">Buscar</button>
+  </form>
+
       <a id="btnCarrito" href="${relativePath}/pages/carrito.html">
         <img class="carrito" src="${relativePath}/assets/Carts_Icons.png" alt="logo carrito de compras" />
       </a>
@@ -74,6 +75,16 @@ function loadFooter() {
       </div>
     </div>
   </footer>`;
+
+//Redirect boton buscar
+  document.getElementById("btnNavSearch").addEventListener("click", function(event){
+    event.preventDefault(); 
+    const inputSearch = document.getElementById("navSearch");
+    const searchValue = inputSearch.value;
+    console.log(searchValue);
+    window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
+});
+
 
 	//Datos de empresa
 	fetch(`${relativePath}/../api/datos-empresa.php`)
