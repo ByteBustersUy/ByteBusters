@@ -82,12 +82,14 @@ document.getElementById("btnNavSearch").addEventListener("click", function(event
   event.preventDefault(); 
   const inputSearch = document.getElementById("navSearch");
   const searchValue = inputSearch.value;
-  if(searchValue === "") {
-      return;
-  }
   console.log(searchValue);
+  if(searchValue === ""){
+    return;
+  }
   window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
 });
+
+
 
 
 
@@ -134,14 +136,6 @@ function loadCategoriesMobile() {
 			}
 		});
 }
-let contador = 0;
-
-document.getElementById("agregarAlCarrito").addEventListener("click", function() {
-  contador++;
-  document.getElementById("contadorCarrito").innerText = contador;
-});
-
-
 
 function loadLinks() {
 	return `
