@@ -32,6 +32,7 @@ function loadNav() {
 
       <a id="btnCarrito" href="${relativePath}/pages/carrito.html">
         <img class="carrito" src="${relativePath}/assets/Carts_Icons.png" alt="logo carrito de compras" />
+        
       </a>
     </div>
   </nav>
@@ -77,13 +78,18 @@ function loadFooter() {
   </footer>`;
 
 //Redirect boton buscar
-  document.getElementById("btnNavSearch").addEventListener("click", function(event){
-    event.preventDefault(); 
-    const inputSearch = document.getElementById("navSearch");
-    const searchValue = inputSearch.value;
-    console.log(searchValue);
-    window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
+document.getElementById("btnNavSearch").addEventListener("click", function(event){
+  event.preventDefault(); 
+  const inputSearch = document.getElementById("navSearch");
+  const searchValue = inputSearch.value;
+  if(searchValue === "") {
+      return;
+  }
+  console.log(searchValue);
+  window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
 });
+
+
 
 
 	//Datos de empresa
@@ -128,6 +134,12 @@ function loadCategoriesMobile() {
 			}
 		});
 }
+let contador = 0;
+
+document.getElementById("agregarAlCarrito").addEventListener("click", function() {
+  contador++;
+  document.getElementById("contadorCarrito").innerText = contador;
+});
 
 
 
