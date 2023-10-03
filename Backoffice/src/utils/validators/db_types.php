@@ -13,4 +13,3 @@ function varchar255(string $var): bool
         is_string($var) &&
         strlen($var) <= 255 ? true : false;
 }
-

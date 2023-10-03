@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="overflow: scroll">
 
 <head>
     <meta charset="UTF-8">
@@ -55,21 +55,21 @@
                         <button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="formAbmPromotions" class="form-abm" action="" method="post">
-                            <input id="nombre" type="text" name="nombre" placeholder="Nombre (opcional)" autocomplete="off">
+                        <form id="formAbmPromotions" class="form-abm" action="../src/modules/promotions/abm-promotions.php" method="post">
                             <input id="descuento" type="number" name="descuento" placeholder="Descuento (%)" required autocomplete="off">
                             <input id="fechaInicio" type="date" name="fechaInicio" required autocomplete="off">
                             <input id="fechaFin" type="date" name="fechaFin" required autocomplete="off">
                             <label id="errorMessageModal"></label>
                             <div class="buttons">
                                 <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
-                                <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
+                                <button id="btnSubmitModal" type="submit">ACEPTAR</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="../js/abm-promociones.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 

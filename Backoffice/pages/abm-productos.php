@@ -22,9 +22,9 @@
             ?>
         </div>
         <?php
-            require "./components/userName.php";
-            echo $userName;
-            ?>
+        require "./components/userName.php";
+        echo $userName;
+        ?>
         <h1>GESTIÓN DE PRODUCTOS</h1>
     </div>
     <div class="container frame">
@@ -97,7 +97,7 @@
                             <form id="formAbmProduct" class="form-abm" action="" method="post">
                                 <input id="nombre" type="text" name="nombre" placeholder="Nombre" required autocomplete="off">
                                 <select name="categoria" id="categoria" required>
-                                    <option selected hidden value="" disabled >Categoría</option>
+                                    <option selected hidden value="" disabled>Categoría</option>
                                     <?php
                                     $options = getOptionsCategoriesHTML();
                                     echo $options;

@@ -6,7 +6,7 @@ function isValidPass(string $var): bool
     $upperCase = "/[A-Z]+/";
     $number = "/[0-9]+/";
 
-    return 
+    return
         strlen($var) >= 8 &&
         strlen($var) <= 255 &&
         preg_match($lowerCase, $var) &&

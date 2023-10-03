@@ -6,8 +6,8 @@ if (currentDir == "pages") relativePath = "..";
 if (currentDir == "Ecommerce") relativePath = ".";
 
 function loadNav() {
-  loadCategoriesDesktop();
-  loadCategoriesMobile();
+	loadCategoriesDesktop();
+	loadCategoriesMobile();
 	let navHTML = `
   <nav id="navConSearch" class="navbar navbar-light bg-light">
     <div class="d-flex m-auto">
@@ -147,7 +147,6 @@ function loadLinks() {
       </ul>
       `;
 }
-
 
 window.onload = function () {
 	loadNav();
