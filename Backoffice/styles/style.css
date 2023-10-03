@@ -666,11 +666,15 @@ thead tr .roles {
 
 /* --------- PROMOTIONS --------- */
 
+.promoted-product{
+    color: var(--bytebusters-color) !important;
+}
+
 .card-add-promotion {
     display: flex;
     min-width: 12rem;
     max-width: 18rem;
-    height: 12rem;
+    height: 11rem;
     text-align: center;
     margin: 0rem auto;
     margin-top: 1rem;
@@ -690,7 +694,7 @@ thead tr .roles {
     display: flex;
     min-width: 12rem;
     max-width: 18rem;
-    height: 12rem;
+    height: 11rem;
     text-align: center;
     margin: 0rem auto;
     margin-top: 1rem;
@@ -699,13 +703,12 @@ thead tr .roles {
     border-radius: .7rem;
     border: 1px solid var(--color-3);
     background-color: var(--semi-transparent-color);
-    filter: drop-shadow(1px 1px 1px var(--color-5));
     filter: brightness(85%);
 }
 
 .card-promo h2 {
     color: var(--bytebusters-color);
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
     filter: drop-shadow(2px 4px 6px var(--color-1));
 }
@@ -714,6 +717,25 @@ thead tr .roles {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.promo-dates {
+    position: absolute;
+    bottom: 0;
+    color: var(--color-1);
+    font-weight: bold;
+    font-size: .7rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: .5rem 1rem;
+}
+
+.promo-content {
+    width: -webkit-fill-available;
+}
+
+.expired-promo{
+    border: 1px solid red;
+    filter: brightness(50%);
 }
 
 .card-buttons button {

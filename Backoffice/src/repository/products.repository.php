@@ -51,7 +51,6 @@ function findLastProductId(): string
 
 function findProductCategoryByProductId(string $productId): string
 {
-
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
         $con->beginTransaction();
@@ -77,7 +76,7 @@ function findProductPromotionStatus(string $productId): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
+        $statement = $con->prepare("SELECT PROMOCIONES_descuento FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -113,11 +112,10 @@ function updateOneProduct(array $updatedData)
         ]);
         $con->commit();
         return $reg ? true : false;
-    }catch(Exception $e){
+    } catch (Exception $e) {
         $con->rollback();
         die("ERROR SQL: " . $e->getMessage());
     }
-    
 }
 
 function saveOneProduct(array $newProduct): bool
@@ -138,7 +136,7 @@ function saveOneProduct(array $newProduct): bool
             ':USUARIO_ci' => $_SESSION['userCi'],
         ]);
 
-        $newProductId = intval(findLastProductId())+1;
+        $newProductId = intval(findLastProductId()) + 1;
         $statement = $con->prepare("INSERT INTO PRODUCTOS_has_CATEGORIAS (PRODUCTOS_id,CATEGORIAS_id) VALUES (:prodId, :catId)");
         $statement->execute([
             ':prodId' => $newProductId,
@@ -160,16 +158,14 @@ function deleteProduct(string $productId): bool
     include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
 
     try {
-            $statement = $con->prepare("UPDATE PRODUCTOS SET activo = :isActive WHERE id = :id");
-            $statement->execute([
-                ':isActive' => 0,
-                ':id' => $productId
-            ]);
+        $statement = $con->prepare("UPDATE PRODUCTOS SET activo = :isActive WHERE id = :id");
+        $statement->execute([
+            ':isActive' => 0,
+            ':id' => $productId
+        ]);
         return true;
     } catch (Exception $e) {
-        echo("ERROR SQL in Delete Product(): " . $e->getMessage());
+        echo ("ERROR SQL in Delete Product(): " . $e->getMessage());
         return false;
     }
 }
-
-
