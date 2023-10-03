@@ -24,22 +24,34 @@ function getAllPromotionCards(): string
     $promoCard = '';
     foreach (findAllPromos() as $promo) {
         checkExpiredPromo($promo);
-        $disabled = '';
+        $promoClass = '';
+        $promoStatus = '';
 
         if ($promo['vigente'] == 0) {
-            $disabled = 'expired-promo';
+            $promoClass = ' expired-promo';
+            $promoStatus = '
+                                <div class="promo-status">
+                                    <h3 class="lbl-expirado">Expirado</h3>
+                                </div>';
+        }else{
+            $promoClass = ' ';
+            $promoStatus = '
+                                <div class="promo-status">
+                                    <h3 class="lbl-vigente">Vigente</h3>
+                                </div>';
         }
 
         $promoCard .= '<div class="col-lg-3">
                         <a href="">
-                            <div class="card-promo ' . $disabled . '">
+                            <div class="card-promo' . $promoClass . '">
                                 <div class="card-buttons">
                                     <button class="btn"><i class="fa-solid fa-trash"></i></button>
                                 </div>
+                                '.$promoStatus.'
                                 <div class="promo-content">
                                     <h2>' . $promo['descuento'] . '%</h2>
                                     <div class="promo-dates">
-                                        <span>Desde: ' . formatDates($promo['fechaInicio']) . '</span>
+                                    <span>Desde: ' . formatDates($promo['fechaInicio']) . '</span>
                                         <br>
                                         <span>Hasta: ' . formatDates($promo['fechaFin']) . '</span>
                                     </div>

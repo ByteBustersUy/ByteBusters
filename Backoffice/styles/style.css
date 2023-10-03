@@ -692,6 +692,7 @@ thead tr .roles {
 
 .card-promo {
     display: flex;
+    position: relative;
     min-width: 12rem;
     max-width: 18rem;
     height: 11rem;
@@ -703,14 +704,13 @@ thead tr .roles {
     border-radius: .7rem;
     border: 1px solid var(--color-3);
     background-color: var(--semi-transparent-color);
-    filter: brightness(85%);
 }
 
 .card-promo h2 {
     color: var(--bytebusters-color);
     font-size: 3.5rem;
     font-weight: bold;
-    filter: drop-shadow(2px 4px 6px var(--color-1));
+    filter: drop-shadow(1px 1px 1px var(--color-1));
 }
 
 .card-buttons {
@@ -734,8 +734,35 @@ thead tr .roles {
 }
 
 .expired-promo{
-    border: 1px solid red;
-    filter: brightness(50%);
+    border-top: 1px solid var(--error-color);
+    border-bottom: 1px solid var(--error-color);
+}
+
+.promo-status{
+    position: absolute;
+    top:5px;
+    left:5px; 
+    z-index: 90; 
+    height: 1rem;
+}
+
+.lbl-vigente{
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--color-4);
+    background-color: var(--color-3);
+    padding: 2px 8px;
+    border-radius: .5rem;
+    
+}
+
+.lbl-expirado{
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--error-color);
+    background-color: var(--color-3);
+    padding: 2px 4px;
+    border-radius: .5rem;
 }
 
 .card-buttons button {
