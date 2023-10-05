@@ -28,7 +28,7 @@
     </div>
     <div class="container frame">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-sm-6 col-md-4 col-lg-3">
                 <a id="btnAddPromo" data-bs-toggle="modal" data-bs-target="#moddalPromotions">
                     <div class="card-add-promotion">
                         <i id="addPromotionIcon" class="fa-solid fa-plus"></i>
