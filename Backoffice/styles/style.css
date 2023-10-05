@@ -6,11 +6,12 @@
     --color-3: #cecece;
     --color-4: #000000;
     --color-5: #b8b8b878;
+    --color-6: #ffffff38;
     --color-white: #ffffff;
     --color-placeholder: #3b3b3bc1;
     ;
     --semi-transparent-color: #ffffff50;
-    --error-color: #e01818;
+    --error-color: #b30a0a;
     --transparent-color: #00000000;
 
 
@@ -701,6 +702,7 @@ thead tr .roles {
     margin-top: 1rem;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
     border-radius: .7rem;
     border: 1px solid var(--color-3);
     background-color: var(--semi-transparent-color);
@@ -710,7 +712,10 @@ thead tr .roles {
     color: var(--bytebusters-color);
     font-size: 3.5rem;
     font-weight: bold;
+    border-top: 2px dashed var(--color-6);
+    border-bottom: 2px dashed var(--color-6);
     filter: drop-shadow(1px 1px 1px var(--color-1));
+    background-color: var(--color-6);
 }
 
 .card-buttons {
@@ -721,12 +726,15 @@ thead tr .roles {
 
 .promo-dates {
     position: absolute;
-    bottom: 0;
+    bottom: 1.2px;
+    left: 1.2px;
     color: var(--color-1);
-    font-weight: bold;
     font-size: .7rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: .5rem 1rem;
+    padding: .2rem .8rem;
+    background-color: var(--color-6);
+    border-radius: 0 1rem 0 .6rem;
+    text-align: start;
 }
 
 .promo-content {
@@ -747,32 +755,40 @@ thead tr .roles {
 }
 
 .lbl-vigente{
-    font-size: .8rem;
+    font-size: .9rem;
     font-weight: 400;
-    color: var(--color-4);
-    background-color: var(--color-3);
+    color: var(--bytebusters-color);
+    background-color: var(--color-1);
     padding: 2px 8px;
     border-radius: .5rem;
-    
 }
 
 .lbl-expirado{
-    font-size: .8rem;
+    font-size: .9rem;
     font-weight: 400;
     color: var(--error-color);
-    background-color: var(--color-3);
-    padding: 2px 4px;
+    background-color: var(--color-1);
+    padding: 2px 8px;
     border-radius: .5rem;
+}
+
+.expired-discount{
+    color: var(--error-color) !important;
 }
 
 .card-buttons button {
     scale: 100%;
     border-radius: 1rem;
-    color: var(--color-3);
+    color: var(--color-1);
 }
 
 .card-buttons button:hover {
     color: var(--color-3);
+}
+
+.card-buttons button:active {
+    border: 0 solid  var(--color-1) !important;
+    color: var(--color-1);
 }
 
 /* --------- GENERICS --------- */
