@@ -79,8 +79,8 @@ btnDeleteProduct.addEventListener("click", () => {
 		btnDeleteProduct.setAttribute("class", "enabled-button");
 		const productRow = document.getElementsByClassName("selected")[0];
 		const productId = productRow.id;
-		const category = productRow.getElementsByTagName("td")[1].innerHTML;
-		const promoId = "";
+		// const category = productRow.getElementsByTagName("td")[1].innerHTML;
+		// const promoId = "";
 		const response = prompt(
 			`Se eliminará el producto con id ${productId} \n\nIngrese el id para confirmar`
 		);

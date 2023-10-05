@@ -26,30 +26,32 @@ function getAllPromotionCards(): string
         checkExpiredPromo($promo);
         $promoClass = '';
         $promoStatus = '';
+        $colorDiscount = '';
 
         if ($promo['vigente'] == 0) {
             $promoClass = ' expired-promo';
-            $promoStatus = '
-                                <div class="promo-status">
-                                    <h3 class="lbl-expirado">Expirado</h3>
-                                </div>';
-        }else{
+            $promoStatus = '<div class="promo-status">
+                                <h3 class="lbl-expirado">Expirado</h3>
+                            </div>';
+            $colorDiscount = 'expired-discount';
+            
+        } else {
             $promoClass = ' ';
-            $promoStatus = '
-                                <div class="promo-status">
-                                    <h3 class="lbl-vigente">Vigente</h3>
-                                </div>';
+            $promoStatus = '<div class="promo-status">
+                                <h3 class="lbl-vigente">Vigente</h3>
+                            </div>';
+            $colorDiscount = '';
         }
 
-        $promoCard .= '<div class="col-lg-3">
+        $promoCard .= '<div class="col-sm-6 col-md-4 col-lg-3">
                         <a href="">
                             <div class="card-promo' . $promoClass . '">
                                 <div class="card-buttons">
-                                    <button class="btn"><i class="fa-solid fa-trash"></i></button>
+                                    <button id="' . $promo['descuento'] . '" class="btn deletePromo"><i class="fa-solid fa-trash"></i></button>
                                 </div>
-                                '.$promoStatus.'
+                                ' . $promoStatus . '
                                 <div class="promo-content">
-                                    <h2>' . $promo['descuento'] . '%</h2>
+                                    <h2 class="'.$colorDiscount.'">' . $promo['descuento'] . '%</h2>
                                     <div class="promo-dates">
                                     <span>Desde: ' . formatDates($promo['fechaInicio']) . '</span>
                                         <br>
@@ -113,4 +115,10 @@ function checkExpiredPromo(array $promo)
     if ($promo["fechaFin"] < $now) {
         updateOnePromo($promo["descuento"]);
     }
+}
+
+function deletePromo($promo): bool
+{
+    
+    return true;
 }
