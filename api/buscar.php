@@ -14,4 +14,3 @@ if (isset($_GET['id'])){
 
 header("Conection-Type: application/json");
 echo json_encode($reg, JSON_PRETTY_PRINT);
-?>

@@ -36,10 +36,9 @@
 // 					divProducPromo.innerHTML = contenido
 // 					cargarBotones(category)
 
-
 // 				})
 // 				.catch((error) => {
-					
+
 // 					console.error(error);
 // 				  });
 // 				}, 1000);

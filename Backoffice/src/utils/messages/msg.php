@@ -5,8 +5,12 @@ $error_messages = [
    "!exist_user" => 'El usuario no existe',
    "!rolesSelected" => 'El usuario debe tener al menos un rol',
    "exist_product" => 'El producto ya existe',
+   "exist_promo" => 'Ya existe una promoción con ese descuento',
    "!exist_product" => 'El producto no existe',
    "!has_data" => 'Todos los campos son requeridos',
+   "!valid_promo" => 'El descuento debe ser entre 1 y 99',
+   "!valid_fechaInicio" => "La fecha de inicio no puede ser menor a hoy",
+   "!valid_fechaFin" => "La fecha de fin no puede ser menor la fecha de inicio",
    "!valid_user" => 'El usuario no es válido',
    "!valid_email" => 'El email no es válido',
    "!valid_length45" => 'algunos campos del formulario no deben superar los 45 caracteres',
@@ -19,7 +23,6 @@ $error_messages = [
    "!user_delete" => 'Usuario no eliminado',
    "!product_add" => 'Producto no agregado',
    "!data_save" => 'No se puedo guardar correctamente'
-
 ];
 
 $success_messages = [

@@ -6,12 +6,14 @@
     --color-3: #cecece;
     --color-4: #000000;
     --color-5: #b8b8b878;
+    --color-6: #ffffff38;
     --color-white: #ffffff;
-    --color-placeholder: #3b3b3bc1;;
+    --color-placeholder: #3b3b3bc1;
+    ;
     --semi-transparent-color: #ffffff50;
-    --error-color: #e01818;
+    --error-color: #b30a0a;
     --transparent-color: #00000000;
-    
+
 
     /* ---- BACKGROUNDS ---- */
     --primary-background-color: var(--color-1);
@@ -51,7 +53,7 @@ button:active {
     display: none;
 }
 
-#userName{
+#userName {
     color: var(--color-3);
     font-size: .8rem;
     padding: .1rem;
@@ -79,12 +81,14 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     margin-right: .5rem;
-  }
-input[type="date"]{
+}
+
+input[type="date"] {
     color: var(--color-placeholder);
-  }
+}
 
 h1 {
     display: inline-flex;
@@ -663,11 +667,15 @@ thead tr .roles {
 
 /* --------- PROMOTIONS --------- */
 
+.promoted-product{
+    color: var(--bytebusters-color) !important;
+}
+
 .card-add-promotion {
     display: flex;
     min-width: 12rem;
     max-width: 18rem;
-    height: 12rem;
+    height: 11rem;
     text-align: center;
     margin: 0rem auto;
     margin-top: 1rem;
@@ -683,44 +691,104 @@ thead tr .roles {
     color: var(--color-3);
 }
 
-.card-promo{
+.card-promo {
     display: flex;
+    position: relative;
     min-width: 12rem;
     max-width: 18rem;
-    height: 12rem;
+    height: 11rem;
     text-align: center;
     margin: 0rem auto;
     margin-top: 1rem;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
     border-radius: .7rem;
     border: 1px solid var(--color-3);
     background-color: var(--semi-transparent-color);
-    filter: drop-shadow(1px 1px 1px var(--color-5));
-    filter: brightness(85%);
 }
 
-.card-promo h2{
+.card-promo h2 {
     color: var(--bytebusters-color);
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
-    filter: drop-shadow(2px 4px 6px var(--color-1));
+    border-top: 2px dashed var(--color-6);
+    border-bottom: 2px dashed var(--color-6);
+    filter: drop-shadow(1px 1px 1px var(--color-1));
+    background-color: var(--color-6);
 }
 
-.card-buttons{
+.card-buttons {
     position: absolute;
     top: 0;
     right: 0;
 }
 
-.card-buttons button{
+.promo-dates {
+    position: absolute;
+    bottom: 1.2px;
+    left: 1.2px;
+    color: var(--color-1);
+    font-size: .7rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: .2rem .8rem;
+    background-color: var(--color-6);
+    border-radius: 0 1rem 0 .6rem;
+    text-align: start;
+}
+
+.promo-content {
+    width: -webkit-fill-available;
+}
+
+.expired-promo{
+    border-top: 1px solid var(--error-color);
+    border-bottom: 1px solid var(--error-color);
+}
+
+.promo-status{
+    position: absolute;
+    top:5px;
+    left:5px; 
+    z-index: 90; 
+    height: 1rem;
+}
+
+.lbl-vigente{
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--bytebusters-color);
+    background-color: var(--color-1);
+    padding: 2px 8px;
+    border-radius: .5rem;
+}
+
+.lbl-expirado{
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--error-color);
+    background-color: var(--color-1);
+    padding: 2px 8px;
+    border-radius: .5rem;
+}
+
+.expired-discount{
+    color: var(--error-color) !important;
+}
+
+.card-buttons button {
     scale: 100%;
     border-radius: 1rem;
+    color: var(--color-1);
+}
+
+.card-buttons button:hover {
     color: var(--color-3);
 }
 
-.card-buttons button:hover{
-    color: var(--color-3);
+.card-buttons button:active {
+    border: 0 solid  var(--color-1) !important;
+    color: var(--color-1);
 }
 
 /* --------- GENERICS --------- */

@@ -97,13 +97,21 @@ function getProductsTableData(): string
     foreach ($productsData as $product) {
         $category = findProductCategoryByProductId($product['id']);
         $isPromo = findProductPromotionStatus($product['id']);
-        $isPromo == 1 ? $isPromo = "Si" : $isPromo = "No";
+
+        if($isPromo == 1){
+            $isPromo = "Si";
+            $classColor = "promoted-product";
+        } else {
+            $isPromo = "No";
+            $classColor = "";
+        }
+
         $productsList .= '
                             <tr id="' . $product['id'] . '" class="user-select-none align-middle" onclick="selectProductRow(' . $product['id'] . ')">
-                                <td class="first-in-table">' . $product['nombre'] . '</td>
-                                <td id="' . $category . '">' . $category . '</td>
-                                <td>$' . $product['precio'] . '</td>
-                                <td>' . $isPromo . '</td>
+                                <td class="'.$classColor.' first-in-table">' . $product['nombre'] . '</td>
+                                <td class="'.$classColor.'" id="' . $category . '">' . $category . '</td>
+                                <td class="'.$classColor.'">$' . $product['precio'] . '</td>
+                                <td class="'.$classColor.'">' . $isPromo . '</td>
                                 <td><button class="btn-eye"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }

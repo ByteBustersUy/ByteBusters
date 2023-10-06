@@ -51,10 +51,10 @@ function getLabelsEmpresaHTML(): string
     $processedKeys = [];
     foreach ($dataEmpresa as $key => $data) {
         if (in_array($key, $processedKeys)) {
-            continue; 
+            continue;
         }
         $labelsEmpresa .= '<label class="data-label">' . strtoupper($key) . ': --> ' . $data . '</label>';
-        array_push($processedKeys,$key);
+        array_push($processedKeys, $key);
     }
     return $labelsEmpresa;
 }

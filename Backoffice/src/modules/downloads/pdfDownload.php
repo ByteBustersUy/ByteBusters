@@ -63,4 +63,3 @@ foreach($registros as $reg) {
     $pdf->Cell(20,10,mb_convert_encoding($productpresi,'ISO-8859-1','UTF-8'),1,0,'C');
 }
 $pdf->Output();
-?>

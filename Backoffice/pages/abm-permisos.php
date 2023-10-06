@@ -21,9 +21,9 @@
             ?>
         </div>
         <?php
-            require "./components/userName.php";
-            echo $userName;
-            ?>
+        require "./components/userName.php";
+        echo $userName;
+        ?>
         <h1>GESTIÓN DE PERMISOS</h1>
     </div>
     <div class="container frame">
@@ -60,8 +60,8 @@
         echo $footer;
         ?>
     </footer>
-    <script src="../js/abm-permisos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="../js/abm-permisos.js"></script>
 </body>
 
 </html>
