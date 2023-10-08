@@ -12,9 +12,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $whatsapp = htmlspecialchars($_POST['whatsapp']);
     $instagram = htmlspecialchars($_POST['instagram']);
     $comentario = htmlspecialchars($_POST['comentario']);
-    $logo = htmlspecialchars($_POST['logo']);
+    $logo = htmlspecialchars($_FILE['logo']);
     $email = htmlspecialchars($_POST['email']);
     $pwd_email = htmlspecialchars($_POST['pwd_email']);
+
+    $nameLogo = "logo-empresa.png";
+
+
+
+          //print_r($_FILES);
+    $fileTmpPath = $_FILES['logo']['tmp_name'];
+    $fileName = $_FILES['logo']['name'];
+    // $fileSize = $_FILES['imagen']['size'];
+    // $fileType = $_FILES['imagen']['type'];
+    $dir = '../../../Backoffice/assets';
+    echo $destino = $dir . $fileName; //TODO: id de producto
+    echo $fileName;
+    // print_r (move_uploaded_file($fileTmpPath, $destino));
+    if (move_uploaded_file($fileTmpPath, $destino)) {
+        echo "Fue guardado";
+    } else {
+        echo "Error";
+    }
+    rename("/tmp/$fileName", "/home/user/login/docs/$nameLogo");
+
+    
+  
+
+
+
+
 
     //TODO: hacer validaciones del formulario
 

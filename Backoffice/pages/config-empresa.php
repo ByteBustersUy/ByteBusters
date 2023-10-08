@@ -29,8 +29,8 @@
     </div>
     <div class="container frame">
         <div class="row">
-            <div class="col-xl-8 center">
-                <form class="form-emp" action="../src/modules/settings/config.php" method="post">
+            <div class="col-xl-8 center"> 
+                <form class="form-emp" action="../src/modules/settings/config.php" method="post" enctype="multipart/form-data">
                     <div>
                         <label>Nombre:<input type="text" name="nombre" placeholder="ej: Digital Market" autocomplete="off"></label>
                         <label>Rubro:<input type="text" name="rubro" placeholder="ej: Supermercado" autocomplete="off"></label>
@@ -47,7 +47,11 @@
                         <label>Email:<input type="emial" name="email" placeholder="ej: dmarket@gmail.com" autocomplete="off"></label>
                         <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="ej: 1234DIGITAL" autocomplete="off"></label>
                         <label>Comentario de venta:<input type="text" name="comentario" placeholder="ej: precios en pesos Uruguayos" autocomplete="off"></label>
-                        <label>Url logo empresa:<input type="text" name="logo" placeholder="ej: drive.com/logo.png" autocomplete="off"></label>
+
+                        <label>Seleccione la imagen:<input id="btnUploadImage" type="file" name="logo" accept="image/*" required></label>
+                        <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
+                        
+                       
                     </div>
                     <div class="buttons absolute bottom-10">
                         <button class="btn-emp" type="submit">ACEPTAR</button>

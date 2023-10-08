@@ -94,7 +94,7 @@
                             <button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="formAbmProduct" class="form-abm" action="" method="post">
+                            <form id="formAbmProduct" class="form-abm" action="" method="post" enctype="multipart/form-data">
                                 <input id="nombre" type="text" name="nombre" placeholder="Nombre" required autocomplete="off">
                                 <select name="categoria" id="categoria" required>
                                     <option selected hidden value="" disabled>Categoría</option>
@@ -103,11 +103,14 @@
                                     echo $options;
                                     ?>
                                 </select>
+                                
                                 <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
-                                <input id="btnUploadImage" type="file" name="imagen" accept=".jpg, .jpeg, .png, .gif" required>
+                                <input id="btnUploadImage" type="file" name="imagen" accept="image/*" required>
+
                                 <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
+
                                 <div class="buttons">
                                     <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
                                     <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
