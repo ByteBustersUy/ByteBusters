@@ -515,13 +515,13 @@ input[type=number]::-webkit-outer-spin-button {
   height: 15rem;
 }
 
-.add-to-cart {
-  border: none;
-  background-color: #d90429;
-  padding: 15px;
-  color: #ffffff;
-  font-weight: 700;
-  margin-top: .5rem;
+.agregar-carrito{
+border: none;
+background-color: #d90429;
+padding: 15px;
+color:#ffffff;
+font-weight: 700;
+margin-top: .5rem;
 }
 
 .container-related-products {
