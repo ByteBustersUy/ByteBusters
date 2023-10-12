@@ -40,7 +40,7 @@ DivBtnPages.addEventListener("click", function (event) {
                 				<h5>${data[id].nombre}</h5>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar ">Agregar al carrito</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 				}
@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
                 				<h5>${data[id].nombre}</h5>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar ">Agregar al carrito</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 			}
@@ -121,7 +121,7 @@ window.addEventListener("load", function () {
                 				<h5>${data[id].nombre}</h5>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar ">Agregar al carrito</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 				}
@@ -167,7 +167,7 @@ function cargarCardsproductosNoPromo() {
                 				<h5>${data[id].nombre}</h5>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar ">Agregar al carrito</a>
+            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 			}
@@ -197,7 +197,7 @@ function cargarListProductosNoPromo() {
             				<div class="d-block list-content">
             					<h5>${data[id].nombre}</h5>
             					<h4>$${data[id].precio}</h4>
-            					<a id="${data[id].id}" class="btn btn-agregar ">Agregar al carrito</a>
+            					<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
             				</div>
         				</a>
        		 		</div>
