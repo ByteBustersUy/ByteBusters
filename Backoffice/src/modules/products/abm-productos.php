@@ -39,12 +39,11 @@ function addProduct()
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
-
-
+        $idFileName = intval(findLastProductId()) + 1 .".png";
 
         $dir = '../../../../Ecommerce/images/';
-        echo $destino = $dir . $fileName; //TODO: id de producto
-        echo $fileName;
+        echo $destino = $dir . $idFileName; //TODO: id de producto
+        echo $idFileName;
 
         print_r (move_uploaded_file($fileTmpPath, $destino));
         if (move_uploaded_file($fileTmpPath, $destino)) {
@@ -72,7 +71,7 @@ function addProduct()
 
     $newProduct = [
         "nombre" => $nombre,
-        "imagen" => $fileName,
+        "imagen" => $idFileName,
         "idCategoria" => $categoria,
         "descripcion" => $descripcion,
         "precio" => $precio,
