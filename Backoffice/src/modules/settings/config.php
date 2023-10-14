@@ -16,17 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = htmlspecialchars($_POST['email']);
     $pwd_email = htmlspecialchars($_POST['pwd_email']);
 
-    $nameLogo = "logo-empresa.png";
-
-
+    //$nameLogo = "logo-empresa.png";
 
           //print_r($_FILES);
     $fileTmpPath = $_FILES['logo']['tmp_name'];
     $fileName = $_FILES['logo']['name'];
     // $fileSize = $_FILES['imagen']['size'];
     // $fileType = $_FILES['imagen']['type'];
-    $dir = '../../../Backoffice/assets';
-    echo $destino = $dir . $fileName; //TODO: id de producto
+    $dir = '../../../../Backoffice/assets/';
+    echo $destino = $dir . $nameLogo; //TODO: id de producto
     echo $fileName;
     // print_r (move_uploaded_file($fileTmpPath, $destino));
     if (move_uploaded_file($fileTmpPath, $destino)) {
@@ -34,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "Error";
     }
-    rename("/tmp/$fileName", "/home/user/login/docs/$nameLogo");
+    
 
     
   
@@ -69,6 +67,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         die('Error al guardar en db');
     }
+
+
+
+
+
+
+    
 }
 
 function getLabelsEmpresaHTML(): string

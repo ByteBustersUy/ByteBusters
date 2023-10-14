@@ -48,7 +48,7 @@
                         <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="ej: 1234DIGITAL" autocomplete="off"></label>
                         <label>Comentario de venta:<input type="text" name="comentario" placeholder="ej: precios en pesos Uruguayos" autocomplete="off"></label>
 
-                        <label>Seleccione la imagen:<input id="btnUploadImage" type="file" name="logo" accept="image/*" required></label>
+                        <input id="btnUploadImage" type="file" name="logo" accept="image/*">
                         <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
                         
                        
