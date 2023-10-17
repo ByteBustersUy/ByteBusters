@@ -78,7 +78,7 @@ function loadFooter() {
   </footer>`;
 
 //Redirect boton buscar
-document.getElementById("btnNavSearch").addEventListener("click", function(event){
+const botonBuscar = (event) => {
   event.preventDefault(); 
   const inputSearch = document.getElementById("navSearch");
   const searchValue = inputSearch.value;
@@ -87,7 +87,27 @@ document.getElementById("btnNavSearch").addEventListener("click", function(event
     return;
   }
   window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
+};
+
+document.getElementById("btnNavSearch").addEventListener("click", botonBuscar);
+document.getElementById("navSearch").addEventListener("keypress", (event) => {
+  if(event.key === 'Enter'){
+    botonBuscar(event);
+  }
 });
+
+/*document.getElementById("btnNavSearch").addEventListener("click", function(event){
+  event.preventDefault(); 
+  const inputSearch = document.getElementById("navSearch");
+  const searchValue = inputSearch.value;
+  console.log(searchValue);
+  if(searchValue === ""){
+    return;
+  }
+  window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
+});*/
+
+
 
 
 
