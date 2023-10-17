@@ -1,17 +1,19 @@
 :root {
     /* ---- COLORS ---- */
     --bytebusters-color: #1fb300;
+    --color-dark-green: #167800;
     --color-1: #181818;
     --color-2: #5a5a5a3b;
     --color-3: #cecece;
     --color-4: #000000;
     --color-5: #b8b8b878;
     --color-6: #ffffff38;
+    --color-7: #c4c4c4c8;
     --color-white: #ffffff;
     --color-placeholder: #3b3b3bc1;
-    ;
     --semi-transparent-color: #ffffff50;
     --error-color: #b30a0a;
+    --color-dark-red:#790000;
     --transparent-color: #00000000;
 
 
@@ -709,7 +711,7 @@ thead tr .roles {
 }
 
 .card-promo h2 {
-    color: var(--bytebusters-color);
+    color: var(--color-7);
     font-size: 3.5rem;
     font-weight: bold;
     border-top: 2px dashed var(--color-6);
@@ -733,8 +735,8 @@ thead tr .roles {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: .2rem .8rem;
     background-color: var(--color-6);
-    border-radius: 0 1rem 0 .6rem;
-    text-align: start;
+    width: 100%;
+    text-align: center;
 }
 
 .promo-content {
@@ -742,8 +744,13 @@ thead tr .roles {
 }
 
 .expired-promo{
-    border-top: 1px solid var(--error-color);
-    border-bottom: 1px solid var(--error-color);
+    border-top: 2px solid var(--error-color);
+    border-bottom: 2px solid var(--error-color);
+}
+
+.valid-promo{
+    border-top: 2px solid var(--color-dark-green);
+    border-bottom: 2px solid var(--color-dark-green);
 }
 
 .promo-status{
@@ -757,8 +764,8 @@ thead tr .roles {
 .lbl-vigente{
     font-size: .9rem;
     font-weight: 400;
-    color: var(--bytebusters-color);
-    background-color: var(--color-1);
+    color: var(--color-3);
+    background-color: var(--color-dark-green);
     padding: 2px 8px;
     border-radius: .5rem;
 }
@@ -766,14 +773,14 @@ thead tr .roles {
 .lbl-expirado{
     font-size: .9rem;
     font-weight: 400;
-    color: var(--error-color);
-    background-color: var(--color-1);
+    color: var(--color-3);
+    background-color: var(--color-dark-red);
     padding: 2px 8px;
     border-radius: .5rem;
 }
 
 .expired-discount{
-    color: var(--error-color) !important;
+    color: var(--color-7) !important;
 }
 
 .card-buttons button {
