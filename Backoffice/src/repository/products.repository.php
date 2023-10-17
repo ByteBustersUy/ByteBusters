@@ -76,7 +76,7 @@ function findProductPromotionStatus(string $productId): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT PROMOCIONES_descuento FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
+        $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
