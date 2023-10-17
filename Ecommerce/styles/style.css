@@ -482,6 +482,16 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #ffffff;
 }
 
+.card-img-top{
+  flex: 1;
+  background-color: #ffffff;
+  display: flex;
+  margin: auto;
+}
+
+.img-product-detail{
+  width: 25rem;
+}
 
 .container-title {
   font-size: 20px;
@@ -516,12 +526,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .add-to-cart{
+width: fit-content;
 border: none;
 background-color: #d90429;
-padding: 15px;
+padding: 10px 15px;
 color:#ffffff;
 font-weight: 700;
 margin-top: .5rem;
+border-radius: .3rem;
 }
 
 .container-related-products {

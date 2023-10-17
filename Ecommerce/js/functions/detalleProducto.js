@@ -22,7 +22,7 @@ fetch("../../api/detalleProducto.php?id=" + id, {
 
         divProduct.innerHTML = `<div class="row">
         <div class="col-sm-12 col-lg-6">
-          <img class="card-img-top" src="../images/${data[id].imagen}" />
+          <img class="card-img-top img-product-detail" src="../images/${data[id].imagen}" />
         </div>
         <div class="col-sm-12 col-lg-6">
           <div class="container-title">
@@ -30,7 +30,7 @@ fetch("../../api/detalleProducto.php?id=" + id, {
           </div>
           <div class="container-info-products">
             <div class="container-price">
-              <h4>${data[id].precio}</h4>
+              <h4>$${data[id].precio}</h4>
             </div>
             <div class="">
               <input type="button" value="-">
