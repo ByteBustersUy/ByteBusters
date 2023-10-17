@@ -21,10 +21,10 @@ fetch("../../api/detalleProducto.php?id=" + id, {
         divProduct.classList.add("row", "cardProd"); 
 
         divProduct.innerHTML = `<div class="row">
-        <div class="col-sm-12 col-lg-6">
+        <div class="col-sm-12 col-lg-5 container-img">
           <img class="card-img-top img-product-detail" src="../images/${data[id].imagen}" />
         </div>
-        <div class="col-sm-12 col-lg-6">
+        <div class="col-sm-12 col-lg-7">
           <div class="container-title">
             <h2>${data[id].nombre}</h2>
           </div>
