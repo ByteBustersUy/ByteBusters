@@ -15,6 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             editProduct($_GET['id']);
         } else if ($_GET['action'] == "delete" && isset($_POST["productId"])) {
             deleteProduct($_POST["productId"]);
+        }else if($_GET['action'] == "detail" && isset($_POST["productId"])){
+            header("Content-Type: application/json");
+            $productData = detailProduct($_POST["productId"]);
+            echo json_encode($productData, JSON_PRETTY_PRINT);
         } else {
             die("Invalid action requested");
         }
@@ -112,7 +116,7 @@ function getProductsTableData(): string
                                 <td class="'.$classColor.'" id="' . $category . '">' . $category . '</td>
                                 <td class="'.$classColor.'">$' . $product['precio'] . '</td>
                                 <td class="'.$classColor.'">' . $isPromo . '</td>
-                                <td><button class="btn-eye"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><button id="' . $product['id'] . '" class="btn-eye" data-bs-toggle="modal" data-bs-target="#moddalProductsDetail"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }
     return $productsList;
@@ -127,4 +131,15 @@ function getOptionsCategoriesHTML(): string
         $options .= '<option value="' . $category['id'] . '">' . $category['nombre'] . '</option>';
     }
     return $options;
+}
+
+function detailProduct(int $id): array{
+    require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
+
+    $productData = findProductById($id);
+    if(!$productData){
+        die("ERROR: " . $error_messages['!exist_product']);
+    }
+
+    return $productData;
 }

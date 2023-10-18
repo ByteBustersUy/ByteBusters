@@ -128,11 +128,70 @@ btnDeleteProduct.addEventListener("click", () => {
 	}
 });
 
-//Modal
+// detalle producto
+const buttonsProductDetail = document.getElementsByClassName("btn-eye");
+console.log(buttonsProductDetail);
+for (let btn of buttonsProductDetail) {
+	btn.addEventListener("click", (event) => {
+		const data = new URLSearchParams();
+		data.append("productId", btn.id);
+		fetch("../src/modules/products/abm-productos.php?action=detail", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/x-www-form-urlencoded",
+			},
+			body: data,
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error en la solicitud: " + response.status);
+				}
+				return response.json();
+			})
+			.then((productData) => {
+				//modal header
+				modalProductsDetail.getElementsByClassName("modal-title")[0].innerHTML = 'Detalle de producto'
+				//modal body
+				const modalBody = modalProductsDetail.getElementsByClassName("modal-body")[0];
+				modalBody.innerHTML = `
+					<div class="product-image">
+					<img src="../assets/${productData.imagen}">
+					</div>
+					<div class="product-detail">
+						<h4>${productData.nombre}</h4>
+						<div class='mt-4 product-description'>
+							<p>${productData.descripcion}</p>
+						
+						</div>
+					</div>
+					`;
+					
+				//
+			})
+			.catch((error) => {
+				console.error("Error: " + error);
+			});
+	});
+}
+
+//Modals
 const modalProducts = document.getElementById("moddalProducts");
+
 modalProducts.addEventListener("click", (event) => {
 	if (
 		event.target.id === modalProducts.id ||
+		event.target.id === "btnCloseModal" ||
+		event.target.id === "btnCancelModal"
+		) {
+			location.reload(true);
+		}
+	});
+	
+const modalProductsDetail = document.getElementById("moddalProductsDetail");
+
+modalProductsDetail.addEventListener("click", (event) => {
+	if (
+		event.target.id === modalProductsDetail.id ||
 		event.target.id === "btnCloseModal" ||
 		event.target.id === "btnCancelModal"
 	) {

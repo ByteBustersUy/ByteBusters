@@ -12,6 +12,19 @@ function findOneProduct(string $nombre): array
     }
 }
 
+function findProductById(int $id): array
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT * FROM PRODUCTOS WHERE id = :id");
+        $statement->execute(array(':id' => $id));
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        return $reg ? $reg : [];
+    } catch (Exception $e) {
+        die("ERROR SQL in findOneProduct(): " . $e->getMessage());
+    }
+}
+
 function findAllProducts(): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
