@@ -28,10 +28,10 @@ function addProduct()
     try {
 
         //print_r($_FILES);
-       
+
         // $fileSize = $_FILES['imagen']['size'];
         // $fileType = $_FILES['imagen']['type'];
-        
+
         //$imagen = htmlspecialchars($_POST['imagen']);
         $fileTmpPath = htmlspecialchars($_FILES['imagen']['tmp_name']);
         $fileName = htmlspecialchars($_FILES['imagen']['name']);
@@ -39,20 +39,18 @@ function addProduct()
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
-        $idFileName = intval(findLastProductId()) + 1 .".png";
+        $idFileName = intval(findLastProductId()) + 1 . ".png";
 
         $dir = '../../../../Ecommerce/images/';
         echo $destino = $dir . $idFileName; //TODO: id de producto
         echo $idFileName;
 
-        print_r (move_uploaded_file($fileTmpPath, $destino));
+        print_r(move_uploaded_file($fileTmpPath, $destino));
         if (move_uploaded_file($fileTmpPath, $destino)) {
             echo "Fue guardado";
         } else {
             echo "Error";
         }
-
-
     } catch (Exception $e) {
         throw new ErrorException($e->getMessage());
     }
@@ -90,15 +88,28 @@ function editProduct(string $productId)
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
-        $imagen = htmlspecialchars($_FILE['imagen']);
+        $imagen = $_FILES['imagen'];
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
+        $fileType = $_FILES['imagen']['type'];
+
+        $fileTmpPath = $_FILES['imagen']['tmp_name'];
+        $fileName = $_FILES['imagen']['name'];
+        $dir = "../../../../Ecommerce/images/";
+        echo $destino = $dir . $productId . ".png"; //TODO: id de producto
+        echo $productId;
+        echo $fileName;
+        if (move_uploaded_file($fileTmpPath, $destino)) {
+            echo "Fue guardado";
+        } else {
+            echo "Error";
+        }
 
         $updateProduct = [
             "id" => $productId,
             "nombre" => $nombre,
-            "imagen" => $imagen,
+            "imagen" => $productId . ".png",
             "idCategoria" => $categoria,
             "descripcion" => $descripcion,
             "precio" => $precio,
@@ -120,7 +131,7 @@ function getProductsTableData(): string
         $category = findProductCategoryByProductId($product['id']);
         $isPromo = findProductPromotionStatus($product['id']);
 
-        if($isPromo == 1){
+        if ($isPromo == 1) {
             $isPromo = "Si";
             $classColor = "promoted-product";
         } else {
@@ -130,10 +141,10 @@ function getProductsTableData(): string
 
         $productsList .= '
                             <tr id="' . $product['id'] . '" class="user-select-none align-middle" onclick="selectProductRow(' . $product['id'] . ')">
-                                <td class="'.$classColor.' first-in-table">' . $product['nombre'] . '</td>
-                                <td class="'.$classColor.'" id="' . $category . '">' . $category . '</td>
-                                <td class="'.$classColor.'">$' . $product['precio'] . '</td>
-                                <td class="'.$classColor.'">' . $isPromo . '</td>
+                                <td class="' . $classColor . ' first-in-table">' . $product['nombre'] . '</td>
+                                <td class="' . $classColor . '" id="' . $category . '">' . $category . '</td>
+                                <td class="' . $classColor . '">$' . $product['precio'] . '</td>
+                                <td class="' . $classColor . '">' . $isPromo . '</td>
                                 <td><button class="btn-eye"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }
