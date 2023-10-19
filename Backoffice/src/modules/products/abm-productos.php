@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             editProduct($_GET['id']);
         } else if ($_GET['action'] == "delete" && isset($_POST["productId"])) {
             deleteProduct($_POST["productId"]);
-        }else if($_GET['action'] == "detail" && isset($_POST["productId"])){
+        } else if ($_GET['action'] == "detail" && isset($_POST["productId"])) {
             header("Content-Type: application/json");
             $productData = detailProduct($_POST["productId"]);
             echo json_encode($productData, JSON_PRETTY_PRINT);
@@ -102,7 +102,7 @@ function getProductsTableData(): string
         $category = findProductCategoryByProductId($product['id']);
         $isPromo = findProductPromotionStatus($product['id']);
 
-        if($isPromo == 1){
+        if ($isPromo == 1) {
             $isPromo = "Si";
             $classColor = "promoted-product";
         } else {
@@ -112,10 +112,10 @@ function getProductsTableData(): string
 
         $productsList .= '
                             <tr id="' . $product['id'] . '" class="user-select-none align-middle" onclick="selectProductRow(' . $product['id'] . ')">
-                                <td class="'.$classColor.' first-in-table">' . $product['nombre'] . '</td>
-                                <td class="'.$classColor.'" id="' . $category . '">' . $category . '</td>
-                                <td class="'.$classColor.'">$' . $product['precio'] . '</td>
-                                <td class="'.$classColor.'">' . $isPromo . '</td>
+                                <td class="' . $classColor . ' first-in-table">' . $product['nombre'] . '</td>
+                                <td class="' . $classColor . '" id="' . $category . '">' . $category . '</td>
+                                <td class="' . $classColor . '">$' . $product['precio'] . '</td>
+                                <td class="' . $classColor . '">' . $isPromo . '</td>
                                 <td><button id="' . $product['id'] . '" class="btn-eye" data-bs-toggle="modal" data-bs-target="#moddalProductsDetail"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }
@@ -133,13 +133,31 @@ function getOptionsCategoriesHTML(): string
     return $options;
 }
 
-function detailProduct(int $id): array{
+function detailProduct(int $productId): array
+{
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
-    $productData = findProductById($id);
-    if(!$productData){
+    $product = findProductById($productId);
+
+    if (!elementsHasData($product)) {
         die("ERROR: " . $error_messages['!exist_product']);
     }
 
+    // $promoId = findPromoIdByProductId($productId);
+    $discount = 0;
+
+    // if (hasData($promoId) ) {
+    //     $promo = findOnePromoById($promoId);
+    //     if (hasData($promo)) {
+    //         $discount = $promo;
+    //     }
+    // }//TODO: da error...
+
+    $productData = [
+        "imagen" => $product['imagen'],
+        "nombre" => $product['nombre'],
+        "descripcion" => $product['descripcion'],
+        "descuento" => $discount,
+    ];
     return $productData;
 }

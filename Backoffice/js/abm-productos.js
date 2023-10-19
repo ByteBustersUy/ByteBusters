@@ -155,7 +155,7 @@ for (let btn of buttonsProductDetail) {
 				const modalBody = modalProductsDetail.getElementsByClassName("modal-body")[0];
 				modalBody.innerHTML = `
 					<div class="product-image">
-					<img src="../assets/${productData.imagen}">
+					<img src="../../Ecommerce/images/${productData.imagen}">
 					</div>
 					<div class="product-detail">
 						<h4>${productData.nombre}</h4>
@@ -163,10 +163,10 @@ for (let btn of buttonsProductDetail) {
 							<p>${productData.descripcion}</p>
 						
 						</div>
+						<p>Descuento: ${productData.descuento}%</p>
 					</div>
 					`;
 					
-				//
 			})
 			.catch((error) => {
 				console.error("Error: " + error);
