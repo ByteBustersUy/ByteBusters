@@ -90,7 +90,7 @@ function editProduct(string $productId)
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
-        $imagen = htmlspecialchars($_POST['imagen']);
+        $imagen = htmlspecialchars($_FILE['imagen']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
