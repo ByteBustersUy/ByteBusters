@@ -150,9 +150,11 @@ for (let btn of buttonsProductDetail) {
 			})
 			.then((productData) => {
 				//modal header
-				modalProductsDetail.getElementsByClassName("modal-title")[0].innerHTML = 'Detalle de producto'
+				modalProductsDetail.getElementsByClassName("modal-title")[0].innerHTML =
+					"Detalle de producto";
 				//modal body
-				const modalBody = modalProductsDetail.getElementsByClassName("modal-body")[0];
+				const modalBody =
+					modalProductsDetail.getElementsByClassName("modal-body")[0];
 				modalBody.innerHTML = `
 					<div class="product-image">
 					<img src="../../Ecommerce/images/${productData.imagen}">
@@ -161,12 +163,20 @@ for (let btn of buttonsProductDetail) {
 						<h4>${productData.nombre}</h4>
 						<div class='mt-4 product-description'>
 							<p>${productData.descripcion}</p>
-						
 						</div>
-						<p>Descuento: ${productData.descuento}%</p>
+					${
+						productData.descuento > 0
+							? `<span class="mt-2">Descuento: ${productData.descuento}%</span>
+								<span>Precio sin descuento: $${productData.precio}</span>
+								<span>Precio con descuento: $${Math.round(
+									productData.precio * (1 - productData.descuento / 100)
+								)}</span>`
+							: `
+								<span class="mt-2">Precio: $${productData.precio}</span>
+								`
+					}
 					</div>
 					`;
-					
 			})
 			.catch((error) => {
 				console.error("Error: " + error);
@@ -182,11 +192,11 @@ modalProducts.addEventListener("click", (event) => {
 		event.target.id === modalProducts.id ||
 		event.target.id === "btnCloseModal" ||
 		event.target.id === "btnCancelModal"
-		) {
-			location.reload(true);
-		}
-	});
-	
+	) {
+		location.reload(true);
+	}
+});
+
 const modalProductsDetail = document.getElementById("moddalProductsDetail");
 
 modalProductsDetail.addEventListener("click", (event) => {

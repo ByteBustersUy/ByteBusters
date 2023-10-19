@@ -95,7 +95,7 @@ function findProductCategoryByProductId(string $productId): string
         die("ERROR SQL in findProductCategoryByProductId(): " . $e->getMessage());
     }
 }
-function findProductPromotionStatus(string $productId): bool
+function findProductPromotionStatus(string $productId)
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {

@@ -136,27 +136,29 @@ function getOptionsCategoriesHTML(): string
 function detailProduct(int $productId): array
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
-
+    require realpath(dirname(__FILE__)) . "/../../repository/promotions.repository.php";
+    
     $product = findProductById($productId);
 
     if (!elementsHasData($product)) {
         die("ERROR: " . $error_messages['!exist_product']);
     }
 
-    // $promoId = findPromoIdByProductId($productId);
+    $promoId = findPromoIdByProductId($productId);
     $discount = 0;
 
-    // if (hasData($promoId) ) {
-    //     $promo = findOnePromoById($promoId);
-    //     if (hasData($promo)) {
-    //         $discount = $promo;
-    //     }
-    // }//TODO: da error...
+    if (hasData($promoId) && $promoId > 0) {
+        $promo = findOnePromoById($promoId);
+        if (hasData($promo)) {
+            $discount = $promo["descuento"];
+        }
+    }
 
     $productData = [
         "imagen" => $product['imagen'],
         "nombre" => $product['nombre'],
         "descripcion" => $product['descripcion'],
+        "precio" => $product['precio'],
         "descuento" => $discount,
     ];
     return $productData;

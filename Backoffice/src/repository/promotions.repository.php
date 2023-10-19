@@ -82,11 +82,11 @@ function findExistentPromo(int $descuento, string $fechaInicio, string $fechaFin
     }
 }
 
-function findOnePromoById(int $promoId): int
+function findOnePromoById(int $promoId): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT PROMOCIONES_id
+        $statement = $con->prepare("SELECT *
                                     FROM PROMOCIONES
                                     WHERE id = :id");
         $statement->execute(
@@ -108,13 +108,14 @@ function findPromoIdByProductId(int $productId): int
         $statement = $con->prepare("SELECT PROMOCIONES_id
                                     FROM PRODUCTOS_has_PROMOCIONES
                                     WHERE PRODUCTOS_id = :id
-                                    ORDER BY PRODUCTOS_id DESC");
+                                    ORDER BY PROMOCIONES_id DESC
+                                    ");
         $statement->execute(
             array(":id" => $productId)
         );
-        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        $reg = $statement->fetch();
 
-        return $reg;
+        return $reg ? $reg['PROMOCIONES_id'] : 0;
     } catch (Exception $e) {
         $con->close();
         die("ERROR SQL in findPromoIdByProductId(): " . $e->getMessage());
