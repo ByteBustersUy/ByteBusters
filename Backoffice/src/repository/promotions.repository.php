@@ -1,18 +1,34 @@
 <?php
 
-function findAllPromos(): array
+function findAllPromos(int $isActive): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-    try {
-        $statement = $con->prepare("SELECT *
-                                    FROM PROMOCIONES
-                                    WHERE activo = :isActive
-                                    ORDER BY fechaInicio ASC");
-        $statement->execute(array(":isActive" => 1));
-        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $reg;
-    } catch (Exception $e) {
-        die("ERROR SQL in findAllPromos(): " . $e->getMessage());
+    if (isset($isActive) && $isActive == false) {
+        try {
+            $statement = $con->prepare("SELECT *
+                                        FROM PROMOCIONES
+                                        ORDER BY fechaInicio ASC");
+            $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $reg;
+        } catch (Exception $e) {
+            $con->close();
+            die("ERROR SQL in findAllPromos(): " . $e->getMessage());
+        }
+    } else {
+        try {
+            $statement = $con->prepare("SELECT *
+                                        FROM PROMOCIONES
+                                        WHERE activo = :isActive
+                                        ORDER BY fechaInicio ASC");
+            $statement->execute(array(":isActive" => 1));
+            $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $reg;
+        } catch (Exception $e) {
+            $con->close();
+            die("ERROR SQL in findAllPromos(): " . $e->getMessage());
+        }
     }
 }
 
@@ -29,38 +45,120 @@ function saveOnePromotion(int $descuento, string $fechaInicio, string $fechaFin)
                 ":fechaFin" => $fechaFin
             )
         );
+
         return true;
     } catch (Exception $e) {
+        $con->close();
         return false;
     }
 }
 
-function findOnePromo($descuento) {
+function findExistentPromo(int $descuento, string $fechaInicio, string $fechaFin, int $vigente): array
+{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
         $statement = $con->prepare("SELECT *
                                     FROM PROMOCIONES
                                     WHERE descuento = :descuento
-                                    AND activo = :isActive");
-        $statement->execute(array(":descuento" => $descuento, ":isActive" => 1));
-        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $reg;
+                                    AND fechaInicio = :fechaInicio
+                                    AND fechaFin = :fechaFin
+                                    AND vigente = :vigente
+                                    AND activo = :activo");
+        $statement->execute(
+            array(
+                ":descuento" => $descuento,
+                ":fechaInicio" => $fechaInicio,
+                ":fechaFin" => $fechaFin,
+                ":vigente" => $vigente,
+                ":activo" => 1
+            )
+        );
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $reg ? $reg : [];
     } catch (Exception $e) {
-        die("ERROR SQL in findAllPromos(): " . $e->getMessage());
+        $con->close();
+        die("ERROR SQL in findExistentPromo(): " . $e->getMessage());
     }
 }
 
-function updateOnePromo($descuento){
+function findOnePromoById(int $promoId): array
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT *
+                                    FROM PROMOCIONES
+                                    WHERE id = :id");
+        $statement->execute(
+            array(":id" => $promoId)
+        );
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $reg;
+    } catch (Exception $e) {
+        $con->close();
+        die("ERROR SQL in findOnePromoById(): " . $e->getMessage());
+    }
+}
+
+function findPromoIdByProductId(int $productId): int
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT PROMOCIONES_id
+                                    FROM PRODUCTOS_has_PROMOCIONES
+                                    WHERE PRODUCTOS_id = :id
+                                    ORDER BY PROMOCIONES_id DESC
+                                    ");
+        $statement->execute(
+            array(":id" => $productId)
+        );
+        $reg = $statement->fetch();
+
+        return $reg ? $reg['PROMOCIONES_id'] : 0;
+    } catch (Exception $e) {
+        $con->close();
+        die("ERROR SQL in findPromoIdByProductId(): " . $e->getMessage());
+    }
+}
+
+function updatePromoToExpired(int $promoId)
+{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
         $statement = $con->prepare("UPDATE PROMOCIONES
                                     SET vigente = :vigente
-                                    WHERE descuento = :descuento
+                                    WHERE id = :id
                                     AND activo = :isActive");
-        $statement->execute(array(":vigente" => 0, ":descuento" => $descuento, ":isActive" => 1));
-        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement->execute(array(":vigente" => 0, ":id" => $promoId, ":isActive" => 1));
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
         return $reg;
     } catch (Exception $e) {
-        die("ERROR SQL in findAllPromos(): " . $e->getMessage());
+        $con->close();
+        die("ERROR SQL in updatePromoToExpired(): " . $e->getMessage());
+    }
+}
+
+function deletePromo(int $promoId): bool
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+
+    try {
+        $statement = $con->prepare("UPDATE PROMOCIONES
+                                    SET activo = :activo
+                                    WHERE id = :id");
+        $statement->execute(
+            array(
+                ":id" => $promoId,
+                ":activo" => 0
+            )
+        );
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $reg ? true : false;
+    } catch (Exception $e) {
+        $con->close();
+        die("ERROR SQL in deletePromo(): " . $e->getMessage());
     }
 }
