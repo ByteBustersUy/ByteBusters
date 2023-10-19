@@ -85,7 +85,7 @@
                     </table>
                 </div>
             </div>
-            <!-- Modal -->
+            <!-- Modal ABM -->
             <div class="modal fade" id="moddalProducts" tabindex="-1" aria-labelledby="ProductsModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div id="modalContent" class="modal-content">
@@ -105,7 +105,7 @@
                                 </select>
                                 <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
                                 <input id="btnUploadImage" type="file" name="imagen" accept=".jpg, .jpeg, .png, .gif" required>
-                                <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
+                                <input id="precio" class="precio" type="text" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
                                 <div class="buttons">
@@ -113,6 +113,19 @@
                                     <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal detalle -->
+            <div class="modal fade" id="moddalProductsDetail" tabindex="-1" aria-labelledby="ProductsModalDetailLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div id="modalContentDetail" class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="ProductsModalDetailLabel"></h2>
+                            <button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
                         </div>
                     </div>
                 </div>

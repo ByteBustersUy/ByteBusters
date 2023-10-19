@@ -5,9 +5,10 @@ function findAllDataEmpresa(): array
     try {
         $statement = $con->prepare("SELECT nombre,rubro,calle,numero,ciudad,telefono,whatsapp,instagram,email,pwd_email,comentarios,logo FROM EMPRESA");
         $statement->execute();
-        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);;
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findAllDataEmpresa(): " . $e->getMessage());
     }
 }
@@ -32,8 +33,10 @@ function saveDataEmpresa(array $dataToUpdate): bool
         pwd_email = '$dataToUpdate[pwd_email]'"
         );
         $res = $statement->execute();
+
         return $res == 1 ? $res : die("Error: " . $error_messages['!data_save']);
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in setDataEmpresa(): " . $e->getMessage());
     }
 }
