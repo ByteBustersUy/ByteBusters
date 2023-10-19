@@ -33,7 +33,7 @@ DivBtnPages.addEventListener("click", function (event) {
 					card += `
     			<div>
         			<div class="card h-100 produc-promo" >
-						<a class="ir-detalle-producto" href="pages/carrito.html">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
                 				<h4>$${data[id].precio}</h4>
@@ -83,7 +83,7 @@ window.addEventListener("load", function () {
 				divPrductoSinPromo.innerHTML += `
 				<div class="list-group"> 
         			<div class="d-flex list-body">
-        				<a class="" href="pages/carrito.html">
+        				<a class="" href="pages/detalleProducto.html">
             				<img class="img-list" src="./images/${data[id].imagen}" class="card-img-top" alt="...">
             				<div class="d-block list-content">
             					<h5>${data[id].nombre}</h5>
@@ -151,6 +151,7 @@ window.onresize = function () {
 function cargarCardsproductosNoPromo() {
 	console.log("tablet/desktop");
 	divProductoNoPromo.innerHTML = "";
+	
 	//Productos promocionados
 	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
@@ -160,7 +161,7 @@ function cargarCardsproductosNoPromo() {
 				cards += `
     			<div>
         			<div class="card h-100 producto-no-promo" >
-						<a class="ir-detalle-producto" href="pages/carrito.html">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
                 				<h4>$${data[id].precio}</h4>
