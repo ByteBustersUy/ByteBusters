@@ -4,6 +4,16 @@ require realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
+    if (isset($_GET['action']) && isset($_POST['id'])) {
+
+        switch ($_GET['action']) {
+            case "delete": 
+                deletePromotion($_POST['id']);
+                break;
+            default: 
+                return http_response_code(500);
+        }
+    }
 
     $descuento = htmlspecialchars($_POST['descuento']);
     $fechaInicio = htmlspecialchars($_POST['fechaInicio']);
@@ -22,8 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 function getAllPromotionCards(): string
 {
     $promoCard = '';
-    foreach (findAllPromos() as $promo) {
+    foreach (findAllPromos(true) as $promo) {
         checkExpiredPromo($promo);
+        sleep(1);
         $promoClass = '';
         $promoStatus = '';
         $colorDiscount = '';
@@ -36,7 +47,7 @@ function getAllPromotionCards(): string
             $colorDiscount = 'expired-discount';
             
         } else {
-            $promoClass = ' ';
+            $promoClass = 'valid-promo';
             $promoStatus = '<div class="promo-status">
                                 <h3 class="lbl-vigente">Vigente</h3>
                             </div>';
@@ -44,18 +55,16 @@ function getAllPromotionCards(): string
         }
 
         $promoCard .= '<div class="col-sm-6 col-md-4 col-lg-3">
-                        <a href="">
-                            <div class="card-promo' . $promoClass . '">
+                        <a href="#">
+                            <div class="card-promo ' . $promoClass . '">
                                 <div class="card-buttons">
-                                    <button id="' . $promo['descuento'] . '" class="btn deletePromo"><i class="fa-solid fa-trash"></i></button>
+                                    <button id="' . $promo["id"] . '" class="btn deletePromo"><i class="fa-solid fa-trash"></i></button>
                                 </div>
                                 ' . $promoStatus . '
                                 <div class="promo-content">
                                     <h2 class="'.$colorDiscount.'">' . $promo['descuento'] . '%</h2>
                                     <div class="promo-dates">
-                                    <span>Desde: ' . formatDates($promo['fechaInicio']) . '</span>
-                                        <br>
-                                        <span>Hasta: ' . formatDates($promo['fechaFin']) . '</span>
+                                    <span>' . formatDates($promo['fechaInicio']) .' - ' . formatDates($promo['fechaFin']) .'</span>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +91,7 @@ function createNewPromo($descuento, $fechaInicio, $fechaFin): bool
         die("ERROR: " . $error_messages['!valid_promo']);
     }
 
-    $existentPromo = findOnePromo($descuento);
+    $existentPromo = findExistentPromo($descuento, $fechaInicio, $fechaFin, 1);
 
     if ($existentPromo) {
         die("ERROR: " . $error_messages['exist_promo']);
@@ -113,12 +122,11 @@ function checkExpiredPromo(array $promo)
 {
     $now = getLocalDate();
     if ($promo["fechaFin"] < $now) {
-        updateOnePromo($promo["descuento"]);
+        updatePromoToExpired($promo["id"]);
     }
 }
 
-function deletePromo($promo): bool
+function deletePromotion($id): bool
 {
-    
-    return true;
+        return deletePromo($id);
 }

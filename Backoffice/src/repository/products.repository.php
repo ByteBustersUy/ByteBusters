@@ -6,8 +6,25 @@ function findOneProduct(string $nombre): array
         $statement = $con->prepare("SELECT * FROM PRODUCTOS WHERE nombre = :nombre");
         $statement->execute(array(':nombre' => $nombre));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
+        die("ERROR SQL in findOneProduct(): " . $e->getMessage());
+    }
+}
+
+function findProductById(int $id): array
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT * FROM PRODUCTOS WHERE id = :id");
+        $statement->execute(array(':id' => $id));
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $reg ? $reg : [];
+    } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findOneProduct(): " . $e->getMessage());
     }
 }
@@ -19,8 +36,10 @@ function findAllProducts(): array
         $res = $con->prepare("SELECT * FROM PRODUCTOS WHERE activo = :isActive ORDER BY nombre ASC");
         $res->execute([':isActive' => 1]);
         $reg = $res->fetchAll(PDO::FETCH_ASSOC);
+
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findAllProducts(): " . $e->getMessage());
     }
 }
@@ -31,8 +50,10 @@ function findAllCategories(): array
     try {
         $res = $con->query("SELECT * FROM CATEGORIAS ORDER BY id ASC");
         $reg = $res->fetchAll(PDO::FETCH_ASSOC);
+
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findAllCategories(): " . $e->getMessage());
     }
 }
@@ -45,6 +66,7 @@ function findLastProductId(): string
         $reg = $res->fetch(PDO::FETCH_ASSOC);
         return $reg['id'] ? $reg['id'] : '';
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findLastProductId(): " . $e->getMessage());
     }
 }
@@ -69,19 +91,21 @@ function findProductCategoryByProductId(string $productId): string
         return '';
     } catch (Exception $e) {
         $con->rollback();
+        $con->close();
         die("ERROR SQL in findProductCategoryByProductId(): " . $e->getMessage());
     }
 }
-function findProductPromotionStatus(string $productId): bool
+function findProductPromotionStatus(string $productId)
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT PROMOCIONES_descuento FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
+        $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $reg ? true : false;
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findProductPromotionStatus(): " . $e->getMessage());
     }
 }
@@ -111,9 +135,11 @@ function updateOneProduct(array $updatedData)
             ':catId' => $updatedData['idCategoria']
         ]);
         $con->commit();
+
         return $reg ? true : false;
     } catch (Exception $e) {
         $con->rollback();
+        $con->close();
         die("ERROR SQL: " . $e->getMessage());
     }
 }
@@ -163,8 +189,10 @@ function deleteProduct(string $productId): bool
             ':isActive' => 0,
             ':id' => $productId
         ]);
+
         return true;
     } catch (Exception $e) {
+
         echo ("ERROR SQL in Delete Product(): " . $e->getMessage());
         return false;
     }
