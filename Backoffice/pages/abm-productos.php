@@ -105,7 +105,7 @@
                                 </select>
                                 <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
                                 <input id="btnUploadImage" type="file" name="imagen" accept=".jpg, .jpeg, .png, .gif" required>
-                                <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
+                                <input id="precio" class="precio" type="text" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
                                 <div class="buttons">
