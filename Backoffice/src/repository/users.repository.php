@@ -7,8 +7,10 @@ function findOneUser(string $ci): array
         $statement = $con->prepare("SELECT * FROM USUARIOS WHERE ci = :ci AND activo = :isActive");
         $statement->execute(array(':ci' => $ci, ":isActive" => 1));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
+
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findOneUser(): " . $e->getMessage());
     }
 }
@@ -20,8 +22,10 @@ function findAllUsers(string $searchValue = ""): array
         $statement = $con->prepare("SELECT * FROM USUARIOS WHERE activo = :isActive AND nombre LIKE '%$searchValue%' ORDER BY nombre ASC");
         $statement->execute(array(":isActive" => 1));
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findAllUsers(): " . $e->getMessage());
     }
 }
@@ -48,11 +52,13 @@ function findRoles(string $ci): array
 
         return [$rolesIdsList, $rolNamesList];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findRoles(): " . $e->getMessage());
     }
 }
 
-function findStatusByActionAndRolesId(string $action, int $rolId): bool{
+function findStatusByActionAndRolesId(string $action, int $rolId): bool
+{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
         $statement = $con->prepare("SELECT activo
@@ -60,10 +66,11 @@ function findStatusByActionAndRolesId(string $action, int $rolId): bool{
                                     WHERE PERMISOS_accion = :accion AND ROLES_id = :rolId");
         $statement->execute(array(':accion' => $action, ':rolId' => $rolId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
-        return $reg["activo"] ? true : false;
 
+        return $reg["activo"] ? true : false;
     } catch (Exception $e) {
-        die("ERROR SQL in findOneRolIdByAction(): " . $e->getMessage());
+        $con->close();
+        die("ERROR SQL in findStatusByActionAndRolesId(): " . $e->getMessage());
     }
 }
 
@@ -88,6 +95,7 @@ function findPathByAction(string $action, array $rolesId): string
 
         return $reg['ruta'] && $isValidRol ? $reg['ruta'] : '';
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findPathByAction(): " . $e->getMessage());
     }
 }
@@ -110,6 +118,7 @@ function findActionsByRolesId(array $rolesId): array
                 array_push($actions, $reg['accion']);
             }
         } catch (Exception $e) {
+            $con->close();
             die("ERROR SQL in findActionsByRolesId(): " . $e->getMessage());
         }
     }
@@ -138,8 +147,10 @@ function saveOneUser(array $newUser): bool
         } else {
             die("ERROR: " . $error_messages['!user_add']);
         }
+
         return true;
     } catch (Exception $e) {
+        $con->close();
         echo ("ERROR SQL in saveOneUser(): " . $e->getMessage());
         return false;
     }
@@ -173,9 +184,11 @@ function updateOneUser(array $newUser): bool
                 $statement->execute(array(':ci' => $newUser['cedula'], ':rolId' => $rolId));
             }
         }
+
         return true;
     } catch (Exception $e) {
-        echo ("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        $con->close();
+        echo ("ERROR SQL in updateOneUser(): " . $e->getMessage());
         return false;
     }
 }
@@ -189,9 +202,11 @@ function deleteUser(string $userCi)
                                     SET activo = :isActive
                                     WHERE ci = :ci ");
         $res = $statement->execute([":ci" => $userCi, "isActive" => 0]);
+
         return $res;
     } catch (Exception $e) {
-        die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+        $con->close();
+        die("ERROR SQL in deleteUser(): " . $e->getMessage());
     }
 }
 
@@ -201,44 +216,27 @@ function findAllPermissions(): array
     try {
         $statement = $con->query("SELECT * FROM PERMISOS ORDER BY accion DESC");
         $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+
         return $reg ? $reg : [];
     } catch (Exception $e) {
+        $con->close();
         die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
     }
 }
 
-// function findAllRolesWithPermissions(string $action): string
-// {
-//     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-
-//     try {
-//         $statement = $con->prepare("SELECT ROLES_id 
-//                                     FROM ROLES_has_PERMISOS
-//                                     WHERE PERMISOS_accion = :accion AND activo = :isActive");
-//         $statement->execute([":accion" => $action]);
-//         $reg = $statement->fetch(PDO::FETCH_ASSOC);
-//         $rolesId = '';
-
-//         while ($reg = $statement->fetch(PDO::FETCH_ASSOC)) {
-//             $rolesId .= $reg["ROLES_id"];
-//         }
-
-//         return $reg ? $rolesId : [];
-//     } catch (Exception $e) {
-//         die("ERROR SQL in findAllPermissions(): " . $e->getMessage());
-//     }
-// }
-
-function updateOnePermission(array $data) {
+function updateOnePermission(array $data)
+{
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     require realpath(dirname(__FILE__)) . "/../utils/actions.php";
-    if($data["accion"] !== "Gestionar permisos de usuario"){
+    if ($data["accion"] !== "Gestionar permisos de usuario") {
         try {
             $statement = $con->prepare("UPDATE ROLES_has_PERMISOS SET activo = :isActive WHERE ROLES_id = :rolId AND PERMISOS_accion = :accion");
             $res = $statement->execute([":isActive" => $data['activo'], ":rolId" => $data['rolId'], ":accion" => $data["accion"]]);
+
             return $res;
         } catch (Exception $e) {
-            die("ERROR SQL in saveOneUser(): " . $e->getMessage());
+            $con->close();
+            die("ERROR SQL in updateOnePermission(): " . $e->getMessage());
         }
     }
 }
