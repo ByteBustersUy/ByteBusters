@@ -202,8 +202,10 @@ span {
 
 .producto-no-promo {
   width: 80%;
-  margin: 0;
-  margin-left: 9.5%;
+  justify-content: center;
+}
+#producto-no-promo{
+  align-items: center;
 }
 
 /* banner */
@@ -330,7 +332,7 @@ justify-content: center;
 align-items: center;
 }
 
-.div-comprar {
+#div-comprar{
   background-color: var(--color-5);
   width: 50rem;
   height: 50%;
@@ -351,12 +353,13 @@ align-items: center;
   font-size: large;
   border-right: none;
   border-left: none;
+  text-align: center;
   
 }
-/*input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
-}*/
+}
 .input-btn-mas{
   border:2px var(--color-3) solid;
   font-size: large;
@@ -437,13 +440,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .btn-comprar{
   margin:auto;
-  border: 2px var(--color-4) solid;
-  /* border-style: none; */
-  width: 8rem;
+  width: auto;
+  height: 1.5rem;
   position: absolute;
   right: 5%;
   bottom:auto;
-
+  border: 1px var(--color-4) solid;
+  border-radius: .5rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
 }
 .total-pagar{
   margin-top:1.2rem;
@@ -714,11 +720,11 @@ border-radius: .3rem;
     right: 30%;
   }
 
-  .producto-no-promo {
+  /*.producto-no-promo {
     width: 60%;
     margin: 0;
     margin-left: 9.5%;
-  }
+  }*/
 
 }
 
