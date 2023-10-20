@@ -51,8 +51,8 @@
             <div class="col-lg-9">
                 <div class="table-options">
                     
-                    <input id="searchTerm" type="text" onkeyup="doSearch()" />
-                    <button type="button">Buscar</button>
+                    <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
+                  
                     <select class="order-list" name="order" id="order">
                         <option selected hidden value="">Ordenar</option>
                         <option value="az">A-Z</option>

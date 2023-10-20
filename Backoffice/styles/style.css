@@ -450,6 +450,7 @@ thead tr .roles {
 
 .table-options input {
     width: 14rem;
+    margin-right: auto;
 }
 
 .table-options button {

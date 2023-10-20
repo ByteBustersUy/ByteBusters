@@ -50,8 +50,7 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                    <input id="userSearch" type="search" name="search" placeholder="Nombre" autocomplete="off">
-                    <button id="btnUserSearch" type="submit">Buscar</button>
+                <input id="searchTerm" type="text" placeholder="Buscar usuario" onkeyup="doSearch()" />
                     <select class="order-list" name="order" id="order">
                         <option selected hidden value="">Ordenar</option>
                         <option value="az">A-Z</option>
