@@ -53,18 +53,31 @@ btnEditProduct.addEventListener("click", () => {
 
 		const inputsForm = {
 			nombre: modalProducts.getElementsByTagName("input")[0],
+			//por  algun motivo esos dos indeces no andan
 			categoria: modalProducts.getElementsByTagName("select")[0],
+			precio: modalProducts.getElementsByTagName("input")[2],
+			//
+			descripcion: modalProducts.getElementsByTagName("textarea")[0],
 			//...
 		};
-
+		
 		const selectedUserData = {
 			nombre: selectedRow.getElementsByTagName("td")[0].innerHTML,
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
+			precio: selectedRow.getElementsByTagName("td")[2].innerHTML,
+
+
+			//La linea descripcion  es pa ver si funcionaba el innerHTML
+			descripcion: selectedRow.getElementsByTagName("td")[2].innerHTML,
 			//...
 		};
 
 		//refill inputs with selected product data
 		inputsForm.nombre.value = selectedUserData.nombre;
+		inputsForm.precio.value = selectedUserData.precio;
+
+
+		inputsForm.descripcion.value = selectedUserData.descripcion;
 		//...
 
 		formAbm.attributes.item(

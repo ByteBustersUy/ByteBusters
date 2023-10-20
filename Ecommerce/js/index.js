@@ -1,27 +1,6 @@
 var anchoVentana = window.innerWidth;
-const DivBtnPages = document.getElementById("div-btns-pages");
-function cargarBotonesBuscar(cantidadProductos) {
-	let producPorPage = 3;
-
-	cantPages = cantidadProductos / producPorPage;
-	if (cantidadProductos % producPorPage != 0) {
-		cantPages++;
-	}
-
-	if (cantPages <= 0) {
-		cantPages = 1;
-	}
-
-	let btnsPages = "";
-	for (let i = 1; i <= cantPages; i++) {
-		btnsPages += `
-		<button type="button" class="btn btn-pages">${i}</button>
-        `;
-	}
-	DivBtnPages.innerHTML = btnsPages;
-}
-
-DivBtnPages.addEventListener("click", function (event) {
+const divBtnPages = document.getElementById("div-btns-pages");
+divBtnPages.addEventListener("click", function (event) {
 	if (event.target.tagName === "BUTTON") {
 		let numPage = event.target.textContent;
 		const divProducPromo = document.getElementById("tarjetas");
@@ -127,7 +106,7 @@ window.addEventListener("load", function () {
 				}
 				cantProduc = data.length;
 				divProducPromo.innerHTML = contenido;
-				cargarBotonesBuscar(cantProduc);
+				//cargarBotonesBuscar(cantProduc);
 			});
 	});
 
