@@ -50,7 +50,8 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                    <input type="search" name="search" placeholder="Nombre" autocomplete="off">
+                    
+                    <input id="searchTerm" type="text" onkeyup="doSearch()" />
                     <button type="button">Buscar</button>
                     <select class="order-list" name="order" id="order">
                         <option selected hidden value="">Ordenar</option>
@@ -76,7 +77,7 @@
                                 <th class="user-select-none" scope="col">Detalle</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="datos">
                             <?php
                             require "../src/modules/products/abm-productos.php";
                             echo getProductsTableData();
