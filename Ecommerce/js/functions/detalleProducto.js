@@ -59,8 +59,6 @@ fetch("../../api/detalleProducto.php?id=" + id, {
 
 //Productos relacionados 
 
-
-
 fetch("../../api/productos-relacionados.php?id=" + id, {
   method: "GET",
  headers: { 

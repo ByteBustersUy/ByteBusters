@@ -64,7 +64,7 @@ btnEditProduct.addEventListener("click", () => {
 		const selectedUserData = {
 			nombre: selectedRow.getElementsByTagName("td")[0].innerHTML,
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
-			precio: selectedRow.getElementsByTagName("td")[2].innerHTML,
+			precio: parseFloat(selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")),
 
 
 			//La linea descripcion  es pa ver si funcionaba el innerHTML
