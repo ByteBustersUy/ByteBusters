@@ -61,7 +61,7 @@
             </div>
             <div class="col-xl-4">
                 <div class="data-emp">
-                    <img src="../assets/logo-empresa.png" alt="Logo de empresa" class="img-empresa">
+                    <img src="../../Ecommerce/assets/logo-empresa.png" alt="Logo de empresa" class="img-empresa">
                     <?php
                     require "../src/modules/settings/config.php";
                     echo getLabelsEmpresaHTML();

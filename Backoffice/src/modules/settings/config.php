@@ -16,18 +16,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = htmlspecialchars($_POST['email']);
     $pwd_email = htmlspecialchars($_POST['pwd_email']);
 
-    //$nameLogo = "logo-empresa.png";
+    $nameLogo = "logo-empresa.png";
+    $destinoEcommerce = "../../../../Ecommerce/assets/".$nameLogo;
 
           //print_r($_FILES);
     $fileTmpPath = $_FILES['logo']['tmp_name'];
     $fileName = $_FILES['logo']['name'];
     // $fileSize = $_FILES['imagen']['size'];
     // $fileType = $_FILES['imagen']['type'];
-    $dir = '../../../../Backoffice/assets/';
-    echo $destino = $dir . $nameLogo; //TODO: id de producto
-    echo $fileName;
+    $dir = '../../../assets/';
+    $destino = $dir . $nameLogo; //TODO: id de producto
+    
     // print_r (move_uploaded_file($fileTmpPath, $destino));
-    if (move_uploaded_file($fileTmpPath, $destino)) {
+   
+    /*if (move_uploaded_file($fileTmpPath, $destino)) {
+        echo "Fue guardado";
+    } else {
+        echo "Error";
+    }*/
+
+    if (move_uploaded_file($fileTmpPath, $destinoEcommerce)) {
         echo "Fue guardado";
     } else {
         echo "Error";
