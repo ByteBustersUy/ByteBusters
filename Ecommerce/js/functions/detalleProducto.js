@@ -18,7 +18,8 @@ fetch("../../api/detalleProducto.php?id=" + id, {
     const container = document.querySelector(".info");
     for (let id = 0; id < data.length; id++) {
         const divProduct = document.createElement("div");
-        divProduct.classList.add("row", "cardProd"); 
+        divProduct.classList.add("row", "cardProd");
+        divProduct.classList.add("row", "cardProdDetail"); 
 
         divProduct.innerHTML = `<div class="row">
         <div class="col-sm-12 col-lg-5 container-img">
