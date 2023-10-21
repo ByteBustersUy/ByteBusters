@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		const inputSearch = document.getElementById("navSearch");
 		inputSearch.addEventListener("keyup", () => {
 			let cantProduc;
-			fetch(`${relativePath}/api/search.php?p=`, {
+			fetch(`../${relativePath}/api/search.php?p=`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
