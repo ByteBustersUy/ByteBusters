@@ -68,7 +68,7 @@ function cargarCardsProductosNoPromo() {
     			<div>
         			<div class="card producto-no-promo" >
 						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
-            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<img src="./images/${data[id].imagen} " class="card-img-top no-promo" alt="...">
             				<div class="card-body">
 							<h5>${limitarNombres(data[id].nombre)}</h5>
 							<h4>$${data[id].precio}</h4>

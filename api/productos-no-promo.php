@@ -1,7 +1,7 @@
 <?php
 include "./db/conexion.php";
 
-$res = $con->query("SELECT * FROM productos WHERE activo = 1 LIMIT 8");
+$res = $con->query("SELECT * FROM productos WHERE activo = 1 LIMIT 20");
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 
 header("Content-Type: application/json");

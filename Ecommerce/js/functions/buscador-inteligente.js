@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 					}
 				});
 			}
-			let cantProduc;
 			if (inputSearch.value.length > 2) {
 				fetch(`../${relativePath}/api/search.php?ppp=4`, {
 					method: "POST",

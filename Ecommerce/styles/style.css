@@ -150,7 +150,7 @@ span {
 #tarjetas {
   justify-content: center;
   margin: auto;
-
+  padding: 1rem;
 }
 
 .card {
@@ -162,6 +162,11 @@ span {
 .card img {
   border-bottom: 1px solid var(--color-2);
   height: 10rem;
+}
+
+.no-promo {
+  height: 6rem !important;
+  width: 8rem !important;
 }
 
 .card-body {
@@ -191,7 +196,8 @@ span {
 }
 
 .card a {
-  margin: .5rem;
+  margin: auto .5rem .5rem .5rem;
+  width: -webkit-fill-available;
   font-size: .8rem;
   color: var(--color-5);
 }
@@ -204,7 +210,7 @@ span {
 }
 
 .producto-no-promo {
-  height: 20rem;
+  height: 16rem;
 }
 
 #producto-no-promo{
@@ -223,7 +229,7 @@ span {
 
 .banner {
   width: 100%;
-  height: 7rem !important;  
+  height: 10rem !important;  
 }
 
 /* LISTADO */
@@ -277,6 +283,7 @@ span {
   width: 99vw;
   margin: auto;
   margin-bottom: 2rem;
+  padding: 2rem;
 }
 
 
@@ -428,6 +435,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .btns-cantidad {
+  display: flex !important;
   width: auto;
   display: inline;
   position: absolute;
@@ -650,9 +658,18 @@ border-radius: .3rem;
     height: 15rem;
   }
 
+  #tarjetas{
+    padding: 2rem;
+  }
+
   .div-producto{
     width: 80%;
   }
+
+  .productos-sin-promo{
+    padding: 3rem;
+  }
+  
   .precio-produc{
     left:5%;
     width: 8rem;
@@ -703,37 +720,6 @@ border-radius: .3rem;
   }
 }
 
-
-/* DESKTOP */
-@media only screen and (min-width: 992px) {
-
-  #btnCarrito {
-    position: absolute;
-    right: 1rem;
-    top: auto
-  }
-
-  .search {
-    min-width: 25rem;
-  }
-
-  .carousel-inner img {
-    height: 20rem;
-  }
-
-  .banner {
-    height: 15rem !important;
-  }
-
-  .btn-comprar {
-    right: 30%;
-  }
-
-  .producto-no-promo {
-    max-width: 15rem;
-  }
-
-}
 
 .imgprod {
   margin: 2px;
@@ -821,4 +807,45 @@ a {
 
 .containter-info-product{
   margin-left: 2rem;
+}
+
+
+
+/* DESKTOP */
+@media only screen and (min-width: 992px) {
+
+  #btnCarrito {
+    position: absolute;
+    right: 1rem;
+    top: auto
+  }
+
+  .search {
+    min-width: 25rem;
+  }
+
+  .carousel-inner img {
+    height: 20rem;
+  }
+
+  .banner {
+    height: 16rem !important;
+  }
+
+  .productos-sin-promo{
+    padding: 4rem;
+  }
+
+  .btn-comprar {
+    right: 30%;
+  }
+
+  #tarjetas{
+    padding: 4rem;
+  }
+
+  .producto-no-promo {
+    max-width: 15rem;
+  }
+
 }
