@@ -14,7 +14,6 @@
 
 body {
   background-color: var(--color-7);
-  margin-top: 5rem;
 }
 
 .logo {
@@ -32,9 +31,12 @@ body {
 }
 
 #navConSearch {
-  position: fixed;
+  /* position: fixed;
   margin-top: -4rem;
   z-index: 10;
+  height: 7rem; */
+  position: relative;
+  height: 7rem;
 }
 
 #navConBotones {
@@ -62,7 +64,7 @@ nav {
   display: none;
   padding: .5rem;
   align-items: center;
-  justify-content: end;
+  justify-content: start;
 }
 
 .menu ul {
@@ -106,7 +108,7 @@ ul a {
   display: flex;
   width: 12rem;
   height: 2.7rem;
-  margin-left: 3rem;
+  margin-left: .5rem;
 }
 
 span {
@@ -148,12 +150,13 @@ span {
 #tarjetas {
   justify-content: center;
   margin: auto;
-  width: 90vw;
+
 }
 
 .card {
   box-shadow: 10px 10px 15px var(--color-3);
   margin-top: 2rem;
+  height: 100%;
 }
 
 .card img {
@@ -201,18 +204,26 @@ span {
 }
 
 .producto-no-promo {
-  width: 80%;
-  justify-content: center;
+  height: 20rem;
 }
+
 #producto-no-promo{
   align-items: center;
 }
 
+.titulo-descuentos-home{
+  margin-top: 3rem;
+  font-size: 4rem;
+  font-family: fantasy;
+  font-style: italic;
+  font-weight: bolder;
+  filter: drop-shadow(2px 2px 2px var(--ecommerce-color));
+}
 /* banner */
 
 .banner {
   width: 100%;
-  margin: 2rem 0;
+  height: 7rem !important;  
 }
 
 /* LISTADO */
@@ -262,7 +273,11 @@ span {
   margin-bottom: .2rem;
 }
 
-
+.productos-sin-promo{
+  width: 99vw;
+  margin: auto;
+  margin-bottom: 2rem;
+}
 
 
 
@@ -580,8 +595,13 @@ border-radius: .3rem;
 
   .logo {
     width: 10rem;
+    height: 6rem;
+    scale: 120%;
     margin-right: 2rem;
     display: block;
+    position: absolute;
+    top: 5px;
+    left: 0;
   }
 
   #btnNavSearch {
@@ -681,21 +701,11 @@ border-radius: .3rem;
   .list-group h4{
     margin-bottom:1rem ;
   }
-  #productos-sin-promo {
-    margin: auto;
-    width: 90vw;
-  }
 }
 
 
 /* DESKTOP */
 @media only screen and (min-width: 992px) {
-
-  .logo {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-  }
 
   #btnCarrito {
     position: absolute;
@@ -712,19 +722,16 @@ border-radius: .3rem;
   }
 
   .banner {
-    height: 13rem;
-    margin: 5rem 0;
+    height: 15rem !important;
   }
 
   .btn-comprar {
     right: 30%;
   }
 
-  /*.producto-no-promo {
-    width: 60%;
-    margin: 0;
-    margin-left: 9.5%;
-  }*/
+  .producto-no-promo {
+    max-width: 15rem;
+  }
 
 }
 

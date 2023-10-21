@@ -1,9 +1,9 @@
-const currentURL = window.location.href;
-const urlParts = currentURL.split("/");
-const currentDir = urlParts[urlParts.length - 2];
-let relativePath;
-if (currentDir == "pages") relativePath = "..";
-if (currentDir == "Ecommerce") relativePath = ".";
+const currentURL2 = window.location.href;
+const urlParts2 = currentURL2.split("/");
+const currentDir2 = urlParts2[urlParts2.length - 2];
+let relativePath2;
+if (currentDir2 == "pages") relativePath2 = "..";
+if (currentDir2 == "Ecommerce") relativePath2 = ".";
 
 document.addEventListener("DOMContentLoaded", function () {
 	setTimeout(function () {
@@ -39,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					}
 
 					cantProduc = data.length;
-					document.querySelector(".contenedor-search").innerHTML = contenido;
+					// document.getElementsByClassName(".otra-cosa")[0].innerHTML = contenido;
+					document.getElementById("tarjetas").innerHTML = contenido;
 				});
 		});
 	}, 1000);

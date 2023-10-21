@@ -37,10 +37,10 @@ function loadNav() {
     </div>
   </nav>
   <nav id="navConBotones" class="navbar" id="burgerCategories">
+    <div class="menu">
     <button id="btnCategories" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarCat" aria-controls="offcanvasNavbarCat" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span><p id="categorias">CATEGORIAS</p>
     </button>
-    <div class="menu">
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarCat" aria-labelledby="offcanvasNavbarCatLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarCatLabel">CATEGORIAS</h5>
