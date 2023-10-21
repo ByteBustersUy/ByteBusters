@@ -34,7 +34,6 @@ function getAllPromotionCards(): string
     $promoCard = '';
     foreach (findAllPromos(true) as $promo) {
         checkExpiredPromo($promo);
-        sleep(1);
         $promoClass = '';
         $promoStatus = '';
         $colorDiscount = '';
