@@ -81,6 +81,6 @@ option=0
     echo "INGRESE UNA DE LAS OPCIONES"
     read -r option
     
-    casos_menu_principal 10
+    casos_menu_principal $option
 } 
 inicio
