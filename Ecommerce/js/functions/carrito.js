@@ -56,12 +56,12 @@ function cargarCarrito() {
                             <p class="nombre-produc">${data[id].nombre}</p>
                         </div>
                         <div class="cantidad">
-                            <p class="precio-produc">${data[id].precio}</p>
+                            <p class="precio-produc">$${data[id].precio}</p>
                             <div class="btns-cantidad">
                                 <button class="input-btn-menos" id="${data[id].id}" type="button">
                                     <i id="${data[id].id}" class="fa-solid fa-minus"></i>
                                 </button>   
-                                <input class="input-num" id="${data[id].id}" type="number" value=1 >
+                                <input disabled  class="input-num" id="${data[id].id}" type="number" value=1 >
                                 <button class="input-btn-mas" id="${data[id].id}" type="button">
                                     <i id="${data[id].id}" class="fa-solid fa-plus"></i>
                                 </button>
@@ -86,7 +86,6 @@ function cargarCarrito() {
 window.addEventListener('DOMContentLoaded',function (){
     cargarCarrito()
 })
-
 
 divProductoCarrito.addEventListener("click", function (event) {
     
@@ -134,16 +133,17 @@ divProductoCarrito.addEventListener("click", function (event) {
         precioTotal(jsonCarrito,idsProductos)
     }
 })
+
 const divComprar = document.getElementById("div-comprar")
 divComprar.addEventListener("click", function (event) {
     if ((event.target.className=== "btn-comprar")){
-        alert("su compra fue realizada corectamente")
-        contenidoCarrito='';
-        divProductoCarrito.innerHTML=contenidoCarrito;
-        resultadoTotal = 0;
-        textoPrecioTotal.innerHTML ='$'+resultadoTotal;
         carritoVacio=[];
         localStorage.setItem("id", JSON.stringify(carritoVacio));
+        alert("su compra fue realizada corectamente")
+        cargarCarrito()
+        resultadoTotal = 0;
+        textoPrecioTotal.innerHTML ='$'+resultadoTotal;
+    
     }
 })
 function sumarProducoAlCarrito(id) {
@@ -163,4 +163,7 @@ function restarProducoAlCarrito(id) {
     } 
     console.log(idsProductos)
     localStorage.setItem("id", JSON.stringify(idsProductos));
+}
+function generarPDF() {
+    
 }
