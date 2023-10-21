@@ -9,6 +9,7 @@
   --color-5: #ffffff;
   --color-6: #0000ff;
   --color-7: #eeeded;
+  --color-8: #ffe000;
   --color-background: #fdfbfb;
 }
 
@@ -220,10 +221,11 @@ span {
 .titulo-descuentos-home{
   margin-top: 3rem;
   font-size: 4rem;
-  font-family: fantasy;
+  font-family: math;
   font-style: italic;
   font-weight: bolder;
-  filter: drop-shadow(2px 2px 2px var(--ecommerce-color));
+  outline-style: auto;
+  filter: drop-shadow(2px 2px 10px var(--color-8));
 }
 /* banner */
 
