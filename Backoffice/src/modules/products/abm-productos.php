@@ -30,16 +30,36 @@ function addProduct()
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
     try {
+
+        //print_r($_FILES);
+
+        // $fileSize = $_FILES['imagen']['size'];
+        // $fileType = $_FILES['imagen']['type'];
+
+        //$imagen = htmlspecialchars($_POST['imagen']);
+        $fileTmpPath = htmlspecialchars($_FILES['imagen']['tmp_name']);
+        $fileName = htmlspecialchars($_FILES['imagen']['name']);
         $nombre = htmlspecialchars($_POST['nombre']);
-        $imagen = htmlspecialchars($_POST['imagen']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
+        $idFileName = intval(findLastProductId()) + 1 . ".png";
+
+        $dir = '../../../../Ecommerce/images/';
+        echo $destino = $dir . $idFileName; //TODO: id de producto
+        echo $idFileName;
+
+        print_r(move_uploaded_file($fileTmpPath, $destino));
+        if (move_uploaded_file($fileTmpPath, $destino)) {
+            echo "Fue guardado";
+        } else {
+            echo "Error";
+        }
     } catch (Exception $e) {
         throw new ErrorException($e->getMessage());
     }
 
-    if (!elementsHasData([$nombre, $imagen, $descripcion, $categoria])) {
+    if (!elementsHasData([$nombre, $descripcion, $categoria])) {
         die("ERROR: " . $error_messages['!form_data']);
     }
 
@@ -53,7 +73,7 @@ function addProduct()
 
     $newProduct = [
         "nombre" => $nombre,
-        "imagen" => $imagen,
+        "imagen" => $idFileName,
         "idCategoria" => $categoria,
         "descripcion" => $descripcion,
         "precio" => $precio,
@@ -72,15 +92,28 @@ function editProduct(string $productId)
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
-        $imagen = htmlspecialchars($_POST['imagen']);
+        $imagen = $_FILES['imagen'];
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
+        $fileType = $_FILES['imagen']['type'];
+
+        $fileTmpPath = $_FILES['imagen']['tmp_name'];
+        $fileName = $_FILES['imagen']['name'];
+        $dir = "../../../../Ecommerce/images/";
+        echo $destino = $dir . $productId . ".png"; //TODO: id de producto
+        echo $productId;
+        echo $fileName;
+        if (move_uploaded_file($fileTmpPath, $destino)) {
+            echo "Fue guardado";
+        } else {
+            echo "Error";
+        }
 
         $updateProduct = [
             "id" => $productId,
             "nombre" => $nombre,
-            "imagen" => $imagen,
+            "imagen" => $productId . ".png",
             "idCategoria" => $categoria,
             "descripcion" => $descripcion,
             "precio" => $precio,

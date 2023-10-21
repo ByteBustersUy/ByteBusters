@@ -11,7 +11,7 @@ function loadNav() {
 	let navHTML = `
   <nav id="navConSearch" class="navbar navbar-light bg-light">
     <div class="d-flex m-auto">
-      <a href="${relativePath}/index.html" id="logo"><img class="logo" src="${relativePath}/assets/logoecomerse1.png" alt=""/></a>
+      <a href="${relativePath}/index.html" id="logo"><img class="logo" src="${relativePath}/assets/logo-empresa.png" alt=""/></a>
       <button id="btnNavOption" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarMenu" aria-controls="offcanvasNavbarMenu" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,7 +26,7 @@ function loadNav() {
         </div>
       </div>
       <form class="d-flex">
-      <input id="navSearch" class="form-control search" type="search" placeholder="Buscar en Digitalmarket" aria-label="Search"/>
+      <input id="navSearch" autofocus class="form-control search" type="search" placeholder="Buscar en Digitalmarket" aria-label="Search"/>
       <button id="btnNavSearch" class="btn btn-outline-secondary" type="button">Buscar</button>
   </form>
 
@@ -37,10 +37,10 @@ function loadNav() {
     </div>
   </nav>
   <nav id="navConBotones" class="navbar" id="burgerCategories">
+    <div class="menu">
     <button id="btnCategories" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarCat" aria-controls="offcanvasNavbarCat" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span><p id="categorias">CATEGORIAS</p>
     </button>
-    <div class="menu">
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarCat" aria-labelledby="offcanvasNavbarCatLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarCatLabel">CATEGORIAS</h5>

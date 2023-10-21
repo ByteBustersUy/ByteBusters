@@ -9,12 +9,12 @@
   --color-5: #ffffff;
   --color-6: #0000ff;
   --color-7: #eeeded;
+  --color-8: #ffe000;
   --color-background: #fdfbfb;
 }
 
 body {
   background-color: var(--color-7);
-  margin-top: 5rem;
 }
 
 .logo {
@@ -32,9 +32,12 @@ body {
 }
 
 #navConSearch {
-  position: fixed;
+  /* position: fixed;
   margin-top: -4rem;
   z-index: 10;
+  height: 7rem; */
+  position: relative;
+  height: 7rem;
 }
 
 #navConBotones {
@@ -62,7 +65,7 @@ nav {
   display: none;
   padding: .5rem;
   align-items: center;
-  justify-content: end;
+  justify-content: start;
 }
 
 .menu ul {
@@ -106,7 +109,7 @@ ul a {
   display: flex;
   width: 12rem;
   height: 2.7rem;
-  margin-left: 3rem;
+  margin-left: .5rem;
 }
 
 span {
@@ -148,17 +151,23 @@ span {
 #tarjetas {
   justify-content: center;
   margin: auto;
-  width: 90vw;
+  padding: 1rem;
 }
 
 .card {
   box-shadow: 10px 10px 15px var(--color-3);
   margin-top: 2rem;
+  height: 100%;
 }
 
 .card img {
   border-bottom: 1px solid var(--color-2);
   height: 10rem;
+}
+
+.no-promo {
+  height: 6rem !important;
+  width: 8rem !important;
 }
 
 .card-body {
@@ -188,7 +197,8 @@ span {
 }
 
 .card a {
-  margin: .5rem;
+  margin: auto .5rem .5rem .5rem;
+  width: -webkit-fill-available;
   font-size: .8rem;
   color: var(--color-5);
 }
@@ -201,16 +211,28 @@ span {
 }
 
 .producto-no-promo {
-  width: 80%;
-  margin: 0;
-  margin-left: 9.5%;
+  height: 16rem;
 }
 
+#producto-no-promo{
+  align-items: center;
+}
+
+.titulo-descuentos-home{
+  font-family: monospace;
+  margin-top: 3rem;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: bolder;
+  outline-style: auto;
+  filter: drop-shadow(1px 1px 1px var(--color-8));
+  background-color: cornsilk;
+}
 /* banner */
 
 .banner {
   width: 100%;
-  margin: 2rem 0;
+  height: 10rem !important;  
 }
 
 /* LISTADO */
@@ -260,7 +282,12 @@ span {
   margin-bottom: .2rem;
 }
 
-
+.productos-sin-promo{
+  width: 99vw;
+  margin: auto;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
 
 
 
@@ -330,7 +357,7 @@ justify-content: center;
 align-items: center;
 }
 
-.div-comprar {
+#div-comprar{
   background-color: var(--color-5);
   width: 50rem;
   height: 50%;
@@ -351,12 +378,13 @@ align-items: center;
   font-size: large;
   border-right: none;
   border-left: none;
+  text-align: center;
   
 }
-/*input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
-}*/
+}
 .input-btn-mas{
   border:2px var(--color-3) solid;
   font-size: large;
@@ -410,6 +438,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .btns-cantidad {
+  display: flex !important;
   width: auto;
   display: inline;
   position: absolute;
@@ -437,13 +466,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .btn-comprar{
   margin:auto;
-  border: 2px var(--color-4) solid;
-  /* border-style: none; */
-  width: 8rem;
+  width: auto;
+  height: 1.5rem;
   position: absolute;
   right: 5%;
   bottom:auto;
-
+  border: 1px var(--color-4) solid;
+  border-radius: .5rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
 }
 .total-pagar{
   margin-top:1.2rem;
@@ -574,8 +606,13 @@ border-radius: .3rem;
 
   .logo {
     width: 10rem;
+    height: 6rem;
+    scale: 120%;
     margin-right: 2rem;
     display: block;
+    position: absolute;
+    top: 5px;
+    left: 0;
   }
 
   #btnNavSearch {
@@ -624,9 +661,18 @@ border-radius: .3rem;
     height: 15rem;
   }
 
+  #tarjetas{
+    padding: 2rem;
+  }
+
   .div-producto{
     width: 80%;
   }
+
+  .productos-sin-promo{
+    padding: 3rem;
+  }
+  
   .precio-produc{
     left:5%;
     width: 8rem;
@@ -675,52 +721,8 @@ border-radius: .3rem;
   .list-group h4{
     margin-bottom:1rem ;
   }
-  #productos-sin-promo {
-    margin: auto;
-    width: 90vw;
-  }
 }
 
-
-/* DESKTOP */
-@media only screen and (min-width: 992px) {
-
-  .logo {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-  }
-
-  #btnCarrito {
-    position: absolute;
-    right: 1rem;
-    top: auto
-  }
-
-  .search {
-    min-width: 25rem;
-  }
-
-  .carousel-inner img {
-    height: 20rem;
-  }
-
-  .banner {
-    height: 13rem;
-    margin: 5rem 0;
-  }
-
-  .btn-comprar {
-    right: 30%;
-  }
-
-  .producto-no-promo {
-    width: 60%;
-    margin: 0;
-    margin-left: 9.5%;
-  }
-
-}
 
 .imgprod {
   margin: 2px;
@@ -731,6 +733,18 @@ border-radius: .3rem;
   box-shadow: 2.5px 2.5px 5px var(--color-3);
   background-color: var(--color-5);
   margin-top: 3%;
+  border-radius: .5rem;
+}
+
+.cardProdSearch {
+  box-shadow: 2.5px 2.5px 5px var(--color-3);
+  background-color: var(--color-5);
+  margin-top: 1rem;
+  width: 50%;
+  margin: 1rem auto;
+  height: 10rem;
+  border-radius: .5rem;
+
 }
 
 .selFilt {
@@ -796,4 +810,45 @@ a {
 
 .containter-info-product{
   margin-left: 2rem;
+}
+
+
+
+/* DESKTOP */
+@media only screen and (min-width: 992px) {
+
+  #btnCarrito {
+    position: absolute;
+    right: 1rem;
+    top: auto
+  }
+
+  .search {
+    min-width: 25rem;
+  }
+
+  .carousel-inner img {
+    height: 20rem;
+  }
+
+  .banner {
+    height: 16rem !important;
+  }
+
+  .productos-sin-promo{
+    padding: 4rem;
+  }
+
+  .btn-comprar {
+    right: 30%;
+  }
+
+  #tarjetas{
+    padding: 4rem;
+  }
+
+  .producto-no-promo {
+    max-width: 15rem;
+  }
+
 }
