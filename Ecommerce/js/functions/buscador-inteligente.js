@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							.getElementById("tituloDescuentosHome")
 							.setAttribute(
 								"style",
-								"font-size: 3rem; margin-top: 1rem; margin-bottom: 3rem"
+								"font-size: 2rem; margin-top: 1rem; margin-bottom: 3rem"
 							);
 						console.log(data);
 						let contenido = "";
