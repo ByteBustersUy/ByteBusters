@@ -86,7 +86,7 @@
                     </table>
                 </div>
             </div>
-            <!-- Modal -->
+            <!-- Modal ABM -->
             <div class="modal fade" id="moddalProducts" tabindex="-1" aria-labelledby="ProductsModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div id="modalContent" class="modal-content">
@@ -117,6 +117,19 @@
                                     <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal detalle -->
+            <div class="modal fade" id="moddalProductsDetail" tabindex="-1" aria-labelledby="ProductsModalDetailLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div id="modalContentDetail" class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="ProductsModalDetailLabel"></h2>
+                            <button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
                         </div>
                     </div>
                 </div>

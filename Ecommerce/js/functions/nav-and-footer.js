@@ -82,7 +82,6 @@ const botonBuscar = (event) => {
   event.preventDefault(); 
   const inputSearch = document.getElementById("navSearch");
   const searchValue = inputSearch.value;
-  console.log(searchValue);
   if(searchValue === ""){
     return;
   }

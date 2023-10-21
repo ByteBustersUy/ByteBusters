@@ -2,11 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	const buttonsDeletePromo = document.getElementsByClassName("deletePromo");
 
 	for (let btnDeletePromo of buttonsDeletePromo) {
-		btnDeletePromo.addEventListener("click", async (event) => {
-			const btn = event.target
-			if(btn.id){
+		btnDeletePromo.addEventListener("click", () => {
+			if(btnDeletePromo.id){
 				const data = new URLSearchParams();
-				data.append("id", btn.id);
+				data.append("id", btnDeletePromo.id);
 				fetch("../src/modules/promotions/abm-promotions.php?action=delete", {
 					method: "POST",
 					headers: {
