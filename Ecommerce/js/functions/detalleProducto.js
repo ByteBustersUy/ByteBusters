@@ -34,12 +34,12 @@ fetch("../../api/detalleProducto.php?id=" + id, {
               <h4>$${data[id].precio}</h4>
               </div>
                 <div class="">
-                  <input type="button" id="decrement" value="-">
+                  <input type="button" id="decrement" value="-">/
                   <input class="input-num" type="number" >
                   <input type="button" id="increment" value="+">
                 </div>
             </div>
-            <button class="add-to-cart" id="${data[id].id}">Agregar al carrito</button>
+            <button class="add-to-cart agregar-carrito" id="${data[id].id}">Agregar al carrito</button>
           </div>
         </div>
       </div>
