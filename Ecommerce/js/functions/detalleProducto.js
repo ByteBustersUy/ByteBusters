@@ -31,11 +31,12 @@ fetch("../../api/detalleProducto.php?id=" + id, {
           <div class="container-info-products">
             <div class="container-price">
               <h4>$${data[id].precio}</h4>
-            </div>
-            <div class="">
-              <input type="button" id="decrement" value="-">
-              <input class="input-num" type="number" placeholder="1">
-              <input type="button" id="increment" value="+">
+              </div>
+                <div class="">
+                  <input type="button" id="decrement" value="-">
+                  <input class="input-num" type="number" >
+                  <input type="button" id="increment" value="+">
+                </div>
             </div>
             <button class="add-to-cart" id="${data[id].id}">Agregar al carrito</button>
           </div>
@@ -112,7 +113,10 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
 
 //cantidad de Producto
 
-   /* let cantidadProduct=document.querySelector("input.input-num");
+
+
+
+    let cantidadProduct=document.querySelector("input.input-num");
     const decrement = document.getElementById('decrement');
     const increment = document.getElementById('increment'); 
 
@@ -121,7 +125,7 @@ increment.addEventListener('click', function() {
 let cantidadActual = cantidadProduct.value;
 cantidadActual ++
 cantidadProduct.value = cantidadActual;
-console.log(cantidadProduct.value)
+
 })
 
 decrement.addEventListener('click', function () {
@@ -133,10 +137,9 @@ decrement.addEventListener('click', function () {
     console.log(cantidadProduct.value)
     }
     
-    })*/
+    })
 
 
 
-    
 
 
