@@ -1,16 +1,16 @@
 <?php
 require realpath(dirname(__FILE__)) . '/../../repository/promotions.repository.php';
-require realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
+require_once realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
     if (isset($_GET['action']) && isset($_POST['id'])) {
 
         switch ($_GET['action']) {
-            case "delete": 
+            case "delete":
                 deletePromotion($_POST['id']);
                 break;
-            default: 
+            default:
                 return http_response_code(500);
         }
     }
@@ -29,6 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+function getPromotionsHtml()
+{
+    $promotions = findActiveAndValidPromos();
+    $options = '';
+    foreach ($promotions as $promo) {
+        $options .= '<option value="' . $promo['id'] . '">' . $promo['descuento'] . '%</option>';
+    }
+    return $options;
+}
+
 function getAllPromotionCards(): string
 {
     $promoCard = '';
@@ -44,7 +54,6 @@ function getAllPromotionCards(): string
                                 <h3 class="lbl-expirado">Expirado</h3>
                             </div>';
             $colorDiscount = 'expired-discount';
-            
         } else {
             $promoClass = 'valid-promo';
             $promoStatus = '<div class="promo-status">
@@ -61,9 +70,9 @@ function getAllPromotionCards(): string
                                 </div>
                                 ' . $promoStatus . '
                                 <div class="promo-content">
-                                    <h2 class="'.$colorDiscount.'">' . $promo['descuento'] . '%</h2>
+                                    <h2 class="' . $colorDiscount . '">' . $promo['descuento'] . '%</h2>
                                     <div class="promo-dates">
-                                    <span>' . formatDates($promo['fechaInicio']) .' - ' . formatDates($promo['fechaFin']) .'</span>
+                                    <span>' . formatDates($promo['fechaInicio']) . ' - ' . formatDates($promo['fechaFin']) . '</span>
                                     </div>
                                 </div>
                             </div>
@@ -127,5 +136,5 @@ function checkExpiredPromo(array $promo)
 
 function deletePromotion($id): bool
 {
-        return deletePromo($id);
+    return deletePromo($id);
 }
