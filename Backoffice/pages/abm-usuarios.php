@@ -104,11 +104,11 @@
                         <div class="d-flex center">
                             <div class="chkbox-div">
                                 <label class="chkbox-labels" for="check-admin">Administrador</label>
-                                <input class="chkbox-roles" type="checkbox" name="check-admin" id="check-admin" value="1">
+                                <input class="chkbox" type="checkbox" name="check-admin" id="check-admin" value="1">
                             </div>
                             <div class="chkbox-div">
                                 <label class="chkbox-labels" for="check-vendedor">Vendedor</label>
-                                <input class="chkbox-roles" type="checkbox" name="check-vendedor" id="check-vendedor" value="2">
+                                <input class="chkbox" type="checkbox" name="check-vendedor" id="check-vendedor" value="2">
                             </div>
                         </div>
                         <label id="errorMessageModal"></label>

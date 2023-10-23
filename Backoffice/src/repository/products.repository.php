@@ -95,7 +95,7 @@ function findProductCategoryByProductId(string $productId): string
         die("ERROR SQL in findProductCategoryByProductId(): " . $e->getMessage());
     }
 }
-function findProductPromotionStatus(string $productId)
+function findProductPromotionId(string $productId)
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
@@ -103,10 +103,10 @@ function findProductPromotionStatus(string $productId)
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return $reg ? true : false;
+        return $reg ? $reg["PROMOCIONES_id"] : 0;
     } catch (Exception $e) {
         $con->close();
-        die("ERROR SQL in findProductPromotionStatus(): " . $e->getMessage());
+        die("ERROR SQL in findProductPromotionId(): " . $e->getMessage());
     }
 }
 
