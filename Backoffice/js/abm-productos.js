@@ -64,7 +64,7 @@ btnEditProduct.addEventListener("click", () => {
 		const selectedUserData = {
 			nombre: selectedRow.getElementsByTagName("td")[0].innerHTML,
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
-			precio: selectedRow.getElementsByTagName("td")[2].innerHTML,
+			precio: parseFloat(selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")),
 
 
 			//La linea descripcion  es pa ver si funcionaba el innerHTML
@@ -282,3 +282,73 @@ function selectProductRow(productId) {
 	btnEditProduct.setAttribute("data-bs-toggle", "modal");
 	btnEditProduct.setAttribute("data-bs-target", "#moddalProducts");
 }
+
+
+function doSearch() {
+	const tableReg = document.getElementById('datos');
+	const searchText = document.getElementById('searchTerm').value.toLowerCase();
+	let total = 0;
+	// Recorremos todas las filas con contenido de la tabla
+	for (let i = 0; i < tableReg.rows.length; i++) {
+		let found = false;
+		const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+		// Recorremos todas las celdas
+		for (let j = 0; j < cellsOfRow.length && !found; j++) {
+			const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+			// Buscamos el texto en el contenido de la celda
+			if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
+				found = true;
+				total++;
+			}
+		}
+		if (found) {
+			tableReg.rows[i].style.display = '';
+		} else {
+			// si no ha encontrado ninguna coincidencia, esconde la
+			// fila de la tabla
+			tableReg.rows[i].style.display = 'none';
+		}
+	}
+}
+
+// FUNCION PARA FILTRAR POR SELECT TIPO EQUIPO
+$(document).ready(function($) {
+    $('table').show();
+    $('#tipo_equipo').change(function() {
+        $('table').show();
+        var selection = $(this).val();
+        if (selection === '-Todos-') {
+            $('tr').show();
+        }
+        else {
+            var dataset = $('#teq .contenidobusqueda').find('tr');
+            // show all rows first
+            dataset.show();
+        }
+        // filter the rows that should be hidden
+        dataset.filter(function(index, item) {
+            return $(item).find('#third-child').text().split(',').indexOf(selection) === -1;
+        }).hide();
+    });
+});
+ 
+// FUNCION PARA FILTRAR POR SELECT MARCA
+$(document).ready(function($) {
+    $('tbody').show();
+    $('#filter').change(function() {
+        $('tbody').show();
+        var selection = $(this).val();
+        if (selection === 'Promocionado') {
+            $('tr').show();
+        }
+        else {
+            var dataset = $('#teq .contenidobusqueda').find('tr');
+            // show all rows first
+            dataset.show();
+        }
+        // filter the rows that should be hidden
+        dataset.filter(function(index, item) {
+            return $(item).find('#fourth-child').text().split(',').indexOf(selection) === -1;
+        }).hide();
+    });
+});

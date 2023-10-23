@@ -50,15 +50,15 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                    <input id="userSearch" type="search" name="search" placeholder="Nombre" autocomplete="off">
-                    <button id="btnUserSearch" type="submit">Buscar</button>
+                <input id="searchTerm" type="text" placeholder="Buscar usuario" onkeyup="doSearch()" />
                     <select class="order-list" name="order" id="order">
                         <option selected hidden value="">Ordenar</option>
                         <option value="az">A-Z</option>
                         <option value="za">Z-A</option>
                     </select>
-                    <select class="filter-list" name="filter" id="filter">
+                    <select class="filter-list" name="filter" id="filter" onchange="filterUserByRol();">
                         <option selected hidden value="">Filtrar</option>
+                        <option value="admin | vendedor">Todos</option>
                         <option value="admin">Administradores</option>
                         <option value="vendedor">Vendedores</option>
                     </select>
@@ -67,10 +67,10 @@
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th class="user-select-none first-in-table" scope="col">Nombre completo</th>
-                                <th class="user-select-none" scope="col">Cédula</th>
-                                <th class="user-select-none" scope="col">Email</th>
-                                <th class="user-select-none" scope="col">Roles</th>
+                                <th onclick="sortTable(0, 'str')" class="user-select-none first-in-table" scope="col">Nombre completo</th>
+                                <th onclick="sortTable(1, 'int')" class="user-select-none" scope="col">Cédula</th>
+                                <th onclick="sortTable(2, 'str')" class="user-select-none" scope="col">Email</th>
+                                <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Roles</th>
                             </tr>
                         </thead>
                         <tbody id="bodyUsersTable">

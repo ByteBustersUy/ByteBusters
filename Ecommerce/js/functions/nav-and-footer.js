@@ -11,7 +11,7 @@ function loadNav() {
 	let navHTML = `
   <nav id="navConSearch" class="navbar navbar-light bg-light">
     <div class="d-flex m-auto">
-      <a href="${relativePath}/index.html" id="logo"><img class="logo" src="${relativePath}/assets/logoecomerse1.png" alt=""/></a>
+      <a href="${relativePath}/index.html" id="logo"><img class="logo" src="${relativePath}/assets/logo-empresa.png" alt=""/></a>
       <button id="btnNavOption" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarMenu" aria-controls="offcanvasNavbarMenu" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -82,7 +82,6 @@ const botonBuscar = (event) => {
   event.preventDefault(); 
   const inputSearch = document.getElementById("navSearch");
   const searchValue = inputSearch.value;
-  console.log(searchValue);
   if(searchValue === ""){
     return;
   }
