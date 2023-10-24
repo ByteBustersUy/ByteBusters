@@ -28,12 +28,14 @@ divBtnPages.addEventListener("click", function (event) {
 	}
 });
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
+	console.log(divProducPromo)
 	//Productos promocionados
 	fetch("../api/productos-promo.php?p=1")
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data)
 			let cards = "";
 			for (let id = 0; id < data.length; id++) {
 				cards += `
