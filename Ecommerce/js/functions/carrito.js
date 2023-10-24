@@ -66,7 +66,6 @@ function cargarCarrito() {
                                     <i id="${data[id].id}" class="fa-solid fa-plus"></i>
                                 </button>
                             </div>
-                            </div>
                             <button class="btn-eliminar" id="${data[id].id}">
                                 <i id="${data[id].id}" class="icon-eliminar fa-solid fa-trash"></i>
                             </button>
