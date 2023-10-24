@@ -1,6 +1,7 @@
 const btnAddProduct = document.getElementById("btnAddProduct");
 const btnEditProduct = document.getElementById("btnEditProduct");
 const btnDeleteProduct = document.getElementById("btnDeleteProduct");
+const btnPromocionar = document.getElementById("btnPromocionar");
 const formAbm = document.getElementById("formAbmProduct");
 const btnSubmitModal = document.getElementById("btnSubmitModal");
 const btnUploadImage = document.getElementById("btnUploadImage");
@@ -57,14 +58,14 @@ btnEditProduct.addEventListener("click", () => {
 			imagen: modalProducts.getElementsByTagName("input")[1],
 			precio: modalProducts.getElementsByTagName("input")[2],
 			descripcion: modalProducts.getElementsByTagName("textarea")[0],
-			//...
 		};
-		
+
 		const selectedUserData = {
 			nombre: selectedRow.getElementsByTagName("td")[0].innerHTML,
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
-			precio: parseFloat(selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")),
-			//...
+			precio: parseFloat(
+				selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")
+			)
 		};
 		
 
@@ -168,7 +169,6 @@ btnDeleteProduct.addEventListener("click", () => {
 
 // detalle producto 
 const buttonsProductDetail = document.getElementsByClassName("btn-eye");
-console.log(buttonsProductDetail);
 for (let btn of buttonsProductDetail) {
 	btn.addEventListener("click", (event) => {
 		const data = new URLSearchParams();
@@ -195,7 +195,7 @@ for (let btn of buttonsProductDetail) {
 					modalProductsDetail.getElementsByClassName("modal-body")[0];
 				modalBody.innerHTML = `
 					<div class="product-image">
-					<img src="../../Ecommerce/images/${productData.imagen}">
+					<img id="productImageDetail" src="../../Ecommerce/images/${productData.imagen}">
 					</div>
 					<div class="product-detail">
 						<h4>${productData.nombre}</h4>
@@ -210,6 +210,7 @@ for (let btn of buttonsProductDetail) {
 									productData.precio * (1 - productData.descuento / 100)
 								)}</span>`
 							: `
+								<span class="mt-2">Descuento: No</span>
 								<span class="mt-2">Precio: $${productData.precio}</span>
 								`
 					}
@@ -240,6 +241,20 @@ const modalProductsDetail = document.getElementById("moddalProductsDetail");
 modalProductsDetail.addEventListener("click", (event) => {
 	if (
 		event.target.id === modalProductsDetail.id ||
+		event.target.id === "btnCloseModal" ||
+		event.target.id === "btnCancelModal"
+	) {
+		location.reload(true);
+	}
+});
+
+const modalProductsPromotion = document.getElementById(
+	"moddalProductsPromotion"
+);
+
+modalProductsPromotion.addEventListener("click", (event) => {
+	if (
+		event.target.id === modalProductsPromotion.id ||
 		event.target.id === "btnCloseModal" ||
 		event.target.id === "btnCancelModal"
 	) {
@@ -304,10 +319,10 @@ function selectProductRow(productId) {
 
 	btnDeleteProduct.classList.remove("disabled");
 	btnEditProduct.classList.remove("disabled");
+	btnPromocionar.classList.remove("disabled");
 	btnEditProduct.setAttribute("data-bs-toggle", "modal");
 	btnEditProduct.setAttribute("data-bs-target", "#moddalProducts");
 }
-
 
 function doSearch() {
 	const tableReg = document.getElementById('datos');
@@ -335,3 +350,52 @@ function doSearch() {
 		}
 	}
 }
+
+// Promocionar producto
+btnPromocionar.addEventListener("click", (event) => {
+	if (selectedRow) {
+		document
+			.getElementById("btnPromocionar")
+			.setAttribute("class", "enabled-button");
+		const data = new URLSearchParams();
+		data.append("productId", selectedRow.id);
+		fetch("../src/modules/products/abm-productos.php?action=detail", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/x-www-form-urlencoded",
+			},
+			body: data,
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error en la solicitud: " + response.status);
+				}
+				return response.json();
+			})
+			.then((productData) => {
+				//modal header
+				modalProductsPromotion.getElementsByClassName(
+					"modal-title"
+				)[0].innerHTML = "Promocionar producto";
+				//modal body
+				const modalBody =
+					modalProductsPromotion.getElementsByClassName("modal-body")[0];
+				modalBody.getElementsByTagName("div")[0].innerHTML = `
+				<img src="../../Ecommerce/images/${productData.imagen}">`;
+				const nombreProducto = modalBody.getElementsByTagName("h4")[0];
+				nombreProducto.innerHTML = productData.nombre;
+				const checkbox = document.getElementById("checkPromocion");
+				const promoId = selectedRow
+					.getElementsByTagName("td")[3]
+					.getAttribute("promoId");
+				if (promoId != 0) {
+					checkbox.checked = true;
+				} else {
+					checkbox.checked = false;
+				}
+			})
+			.catch((error) => {
+				console.error("Error: " + error);
+			});
+	}
+});

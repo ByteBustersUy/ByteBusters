@@ -32,6 +32,26 @@ function findAllPromos(int $isActive): array
     }
 }
 
+
+function findActiveAndValidPromos(): array
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try {
+        $statement = $con->prepare("SELECT *
+                                        FROM PROMOCIONES
+                                        WHERE activo = :isActive
+                                        AND vigente = :isValid
+                                        ORDER BY fechaInicio ASC");
+        $statement->execute(array(":isActive" => 1, "isValid" => 1));
+        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $reg;
+    } catch (Exception $e) {
+        $con->close();
+        die("ERROR SQL in findAllPromos(): " . $e->getMessage());
+    }
+}
+
 function saveOnePromotion(int $descuento, string $fechaInicio, string $fechaFin): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../styles/style.css">
     <title>Ecommerce Manager</title>
 </head>
-
 <body>
     <div>
         <div class="link-options-div">
@@ -50,16 +49,8 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                    
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
-                  
-                    <select class="order-list" name="order" id="order">
-                        <option selected hidden value="">Ordenar</option>
-                        <option value="az">A-Z</option>
-                        <option value="za">Z-A</option>
-                        <option value="mayorPrecio">mayor $</option>
-                        <option value="menorPrecio">menor $</option>
-                    </select>
+                    <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
                     <select class="filter-list" name="filter" id="filter">
                         <option selected hidden value="">Filtrar</option>
                         <option value="promocionado">Promocionado</option>
@@ -104,10 +95,8 @@
                                     echo $options;
                                     ?>
                                 </select>
-                                
                                 <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
                                 <input id="btnUploadImage" type="file" name="imagen" accept="image/*" required>
-
                                 <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
@@ -134,18 +123,55 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Promocionar -->
+            <div class="modal fade" id="moddalProductsPromotion" tabindex="-1" aria-labelledby="ProductsModalPromotionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div id="modalContentPromotion" class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="ProductsModalPromotionLabel"></h2>
+                            <button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="product-image">
+                            </div>
+                            <div id='nombreProducto' class="product-detail">
+                                <h4></h4>
+                            </div>
+                            <form id="formPromocionar" class="form-promo" action="../src/modules/products/abm-products.php?addpromo=1" method="post" enctype="multipart/form-data">
+                                <div class='promo-content promo-modal'>
+                                    <div>
+                                        <label for="checkbox">Habilitar promoción</label>
+                                        <input type="checkbox" class="chkbox" name="checkbox" id="checkPromocion">
+                                    </div>
+                                    <select name="promocionar" id="promocionar" required>
+                                        <option selected hidden value="">Elige una promoción</option>
+                                        <?php
+                                        require "../src/modules/promotions/abm-promotions.php";
+                                        $promos = getPromotionsHTML();
+                                        echo $promos;
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="buttons">
+                                    <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
+                                    <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
+                                </div>
+                            </form>
+                            <div class="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <footer>
-        <?php
-        require "./components/footer.php";
-        echo $footer;
-        ?>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="../js/abm-productos.js"></script>
-
-
+        <footer>
+            <?php
+            require "./components/footer.php";
+            echo $footer;
+            ?>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="../js/abm-productos.js"></script>
 </body>
 
 </html>

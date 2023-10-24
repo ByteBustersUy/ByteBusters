@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded", function () {
                   <h3>${data[id].nombre}</h3>
                 </a>
                 <h4>${data[id].precio}</h4>
-                <a id="${data[id].id}" href="#" class="btn btn-agregar buttonAdd">Agregar al carrito</a>
+                <a id="${data[id].id}" href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
               </div>
             </div>
           `;

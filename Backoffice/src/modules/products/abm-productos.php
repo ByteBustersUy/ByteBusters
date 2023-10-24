@@ -1,5 +1,5 @@
 <?php
-require realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
+require_once realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
 require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 
@@ -23,6 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die("Invalid action requested");
         }
     }
+
+    if(isset($_GET['addpromo']) && $_GET['addpromo'] == 1){
+        $productId = 0;
+        $promoId = 0;
+        addPromoToProduct($productId, $promoId);
+        
+    }
 }
 
 function addProduct()
@@ -30,13 +37,6 @@ function addProduct()
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
     try {
-
-        //print_r($_FILES);
-
-        // $fileSize = $_FILES['imagen']['size'];
-        // $fileType = $_FILES['imagen']['type'];
-
-        //$imagen = htmlspecialchars($_POST['imagen']);
         $fileTmpPath = htmlspecialchars($_FILES['imagen']['tmp_name']);
         $fileName = htmlspecialchars($_FILES['imagen']['name']);
         $nombre = htmlspecialchars($_POST['nombre']);
@@ -92,12 +92,9 @@ function editProduct(string $productId)
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
-        $imagen = $_FILES['imagen'];
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
-        $fileType = $_FILES['imagen']['type'];
-
         $fileTmpPath = $_FILES['imagen']['tmp_name'];
         $fileName = $_FILES['imagen']['name'];
         $dir = "../../../../Ecommerce/images/";
@@ -133,9 +130,9 @@ function getProductsTableData(): string
     $productsList = '';
     foreach ($productsData as $product) {
         $category = findProductCategoryByProductId($product['id']);
-        $isPromo = findProductPromotionStatus($product['id']);
+        $promoId = findProductPromotionId($product['id']);
 
-        if ($isPromo == 1) {
+        if ($promoId !== 0) {
             $isPromo = "Si";
             $classColor = "promoted-product";
         } else {
@@ -148,7 +145,7 @@ function getProductsTableData(): string
                                 <td class="' . $classColor . ' first-in-table">' . $product['nombre'] . '</td>
                                 <td class="' . $classColor . '" id="' . $category . '">' . $category . '</td>
                                 <td class="' . $classColor . '">$' . $product['precio'] . '</td>
-                                <td class="' . $classColor . '">' . $isPromo . '</td>
+                                <td promoId="'.$promoId.'" class="' . $classColor . '">' . $isPromo . '</td>
                                 <td><button id="' . $product['id'] . '" class="btn-eye" data-bs-toggle="modal" data-bs-target="#moddalProductsDetail"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }
@@ -170,7 +167,7 @@ function detailProduct(int $productId): array
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
     require realpath(dirname(__FILE__)) . "/../../repository/promotions.repository.php";
-    
+
     $product = findProductById($productId);
 
     if (!elementsHasData($product)) {
@@ -195,4 +192,8 @@ function detailProduct(int $productId): array
         "descuento" => $discount,
     ];
     return $productData;
+}
+
+function addPromoToProduct(int $productId, int $promoId){
+    
 }
