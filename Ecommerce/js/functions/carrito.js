@@ -56,7 +56,7 @@ function cargarCarrito() {
                             <p class="nombre-produc">${data[id].nombre}</p>
                         </div>
                         <div class="cantidad">
-                            <p class="precio-produc">$${data[id].precio}</p>
+                            <p class="precio-produc">${data[id].precio}</p>
                             <div class="btns-cantidad">
                                 <button class="input-btn-menos" id="${data[id].id}" type="button">
                                     <i id="${data[id].id}" class="fa-solid fa-minus"></i>
@@ -65,6 +65,7 @@ function cargarCarrito() {
                                 <button class="input-btn-mas" id="${data[id].id}" type="button">
                                     <i id="${data[id].id}" class="fa-solid fa-plus"></i>
                                 </button>
+                            </div>
                             </div>
                             <button class="btn-eliminar" id="${data[id].id}">
                                 <i id="${data[id].id}" class="icon-eliminar fa-solid fa-trash"></i>

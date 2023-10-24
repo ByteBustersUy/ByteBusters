@@ -26,16 +26,18 @@ fetch("../../api/detalleProducto.php?id=" + id, {
             <h2>${data[id].nombre}</h2>
           </div>
           <div class="container-info-products">
-            <div class="container-price">
+            <div class="container-price cantidad">
               <h4>$${data[id].precio}</h4>
               </div>
-                <div class="">
-                  <input type="button" id="decrement" value="-">
-                  <input class="input-num" type="number" >
-                  <input type="button" id="increment" value="+">
+			  <div">
+                <div class="cant-products container-cantidad"> 
+                  <input type="button" class="input-btn-menos" id="decrement" value="-">
+                  <input class="input-num" type="number" value=1 >
+                  <input type="button" class="input-btn-mas" id="increment" value="+">
                 </div>
             </div>
-            <button class="add-to-cart" id="${data[id].id}">Agregar al carrito</button>
+            <button class="add-to-cart agregar-carrito" id="${data[id].id}">Agregar al carrito</button>
+			</div>
           </div>
         </div>
       </div>
@@ -106,7 +108,7 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
         <img src="../images/${data[0].imagen}" />
         <div class="info-card">
           <div class="title-product">
-            <p>${data[0].nombre}</p>
+            <p>${limitarNombres(data[0].nombre)}</p>
           </div>
           <div class="price">${data[0].precio}</div>
         </div>
@@ -116,3 +118,14 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
 				});
 		}
 	});
+
+	function limitarNombres(nombre){
+		if (nombre.length > 30) {
+			nombre = nombre.slice(0, 30);
+			if (!nombre.endsWith(" ")) {
+				indiceUltimaPalabra = nombre.lastIndexOf(" ");
+				nombre = nombre.slice(0, indiceUltimaPalabra);
+			}
+		}
+		return nombre;
+	}
