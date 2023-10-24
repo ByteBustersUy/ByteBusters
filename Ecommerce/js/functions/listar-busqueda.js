@@ -4,8 +4,10 @@ window.addEventListener("DOMContentLoaded", async function () {
   let numPage=1;
   let totalProductos=0;
 
-  listarBusqueda(nombreProductoABuscar,numPage);
-  cargarBotonesPaginacion(totalProductos);
+  if(nombreProductoABuscar){
+    listarBusqueda(nombreProductoABuscar,numPage);
+    cargarBotonesPaginacion(totalProductos);
+  }
 });
 
 const botonesPaginacion = document.getElementById("div-btns-pages");
@@ -40,8 +42,6 @@ function cargarBotonesPaginacion(totalProductos) {
   const divBtnPages = document.getElementById("div-btns-pages");
   divBtnPages.innerHTML = botones;
 }
-
-let contenidoLista='';
 function listarBusqueda(nombreProductoABuscar,numPage) {
   
   fetch("../../api/listar-busqueda.php?nombre=" + nombreProductoABuscar, {
@@ -53,19 +53,19 @@ function listarBusqueda(nombreProductoABuscar,numPage) {
 
     .then((response) => response.json())
     .then((data) => {
-
       totalProductos=data.length;
 
       cargarBotonesPaginacion(totalProductos);
 
       const container = document.querySelector(".container-sm");
-      indi=limit*numPage-limit
-      contenidoLista='';
-      for (let id =indi; id < indi+10; id++) {
+      let indi = limit * numPage - limit;
+      
+      let contenidoLista='';
+      for (let id = indi ; id < indi+10; id++) {
         contenidoLista+= `
         <div class="row cardProd">
         <div class="col-md-12 d-flex">
-          <a href=""><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt="10"></a>
+          <a href=""><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt=""></a>
           <div>
             <a class="aNomb" href="">
               <h3>${data[id].nombre}</h3>

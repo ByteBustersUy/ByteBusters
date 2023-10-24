@@ -137,7 +137,7 @@
                             <div id='nombreProducto' class="product-detail">
                                 <h4></h4>
                             </div>
-                            <form id="formPromocionar" class="form-promo" action="" method="post" enctype="multipart/form-data">
+                            <form id="formPromocionar" class="form-promo" action="../src/modules/products/abm-products.php?addpromo=1" method="post" enctype="multipart/form-data">
                                 <div class='promo-content promo-modal'>
                                     <div>
                                         <label for="checkbox">Habilitar promoción</label>
