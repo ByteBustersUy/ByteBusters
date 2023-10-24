@@ -53,10 +53,9 @@ btnEditProduct.addEventListener("click", () => {
 
 		const inputsForm = {
 			nombre: modalProducts.getElementsByTagName("input")[0],
-			//por  algun motivo esos dos indeces no andan
 			categoria: modalProducts.getElementsByTagName("select")[0],
+			imagen: modalProducts.getElementsByTagName("input")[1],
 			precio: modalProducts.getElementsByTagName("input")[2],
-			//
 			descripcion: modalProducts.getElementsByTagName("textarea")[0],
 			//...
 		};
@@ -65,19 +64,45 @@ btnEditProduct.addEventListener("click", () => {
 			nombre: selectedRow.getElementsByTagName("td")[0].innerHTML,
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
 			precio: parseFloat(selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")),
-
-
-			//La linea descripcion  es pa ver si funcionaba el innerHTML
-			descripcion: selectedRow.getElementsByTagName("td")[2].innerHTML,
 			//...
 		};
+		
 
 		//refill inputs with selected product data
 		inputsForm.nombre.value = selectedUserData.nombre;
 		inputsForm.precio.value = selectedUserData.precio;
 
+		const options = inputsForm.categoria.getElementsByTagName("option");
+		for(let i = 0; i < options.length; i++) {
+			if(options[i].innerHTML == selectedRow.getElementsByTagName("td")[1].innerHTML) {
+				options[i].setAttribute("selected", true);
+			}
+		}
 
-		inputsForm.descripcion.value = selectedUserData.descripcion;
+		const data = new URLSearchParams();
+		data.append("productId", productId);
+		fetch("../src/modules/products/abm-productos.php?action=detail", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/x-www-form-urlencoded",
+			},
+			body: data,
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error en la solicitud: " + response.status);
+				}
+				return response.json();
+			})
+			.then((productData) => {
+				inputsForm.descripcion.value = productData.descripcion;
+				document.getElementById("uploadLabel").innerHTML ="Cambiar imágen"
+				document.getElementById("btnUploadImage").removeAttribute("required");
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+		
 		//...
 
 		formAbm.attributes.item(
@@ -141,7 +166,7 @@ btnDeleteProduct.addEventListener("click", () => {
 	}
 });
 
-// detalle producto
+// detalle producto 
 const buttonsProductDetail = document.getElementsByClassName("btn-eye");
 console.log(buttonsProductDetail);
 for (let btn of buttonsProductDetail) {
@@ -310,45 +335,3 @@ function doSearch() {
 		}
 	}
 }
-
-// FUNCION PARA FILTRAR POR SELECT TIPO EQUIPO
-$(document).ready(function($) {
-    $('table').show();
-    $('#tipo_equipo').change(function() {
-        $('table').show();
-        var selection = $(this).val();
-        if (selection === '-Todos-') {
-            $('tr').show();
-        }
-        else {
-            var dataset = $('#teq .contenidobusqueda').find('tr');
-            // show all rows first
-            dataset.show();
-        }
-        // filter the rows that should be hidden
-        dataset.filter(function(index, item) {
-            return $(item).find('#third-child').text().split(',').indexOf(selection) === -1;
-        }).hide();
-    });
-});
- 
-// FUNCION PARA FILTRAR POR SELECT MARCA
-$(document).ready(function($) {
-    $('tbody').show();
-    $('#filter').change(function() {
-        $('tbody').show();
-        var selection = $(this).val();
-        if (selection === 'Promocionado') {
-            $('tr').show();
-        }
-        else {
-            var dataset = $('#teq .contenidobusqueda').find('tr');
-            // show all rows first
-            dataset.show();
-        }
-        // filter the rows that should be hidden
-        dataset.filter(function(index, item) {
-            return $(item).find('#fourth-child').text().split(',').indexOf(selection) === -1;
-        }).hide();
-    });
-});
