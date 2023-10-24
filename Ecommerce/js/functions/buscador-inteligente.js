@@ -47,21 +47,18 @@ document.addEventListener("DOMContentLoaded", function () {
 							contenido += `
                 <div class="row cardProdSearch">
                 <div class="col-md-12 d-flex">
-                  <a href=""><img src="./images/${
-										data[id].imagen
-									}" class="card-img-top img-producto-lista" alt="10"></a>
-                  <div>
-                    <a class="aNomb" href="">
-                      <h3>${limitarNombres(data[id].nombre)}</h3>
-                    </a>
-                    <h4>$${data[id].precio}</h4>
-                    <a id="${
-											data[id].id
-										}" href="#" class="btn btn-agregar buttonAdd">Agregar al carrito</a>
+                  <a href="pages/detalleProducto.html?id=${data[id].id}">
+				  	<img src="./images/${data[id].imagen}" class="card-img-top img-producto-lista" alt="10">
+				  </a>
+                <div>
+                    <a class="aNomb" href="pages/detalleProducto.html?id=${data[id].id}">
+                      	<h3>${limitarNombres(data[id].nombre)}</h3>
+                    	<h4>$${data[id].precio}</h4>
+					</a>
+                    <a id="${data[id].id}" href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
                   </div>
                 </div>
-                </div>
-              `;
+                </div>`;
 						}
 
 						cantProduc = data.length;

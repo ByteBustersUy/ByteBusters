@@ -111,7 +111,7 @@ divProductoCarrito.addEventListener("click", function (event) {
     
     if ((event.target.className === "input-btn-mas")||(event.target.className==="fa-solid fa-plus")) {
         idBtnMas = event.target.id
-        for(let e=0;e<idsProductos.length;e++){
+        for(let e=0;e<listadoCantidades.length;e++){
             if(listadoCantidades[e].id==idBtnMas){
                 listadoCantidades[e].elemento.value++;
                 sumarProducoAlCarrito(idBtnMas);
@@ -122,7 +122,7 @@ divProductoCarrito.addEventListener("click", function (event) {
         
     if ((event.target.className === "input-btn-menos")||(event.target.className==="fa-solid fa-minus")) {
         idBtnMenos = event.target.id
-        for(let e=0;e<idsProductos.length;e++){
+        for(let e=0;e<listadoCantidades.length;e++){
             if(listadoCantidades[e].id==idBtnMenos){
                 if(listadoCantidades[e].elemento.value>1){
                     listadoCantidades[e].elemento.value--;
@@ -134,17 +134,16 @@ divProductoCarrito.addEventListener("click", function (event) {
     }
 })
 
-const divComprar = document.getElementById("div-comprar")
-divComprar.addEventListener("click", function (event) {
-    if ((event.target.className=== "btn-comprar")){
+const btnComprar = document.getElementById("btn-comprar")
+btnComprar.addEventListener("click", function () {
+    
         carritoVacio=[];
         localStorage.setItem("id", JSON.stringify(carritoVacio));
         alert("su compra fue realizada corectamente")
         cargarCarrito()
         resultadoTotal = 0;
         textoPrecioTotal.innerHTML ='$'+resultadoTotal;
-    
-    }
+        generarPDF();
 })
 function sumarProducoAlCarrito(id) {
     let productoExistente = idsProductos.find((producto) => producto.id === parseInt(id));
@@ -165,5 +164,17 @@ function restarProducoAlCarrito(id) {
     localStorage.setItem("id", JSON.stringify(idsProductos));
 }
 function generarPDF() {
-    
+    let doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4'})
+   let alto=10;
+    for (let indi = 0; indi < jsonCarrito.length; indi++) {
+        doc.text(jsonCarrito[indi].nombre, 10,alto,{maxWidth: 70});
+        doc.line(0,alto,200,alto);
+        console.log(alto)
+        alto+=10;
+    }
+
+    doc.save('boleta.pdf')
 }

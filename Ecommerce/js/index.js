@@ -12,7 +12,7 @@ divBtnPages.addEventListener("click", function (event) {
 					card += `
     			<div>
         			<div class="card h-100 produc-promo" >
-						<a class="ir-detalle-producto" href="pages/detalleProducto.html">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
                 				<h4>$${data[id].precio}</h4>
