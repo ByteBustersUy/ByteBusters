@@ -52,28 +52,20 @@
                 <div class="table-options">
                     
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
-                  
-                    <select class="order-list" name="order" id="order">
-                        <option selected hidden value="">Ordenar</option>
-                        <option value="az">A-Z</option>
-                        <option value="za">Z-A</option>
-                        <option value="mayorPrecio">mayor $</option>
-                        <option value="menorPrecio">menor $</option>
-                    </select>
-                    <select class="filter-list" name="filter" id="filter">
+                    <select class="filter-list" name="filter" id="filter" onchange="orderProductByPromo();">
                         <option selected hidden value="">Filtrar</option>
-                        <option value="promocionado">Promocionado</option>
-                        <option value="noPromocionado">No Promocionado</option>
+                        <option value="Si">Promocionado</option>
+                        <option value="No">No Promocionado</option>
                     </select>
                 </div>
                 <div class="table-frame">
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th class="user-select-none first-in-table" scope="col">Nombre del producto</th>
-                                <th class="user-select-none" scope="col">Categoría</th>
-                                <th class="user-select-none" scope="col">Precio</th>
-                                <th class="user-select-none" scope="col">Promo</th>
+                                <th onclick="sortTable(0, 'str')" class="user-select-none first-in-table" scope="col">Nombre del producto</th>
+                                <th onclick="sortTable(1, 'str')" class="user-select-none" scope="col">Categoría</th>
+                                <th onclick="sortTable(2, 'int')" class="user-select-none" scope="col">Precio $</th>
+                                <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Promo</th>
                                 <th class="user-select-none" scope="col">Detalle</th>
                             </tr>
                         </thead>
