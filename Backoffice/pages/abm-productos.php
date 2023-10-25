@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../styles/style.css">
     <title>Ecommerce Manager</title>
 </head>
-
 <body>
     <div>
         <div class="link-options-div">
@@ -50,7 +49,7 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                    
+
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
                     <select class="filter-list" name="filter" id="filter" onchange="orderProductByPromo();">
                         <option selected hidden value="">Filtrar</option>
@@ -96,10 +95,8 @@
                                     echo $options;
                                     ?>
                                 </select>
-                                
                                 <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
                                 <input id="btnUploadImage" type="file" name="imagen" accept="image/*" required>
-
                                 <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
@@ -123,21 +120,19 @@
                         </div>
                         <div class="modal-body">
                         </div>
+                                            </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <footer>
-        <?php
-        require "./components/footer.php";
-        echo $footer;
-        ?>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="../js/abm-productos.js"></script>
-
-
+        <footer>
+            <?php
+            require "./components/footer.php";
+            echo $footer;
+            ?>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="../js/abm-productos.js"></script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@ divBtnPages.addEventListener("click", function (event) {
 					card += `
     			<div>
         			<div class="card h-100 produc-promo" >
-						<a class="ir-detalle-producto" href="pages/detalleProducto.html">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
                 				<h4>$${data[id].precio}</h4>
@@ -28,22 +28,24 @@ divBtnPages.addEventListener("click", function (event) {
 	}
 });
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
+	console.log(divProducPromo)
 	//Productos promocionados
 	fetch("../api/productos-promo.php?p=1")
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data)
 			let cards = "";
 			for (let id = 0; id < data.length; id++) {
 				cards += `
     			<div>
-        			<div class="card h-100 produc-promo" >
+        			<div class="card produc-promo" >
 						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
+								<h5>${limitarNombres(data[id].nombre)}</h5>
                 				<h4>$${data[id].precio}</h4>
-                				<h5>${data[id].nombre}</h5>
             				</div>
 						</a>
             			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
@@ -52,85 +54,12 @@ window.addEventListener("load", function () {
 			}
 			divProducPromo.innerHTML = cards;
 		});
-
-	//Productos no promocionados
-	/*fetch("../api/productos-no-promo.php")
-		.then((response) => response.json())
-		.then((data) => {
-			const divPrductoSinPromo = document.getElementById("productos-sin-promo");
-			for (let id = 0; id < data.length; id++) {
-				divPrductoSinPromo.innerHTML += `
-				<div class="list-group"> 
-        			<div class="d-flex list-body">
-        				<a class="" href="pages/detalleProducto.html">
-            				<img class="img-list" src="./images/${data[id].imagen}" class="card-img-top" alt="...">
-            				<div class="d-block list-content">
-            					<h5>${data[id].nombre}</h5>
-            					<h4>$${data[id].precio}</h4>
-            					<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
-            				</div>
-        				</a>
-       		 		</div>
-        		</div>`;
-			}
-		});*/
-
-	// //Buscador inteligente
-	// const inputSearch = document.getElementById("navSearch");
-	// inputSearch.addEventListener("keyup", () => {
-	// 	let cantProduc;
-	// 	fetch(`../api/search.php?pagina=`, {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify({ value: inputSearch.value }),
-	// 	})
-	// 		.then((response) => response.json())
-	// 		.then((data) => {
-	// 			let contenido = "";
-	// 			for (let id = 0; id < data.length; id++) {
-	// 				contenido += `
-    // 			<div>
-    //     			<div class="card h-100 produc-promo" >
-	// 					<a class="ir-detalle-producto" href="pages/carrito.html">
-    //         				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
-    //         				<div class="card-body">
-    //             				<h4>$${data[id].precio}</h4>
-    //             				<h5>${data[id].nombre}</h5>
-    //         				</div>
-	// 					</a>
-    //         			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
-    //     			</div>
-    // 			</div>`;
-	// 			}
-	// 			cantProduc = data.length;
-	// 			divProducPromo.innerHTML = contenido;
-	// 			//cargarBotonesBuscar(cantProduc);
-	// 		});
-	// });
-
-	if (anchoVentana < 768) {
-		cargarListadoProductosNoPromoMobile();
-	} else if (anchoVentana > 760) {
-		cargarCardsproductosNoPromo();
-	}
+		cargarCardsProductosNoPromo();
 });
 const divProductoNoPromo = document.getElementById("productos-sin-promo");
 
-window.onresize = function () {
-	anchoVentana = window.innerWidth;
-	if (anchoVentana < 768) {
-		cargarListadoProductosNoPromoMobile();
-	} else if (anchoVentana > 760) {
-		cargarCardsproductosNoPromo();
-	}
-};
-
-function cargarCardsproductosNoPromo() {
-	console.log("tablet/desktop");
+function cargarCardsProductosNoPromo() {
 	divProductoNoPromo.innerHTML = "";
-	
 	//Productos promocionados
 	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
@@ -139,48 +68,31 @@ function cargarCardsproductosNoPromo() {
 			for (let id = 0; id < data.length; id++) {
 				cards += `
     			<div>
-        			<div class="card h-100 producto-no-promo" >
+        			<div class="card producto-no-promo" >
 						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
-            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<img src="./images/${data[id].imagen} " class="card-img-top no-promo" alt="...">
             				<div class="card-body">
-                				<h4>$${data[id].precio}</h4>
-                				<h5>${data[id].nombre}</h5>
+							<h5>${limitarNombres(data[id].nombre)}</h5>
+							<h4>$${data[id].precio}</h4>
             				</div>
 						</a>
             			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 			}
-			divProductoNoPromo.classList.add("row");
-			divProductoNoPromo.classList.add("row-cols-3");
-
 			divProductoNoPromo.innerHTML = cards;
 		});
 }
 
-function cargarListadoProductosNoPromoMobile() {
-	divProductoNoPromo.innerHTML = "";
-	divProductoNoPromo.classList.remove("row");
-	divProductoNoPromo.classList.remove("row-cols-3");
 
-	console.log("movile");
-	fetch("../api/productos-no-promo.php")
-		.then((response) => response.json())
-		.then((data) => {
-			for (let id = 0; id < data.length; id++) {
-				divProductoNoPromo.innerHTML += `
-				<div class="list-group"> 
-        			<div class="d-flex list-body">
-        				<a class="" href="pages/carrito.html">
-            				<img class="img-list" src="./images/${data[id].imagen}" class="card-img-top" alt="...">
-            				<div class="d-block list-content">
-            					<h5>${data[id].nombre}</h5>
-            					<h4>$${data[id].precio}</h4>
-            					<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
-            				</div>
-        				</a>
-       		 		</div>
-        		</div>`;
-			}
-		});
+function limitarNombres(nombre){
+	if (nombre.length > 30) {
+		nombre = nombre.slice(0, 30);
+		if (!nombre.endsWith(" ")) {
+			indiceUltimaPalabra = nombre.lastIndexOf(" ");
+			nombre = nombre.slice(0, indiceUltimaPalabra);
+		}
+	}
+	return nombre;
 }
+

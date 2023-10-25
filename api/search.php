@@ -2,7 +2,7 @@
 include "./db/conexion.php";
 
 $reg=[];
-$productsPorPagina = 12;
+$productsPorPagina = isset($_GET["ppp"])? $_GET["ppp"] : 12;
 $pagina = isset($_GET["pagina"]) && is_numeric($_GET["pagina"]) ? $_GET["pagina"] : 1;
 $offset = ($pagina - 1)* $productsPorPagina;
 

@@ -35,10 +35,10 @@ function getAllPermissionsDataTableHTML(): string
                     <td class="first-in-table">' . $permissions[$i]["accion"] . '</td>
                     <td>' . $permissions[$i]["ruta"] . '</td>
                     <td>
-                        <input type="checkbox" class="chkbox-roles" ' . $activeAdmin . ' name="checkbox" id="checkAdmin">
+                        <input type="checkbox" class="chkbox" ' . $activeAdmin . ' name="checkbox" id="checkAdmin">
                     </td>
                     <td>
-                        <input type="checkbox"  class="chkbox-roles" ' . $activeVendedor . ' name="checkbox" id="checkVendedor">
+                        <input type="checkbox"  class="chkbox" ' . $activeVendedor . ' name="checkbox" id="checkVendedor">
                     </td>
                 </tr>';
     }
