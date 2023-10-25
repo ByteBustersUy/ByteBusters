@@ -23,6 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die("Invalid action requested");
         }
     }
+
+    if(isset($_GET['addpromo']) && $_GET['addpromo'] == 1){
+        $productId = 0;
+        $promoId = 0;
+        addPromoToProduct($productId, $promoId);
+        
+    }
 }
 
 function addProduct()
@@ -30,13 +37,6 @@ function addProduct()
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
     try {
-
-        //print_r($_FILES);
-
-        // $fileSize = $_FILES['imagen']['size'];
-        // $fileType = $_FILES['imagen']['type'];
-
-        //$imagen = htmlspecialchars($_POST['imagen']);
         $fileTmpPath = htmlspecialchars($_FILES['imagen']['tmp_name']);
         $fileName = htmlspecialchars($_FILES['imagen']['name']);
         $nombre = htmlspecialchars($_POST['nombre']);
@@ -92,12 +92,9 @@ function editProduct(string $productId)
 
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
-        $imagen = $_FILES['imagen'];
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
         $precio = htmlspecialchars($_POST['precio']);
-        $fileType = $_FILES['imagen']['type'];
-
         $fileTmpPath = $_FILES['imagen']['tmp_name'];
         $fileName = $_FILES['imagen']['name'];
         $dir = "../../../../Ecommerce/images/";
@@ -195,4 +192,8 @@ function detailProduct(int $productId): array
         "descuento" => $discount,
     ];
     return $productData;
+}
+
+function addPromoToProduct(int $productId, int $promoId){
+    
 }

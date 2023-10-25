@@ -445,7 +445,7 @@ input[type=number]::-webkit-outer-spin-button {
 .btns-cantidad {
   display: flex !important;
   width: auto;
-  display: inline;
+  display: inline-flex;
   position: absolute;
   right: 25%;
   bottom: 1.5rem; 
@@ -469,7 +469,7 @@ input[type=number]::-webkit-outer-spin-button {
   left: 5%;
   top: 5%;
 }
-.btn-comprar{
+#btn-comprar{
   margin:auto;
   width: auto;
   height: 1.5rem;
@@ -541,12 +541,17 @@ input[type=number]::-webkit-outer-spin-button {
 .container-info-products {
   display: flex;
   flex-direction: column;
-  margin-left: 2rem
 }
 
 .container-price {
   display: flex;
   align-items: center;
+}
+
+.container-cantidad{
+  position: relative;
+  display: flex;
+  
 }
 
 .container-price h4 {
@@ -587,24 +592,34 @@ border-radius: .3rem;
 .container-related-products {
   display: flex;
   justify-content: space-evenly;
-  margin: auto;
+  margin: auto auto 3rem auto;
 }
+
+
+/* detalle producto, producto relacionados */
 
 .card-list-product {
   display: block;
   gap: 25px;
-  height: 15;
+  background-color: var(--color-5);
+  height: 20rem;
+  border-radius: .5rem;
 }
 
 .card-list-product img {
-  height: 100px;
+  height: 250px;
   object-fit: cover;
+  border-radius: .5rem;
 }
 
 .info-card {
   height: 100px;
   object-fit: cover;
+  padding: 10px;
 }
+
+
+
 
 /* TABLET */
 @media only screen and (min-width: 768px) {
@@ -709,7 +724,7 @@ border-radius: .3rem;
     font-weight: 600;
   }
 
-  .btn-comprar {
+  #btn-comprar {
     right: 10%;
   }
 
@@ -850,7 +865,7 @@ a {
     padding: 4rem;
   }
 
-  .btn-comprar {
+  #btn-comprar {
     right: 30%;
   }
 

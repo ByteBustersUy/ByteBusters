@@ -12,7 +12,7 @@ divBtnPages.addEventListener("click", function (event) {
 					card += `
     			<div>
         			<div class="card h-100 produc-promo" >
-						<a class="ir-detalle-producto" href="pages/detalleProducto.html">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
                 				<h4>$${data[id].precio}</h4>
@@ -28,12 +28,14 @@ divBtnPages.addEventListener("click", function (event) {
 	}
 });
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
+	console.log(divProducPromo)
 	//Productos promocionados
 	fetch("../api/productos-promo.php?p=1")
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data)
 			let cards = "";
 			for (let id = 0; id < data.length; id++) {
 				cards += `
