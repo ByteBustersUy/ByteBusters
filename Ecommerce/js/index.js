@@ -30,7 +30,7 @@ divBtnPages.addEventListener("click", function (event) {
 
 window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
-	console.log(divProducPromo)
+	
 
 	//Productos promocionados
 	fetch("../api/productos-promo.php")
@@ -38,12 +38,15 @@ window.addEventListener("DOMContentLoaded", function () {
 		.then((data) => {
 			let cards = "";
 			for (let id = 0; id < data.length; id++) {
-				cards += `
+				fetch("../api/promocion.php?id=" + data[id].id)
+					.then((response2) => response2.json())
+					.then((promo) => {
+						cards += `
     			<div>
         			<div class="card produc-promo" >
 						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${data[id].id}">
 						<div class="promo-tag">
-						<span>00% OFF</span>
+						<span>${promo.descuento}% OFF</span>
 						</div>
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
@@ -54,17 +57,20 @@ window.addEventListener("DOMContentLoaded", function () {
             			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
+
+				divProducPromo.innerHTML = cards;
+					}).catch((error) => { });
+					
 			}
-			divProducPromo.innerHTML = cards;
-	
+
 		});
-		cargarCardsProductosNoPromo();
+	cargarCardsProductosNoPromo();
 });
 const divProductoNoPromo = document.getElementById("productos-sin-promo");
 
 function cargarCardsProductosNoPromo() {
 	divProductoNoPromo.innerHTML = "";
-	
+
 	//Productos no promocionados
 	fetch("../api/productos-no-promo.php")
 		.then((response) => response.json())
@@ -85,16 +91,16 @@ function cargarCardsProductosNoPromo() {
         			</div>
     			</div>`;
 			}
-			
+
 			divProductoNoPromo.innerHTML = cards;
-			
+
 
 		});
-		
+
 }
 
 
-function limitarNombres(nombre){
+function limitarNombres(nombre) {
 	if (nombre.length > 30) {
 		nombre = nombre.slice(0, 30);
 		if (!nombre.endsWith(" ")) {
