@@ -1,6 +1,7 @@
 const btnAddProduct = document.getElementById("btnAddProduct");
 const btnEditProduct = document.getElementById("btnEditProduct");
 const btnDeleteProduct = document.getElementById("btnDeleteProduct");
+const btnPromocionar = document.getElementById("btnPromocionar");
 const formAbm = document.getElementById("formAbmProduct");
 const btnSubmitModal = document.getElementById("btnSubmitModal");
 const btnUploadImage = document.getElementById("btnUploadImage");
@@ -53,29 +54,24 @@ btnEditProduct.addEventListener("click", () => {
 
 		const inputsForm = {
 			nombre: modalProducts.getElementsByTagName("input")[0],
-			//por  algun motivo esos dos indeces no andan
 			categoria: modalProducts.getElementsByTagName("select")[0],
+			imagen: modalProducts.getElementsByTagName("input")[1],
 			precio: modalProducts.getElementsByTagName("input")[2],
-			//
 			descripcion: modalProducts.getElementsByTagName("textarea")[0],
-			//...
 		};
-		
+
 		const selectedUserData = {
 			nombre: selectedRow.getElementsByTagName("td")[0].innerHTML,
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
-			precio: parseFloat(selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")),
-
-
-			//La linea descripcion  es pa ver si funcionaba el innerHTML
-			descripcion: selectedRow.getElementsByTagName("td")[2].innerHTML,
-			//...
+			precio: parseFloat(
+				selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")
+			)
 		};
+		
 
 		inputsForm.nombre.value = selectedUserData.nombre;
 		inputsForm.precio.value = selectedUserData.precio;
 
-<<<<<<< HEAD
 		const options = inputsForm.categoria.getElementsByTagName("option");
 		for (let i = 0; i < options.length; i++) {
 			if (
@@ -89,11 +85,6 @@ btnEditProduct.addEventListener("click", () => {
 		inputsForm.descripcion.value = productData.descripcion;
 		document.getElementById("uploadLabel").innerHTML = "Cambiar imágen";
 		document.getElementById("btnUploadImage").removeAttribute("required");
-=======
-
-		inputsForm.descripcion.value = selectedUserData.descripcion;
-		//...
->>>>>>> anibal
 
 		formAbm.attributes.item(
 			2
@@ -123,9 +114,8 @@ btnDeleteProduct.addEventListener("click", () => {
 	}
 });
 
-// detalle producto
+// detalle producto 
 const buttonsProductDetail = document.getElementsByClassName("btn-eye");
-console.log(buttonsProductDetail);
 for (let btn of buttonsProductDetail) {
 	btn.addEventListener("click", async () => {
 		const productData = await getProductData(btn.id);
@@ -137,7 +127,7 @@ for (let btn of buttonsProductDetail) {
 			modalProductsDetail.getElementsByClassName("modal-body")[0];
 		modalBody.innerHTML = `
 					<div class="product-image">
-					<img src="../../Ecommerce/images/${productData.imagen}">
+					<img id="productImageDetail" src="../../Ecommerce/images/${productData.imagen}">
 					</div>
 					<div class="product-detail">
 						<h4>${productData.nombre}</h4>
@@ -152,6 +142,7 @@ for (let btn of buttonsProductDetail) {
 									productData.precio * (1 - productData.descuento / 100)
 								)}</span>`
 							: `
+								<span class="mt-2">Descuento: No</span>
 								<span class="mt-2">Precio: $${productData.precio}</span>
 								`
 					}
@@ -178,6 +169,20 @@ const modalProductsDetail = document.getElementById("moddalProductsDetail");
 modalProductsDetail.addEventListener("click", (event) => {
 	if (
 		event.target.id === modalProductsDetail.id ||
+		event.target.id === "btnCloseModal" ||
+		event.target.id === "btnCancelModal"
+	) {
+		location.reload(true);
+	}
+});
+
+const modalProductsPromotion = document.getElementById(
+	"moddalProductsPromotion"
+);
+
+modalProductsPromotion.addEventListener("click", (event) => {
+	if (
+		event.target.id === modalProductsPromotion.id ||
 		event.target.id === "btnCloseModal" ||
 		event.target.id === "btnCancelModal"
 	) {
@@ -242,10 +247,10 @@ function selectProductRow(productId) {
 
 	btnDeleteProduct.classList.remove("disabled");
 	btnEditProduct.classList.remove("disabled");
+	btnPromocionar.classList.remove("disabled");
 	btnEditProduct.setAttribute("data-bs-toggle", "modal");
 	btnEditProduct.setAttribute("data-bs-target", "#moddalProducts");
 }
-
 
 function doSearch() {
 	const tableReg = document.getElementById("datos");
@@ -376,80 +381,3 @@ async function deleteProduct(productId) {
 		});
 	} catch (error) {}
 }
-
-
-
-function orderProductByPromo() {
-	const selectedValue = document.getElementById("filter").value;
-	console.log(selectedValue);
-
-	if (selectedValue === "promocionado" || "noPromocionado") {
-		const tableReg = document.getElementById('datos');
-		const searchText = document.getElementById('filter').value.toLowerCase();
-		let total = 0;
-		// Recorremos todas las filas con contenido de la tabla
-		for (let i = 0; i < tableReg.rows.length; i++) {
-			let found = false;
-			const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-			// Recorremos todas las celdas
-
-			const compareWith = cellsOfRow[3].innerHTML.toLowerCase();
-			// Buscamos el texto en el contenido de la celda
-			if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
-				found = true;
-				total++;
-			}
-
-			if (found) {
-				tableReg.rows[i].style.display = '';
-			} else {
-				// si no ha encontrado ninguna coincidencia, esconde la
-				// fila de la tabla
-				tableReg.rows[i].style.display = 'none';
-			}
-		}
-	} else {
-		getUsersTableDataHTML();
-	}
-
-}
-function sortTable(n, type) {
-	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-	table = document.getElementById("datos");
-	switching = true;
-	dir = "asc";
-	while (switching) {
-		switching = false;
-		rows = table.rows;
-		for (i = 0; i < (rows.length - 1); i++) {
-			shouldSwitch = false;
-			x = rows[i].getElementsByTagName("TD")[n];
-			y = rows[i + 1].getElementsByTagName("TD")[n];
-			if (dir == "asc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
-					shouldSwitch = true;
-					break;
-				}
-			} else if (dir == "desc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
-					shouldSwitch = true;
-					break;
-				}
-			}
-		}
-		if (shouldSwitch) {
-			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-			switching = true;
-			switchcount++;
-		} else {
-			if (switchcount == 0 && dir == "asc") {
-				dir = "desc";
-				switching = true;
-			}
-		}
-	}
-}
-
-
-
-

@@ -49,22 +49,22 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
-                    <select class="filter-list" name="filter" id="filter" onchange="orderProductByPromo();">
+                    <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
+                    <select class="filter-list" name="filter" id="filter">
                         <option selected hidden value="">Filtrar</option>
-                        <option value="Si">Promocionado</option>
-                        <option value="No">No Promocionado</option>
+                        <option value="promocionado">Promocionado</option>
+                        <option value="noPromocionado">No Promocionado</option>
                     </select>
                 </div>
                 <div class="table-frame">
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th onclick="sortTable(0, 'str')" class="user-select-none first-in-table" scope="col">Nombre del producto</th>
-                                <th onclick="sortTable(1, 'str')" class="user-select-none" scope="col">Categoría</th>
-                                <th onclick="sortTable(2, 'int')" class="user-select-none" scope="col">Precio $</th>
-                                <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Promo</th>
+                                <th class="user-select-none first-in-table" scope="col">Nombre del producto</th>
+                                <th class="user-select-none" scope="col">Categoría</th>
+                                <th class="user-select-none" scope="col">Precio</th>
+                                <th class="user-select-none" scope="col">Promo</th>
                                 <th class="user-select-none" scope="col">Detalle</th>
                             </tr>
                         </thead>
