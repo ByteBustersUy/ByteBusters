@@ -291,7 +291,9 @@ btnPromocionar.addEventListener("click", async () => {
 			.getElementById("btnPromocionar")
 			.setAttribute("class", "enabled-button");
 
-		const productData = await getProductData(selectedRow.id);
+		const productId = selectedRow.id;
+		const productData = await getProductData(productId);
+		console.log(productData);
 		//modal header
 		modalProductsPromotion.getElementsByClassName("modal-title")[0].innerHTML =
 			"Promocionar producto";
@@ -310,6 +312,17 @@ btnPromocionar.addEventListener("click", async () => {
 			checkbox.checked = true;
 		} else {
 			checkbox.checked = false;
+		}
+
+		const options = modalProductsPromotion.getElementsByTagName("option");
+		for (let i = 0; i < options.length; i++) {
+			if (options[i].innerHTML == productData.descuento+"%") {
+				options[i].setAttribute("selected", true);
+				console.log('si')
+			}else{
+				console.log(productData.descuento)
+				console.log(options[i].innerHTML )
+			}
 		}
 	}
 });

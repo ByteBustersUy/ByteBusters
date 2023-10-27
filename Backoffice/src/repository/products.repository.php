@@ -95,11 +95,11 @@ function findProductCategoryByProductId(string $productId): string
         die("ERROR SQL in findProductCategoryByProductId(): " . $e->getMessage());
     }
 }
-function findProductPromotionId(string $productId)
+function findProductPromotionId(string $productId): int
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
+        $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId ORDER BY PROMOCIONES_id DESC ");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 

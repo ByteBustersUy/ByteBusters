@@ -24,11 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    if(isset($_GET['addpromo']) && $_GET['addpromo'] == 1){
+    if (isset($_GET['addpromo']) && $_GET['addpromo'] == 1) {
         $productId = 0;
         $promoId = 0;
         addPromoToProduct($productId, $promoId);
-        
     }
 }
 
@@ -38,7 +37,6 @@ function addProduct()
 
     try {
         $fileTmpPath = htmlspecialchars($_FILES['imagen']['tmp_name']);
-        $fileName = htmlspecialchars($_FILES['imagen']['name']);
         $nombre = htmlspecialchars($_POST['nombre']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
         $categoria = htmlspecialchars($_POST['categoria']);
@@ -126,6 +124,8 @@ function editProduct(string $productId)
 
 function getProductsTableData(): string
 {
+    require realpath(dirname(__FILE__)) . "/../../repository/promotions.repository.php";
+
     $productsData = findAllProducts();
     $productsList = '';
     foreach ($productsData as $product) {
@@ -133,8 +133,12 @@ function getProductsTableData(): string
         $promoId = findProductPromotionId($product['id']);
 
         if ($promoId !== 0) {
-            $isPromo = "Si";
-            $classColor = "promoted-product";
+            $promo = findOnePromoById($promoId);
+            date_default_timezone_set('America/Montevideo');
+            if ($promo['fechaFin'] >= date("Y-m-d")) {
+                $isPromo = "Si";
+                $classColor = "promoted-product";
+            }
         } else {
             $isPromo = "No";
             $classColor = "";
@@ -145,7 +149,7 @@ function getProductsTableData(): string
                                 <td class="' . $classColor . ' first-in-table">' . $product['nombre'] . '</td>
                                 <td class="' . $classColor . '" id="' . $category . '">' . $category . '</td>
                                 <td class="' . $classColor . '">$' . $product['precio'] . '</td>
-                                <td promoId="'.$promoId.'" class="' . $classColor . '">' . $isPromo . '</td>
+                                <td promoId="' . $promoId . '" class="' . $classColor . '">' . $isPromo . '</td>
                                 <td><button id="' . $product['id'] . '" class="btn-eye" data-bs-toggle="modal" data-bs-target="#moddalProductsDetail"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }
@@ -194,6 +198,6 @@ function detailProduct(int $productId): array
     return $productData;
 }
 
-function addPromoToProduct(int $productId, int $promoId){
-    
+function addPromoToProduct(int $productId, int $promoId)
+{
 }
