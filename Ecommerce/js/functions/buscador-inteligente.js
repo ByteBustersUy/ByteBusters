@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
 								"style",
 								"font-size: 2rem; margin-top: 1rem; margin-bottom: 3rem"
 							);
-						console.log(data);
 						let contenido = "";
 						for (let id = 0; id < data.length; id++) {
 							contenido += `

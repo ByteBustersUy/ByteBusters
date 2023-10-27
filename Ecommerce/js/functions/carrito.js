@@ -18,10 +18,7 @@ function actualizarValuesInputs() {
     divProductoCarrito.querySelectorAll("input.input-num").forEach(function(inputCantidad,ind ) {
         let idInput=inputCantidad.id;
         listadoCantidades.push({id:idInput,elemento:inputCantidad});
-        console.log(inputCantidad.value=idsProductos[ind].cantidad)
     });
-     console.log(listadoCantidades)
-     console.log(idsProductos);
 }
 
 function cargarCarrito() {
@@ -150,7 +147,6 @@ function sumarProducoAlCarrito(id) {
     if (productoExistente) {
         productoExistente.cantidad++;
     } 
-    console.log(idsProductos)
     localStorage.setItem("id", JSON.stringify(idsProductos));
 }
 function restarProducoAlCarrito(id) {
@@ -160,7 +156,6 @@ function restarProducoAlCarrito(id) {
             productoExistente.cantidad--;
         }
     } 
-    console.log(idsProductos)
     localStorage.setItem("id", JSON.stringify(idsProductos));
 }
 function generarPDF() {
@@ -172,7 +167,6 @@ function generarPDF() {
     for (let indi = 0; indi < jsonCarrito.length; indi++) {
         doc.text(jsonCarrito[indi].nombre, 10,alto,{maxWidth: 70});
         doc.line(0,alto,200,alto);
-        console.log(alto)
         alto+=10;
     }
 

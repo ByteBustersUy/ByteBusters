@@ -73,14 +73,41 @@ btnEditProduct.addEventListener("click", () => {
 			descripcion: selectedRow.getElementsByTagName("td")[2].innerHTML,
 			//...
 		};
-
-		//refill inputs with selected product data
+		
 		inputsForm.nombre.value = selectedUserData.nombre;
 		inputsForm.precio.value = selectedUserData.precio;
 
-		inputsForm.descripcion.value = selectedUserData.descripcion;
-		//...
+		const options = inputsForm.categoria.getElementsByTagName("option");
+		for(let i = 0; i < options.length; i++) {
+			if(options[i].innerHTML == selectedRow.getElementsByTagName("td")[1].innerHTML) {
+				options[i].setAttribute("selected", true);
+			}
+		}
 
+		const data = new URLSearchParams();
+		data.append("productId", productId);
+		fetch("../src/modules/products/abm-productos.php?action=detail", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/x-www-form-urlencoded",
+			},
+			body: data,
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error en la solicitud: " + response.status);
+				}
+				return response.json();
+			})
+			.then((productData) => {
+				inputsForm.descripcion.value = productData.descripcion;
+				document.getElementById("uploadLabel").innerHTML ="Cambiar imágen"
+				document.getElementById("btnUploadImage").removeAttribute("required");
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+		
 		formAbm.attributes.item(
 			2
 		).value = `../src/modules/products/abm-productos.php?action=edit&id=${productId}`;
@@ -93,8 +120,6 @@ btnDeleteProduct.addEventListener("click", () => {
 		btnDeleteProduct.setAttribute("class", "enabled-button");
 		const productRow = document.getElementsByClassName("selected")[0];
 		const productId = productRow.id;
-		// const category = productRow.getElementsByTagName("td")[1].innerHTML;
-		// const promoId = "";
 		const response = prompt(
 			`Se eliminará el producto con id ${productId} \n\nIngrese el id para confirmar`
 		);
@@ -327,7 +352,7 @@ function doSearch() {
 }
 
 // Promocionar producto
-btnPromocionar.addEventListener("click", (event) => {
+btnPromocionar.addEventListener("click", () => {
 	if (selectedRow) {
 		document
 			.getElementById("btnPromocionar")
