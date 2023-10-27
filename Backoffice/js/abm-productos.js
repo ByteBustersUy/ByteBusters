@@ -73,41 +73,24 @@ btnEditProduct.addEventListener("click", () => {
 			descripcion: selectedRow.getElementsByTagName("td")[2].innerHTML,
 			//...
 		};
-		
+
 		inputsForm.nombre.value = selectedUserData.nombre;
 		inputsForm.precio.value = selectedUserData.precio;
 
 		const options = inputsForm.categoria.getElementsByTagName("option");
-		for(let i = 0; i < options.length; i++) {
-			if(options[i].innerHTML == selectedRow.getElementsByTagName("td")[1].innerHTML) {
+		for (let i = 0; i < options.length; i++) {
+			if (
+				options[i].innerHTML ==
+				selectedRow.getElementsByTagName("td")[1].innerHTML
+			) {
 				options[i].setAttribute("selected", true);
 			}
 		}
+		const productData = getProductData(productId);
+		inputsForm.descripcion.value = productData.descripcion;
+		document.getElementById("uploadLabel").innerHTML = "Cambiar imágen";
+		document.getElementById("btnUploadImage").removeAttribute("required");
 
-		const data = new URLSearchParams();
-		data.append("productId", productId);
-		fetch("../src/modules/products/abm-productos.php?action=detail", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/x-www-form-urlencoded",
-			},
-			body: data,
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Error en la solicitud: " + response.status);
-				}
-				return response.json();
-			})
-			.then((productData) => {
-				inputsForm.descripcion.value = productData.descripcion;
-				document.getElementById("uploadLabel").innerHTML ="Cambiar imágen"
-				document.getElementById("btnUploadImage").removeAttribute("required");
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-		
 		formAbm.attributes.item(
 			2
 		).value = `../src/modules/products/abm-productos.php?action=edit&id=${productId}`;
@@ -124,38 +107,7 @@ btnDeleteProduct.addEventListener("click", () => {
 			`Se eliminará el producto con id ${productId} \n\nIngrese el id para confirmar`
 		);
 		if (response == productId) {
-			const data = new URLSearchParams();
-			data.append("productId", productId);
-			fetch("../src/modules/products/abm-productos.php?action=delete", {
-				method: "POST",
-				headers: {
-					"Content-type": "application/x-www-form-urlencoded",
-				},
-				body: data,
-			})
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error("Error en la solicitud: " + response.status);
-					}
-					selectedRow.setAttribute(
-						"style",
-						"border-top: 1.5px solid #e01818;border-bottom: 1.5px solid #e01818;"
-					);
-					setTimeout(() => {
-						if (response.status == 200) {
-							alert("Producto eliminado con éxito!");
-							location.reload(true);
-						} else if (response.status == 400) {
-							alert("No se pudo eliminar el producto seleccionado");
-							location.reload(true);
-						} else {
-							alert("Error inesperado al intentar de eliminar el producto");
-						}
-					}, 1200);
-				})
-				.catch((error) => {
-					console.error("Error: " + error);
-				});
+			deleteProduct(productId);
 		} else {
 			alert("Error: El id ingresado no es correcto");
 		}
@@ -170,30 +122,15 @@ btnDeleteProduct.addEventListener("click", () => {
 // detalle producto
 const buttonsProductDetail = document.getElementsByClassName("btn-eye");
 for (let btn of buttonsProductDetail) {
-	btn.addEventListener("click", (event) => {
-		const data = new URLSearchParams();
-		data.append("productId", btn.id);
-		fetch("../src/modules/products/abm-productos.php?action=detail", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/x-www-form-urlencoded",
-			},
-			body: data,
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Error en la solicitud: " + response.status);
-				}
-				return response.json();
-			})
-			.then((productData) => {
-				//modal header
-				modalProductsDetail.getElementsByClassName("modal-title")[0].innerHTML =
-					"Detalle de producto";
-				//modal body
-				const modalBody =
-					modalProductsDetail.getElementsByClassName("modal-body")[0];
-				modalBody.innerHTML = `
+	btn.addEventListener("click", async () => {
+		const productData = await getProductData(btn.id);
+		//modal header
+		modalProductsDetail.getElementsByClassName("modal-title")[0].innerHTML =
+			"Detalle de producto";
+		//modal body
+		const modalBody =
+			modalProductsDetail.getElementsByClassName("modal-body")[0];
+		modalBody.innerHTML = `
 					<div class="product-image">
 					<img id="productImageDetail" src="../../Ecommerce/images/${productData.imagen}">
 					</div>
@@ -216,10 +153,6 @@ for (let btn of buttonsProductDetail) {
 					}
 					</div>
 					`;
-			})
-			.catch((error) => {
-				console.error("Error: " + error);
-			});
 	});
 }
 
@@ -325,13 +258,13 @@ function selectProductRow(productId) {
 }
 
 function doSearch() {
-	const tableReg = document.getElementById('datos');
-	const searchText = document.getElementById('searchTerm').value.toLowerCase();
+	const tableReg = document.getElementById("datos");
+	const searchText = document.getElementById("searchTerm").value.toLowerCase();
 	let total = 0;
 	// Recorremos todas las filas con contenido de la tabla
 	for (let i = 0; i < tableReg.rows.length; i++) {
 		let found = false;
-		const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+		const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
 		// Recorremos todas las celdas
 		for (let j = 0; j < cellsOfRow.length && !found; j++) {
 			const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
@@ -342,60 +275,101 @@ function doSearch() {
 			}
 		}
 		if (found) {
-			tableReg.rows[i].style.display = '';
+			tableReg.rows[i].style.display = "";
 		} else {
 			// si no ha encontrado ninguna coincidencia, esconde la
 			// fila de la tabla
-			tableReg.rows[i].style.display = 'none';
+			tableReg.rows[i].style.display = "none";
 		}
 	}
 }
 
 // Promocionar producto
-btnPromocionar.addEventListener("click", () => {
+btnPromocionar.addEventListener("click", async () => {
 	if (selectedRow) {
 		document
 			.getElementById("btnPromocionar")
 			.setAttribute("class", "enabled-button");
-		const data = new URLSearchParams();
-		data.append("productId", selectedRow.id);
-		fetch("../src/modules/products/abm-productos.php?action=detail", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/x-www-form-urlencoded",
-			},
-			body: data,
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Error en la solicitud: " + response.status);
-				}
-				return response.json();
-			})
-			.then((productData) => {
-				//modal header
-				modalProductsPromotion.getElementsByClassName(
-					"modal-title"
-				)[0].innerHTML = "Promocionar producto";
-				//modal body
-				const modalBody =
-					modalProductsPromotion.getElementsByClassName("modal-body")[0];
-				modalBody.getElementsByTagName("div")[0].innerHTML = `
+
+		const productData = await getProductData(selectedRow.id);
+		//modal header
+		modalProductsPromotion.getElementsByClassName("modal-title")[0].innerHTML =
+			"Promocionar producto";
+		//modal body
+		const modalBody =
+			modalProductsPromotion.getElementsByClassName("modal-body")[0];
+		modalBody.getElementsByTagName("div")[0].innerHTML = `
 				<img src="../../Ecommerce/images/${productData.imagen}">`;
-				const nombreProducto = modalBody.getElementsByTagName("h4")[0];
-				nombreProducto.innerHTML = productData.nombre;
-				const checkbox = document.getElementById("checkPromocion");
-				const promoId = selectedRow
-					.getElementsByTagName("td")[3]
-					.getAttribute("promoId");
-				if (promoId != 0) {
-					checkbox.checked = true;
-				} else {
-					checkbox.checked = false;
-				}
-			})
-			.catch((error) => {
-				console.error("Error: " + error);
-			});
+		const nombreProducto = modalBody.getElementsByTagName("h4")[0];
+		nombreProducto.innerHTML = productData.nombre;
+		const checkbox = document.getElementById("checkPromocion");
+		const promoId = selectedRow
+			.getElementsByTagName("td")[3]
+			.getAttribute("promoId");
+		if (promoId != 0) {
+			checkbox.checked = true;
+		} else {
+			checkbox.checked = false;
+		}
 	}
 });
+
+
+
+
+
+// REQUEST's
+async function getProductData(productId) {
+	try {
+		const data = new URLSearchParams();
+		data.append("productId", productId);
+		return await fetch(
+			"../src/modules/products/abm-productos.php?action=detail",
+			{
+				method: "POST",
+				headers: {
+					"Content-type": "application/x-www-form-urlencoded",
+				},
+				body: data,
+			}
+		).then((response) => response.json());
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+async function deleteProduct(productId) {
+	try {
+		const data = new URLSearchParams();
+		data.append("productId", productId);
+		return await fetch(
+			"../src/modules/products/abm-productos.php?action=delete",
+			{
+				method: "POST",
+				headers: {
+					"Content-type": "application/x-www-form-urlencoded",
+				},
+				body: data,
+			}
+		).then((response) => {
+			if (!response.ok) {
+				throw new Error("Error en la solicitud: " + response.status);
+			}
+			selectedRow.setAttribute(
+				"style",
+				"border-top: 1.5px solid #e01818;border-bottom: 1.5px solid #e01818;"
+			);
+			setTimeout(() => {
+				if (response.status == 200) {
+					alert("Producto eliminado con éxito!");
+					location.reload(true);
+				} else if (response.status == 400) {
+					alert("No se pudo eliminar el producto seleccionado");
+					location.reload(true);
+				} else {
+					alert("Error inesperado al intentar de eliminar el producto");
+				}
+			}, 1200);
+		});
+	} catch (error) {}
+}
