@@ -95,8 +95,8 @@ function editProduct(string $productId)
         $precio = htmlspecialchars($_POST['precio']);
         $fileTmpPath = $_FILES['imagen']['tmp_name'];
         $fileName = $_FILES['imagen']['name'];
-        $dir = "../../../../Ecommerce/images/";
-        echo $destino = $dir . $productId . ".png"; //TODO: id de producto
+        $dir = realpath(dirname(__FILE__)) . "/../../../../Ecommerce/images/";
+        echo $destino = $dir . $productId . ".png";
         echo $productId;
         echo $fileName;
         if (move_uploaded_file($fileTmpPath, $destino)) {

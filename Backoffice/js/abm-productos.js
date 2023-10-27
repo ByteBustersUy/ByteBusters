@@ -44,7 +44,7 @@ btnUploadImage.addEventListener("change", () => {
 });
 
 //Editar Producto
-btnEditProduct.addEventListener("click", () => {
+btnEditProduct.addEventListener("click", async () => {
 	if (!btnEditProduct.classList.contains("disabled")) {
 		btnEditProduct.setAttribute("class", "enabled-button");
 		const productId = document.getElementsByClassName("selected")[0].id;
@@ -81,7 +81,8 @@ btnEditProduct.addEventListener("click", () => {
 				options[i].setAttribute("selected", true);
 			}
 		}
-		const productData = getProductData(productId);
+		const productData = await getProductData(productId);
+		console.log(productData.descripcion)
 		inputsForm.descripcion.value = productData.descripcion;
 		document.getElementById("uploadLabel").innerHTML = "Cambiar imágen";
 		document.getElementById("btnUploadImage").removeAttribute("required");
