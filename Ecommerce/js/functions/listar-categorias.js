@@ -17,12 +17,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
 				divPrducPromo.innerHTML = `
             <div class="col-md-12 d-flex">
-              <a href=""><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt="10"></a>
+              <a href="detalleProducto.html?id=${data[id].id}"><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt="10"></a>
               <div>
-                <a class="aNomb" href="">
+                <a class="aNomb" href="detalleProducto.html?id=${data[id].id}">
                   <h3>${data[id].nombre}</h3>
-                </a>
-                <h4>${data[id].precio}</h4>
+                <h4>$${data[id].precio}</h4>
+				</a>
                 <a id="${data[id].id}" href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
               </div>
             </div>

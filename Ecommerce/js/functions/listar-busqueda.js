@@ -64,13 +64,13 @@ function listarBusqueda(nombreProductoABuscar,numPage) {
         contenidoLista+= `
         <div class="row cardProd">
         <div class="col-md-12 d-flex">
-          <a href=""><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt=""></a>
+          <a href="detalleProducto.html?id=${data[id].id}"><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt="10"></a>
           <div>
-            <a class="aNomb" href="">
+            <a class="aNomb" href="detalleProducto.html?id=${data[id].id}">
               <h3>${data[id].nombre}</h3>
+              <h4>$${data[id].precio}</h4>
             </a>
-            <h4>$${data[id].precio}</h4>
-            <a id="1" href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
+            <a id=${data[id].id} href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
           </div>
         </div>
         </div>
