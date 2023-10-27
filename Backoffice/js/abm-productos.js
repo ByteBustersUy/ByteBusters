@@ -289,7 +289,6 @@ btnPromocionar.addEventListener("click", async () => {
 
 		const productId = selectedRow.id;
 		const productData = await getProductData(productId);
-		console.log(productData);
 		//modal header
 		modalProductsPromotion.getElementsByClassName("modal-title")[0].innerHTML =
 			"Promocionar producto";

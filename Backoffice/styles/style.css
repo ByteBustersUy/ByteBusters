@@ -342,17 +342,14 @@ thead tr {
 /* --------- MENU --------- */
 
 .menu-cards {
-    height: 15rem;
-    min-width: 13rem;
+    /* height: 15rem;
+    min-width: 13rem; */
     max-width: 15rem;
     text-align: center;
-    margin: 0rem auto;
-    margin-bottom: 1rem;
     border-radius: .7rem;
     border: 2px solid var(--color-4);
     background-color: var(--background-color-light);
-    filter: drop-shadow(4px 4px 4px var(--color-5));
-    filter: brightness(85%);
+    filter: drop-shadow(4px 4px 4px var(--color-5)) brightness(85%);
 }
 
 .menu-cards a {

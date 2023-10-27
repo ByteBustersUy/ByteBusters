@@ -138,6 +138,8 @@ function getProductsTableData(): string
             if ($promo['fechaFin'] >= date("Y-m-d")) {
                 $isPromo = "Si";
                 $classColor = "promoted-product";
+            }else{
+                updatePromoToExpired($promoId);
             }
         } else {
             $isPromo = "No";
