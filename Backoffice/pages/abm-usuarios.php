@@ -51,14 +51,9 @@
             <div class="col-lg-9">
                 <div class="table-options">
                 <input id="searchTerm" type="text" placeholder="Buscar usuario" onkeyup="doSearch()" />
-                    <select class="order-list" name="order" id="order">
-                        <option selected hidden value="">Ordenar</option>
-                        <option value="az">A-Z</option>
-                        <option value="za">Z-A</option>
-                    </select>
                     <select class="filter-list" name="filter" id="filter" onchange="filterUserByRol();">
-                        <option selected hidden value="">Filtrar</option>
-                        <option value="admin | vendedor">Todos</option>
+                        <option selected hidden value="">Roles</option>
+                        <option value="|">Todos</option>
                         <option value="admin">Administradores</option>
                         <option value="vendedor">Vendedores</option>
                     </select>

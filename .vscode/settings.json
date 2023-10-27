@@ -1,0 +1,10 @@
+{
+    "editor.scrollbar.verticalScrollbarSize": 14,
+    "editor.stickyScroll.enabled": false,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelScrollSensitivity": 0,
+    "editor.fastScrollSensitivity": 5,
+    "editor.stickyScroll.maxLineCount": 1,
+    "markdown.preview.scrollPreviewWithEditor": true,
+    "markdown.preview.scrollEditorWithPreview": true
+}

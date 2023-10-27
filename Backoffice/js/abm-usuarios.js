@@ -298,95 +298,74 @@ function doSearch() {
 
 function filterUserByRol() {
 	const selectedValue = document.getElementById("filter").value;
-	console.log(selectedValue);
 
-	if (selectedValue === "vendedor"||"admin") {
+	if (selectedValue === "vendedor" || "admin") {
 		const tableReg = document.getElementById('bodyUsersTable');
 		const searchText = document.getElementById('filter').value.toLowerCase();
-	let total = 0;
-	// Recorremos todas las filas con contenido de la tabla
-	for (let i = 0; i < tableReg.rows.length; i++) {
-		let found = false;
-		const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-		// Recorremos todas las celdas
-		for (let j = 0; j < cellsOfRow.length && !found; j++) {
-			const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+		let total = 0;
+		// Recorremos todas las filas con contenido de la tabla
+		for (let i = 0; i < tableReg.rows.length; i++) {
+			let found = false;
+			const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+			// Recorremos todas las celdas
+			const compareWith = cellsOfRow[3].innerHTML.toLowerCase();
 			// Buscamos el texto en el contenido de la celda
 			if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
 				found = true;
 				total++;
 			}
+
+			if (found) {
+				tableReg.rows[i].style.display = '';
+			} else {
+				// si no ha encontrado ninguna coincidencia, esconde la
+				// fila de la tabla
+				tableReg.rows[i].style.display = 'none';
+			}
 		}
-		if (found) {
-			tableReg.rows[i].style.display = '';
-		} else {
-			// si no ha encontrado ninguna coincidencia, esconde la
-			// fila de la tabla
-			tableReg.rows[i].style.display = 'none';
-		}
-	}
-	}else{
+	} else {
 		getUsersTableDataHTML();
 	}
 
 }
-
-
-
-
-
-//Metodo burbuja
-
-function sortTable(n,type) {
+function sortTable(n, type) {
 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-   
+
 	table = document.getElementById("bodyUsersTable");
 	switching = true;
-	//Set the sorting direction to ascending:
 	dir = "asc";
-   
-	/*Make a loop that will continue until no switching has been done:*/
+
 	while (switching) {
-	  //start by saying: no switching is done:
-	  switching = false;
-	  rows = table.rows;
-	  /*Loop through all table rows (except the first, which contains table headers):*/
-	  for (i = 0; i < (rows.length - 1); i++) {
-		//start by saying there should be no switching:
-		shouldSwitch = false;
-		/*Get the two elements you want to compare, one from current row and one from the next:*/
-		x = rows[i].getElementsByTagName("TD")[n];
-		y = rows[i + 1].getElementsByTagName("TD")[n];
-		/*check if the two rows should switch place, based on the direction, asc or desc:*/
-		if (dir == "asc") {
-		  if ((type=="str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type=="int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
-			//if so, mark as a switch and break the loop:
-			shouldSwitch= true;
-			break;
-		  }
-		} else if (dir == "desc") {
-		  if ((type=="str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type=="int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
-			//if so, mark as a switch and break the loop:
-			shouldSwitch = true;
-			break;
-		  }
+		switching = false;
+		rows = table.rows;
+		for (i = 0; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+			if (dir == "asc") {
+				if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
+					shouldSwitch = true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
+					shouldSwitch = true;
+					break;
+				}
+			}
 		}
-	  }
-	  if (shouldSwitch) {
-		/*If a switch has been marked, make the switch and mark that a switch has been done:*/
-		rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-		switching = true;
-		//Each time a switch is done, increase this count by 1:
-		switchcount ++;
-	  } else {
-		/*If no switching has been done AND the direction is "asc", set the direction to "desc" and run the while loop again.*/
-		if (switchcount == 0 && dir == "asc") {
-		  dir = "desc";
-		  switching = true;
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount++;
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
 		}
-	  }
 	}
-  }
+}
 
 
 

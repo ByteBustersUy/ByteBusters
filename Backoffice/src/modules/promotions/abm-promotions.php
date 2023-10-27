@@ -1,5 +1,5 @@
 <?php
-require realpath(dirname(__FILE__)) . '/../../repository/promotions.repository.php';
+require_once realpath(dirname(__FILE__)) . '/../../repository/promotions.repository.php';
 require_once realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -126,12 +126,15 @@ function getLocalDate(): string
     return date("Y-m-d");
 }
 
-function checkExpiredPromo(array $promo)
+function checkExpiredPromo(array $promo): bool
 {
     $now = getLocalDate();
     if ($promo["fechaFin"] < $now) {
         updatePromoToExpired($promo["id"]);
+        return true; //expirado
     }
+    return false; //vigente
+
 }
 
 function deletePromotion($id): bool

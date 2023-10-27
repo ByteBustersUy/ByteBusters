@@ -61,18 +61,15 @@ fetch("../../api/detalleProducto.php?id=" + id, {
 
 			increment.addEventListener("click", function () {
 				let cantidadActual = cantidadProduct.value;
-				console.log(cantidadActual);
 				cantidadActual++;
 				cantidadProduct.value = cantidadActual;
 			});
 
 			decrement.addEventListener("click", function () {
 				let cantidadActual = cantidadProduct.value;
-				console.log(cantidadActual);
 				if (cantidadActual > 1) {
 					cantidadActual--;
 					cantidadProduct.value = cantidadActual;
-					console.log(cantidadProduct.value);
 				}
 			});
 		}
@@ -93,7 +90,6 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
 		for (let id = 0; id < data.length; id++) {
 			const divProduct = document.createElement("div");
 
-			console.log(data[id].PRODUCTOS_id);
 			fetch("../../api/detalleProducto.php?id=" + data[id].PRODUCTOS_id, {
 				method: "GET",
 				headers: {

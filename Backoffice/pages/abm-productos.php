@@ -100,7 +100,6 @@
                                 <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
-
                                 <div class="buttons">
                                     <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
                                     <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
@@ -147,8 +146,7 @@
                                         <option selected hidden value="">Elige una promoción</option>
                                         <?php
                                         require "../src/modules/promotions/abm-promotions.php";
-                                        $promos = getPromotionsHTML();
-                                        echo $promos;
+                                        echo getPromotionsHTML();
                                         ?>
                                     </select>
                                 </div>

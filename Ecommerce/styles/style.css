@@ -157,7 +157,7 @@ span {
 
 .promo-tag {
   position: absolute;
-  top: 2rem;
+  top: 1rem;
   left: 0;
   background-color: var(--ecommerce-color);
   color: var(--color-5);

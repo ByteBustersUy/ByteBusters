@@ -47,11 +47,8 @@
                         <label>Email:<input type="emial" name="email" placeholder="ej: dmarket@gmail.com" autocomplete="off"></label>
                         <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="ej: 1234DIGITAL" autocomplete="off"></label>
                         <label>Comentario de venta:<input type="text" name="comentario" placeholder="ej: precios en pesos Uruguayos" autocomplete="off"></label>
-
-                        <input id="btnUploadImage" type="file" name="logo" accept="image/*">
-                        <label id="uploadLabel" for="btnUploadImage">Seleccionar imagen</label>
+                        <label>Logo de empresa:<input id="btnUploadImageEmp" type="file" name="logo" accept="image/*"></label>
                         
-                       
                     </div>
                     <div class="buttons absolute bottom-10">
                         <button class="btn-emp" type="submit">ACEPTAR</button>
