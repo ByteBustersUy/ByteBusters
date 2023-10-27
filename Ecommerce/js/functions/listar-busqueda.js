@@ -17,7 +17,6 @@ const botonesPaginacion = document.getElementById("div-btns-pages");
     numPage=event.target.id
     const urlParams = new URLSearchParams(window.location.search);
     nombreProductoABuscar = urlParams.get('search');
-    console.log(numPage)
     listarBusqueda(nombreProductoABuscar,numPage);  
     }
   })

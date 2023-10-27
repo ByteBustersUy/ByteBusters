@@ -114,7 +114,7 @@ function findOnePromoById(int $promoId): array
         );
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return $reg;
+        return $reg ? $reg : [];
     } catch (Exception $e) {
         $con->close();
         die("ERROR SQL in findOnePromoById(): " . $e->getMessage());

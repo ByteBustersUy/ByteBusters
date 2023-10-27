@@ -298,7 +298,6 @@ function doSearch() {
 
 function filterUserByRol() {
 	const selectedValue = document.getElementById("filter").value;
-	console.log(selectedValue);
 
 	if (selectedValue === "vendedor"||"admin") {
 		const tableReg = document.getElementById('bodyUsersTable');

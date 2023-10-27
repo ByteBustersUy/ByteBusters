@@ -30,18 +30,16 @@ divBtnPages.addEventListener("click", function (event) {
 
 window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
-	console.log(divProducPromo)
 	//Productos promocionados
 	fetch("../api/productos-promo.php?p=1")
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data)
 			let cards = "";
 			for (let id = 0; id < data.length; id++) {
 				cards += `
     			<div>
         			<div class="card produc-promo" >
-						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${data[id].id}">
             				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
 								<h5>${limitarNombres(data[id].nombre)}</h5>
