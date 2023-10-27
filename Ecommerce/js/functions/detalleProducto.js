@@ -100,13 +100,15 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
 				.then((data) => {
 					divProduct.innerHTML = `
         <div class="card-list-product ">
-        <img src="../images/${data[0].imagen}" />
+		<a class="ir-detalle-producto" href="detalleProducto.html?id=${data[0].id}">
+        <img src="../images/${data[0].imagen}">
         <div class="info-card">
           <div class="title-product">
             <p>${limitarNombres(data[0].nombre)}</p>
           </div>
           <div class="price">${data[0].precio}</div>
         </div>
+		</a>
       </div>
     `;
 					container.appendChild(divProduct);

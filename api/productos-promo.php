@@ -5,7 +5,6 @@ $res = $con->query("SELECT *
                     FROM productos p
                     WHERE activo = 1
                     AND p.id IN (SELECT PRODUCTOS_id FROM PRODUCTOS_has_PROMOCIONES)
-                    -- LIMIT $ini,12
                     LIMIT 10");
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 

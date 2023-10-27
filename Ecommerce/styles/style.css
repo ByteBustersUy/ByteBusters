@@ -152,7 +152,20 @@ span {
 
 
 
+
 /* cards */
+
+.promo-tag {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  background-color: var(--ecommerce-color);
+  color: var(--color-5);
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 0 5px 5px 0;
+}
+
 #tarjetas {
   justify-content: center;
   margin: auto;
