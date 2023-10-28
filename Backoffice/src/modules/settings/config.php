@@ -18,36 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $nameLogo = "logo-empresa.png";
     $destinoEcommerce = "../../../../Ecommerce/assets/".$nameLogo;
-
-          //print_r($_FILES);
     $fileTmpPath = $_FILES['logo']['tmp_name'];
-    $fileName = $_FILES['logo']['name'];
-    // $fileSize = $_FILES['imagen']['size'];
-    // $fileType = $_FILES['imagen']['type'];
-    $dir = '../../../assets/';
-    $destino = $dir . $nameLogo; //TODO: id de producto
-    
-    // print_r (move_uploaded_file($fileTmpPath, $destino));
-   
-    /*if (move_uploaded_file($fileTmpPath, $destino)) {
-        echo "Fue guardado";
-    } else {
-        echo "Error";
-    }*/
-
     if (move_uploaded_file($fileTmpPath, $destinoEcommerce)) {
         echo "Fue guardado";
     } else {
         echo "Error";
     }
-    
-
-    
-  
-
-
-
-
 
     //TODO: hacer validaciones del formulario
 
@@ -75,13 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         die('Error al guardar en db');
     }
-
-
-
-
-
-
-    
 }
 
 function getLabelsEmpresaHTML(): string
