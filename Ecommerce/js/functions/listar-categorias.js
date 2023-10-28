@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", function () {
 	const urlParams = new URLSearchParams(window.location.search);
 	const id = urlParams.get("cat");
-	console.log(id);
 
 	fetch("../../api/productos-categorias.php?id=" + id, {
 		method: "GET",
@@ -11,7 +10,6 @@ window.addEventListener("DOMContentLoaded", function () {
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 			const container = document.querySelector(".container-sm");
 			for (let id = 0; id < data.length; id++) {
 				const divPrducPromo = document.createElement("div");

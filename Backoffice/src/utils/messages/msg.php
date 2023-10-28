@@ -7,6 +7,7 @@ $error_messages = [
    "exist_product" => 'El producto ya existe',
    "exist_promo" => 'Ya existe una promoción con ese descuento',
    "!exist_product" => 'El producto no existe',
+   "!exist_promo" => 'No existe promoción con ese id',
    "!has_data" => 'Todos los campos son requeridos',
    "!valid_promo" => 'El descuento debe ser entre 1 y 99',
    "!valid_fechaInicio" => "La fecha de inicio no puede ser menor a hoy",
@@ -23,8 +24,4 @@ $error_messages = [
    "!user_delete" => 'Usuario no eliminado',
    "!product_add" => 'Producto no agregado',
    "!data_save" => 'No se puedo guardar correctamente'
-];
-
-$success_messages = [
-   //TODO:
 ];

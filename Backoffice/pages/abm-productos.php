@@ -49,22 +49,22 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
-                    <select class="filter-list" name="filter" id="filter" onchange="orderProductByPromo();">
+                    <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
+                    <select class="filter-list" name="filter" id="filter">
                         <option selected hidden value="">Filtrar</option>
-                        <option value="Si">Promocionado</option>
-                        <option value="No">No Promocionado</option>
+                        <option value="promocionado">Promocionado</option>
+                        <option value="noPromocionado">No Promocionado</option>
                     </select>
                 </div>
                 <div class="table-frame">
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th onclick="sortTable(0, 'str')" class="user-select-none first-in-table" scope="col">Nombre del producto</th>
-                                <th onclick="sortTable(1, 'str')" class="user-select-none" scope="col">Categoría</th>
-                                <th onclick="sortTable(2, 'int')" class="user-select-none" scope="col">Precio $</th>
-                                <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Promo</th>
+                                <th class="user-select-none first-in-table" scope="col">Nombre del producto</th>
+                                <th class="user-select-none" scope="col">Categoría</th>
+                                <th class="user-select-none" scope="col">Precio</th>
+                                <th class="user-select-none" scope="col">Promo</th>
                                 <th class="user-select-none" scope="col">Detalle</th>
                             </tr>
                         </thead>
@@ -100,7 +100,6 @@
                                 <input id="precio" class="precio" type="number" name="precio" placeholder="Precio" required>
                                 <textarea name="descripcion" id="descripcion" placeholder="Descripción" required autocomplete="off"></textarea>
                                 <label id="errorMessageModal"></label>
-
                                 <div class="buttons">
                                     <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
                                     <button id="btnSubmitModal" type="submit" disabled>ACEPTAR</button>
@@ -120,7 +119,45 @@
                         </div>
                         <div class="modal-body">
                         </div>
-                                            </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Promocionar -->
+            <div class="modal fade" id="moddalProductsPromotion" tabindex="-1" aria-labelledby="ProductsModalPromotionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div id="modalContentPromotion" class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="ProductsModalPromotionLabel"></h2>
+                            <button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="product-image">
+                            </div>
+                            <div id='nombreProducto' class="product-detail">
+                                <h4></h4>
+                            </div>
+                            <form id="formPromocionar" class="form-promo" action="../src/modules/products/abm-productos.php?action=addDiscount" method="post" enctype="multipart/form-data">
+                                <div class='promo-content promo-modal'>
+                                    <div>
+                                        <label for="status">Habilitar promoción</label>
+                                        <input type="checkbox" class="chkbox" name="status" id="checkPromocion">
+                                    </div>
+                                    <select name="promocionar" id="promocionar" required>
+                                        <option selected hidden value="">Elige una promoción</option>
+                                        <?php
+                                        require "../src/modules/promotions/abm-promotions.php";
+                                        echo getPromotionsHTML();
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="buttons">
+                                    <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
+                                    <button id="btnSubmitModaldiscount" type="submit">ACEPTAR</button>
+                                </div>
+                            </form>
+                            <div class="modal-body">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

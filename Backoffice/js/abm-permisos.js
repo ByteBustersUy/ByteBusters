@@ -21,7 +21,6 @@ for (let row of rows) {
 				.then((response) => response.status)
 				.then((response) => {
 					if (response === 200) {
-						console.log(response);
 					} else {
 						throw response;
 					}

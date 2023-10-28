@@ -61,18 +61,15 @@ fetch("../../api/detalleProducto.php?id=" + id, {
 
 			increment.addEventListener("click", function () {
 				let cantidadActual = cantidadProduct.value;
-				console.log(cantidadActual);
 				cantidadActual++;
 				cantidadProduct.value = cantidadActual;
 			});
 
 			decrement.addEventListener("click", function () {
 				let cantidadActual = cantidadProduct.value;
-				console.log(cantidadActual);
 				if (cantidadActual > 1) {
 					cantidadActual--;
 					cantidadProduct.value = cantidadActual;
-					console.log(cantidadProduct.value);
 				}
 			});
 		}
@@ -93,7 +90,6 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
 		for (let id = 0; id < data.length; id++) {
 			const divProduct = document.createElement("div");
 
-			console.log(data[id].PRODUCTOS_id);
 			fetch("../../api/detalleProducto.php?id=" + data[id].PRODUCTOS_id, {
 				method: "GET",
 				headers: {
@@ -102,16 +98,17 @@ fetch("../../api/productos-relacionados.php?id=" + id, {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					console.log(data[0].imagen);
 					divProduct.innerHTML = `
         <div class="card-list-product ">
-        <img src="../images/${data[0].imagen}" />
+		<a class="ir-detalle-producto" href="detalleProducto.html?id=${data[0].id}">
+        <img src="../images/${data[0].imagen}">
         <div class="info-card">
           <div class="title-product">
             <p>${limitarNombres(data[0].nombre)}</p>
           </div>
           <div class="price">${data[0].precio}</div>
         </div>
+		</a>
       </div>
     `;
 					container.appendChild(divProduct);

@@ -95,7 +95,7 @@
                         <input id="apellido" type="text" name="apellido" placeholder="Apellidos" required autocomplete="off">
                         <input id="cedula" type="text" name="cedula" placeholder="Cédula de identidad" required autocomplete="off">
                         <input id="email" type="text" name="email" placeholder="Email" required autocomplete="off">
-                        <input id="contrasenia" type="text" name="contrasenia" placeholder="Contraseña" required autocomplete="off">
+                        <input id="contrasenia" type="password" name="contrasenia" placeholder="Contraseña" required autocomplete="off">
                         <div class="d-flex center">
                             <div class="chkbox-div">
                                 <label class="chkbox-labels" for="check-admin">Administrador</label>
