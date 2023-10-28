@@ -136,11 +136,14 @@ btnComprar.addEventListener("click", function () {
     
         carritoVacio=[];
         localStorage.setItem("id", JSON.stringify(carritoVacio));
+        generarPDF();
+        console.log("comprado");
         alert("su compra fue realizada corectamente")
         cargarCarrito()
+       
         resultadoTotal = 0;
         textoPrecioTotal.innerHTML ='$'+resultadoTotal;
-        generarPDF();
+        
 })
 function sumarProducoAlCarrito(id) {
     let productoExistente = idsProductos.find((producto) => producto.id === parseInt(id));
@@ -163,12 +166,34 @@ function generarPDF() {
         orientation: 'p',
         unit: 'mm',
         format: 'a4'})
-   let alto=10;
-    for (let indi = 0; indi < jsonCarrito.length; indi++) {
-        doc.text(jsonCarrito[indi].nombre, 10,alto,{maxWidth: 70});
-        doc.line(0,alto,200,alto);
-        alto+=10;
+    let alto=20;
+        doc.text("Producto",20,10)
+        doc.text("Cantidad",120,10)
+        doc.text("Precio",150,10)
+    for (let indi = 0; indi < jsonCarrito.length; indi++) { 
+         if((indi==28)||(indi==56)||(indi==84)||(indi==112)){
+        doc.addPage()
+        alto=10;
+        }
+        let nombre = limitarNombres(jsonCarrito[indi].nombre)
+        let cantidad=idsProductos[indi].cantidad.toString()
+        doc.text(nombre, 10,alto);
+        doc.text(cantidad,130,alto);
+        doc.text("$"+jsonCarrito[indi].precio,150,alto);
+        alto+=10;  
     }
-
+    alto+=10;
+    let precioTotal= resultadoTotal.toString();
+    doc.text("Total a Pagar: $"+precioTotal,113,alto);
     doc.save('boleta.pdf')
+}
+function limitarNombres(nombre){
+	if (nombre.length > 30) {
+		nombre = nombre.slice(0, 40);
+		if (!nombre.endsWith(" ")) {
+			indiceUltimaPalabra = nombre.lastIndexOf(" ");
+			nombre = nombre.slice(0, indiceUltimaPalabra);
+		}
+	}
+	return nombre;
 }
