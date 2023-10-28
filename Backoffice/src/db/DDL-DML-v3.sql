@@ -190,9 +190,12 @@ CREATE TABLE IF NOT EXISTS `bytebusters2_db`.`PROMOCIONES`(
 ----------------------------------
 */
 CREATE TABLE IF NOT EXISTS `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `PRODUCTOS_id` int(11) NOT NULL,
   `PROMOCIONES_id` int(11)NOT NULL,
-   PRIMARY KEY(`PRODUCTOS_id`,`PROMOCIONES_id`),
+  `activo` boolean NOT NULL DEFAULT 1,
+  `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY(`id`,`PRODUCTOS_id`,`PROMOCIONES_id`),
   FOREIGN KEY(`PRODUCTOS_id`)
   	REFERENCES `bytebusters2_db`.`PRODUCTOS`(`id`),
   FOREIGN KEY(`PROMOCIONES_id`)
@@ -320,35 +323,19 @@ VALUES ('logo-empresa' ,'Supermercado' , 'DigitalMarket' , '18 de julio' , '1' ,
 --INSERT DE LA TABLA CATEGORIAS --
 ----------------------------------
 */
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('0', 'Almacen');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('1', 'Limpieza');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('2', 'Papeleria');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('3', 'Ferreteria');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('4', 'Textil');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('5', 'Perfumeria y Bebe');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('6', 'Deporte');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('7', 'Tecnologia');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('8', 'Mascotas');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('9', 'Jugueteria y Libreria');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('10', 'Hogar y Bazar');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('11', 'Bebidas');
-
 INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('12', 'Frescos');
-
-
-
 
 
 /*
@@ -552,17 +539,17 @@ INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEG
 --INSERT DE LA TABLA PROMOCIONES--
 ----------------------------------
 */
-INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (1,15,'2023/07/23','2023/08/05',1,1);
-INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (2,40,'2023/09/03','2023/10/17',1,1);
-INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (3,25,'2023/10/01','2023/10/02',1,1);
-INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (4,10,'2023/10/01','2023/12/31',1,1);
+INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (1,15,'2023/07/23','2024/08/05',1,1);
+INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (2,40,'2023/09/03','2024/10/17',1,1);
+INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (3,25,'2023/10/01','2024/10/02',1,1);
+INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fechaFin`,`vigente`,`activo`) VALUES (4,10,'2023/10/01','2024/12/31',1,1);
 /*
 ------------------------------------------------
---INSER RELACIONANDO PRODUCTOS CON PROMOCIONES--
+--INSERT RELACIONANDO PRODUCTOS CON PROMOCIONES--
 ------------------------------------------------
 
 */
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES ('2', 1);
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES ('4', 2);
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES ('6', 3);
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES ('22', 4);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (1,2,1,1);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (2,4,2,1);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (3,6,3,1);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (4,22,4,1);

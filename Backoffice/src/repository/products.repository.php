@@ -182,7 +182,11 @@ function deleteProduct(string $productId): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
-
+    
+    if(!$productId){
+        throw new Error("ERROR: " . $error_messages['!exist_product']);
+    }
+    
     try {
         $statement = $con->prepare("UPDATE PRODUCTOS SET activo = :isActive WHERE id = :id");
         $statement->execute([
@@ -196,4 +200,25 @@ function deleteProduct(string $productId): bool
         echo ("ERROR SQL in Delete Product(): " . $e->getMessage());
         return false;
     }
+}
+
+function setPromoToProduct(string $productId, string $promoId, int $isActive): bool
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
+
+    //TODO: si ya existe que deberia pasar?
+    try {
+        $statement = $con->prepare("INSERT INTO PRODUCTOS_has_PROMOCIONES (PROMOCIONES_id, PRODUCTOS_id, activo) VALUES (:promoId, :productId, :isActive)");
+        $statement->execute([
+            ':promoId' => $promoId,
+            ':productId' => $productId,
+            ':isActive' => $isActive,
+        ]);
+        return true;
+    } catch (Exception $e) {
+        echo ("ERROR SQL in setPromoToProduct(): " . $e->getMessage());
+        return false;
+    }
+
 }

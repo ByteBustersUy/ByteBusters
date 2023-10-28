@@ -26,7 +26,7 @@ const validators = {
 	isValidCi: (str) =>
 		new RegExp("^[1-9]{1}[0-9]{7}$").test(str) ? true : false,
 	isValidPass: (str) =>
-		new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*d).+").test(str) && str.length >= 8
+		new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+").test(str) && str.length >= 8
 			? true
 			: false,
 };
@@ -183,7 +183,7 @@ modalUsers.addEventListener("click", (event) => {
 	}
 });
 
-formAbm.addEventListener("change", () => {
+formAbm.addEventListener("click", () => {
 	const chkboxAdmin = modalUsers.getElementsByTagName("input")[5];
 	const chkboxVendedor = modalUsers.getElementsByTagName("input")[6];
 	const btnSubmitModal = document.getElementById("btnSubmitModal");
@@ -222,16 +222,21 @@ formAbm.addEventListener("change", () => {
 		}
 
 		if (selectedModal == "add") {
-			if (!isValidPass(pass.value)) {
-				messageError.innerHTML = `La contraseña no es válida.
-					<br><br>
-					Requiere:
-					<br>
-					Mayúsculas, Minúsculas,
-					<br>
-					Números y 8 caractéres.
-					`;
+			if(pass.value.length > 0){
+				if (!isValidPass(pass.value)) {
+					validForm = false;
+					messageError.innerHTML = `La contraseña no es válida.
+						<br>
+						Requiere:
+						<br>
+						Mayúsculas, Minúsculas,
+						<br>
+						Números y 8 caractéres.
+						`;
+				}
+			}else{
 				validForm = false;
+				messageError.innerHTML = "Todos los campos son obligatorios";
 			}
 		}
 	} else {

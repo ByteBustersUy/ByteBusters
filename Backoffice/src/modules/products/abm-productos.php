@@ -1,7 +1,7 @@
 <?php
 require_once realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
-require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
 require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
+require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -9,25 +9,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (isset($_GET['action'])) {
 
-        if ($_GET['action'] == "add") {
-            addProduct();
-        } else if ($_GET['action'] == "edit" && isset($_GET['id'])) {
-            editProduct($_GET['id']);
-        } else if ($_GET['action'] == "delete" && isset($_POST["productId"])) {
-            deleteProduct($_POST["productId"]);
-        } else if ($_GET['action'] == "detail" && isset($_POST["productId"])) {
-            header("Content-Type: application/json");
-            $productData = detailProduct($_POST["productId"]);
-            echo json_encode($productData, JSON_PRETTY_PRINT);
-        } else {
-            die("Invalid action requested");
+        switch ($_GET['action']) {
+            case "add":
+                addProduct();
+                break;
+            case "edit":
+                editProduct($_GET['id']);
+                break;
+            case "delete":
+                deleteProduct($_POST["productId"]);
+                break;
+            case "detail":
+                detailProduct($_POST["productId"]);
+                break;
+            case "addDiscount":
+                addDiscount($_GET["productId"], $_POST['promocionar'], $_GET['status']);
+                break;
+            default: 
+                die("Invalid action requested");
         }
-    }
-
-    if (isset($_GET['addpromo']) && $_GET['addpromo'] == 1) {
-        $productId = 0;
-        $promoId = 0;
-        addPromoToProduct($productId, $promoId);
     }
 }
 
@@ -88,6 +88,10 @@ function editProduct(string $productId)
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
+    if(!$productId){
+        throw new Error("ERROR: " . $error_messages['!exist_product']);
+    }
+
     try {
         $nombre = htmlspecialchars($_POST['nombre']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
@@ -136,13 +140,13 @@ function getProductsTableData(): string
             $promo = findOnePromoById($promoId);
             date_default_timezone_set('America/Montevideo');
             if ($promo['fechaFin'] >= date("Y-m-d")) {
-                $isPromo = "Si";
+                $discount = $promo['descuento'] . "%";
                 $classColor = "promoted-product";
-            }else{
+            } else {
                 updatePromoToExpired($promoId);
             }
         } else {
-            $isPromo = "No";
+            $discount = "-";
             $classColor = "";
         }
 
@@ -151,7 +155,7 @@ function getProductsTableData(): string
                                 <td class="' . $classColor . ' first-in-table">' . $product['nombre'] . '</td>
                                 <td class="' . $classColor . '" id="' . $category . '">' . $category . '</td>
                                 <td class="' . $classColor . '">$' . $product['precio'] . '</td>
-                                <td promoId="' . $promoId . '" class="' . $classColor . '">' . $isPromo . '</td>
+                                <td promoId="' . $promoId . '" class="' . $classColor . '">' . $discount . '</td>
                                 <td><button id="' . $product['id'] . '" class="btn-eye" data-bs-toggle="modal" data-bs-target="#moddalProductsDetail"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
     }
@@ -169,10 +173,14 @@ function getOptionsCategoriesHTML(): string
     return $options;
 }
 
-function detailProduct(int $productId): array
+function detailProduct(int $productId)
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
     require realpath(dirname(__FILE__)) . "/../../repository/promotions.repository.php";
+    
+    if(!$productId){
+        throw new Error("ERROR: " . $error_messages['!exist_product']);
+    }
 
     $product = findProductById($productId);
 
@@ -197,9 +205,26 @@ function detailProduct(int $productId): array
         "precio" => $product['precio'],
         "descuento" => $discount,
     ];
-    return $productData;
+
+    header("Content-Type: application/json");
+    echo json_encode($productData, JSON_PRETTY_PRINT);
 }
 
-function addPromoToProduct(int $productId, int $promoId)
+function addDiscount(int $productId, int $promoId, int $status)
 {
+    require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
+
+    if(!$productId){
+        die("ERROR: " . $error_messages['!exist_product']);
+    }
+
+    if(!$promoId){
+        die("ERROR: " . $error_messages['!exist_promo']);
+    }
+
+    if(!isset($status)){
+        die("ERROR: " . $error_messages['!valid_form']);
+    }
+
+    setPromoToProduct($productId, $promoId, $status);
 }

@@ -27,6 +27,7 @@ btnAddProduct.addEventListener("click", () => {
 	} else {
 		btnSubmitModal.disabled = false;
 		btnSubmitModal.setAttribute("style", "filter:brightness(100%);");
+		document.getElementById("btnUploadImage").setAttribute("required");
 	}
 	formAbm.attributes.item(
 		2
@@ -139,9 +140,9 @@ for (let btn of buttonsProductDetail) {
 						productData.descuento > 0
 							? `<span class="mt-2">Descuento: ${productData.descuento}%</span>
 								<span>Precio sin descuento: $${productData.precio}</span>
-								<span>Precio con descuento: $${Math.round(
+								<span>Precio con descuento: $${
 									productData.precio * (1 - productData.descuento / 100)
-								)}</span>`
+								}</span>`
 							: `
 								<span class="mt-2">Descuento: No</span>
 								<span class="mt-2">Precio: $${productData.precio}</span>
@@ -313,12 +314,17 @@ btnPromocionar.addEventListener("click", async () => {
 		for (let i = 0; i < options.length; i++) {
 			if (options[i].innerHTML == productData.descuento+"%") {
 				options[i].setAttribute("selected", true);
-				console.log('si')
-			}else{
-				console.log(productData.descuento)
-				console.log(options[i].innerHTML )
 			}
 		}
+
+
+		const formPromocionar = document.getElementById("formPromocionar");
+		formPromocionar.addEventListener("submit", () => {
+			formPromocionar.attributes.item(
+				2
+			).value += `&productId=${productId}&status=${checkbox.checked? 1 : 0}`;
+		})
+
 	}
 });
 
