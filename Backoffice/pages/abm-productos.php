@@ -61,11 +61,11 @@
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th class="user-select-none first-in-table" scope="col">Nombre del producto</th>
-                                <th class="user-select-none" scope="col">Categoría</th>
-                                <th class="user-select-none" scope="col">Precio</th>
-                                <th class="user-select-none" scope="col">Promo</th>
-                                <th class="user-select-none" scope="col">Detalle</th>
+                                <th onclick="sortTable(0, 'str')"class="user-select-none first-in-table" scope="col">Nombre del producto</th>
+                                <th onclick="sortTable(1, 'str')" class="user-select-none" scope="col">Categoría</th>
+                                <th onclick="sortTable(2, 'int')" class="user-select-none" scope="col">Precio $</th>
+                                <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Promo</th>
+                                <th onclick="sortTable(4, 'str')" class="user-select-none" scope="col">Detalle</th>
                             </tr>
                         </thead>
                         <tbody id="datos">
