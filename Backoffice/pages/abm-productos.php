@@ -51,10 +51,10 @@
                 <div class="table-options">
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
                     <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
-                    <select class="filter-list" name="filter" id="filter">
+                    <select class="filter-list" name="filter" id="filter" onchange="filterProductByPromo();">
                         <option selected hidden value="">Filtrar</option>
-                        <option value="promocionado">Promocionado</option>
-                        <option value="noPromocionado">No Promocionado</option>
+                        <option value="%">Promocionado</option>
+                        <option value="-">No Promocionado</option>
                     </select>
                 </div>
                 <div class="table-frame">

@@ -429,9 +429,9 @@ function sortTable(n, type) {
 
 function filterProductByPromo() {
 	const selectedValue = document.getElementById("filter").value;
-
-	if (selectedValue === "vendedor" || "admin") {
-		const tableReg = document.getElementById('bodyUsersTable');
+	console.log(selectedValue);
+	if (selectedValue === "-" || "%") {
+		const tableReg = document.getElementById('datos');
 		const searchText = document.getElementById('filter').value.toLowerCase();
 		let total = 0;
 		// Recorremos todas las filas con contenido de la tabla
