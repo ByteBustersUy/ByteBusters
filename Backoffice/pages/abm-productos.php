@@ -138,10 +138,6 @@
                             </div>
                             <form id="formPromocionar" class="form-promo" action="../src/modules/products/abm-productos.php?action=addDiscount" method="post" enctype="multipart/form-data">
                                 <div class='promo-content promo-modal'>
-                                    <div>
-                                        <label for="status">Habilitar promoción</label>
-                                        <input type="checkbox" class="chkbox" name="status" id="checkPromocion">
-                                    </div>
                                     <select name="promocionar" id="promocionar" required>
                                         <option selected hidden value="">Elige una promoción</option>
                                         <?php
@@ -149,7 +145,6 @@
                                         echo getPromotionsHTML();
                                         ?>
                                     </select>
-                                    <input type="hidden" id="selectHidden" name="selectHidden" value="">
                                 </div>
                                 <div class="buttons">
                                     <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>

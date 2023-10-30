@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function limitarNombres(nombre) {
+	if(!nombre) return '';
 	if (nombre.length > 30) {
 		nombre = nombre.slice(0, 30);
 		if (!nombre.endsWith(" ")) {

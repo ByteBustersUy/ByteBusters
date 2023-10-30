@@ -296,56 +296,59 @@ btnPromocionar.addEventListener("click", async () => {
 		const nombreProducto = modalBody.getElementsByTagName("h4")[0];
 		nombreProducto.innerHTML = productData.nombre;
 		const checkbox = document.getElementById("checkPromocion");
-		const selectHidden = document.getElementById("selectHidden");
+		// const selectHidden = document.getElementById("selectHidden");
 		const promoId = selectedRow
 			.getElementsByTagName("td")[3]
 			.getAttribute("promoId");
 
+		let currentPromo, selectedPromo;
+
+		//preseleccionar la promo existente
 		const options = modalProductsPromotion.getElementsByTagName("option");
 		for (let i = 0; i < options.length; i++) {
 			if (options[i].innerHTML == productData.descuento + "%") {
 				options[i].setAttribute("selected", true);
+				currentPromo = options[i].value
+				console.log("aa,"+currentPromo)
 			}
 		}
-			
+		
+		const currentStatus = checkbox.checked;
+		
 		const selectPromo = document.getElementById("promocionar");
-		let selectedPromo;
 		selectPromo.addEventListener("change", () => {
 			selectedPromo = selectPromo.value;
 		})
 
 		if (promoId != 0) {
 			checkbox.checked = true;
-			selectedPromo = selectPromo.value;
 			selectPromo.removeAttribute("disabled");
+			currentPromo = selectPromo.value;
 		} else {
 			checkbox.checked = false;
-			selectedPromo = selectPromo.value;
+			currentPromo = selectPromo.value;
 			selectPromo.setAttribute("disabled","");
 		}
-
-		const currentStatus = checkbox.checked;
-		
-
+	
 		checkbox.addEventListener("click", () => {
 			if(selectPromo.getAttribute("disabled") == null){
 				selectedPromo = selectPromo.value;
 				selectPromo.setAttribute("disabled","");
 			}else{
-				selectedPromo = selectPromo.value;
 				selectPromo.removeAttribute("disabled");
+				selectedPromo = selectPromo.value;
 			}
 		});
 
-		selectHidden.value = selectedPromo;
+		// selectHidden.value = selectedPromo;
 
 		const formPromocionar = document.getElementById("formPromocionar");
 		formPromocionar.addEventListener("submit", () => {
 			if (currentStatus != checkbox.checked) {
-
+				
 				formPromocionar.attributes.item(
 					2
-				).value += `&productId=${productId}&promoId=${selectHidden.value}&status=${checkbox.checked ? 1 : 0}`;
+				).value += `&productId=${productId}`;
 			}
 		});
 	}
