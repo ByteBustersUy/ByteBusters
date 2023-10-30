@@ -99,11 +99,11 @@ function findProductPromotionId(string $productId): int
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId ORDER BY PROMOCIONES_id DESC ");
+        $statement = $con->prepare("SELECT * FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId ORDER BY id DESC ");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return $reg ? $reg["PROMOCIONES_id"] : 0;
+        return $reg && $reg["activo"] == 1 ? $reg["PROMOCIONES_id"] : 0;
     } catch (Exception $e) {
         $con->close();
         die("ERROR SQL in findProductPromotionId(): " . $e->getMessage());

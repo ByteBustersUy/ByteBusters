@@ -149,6 +149,7 @@
                                         echo getPromotionsHTML();
                                         ?>
                                     </select>
+                                    <input type="hidden" id="selectHidden" name="selectHidden" value="">
                                 </div>
                                 <div class="buttons">
                                     <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>

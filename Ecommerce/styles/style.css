@@ -24,7 +24,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  margin: auto 1rem;
+  margin: 1rem auto auto -.5rem;
   padding: 1rem;
 }
 
