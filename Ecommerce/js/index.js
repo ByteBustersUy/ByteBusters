@@ -30,6 +30,8 @@ divBtnPages.addEventListener("click", function (event) {
 
 window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
+	
+
 	//Productos promocionados
 	fetch("../api/productos-promo.php")
 		.then((response) => response.json())
