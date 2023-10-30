@@ -16,7 +16,8 @@
     <div>
         <div class="link-options-div">
             <?php
-            require "./../src/modules/downloads/pdfDownload.php";
+           // require "./../src/modules/downloads/catalogoAllProduc.php";
+           //require "./../src/modules/downloads/catalogoProducPromo.php";
             require "./components/options.php";
             echo $options;
             ?>
@@ -30,6 +31,22 @@
     <div class="container frame">
         <div class="row">
             <!-- columnas... -->
+            <div class="col-10 offset-1 div-descarga">
+                <h2>CATALOGO DE PRODUCTOS DE LA EMPRESA</h2>
+                <form action="./../src/modules/downloads/catalogoallProduc.php" method="get">
+                    <input type="submit" value="Descargar">
+                </form>
+            </div>
+            <div class="col-10 offset-1 div-descarga">
+                <h2>CATALOGO DE PRODUCTOS PROMOCIONADOS</h2>
+                <div>
+                    <form action="./../src/modules/downloads/catalogoProducPromo.php" method="get">
+                        <input name="fechaInicio" type="date" class="secl-fecha">
+                        <input name="fechaFin" type="date" class="secl-fecha">
+                        <input class="submitinput" type="submit" value="Descargar">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <footer>
