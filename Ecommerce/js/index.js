@@ -99,8 +99,8 @@ function cargarCardsProductosNoPromo() {
 
 
 function limitarNombres(nombre) {
-	if (nombre.length > 30) {
-		nombre = nombre.slice(0, 30);
+	if (nombre.length > 10) {
+		nombre = nombre.slice(0, 10);
 		if (!nombre.endsWith(" ")) {
 			indiceUltimaPalabra = nombre.lastIndexOf(" ");
 			nombre = nombre.slice(0, indiceUltimaPalabra);

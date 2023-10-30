@@ -27,7 +27,7 @@ btnAddProduct.addEventListener("click", () => {
 	} else {
 		btnSubmitModal.disabled = false;
 		btnSubmitModal.setAttribute("style", "filter:brightness(100%);");
-		document.getElementById("btnUploadImage").setAttribute("required");
+		document.getElementById("btnUploadImage").setAttribute("required", "");
 	}
 	formAbm.attributes.item(
 		2
@@ -47,6 +47,7 @@ btnUploadImage.addEventListener("change", () => {
 //Editar Producto
 btnEditProduct.addEventListener("click", async () => {
 	if (!btnEditProduct.classList.contains("disabled")) {
+		document.getElementById("btnUploadImage").removeAttribute("required");
 		btnEditProduct.setAttribute("class", "enabled-button");
 		const productId = document.getElementsByClassName("selected")[0].id;
 
@@ -66,9 +67,8 @@ btnEditProduct.addEventListener("click", async () => {
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
 			precio: parseFloat(
 				selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")
-			)
+			),
 		};
-		
 
 		inputsForm.nombre.value = selectedUserData.nombre;
 		inputsForm.precio.value = selectedUserData.precio;
@@ -83,10 +83,9 @@ btnEditProduct.addEventListener("click", async () => {
 			}
 		}
 		const productData = await getProductData(productId);
-		console.log(productData.descripcion)
+		console.log(productData.descripcion);
 		inputsForm.descripcion.value = productData.descripcion;
 		document.getElementById("uploadLabel").innerHTML = "Cambiar imágen";
-		document.getElementById("btnUploadImage").removeAttribute("required");
 
 		formAbm.attributes.item(
 			2
@@ -116,7 +115,7 @@ btnDeleteProduct.addEventListener("click", () => {
 	}
 });
 
-// detalle producto 
+// detalle producto
 const buttonsProductDetail = document.getElementsByClassName("btn-eye");
 for (let btn of buttonsProductDetail) {
 	btn.addEventListener("click", async () => {
@@ -216,11 +215,7 @@ formAbm.addEventListener("change", () => {
 			validForm = false;
 		}
 
-		if (
-			isEmpty(descripcion.value) ||
-			isEmpty(categoria.value) ||
-			isEmpty(imagen.value)
-		) {
+		if (isEmpty(descripcion.value) || isEmpty(categoria.value)) {
 			messageError.innerHTML = "Todos los campos son obligatorios";
 			validForm = false;
 		}
@@ -301,36 +296,60 @@ btnPromocionar.addEventListener("click", async () => {
 		const nombreProducto = modalBody.getElementsByTagName("h4")[0];
 		nombreProducto.innerHTML = productData.nombre;
 		const checkbox = document.getElementById("checkPromocion");
+		const selectHidden = document.getElementById("selectHidden");
 		const promoId = selectedRow
 			.getElementsByTagName("td")[3]
 			.getAttribute("promoId");
-		if (promoId != 0) {
-			checkbox.checked = true;
-		} else {
-			checkbox.checked = false;
-		}
 
 		const options = modalProductsPromotion.getElementsByTagName("option");
 		for (let i = 0; i < options.length; i++) {
-			if (options[i].innerHTML == productData.descuento+"%") {
+			if (options[i].innerHTML == productData.descuento + "%") {
 				options[i].setAttribute("selected", true);
 			}
 		}
+			
+		const selectPromo = document.getElementById("promocionar");
+		let selectedPromo;
+		selectPromo.addEventListener("change", () => {
+			selectedPromo = selectPromo.value;
+		})
 
+		if (promoId != 0) {
+			checkbox.checked = true;
+			selectedPromo = selectPromo.value;
+			selectPromo.removeAttribute("disabled");
+		} else {
+			checkbox.checked = false;
+			selectedPromo = selectPromo.value;
+			selectPromo.setAttribute("disabled","");
+		}
+
+		const currentStatus = checkbox.checked;
+		
+
+		checkbox.addEventListener("click", () => {
+			if(selectPromo.getAttribute("disabled") == null){
+				selectedPromo = selectPromo.value;
+				selectPromo.setAttribute("disabled","");
+			}else{
+				selectedPromo = selectPromo.value;
+				selectPromo.removeAttribute("disabled");
+			}
+		});
+
+		selectHidden.value = selectedPromo;
 
 		const formPromocionar = document.getElementById("formPromocionar");
 		formPromocionar.addEventListener("submit", () => {
-			formPromocionar.attributes.item(
-				2
-			).value += `&productId=${productId}&status=${checkbox.checked? 1 : 0}`;
-		})
+			if (currentStatus != checkbox.checked) {
 
+				formPromocionar.attributes.item(
+					2
+				).value += `&productId=${productId}&promoId=${selectHidden.value}&status=${checkbox.checked ? 1 : 0}`;
+			}
+		});
 	}
 });
-
-
-
-
 
 // REQUEST's
 async function getProductData(productId) {

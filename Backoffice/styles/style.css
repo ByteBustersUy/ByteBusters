@@ -117,6 +117,7 @@ h1 {
 html {
     position: relative;
     min-height: 100vh;
+    overflow: scroll;
 }
 
 body {
@@ -993,12 +994,11 @@ footer img {
 
 
 
-/* --------- DESKTOP -------- */
+/* --------- TABLET -------- */
 @media only screen and (min-width: 992px) {
 
     html {
         min-height: 100vh;
-        overflow: hidden;
     }
 
     body {
@@ -1123,6 +1123,13 @@ footer img {
         margin: auto;
     }
 
+}
+
+
+@media only screen and (min-width: 1400px) {
+    html{
+        overflow: hidden;
+    }
 }
 
 /* --------- ANIMATIONS ---------  */

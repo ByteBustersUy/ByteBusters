@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 detailProduct($_POST["productId"]);
                 break;
             case "addDiscount":
-                addDiscount($_GET["productId"], $_POST['promocionar'], $_GET['status']);
+                addDiscount($_GET["productId"], $_GET['promoId'], $_GET['status']);
                 break;
             default: 
                 die("Invalid action requested");
@@ -227,4 +227,5 @@ function addDiscount(int $productId, int $promoId, int $status)
     }
 
     setPromoToProduct($productId, $promoId, $status);
+    header("Location:../../../pages/abm-productos.php");
 }
