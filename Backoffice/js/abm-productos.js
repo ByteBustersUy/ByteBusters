@@ -387,3 +387,75 @@ async function deleteProduct(productId) {
 		});
 	} catch (error) {}
 }
+
+function sortTable(n, type) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+	table = document.getElementById("datos");
+	switching = true;
+	dir = "asc";
+
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		for (i = 0; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+			if (dir == "asc") {
+				if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
+					shouldSwitch = true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
+					shouldSwitch = true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			switchcount++;
+		} else {
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
+
+function filterProductByPromo() {
+	const selectedValue = document.getElementById("filter").value;
+	console.log(selectedValue);
+	if (selectedValue === "-" || "%") {
+		const tableReg = document.getElementById('datos');
+		const searchText = document.getElementById('filter').value.toLowerCase();
+		let total = 0;
+		// Recorremos todas las filas con contenido de la tabla
+		for (let i = 0; i < tableReg.rows.length; i++) {
+			let found = false;
+			const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+			// Recorremos todas las celdas
+			const compareWith = cellsOfRow[3].innerHTML.toLowerCase();
+			// Buscamos el texto en el contenido de la celda
+			if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
+				found = true;
+				total++;
+			}
+
+			if (found) {
+				tableReg.rows[i].style.display = '';
+			} else {
+				// si no ha encontrado ninguna coincidencia, esconde la
+				// fila de la tabla
+				tableReg.rows[i].style.display = 'none';
+			}
+		}
+	} else {
+		getUsersTableDataHTML();
+	}
+
+}

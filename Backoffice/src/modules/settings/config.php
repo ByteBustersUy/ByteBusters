@@ -18,10 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $nameLogo = "logo-empresa.png";
     $destinoEcommerce = "../../../../Ecommerce/assets/".$nameLogo;
-
     $fileTmpPath = $_FILES['logo']['tmp_name'];
-    die($fileTmpPath);
-
     if (move_uploaded_file($fileTmpPath, $destinoEcommerce)) {
         echo "Fue guardado";
     } else {
@@ -54,13 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         die('Error al guardar en db');
     }
-
-
-
-
-
-
-    
 }
 
 function getLabelsEmpresaHTML(): string

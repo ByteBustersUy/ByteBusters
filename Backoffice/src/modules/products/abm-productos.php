@@ -154,7 +154,7 @@ function getProductsTableData(): string
                             <tr id="' . $product['id'] . '" class="user-select-none align-middle" onclick="selectProductRow(' . $product['id'] . ')">
                                 <td class="' . $classColor . ' first-in-table">' . $product['nombre'] . '</td>
                                 <td class="' . $classColor . '" id="' . $category . '">' . $category . '</td>
-                                <td class="' . $classColor . '">$' . $product['precio'] . '</td>
+                                <td class="' . $classColor . '">' . $product['precio'] . '</td>
                                 <td promoId="' . $promoId . '" class="' . $classColor . '">' . $discount . '</td>
                                 <td><button id="' . $product['id'] . '" class="btn-eye" data-bs-toggle="modal" data-bs-target="#moddalProductsDetail"><i class="fa-solid fa-eye"></i></button></td>
                             </tr>';
