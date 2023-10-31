@@ -70,7 +70,6 @@ function cargarCardsProductosNoPromo() {
 		.then((data) => {
 			let cards = "";
 			for (let i = 0; i < data.length; i++) {
-				console.log(data[i])
 				cards += `
     			<div>
         			<div class="card producto-no-promo" >
@@ -85,7 +84,6 @@ function cargarCardsProductosNoPromo() {
         			</div>
     			</div>`;
 			}
-
 			divProductoNoPromo.innerHTML = cards;
 		});
 }

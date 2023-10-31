@@ -83,7 +83,6 @@ btnEditProduct.addEventListener("click", async () => {
 			}
 		}
 		const productData = await getProductData(productId);
-		console.log(productData.descripcion);
 		inputsForm.descripcion.value = productData.descripcion;
 		document.getElementById("uploadLabel").innerHTML = "Cambiar imágen";
 
@@ -295,61 +294,18 @@ btnPromocionar.addEventListener("click", async () => {
 				<img src="../../Ecommerce/images/${productData.imagen}">`;
 		const nombreProducto = modalBody.getElementsByTagName("h4")[0];
 		nombreProducto.innerHTML = productData.nombre;
-		const checkbox = document.getElementById("checkPromocion");
-		// const selectHidden = document.getElementById("selectHidden");
-		const promoId = selectedRow
-			.getElementsByTagName("td")[3]
-			.getAttribute("promoId");
-
-		let currentPromo, selectedPromo;
 
 		//preseleccionar la promo existente
 		const options = modalProductsPromotion.getElementsByTagName("option");
 		for (let i = 0; i < options.length; i++) {
 			if (options[i].innerHTML == productData.descuento + "%") {
 				options[i].setAttribute("selected", true);
-				currentPromo = options[i].value
-				console.log("aa,"+currentPromo)
 			}
 		}
-		
-		const currentStatus = checkbox.checked;
-		
-		const selectPromo = document.getElementById("promocionar");
-		selectPromo.addEventListener("change", () => {
-			selectedPromo = selectPromo.value;
-		})
-
-		if (promoId != 0) {
-			checkbox.checked = true;
-			selectPromo.removeAttribute("disabled");
-			currentPromo = selectPromo.value;
-		} else {
-			checkbox.checked = false;
-			currentPromo = selectPromo.value;
-			selectPromo.setAttribute("disabled","");
-		}
-	
-		checkbox.addEventListener("click", () => {
-			if(selectPromo.getAttribute("disabled") == null){
-				selectedPromo = selectPromo.value;
-				selectPromo.setAttribute("disabled","");
-			}else{
-				selectPromo.removeAttribute("disabled");
-				selectedPromo = selectPromo.value;
-			}
-		});
-
-		// selectHidden.value = selectedPromo;
-
+		console.log(productId);
 		const formPromocionar = document.getElementById("formPromocionar");
 		formPromocionar.addEventListener("submit", () => {
-			if (currentStatus != checkbox.checked) {
-				
-				formPromocionar.attributes.item(
-					2
-				).value += `&productId=${productId}`;
-			}
+			formPromocionar.attributes.item(2).value += `&productId=${productId}`;
 		});
 	}
 });
@@ -411,7 +367,15 @@ async function deleteProduct(productId) {
 }
 
 function sortTable(n, type) {
-	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	var table,
+		rows,
+		switching,
+		i,
+		x,
+		y,
+		shouldSwitch,
+		dir,
+		switchcount = 0;
 
 	table = document.getElementById("datos");
 	switching = true;
@@ -420,17 +384,25 @@ function sortTable(n, type) {
 	while (switching) {
 		switching = false;
 		rows = table.rows;
-		for (i = 0; i < (rows.length - 1); i++) {
+		for (i = 0; i < rows.length - 1; i++) {
 			shouldSwitch = false;
 			x = rows[i].getElementsByTagName("TD")[n];
 			y = rows[i + 1].getElementsByTagName("TD")[n];
 			if (dir == "asc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
+				if (
+					(type == "str" &&
+						x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
+					(type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))
+				) {
 					shouldSwitch = true;
 					break;
 				}
 			} else if (dir == "desc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
+				if (
+					(type == "str" &&
+						x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) ||
+					(type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))
+				) {
 					shouldSwitch = true;
 					break;
 				}
@@ -451,15 +423,14 @@ function sortTable(n, type) {
 
 function filterProductByPromo() {
 	const selectedValue = document.getElementById("filter").value;
-	console.log(selectedValue);
 	if (selectedValue === "-" || "%") {
-		const tableReg = document.getElementById('datos');
-		const searchText = document.getElementById('filter').value.toLowerCase();
+		const tableReg = document.getElementById("datos");
+		const searchText = document.getElementById("filter").value.toLowerCase();
 		let total = 0;
 		// Recorremos todas las filas con contenido de la tabla
 		for (let i = 0; i < tableReg.rows.length; i++) {
 			let found = false;
-			const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+			const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
 			// Recorremos todas las celdas
 			const compareWith = cellsOfRow[3].innerHTML.toLowerCase();
 			// Buscamos el texto en el contenido de la celda
@@ -469,15 +440,14 @@ function filterProductByPromo() {
 			}
 
 			if (found) {
-				tableReg.rows[i].style.display = '';
+				tableReg.rows[i].style.display = "";
 			} else {
 				// si no ha encontrado ninguna coincidencia, esconde la
 				// fila de la tabla
-				tableReg.rows[i].style.display = 'none';
+				tableReg.rows[i].style.display = "none";
 			}
 		}
 	} else {
 		getUsersTableDataHTML();
 	}
-
 }
