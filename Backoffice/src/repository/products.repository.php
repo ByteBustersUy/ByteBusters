@@ -99,7 +99,7 @@ function findProductPromotionId(string $productId): int
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId ORDER BY id DESC ");
+        $statement = $con->prepare("SELECT * FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
