@@ -222,13 +222,14 @@ function addPromotionToProduct(int $productId, int $promoId)
         die("ERROR: " . $error_messages['!exist_promo']);
     }
 
-    // $isAlreadyPromoted = checkproductHasPromotion();
-
-    if($isAlreadyPromoted){
-        //TODO: update and insert
-    }else{
-        //TODO: insert
+    if(checkPromoIsAlreadyAssigned($productId, $promoId)){
+        die("ya esta asignada la misma promo");
     }
-    setPromoToProduct($productId, $promoId, $status);
+
+    if(checkproductHasValidPromotion($productId)){
+        die("ya tiene una promo vigente");
+    }
+
+    setPromoToProduct($productId, $promoId);
     header("Location:../../../pages/abm-productos.php");
 }

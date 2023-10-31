@@ -108,10 +108,10 @@ function findOnePromoById(int $promoId): array
     try {
         $statement = $con->prepare("SELECT *
                                     FROM PROMOCIONES
-                                    WHERE id = :id");
-        $statement->execute(
-            array(":id" => $promoId)
-        );
+                                    WHERE id = :id
+                                    AND activo = 1
+                                    AND vigente = 1");
+        $statement->execute(array(":id" => $promoId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $reg ? $reg : [];

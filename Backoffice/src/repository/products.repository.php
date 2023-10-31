@@ -99,11 +99,11 @@ function findProductPromotionId(string $productId): int
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $statement = $con->prepare("SELECT * FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId");
+        $statement = $con->prepare("SELECT * FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId ORDER BY fecha DESC");
         $statement->execute(array(':productId' => $productId));
         $reg = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return $reg && $reg["activo"] == 1 ? $reg["PROMOCIONES_id"] : 0;
+        return $reg ? $reg["PROMOCIONES_id"] : 0;
     } catch (Exception $e) {
         $con->close();
         die("ERROR SQL in findProductPromotionId(): " . $e->getMessage());
@@ -202,18 +202,15 @@ function deleteProduct(string $productId): bool
     }
 }
 
-function setPromoToProduct(string $productId, string $promoId, int $isActive): bool
+function setPromoToProduct(int $productId, int $promoId): bool
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
-    include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
 
-    //TODO: si ya existe que deberia pasar?
     try {
-        $statement = $con->prepare("INSERT INTO PRODUCTOS_has_PROMOCIONES (PROMOCIONES_id, PRODUCTOS_id, activo) VALUES (:promoId, :productId, :isActive)");
+        $statement = $con->prepare("INSERT INTO PRODUCTOS_has_PROMOCIONES (PROMOCIONES_id, PRODUCTOS_id) VALUES (:promoId, :productId)");
         $statement->execute([
             ':promoId' => $promoId,
-            ':productId' => $productId,
-            ':isActive' => $isActive,
+            ':productId' => $productId
         ]);
         return true;
     } catch (Exception $e) {
@@ -221,4 +218,45 @@ function setPromoToProduct(string $productId, string $promoId, int $isActive): b
         return false;
     }
 
+}
+
+function checkproductHasValidPromotion(int $productId): bool
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
+
+    try {
+        $statement = $con->prepare("SELECT *
+                                    FROM PROMOCIONES
+                                    WHERE
+                                    id IN (SELECT PROMOCIONES_id FROM PRODUCTOS_has_PROMOCIONES
+                                    WHERE PRODUCTOS_id = :productId)
+                                    AND vigente = 1
+                                    AND activo = 1");
+        $statement->execute([':productId' => $productId]);
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        return $reg['id'] ? true : false;
+    } catch (Exception $e) {
+        echo ("ERROR SQL in checkproductHasPromotion(): " . $e->getMessage());
+        return false;
+    }
+}
+
+function checkPromoIsAlreadyAssigned(int $productId, int $promoId): bool
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    include realpath(dirname(__FILE__)) . "/../utils/messages/msg.php";
+
+    try {
+        $statement = $con->prepare("SELECT * FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId AND PROMOCIONES_id = :promoId");
+        $statement->execute([
+            ':promoId' => $promoId,
+            ':productId' => $productId,
+        ]);
+        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        return $reg['PRODUCTOS_id'] ? true : false;
+    } catch (Exception $e) {
+        echo ("ERROR SQL in checkPromoIsAlreadyAssigned(): " . $e->getMessage());
+        return false;
+    }
 }
