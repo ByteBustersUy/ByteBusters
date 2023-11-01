@@ -1,3 +1,7 @@
+<?php
+require './guards/active-session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
