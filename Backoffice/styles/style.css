@@ -658,6 +658,10 @@ thead tr .roles {
     width: 10rem;
 }
 
+.btn-logo-empresa{
+    width: 0;
+}
+
 .data-emp {
     display: grid;
     margin: auto;

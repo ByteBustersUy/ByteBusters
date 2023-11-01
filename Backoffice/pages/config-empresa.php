@@ -51,7 +51,7 @@ require './guards/active-session.php';
                         <label>Email:<input type="emial" name="email" placeholder="ej: dmarket@gmail.com" autocomplete="off"></label>
                         <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="ej: 1234DIGITAL" autocomplete="off"></label>
                         <label>Comentario de venta:<input type="text" name="comentario" placeholder="ej: precios en pesos Uruguayos" autocomplete="off"></label>
-                        <label>Logo de empresa:<input id="btnUploadImageEmp" type="file" name="logo" accept="image/*"></label>
+                        <label>Logo de empresa:<input id="btnUploadImageEmp" type="file" name="logo" class="btn-logo-empresa" accept="image/*"></label>
                         
                     </div>
                     <div class="buttons absolute bottom-10">
