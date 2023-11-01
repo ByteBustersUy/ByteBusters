@@ -190,16 +190,14 @@ CREATE TABLE IF NOT EXISTS `bytebusters2_db`.`PROMOCIONES`(
 ----------------------------------
 */
 CREATE TABLE IF NOT EXISTS `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `PRODUCTOS_id` int(11) NOT NULL,
-  `PROMOCIONES_id` int(11)NOT NULL,
-  `activo` boolean NOT NULL DEFAULT 1,
-  `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-   PRIMARY KEY(`id`,`PRODUCTOS_id`,`PROMOCIONES_id`),
+  `PROMOCIONES_id` int(11) NOT NULL,
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(`PRODUCTOS_id`,`PROMOCIONES_id`),
   FOREIGN KEY(`PRODUCTOS_id`)
-  	REFERENCES `bytebusters2_db`.`PRODUCTOS`(`id`),
+    REFERENCES `bytebusters2_db`.`PRODUCTOS`(`id`),
   FOREIGN KEY(`PROMOCIONES_id`)
-   	REFERENCES `bytebusters2_db`.`PROMOCIONES`(`id`)	
+    REFERENCES `bytebusters2_db`.`PROMOCIONES`(`id`)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -549,7 +547,7 @@ INSERT INTO `bytebusters2_db`.`PROMOCIONES` (`id`,`descuento`,`fechaInicio`,`fec
 ------------------------------------------------
 
 */
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (1,2,1,1);
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (2,4,2,1);
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (3,6,3,1);
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`id`,`PRODUCTOS_id`,`PROMOCIONES_id`,`activo`) VALUES (4,22,4,1);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES (2,1);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES (4,2);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES (6,3);
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_PROMOCIONES` (`PRODUCTOS_id`,`PROMOCIONES_id`) VALUES (22,4);

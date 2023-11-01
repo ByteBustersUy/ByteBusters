@@ -129,7 +129,6 @@ body {
 }
 
 input {
-    width: 0px;
     height: 2.3rem;
     outline: none;
     text-indent: .5rem;
@@ -659,6 +658,10 @@ thead tr .roles {
     width: 10rem;
 }
 
+.btn-logo-empresa{
+    width: 0;
+}
+
 .data-emp {
     display: grid;
     margin: auto;
@@ -990,9 +993,62 @@ footer img {
     background-color: var(--light-text-color);
     margin: 0 !important;
 }
+/*****DESCARGAS PDFs*****/
+.contenedor-descargas{
+    gap: 1rem 0.1rem;
+}
 
+.div-descarga{
+    background-color: #ffffff2b;
+    height: 9rem;
+    border-radius: 1rem;
+    border: 1px solid var(--bytebusters-color);
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.div-descarga form{
+    display: contents;
+}
 
+.div-descarga button{
+    border: 1px solid;
+    border-radius: 1rem;
+    background: var(--color-dark-green);
+    width: 5rem;
+    height: 6rem;
+}
+
+.div-descarga button:hover{
+    border: none;
+    scale: 105%;
+    filter: drop-shadow(0 6px 2px var(--color-4));
+
+}
+
+.div-descarga h4 {
+    color: var(--color-3);
+    font-size: 1.2rem;
+}
+
+.lbl-fecha-descarga{
+    color: var(--color-3);
+    margin-right: .2rem;
+}
+
+.icono-descarga{
+    scale: 200%;
+}
+.secl-fecha{
+    width: 9rem;
+    margin-right: .5rem;
+}
+
+.submitinput{
+    width: 10rem;
+}
 
 /* --------- TABLET -------- */
 @media only screen and (min-width: 992px) {

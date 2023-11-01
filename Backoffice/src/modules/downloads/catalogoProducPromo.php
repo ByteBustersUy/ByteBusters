@@ -3,22 +3,20 @@ ob_end_clean();
 
 require realpath(dirname(__FILE__)). '/../../repository/download.repository.php';
 require('FPDF/fpdf.php');
-
+$fechaIni=$_GET['fechaInicio'];
+$fechaFin=$_GET['fechaFin'];
 class pdfDownload extends FPDF
 {
-
 
 // Cabecera de página
 function Header()
 {
-    // Logo
-    //$this->Image('logo.png',10,8,33);
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     // Movernos a la derecha
     $this->Cell(60);
     // Título
-    $this->Cell(20,10,utf8_decode('Reporte de Productos'),0,0);
+    $this->Cell(20,10,utf8_decode('Catalogo Productos Promocionados'),0,0);
     // Salto de línea
     $this->Ln(20);
     
@@ -44,8 +42,9 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 
+
 //$data = findAllDataProduct();
-$registros = findAllDataProduct();
+$registros = findProductDataByDateOfPromotion($fechaIni,$fechaFin);
 foreach($registros as $reg) { 
     $productname = '';
     $productdesc = '';
@@ -61,5 +60,6 @@ foreach($registros as $reg) {
     $pdf->Cell(80,10,mb_convert_encoding($productname,'ISO-8859-1','UTF-8'),1,0);
     $pdf->Cell(95,10,mb_convert_encoding($productdesc,'ISO-8859-1','UTF-8'),1,0,);
     $pdf->Cell(20,10,mb_convert_encoding($productpresi,'ISO-8859-1','UTF-8'),1,0,'C');
+    
 }
 $pdf->Output();

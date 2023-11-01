@@ -1,3 +1,7 @@
+<?php
+require './guards/active-session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,7 +20,8 @@
     <div>
         <div class="link-options-div">
             <?php
-            require "./../src/modules/downloads/pdfDownload.php";
+            // require "./../src/modules/downloads/catalogoAllProduc.php";
+            //require "./../src/modules/downloads/catalogoProducPromo.php";
             require "./components/options.php";
             echo $options;
             ?>
@@ -28,8 +33,28 @@
         <h1>DESCARGAS</h1>
     </div>
     <div class="container frame">
-        <div class="row">
+        <div class="row contenedor-descargas">
             <!-- columnas... -->
+            <div class="col-12 col-sm-9 div-descarga">
+                <h4>CATÁLOGO DE PRODUCTOS DE LA EMPRESA</h4>
+                <form action="./../src/modules/downloads/catalogoallProduc.php" method="get">
+                    <button type="submit" value="Descargar"><i class="fa-solid fa-angles-down icono-descarga"></i></button>
+                </form>
+            </div>
+            <div class="col-12 col-sm-9 div-descarga">
+                <h4>CATÁLOGO DE PRODUCTOS PROMOCIONADOS</h4>
+                <form action="./../src/modules/downloads/catalogoProducPromo.php" method="get">
+
+                    <div class='d-flex'></div>
+                        <label class="lbl-fecha-descarga">Desde: </label>
+                            <input name="fechaInicio" type="date" class="secl-fecha">
+                        <label class="lbl-fecha-descarga">Hasta: </label>
+                            <input name="fechaFin" type="date" class="secl-fecha">
+                            <button class="submitinput" type="submit" value="Descargar"><i class="fa-solid fa-angles-down icono-descarga"></i></button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
     <footer>

@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 detailProduct($_POST["productId"]);
                 break;
             case "addDiscount":
-                addDiscount($_GET["productId"], $_GET['promoId'], $_GET['status']);
+                addPromotionToProduct($_GET["productId"], $_POST['promocionar']);
                 break;
             default: 
                 die("Invalid action requested");
@@ -210,7 +210,7 @@ function detailProduct(int $productId)
     echo json_encode($productData, JSON_PRETTY_PRINT);
 }
 
-function addDiscount(int $productId, int $promoId, int $status)
+function addPromotionToProduct(int $productId, int $promoId)
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
 
@@ -222,10 +222,14 @@ function addDiscount(int $productId, int $promoId, int $status)
         die("ERROR: " . $error_messages['!exist_promo']);
     }
 
-    if(!isset($status)){
-        die("ERROR: " . $error_messages['!valid_form']);
+    if(checkPromoIsAlreadyAssigned($productId, $promoId)){
+        die("ya esta asignada la misma promo");
     }
 
-    setPromoToProduct($productId, $promoId, $status);
+    if(checkproductHasValidPromotion($productId)){
+        die("ya tiene una promo vigente");
+    }
+
+    setPromoToProduct($productId, $promoId);
     header("Location:../../../pages/abm-productos.php");
 }

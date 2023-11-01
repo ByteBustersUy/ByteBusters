@@ -23,7 +23,6 @@ document.addEventListener("mousedown", function () {
 			cantidad: 1,
 		});
 		carrito.sort(comparar);
-		console.log(carrito)
 		localStorage.setItem("id", JSON.stringify(carrito));
 	}
 });
