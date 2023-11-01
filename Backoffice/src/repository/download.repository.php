@@ -1,5 +1,5 @@
 <?php
-function findAllDataProduct(): array
+function findAllProductData(): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
@@ -11,4 +11,30 @@ function findAllDataProduct(): array
         $con->close();
         die("ERROR SQL in findAllDataProduct(): " . $e->getMessage());
     }
+}
+function findProductDataByDateOfPromotion($fechaInicio,$fechaFin)
+{
+
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+    try{
+        $resultado = $con->query("  SELECT nombre,descripcion,precio 
+                                    FROM PRODUCTOS 
+                                    WHERE id 
+                                    IN(
+                                        SELECT PRODUCTOS_id 
+                                        FROM `productos_has_promociones` 
+                                        WHERE PROMOCIONES_id 
+                                        IN (
+                                            SELECT id 
+                                            FROM PROMOCIONES 
+                                            WHERE fechaInicio >= '$fechaInicio' 
+                                            AND fechaFin <= '$fechaFin'))");
+        $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
+       return $registros;
+    }catch(Exception $e) {
+        $con->close();
+        die("ERROR SQL in findAllDataProduct(): " . $e->getMessage());
+    }
+
+
 }
