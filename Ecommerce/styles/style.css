@@ -196,6 +196,10 @@ span {
 .card h5 {
   color: black;
 }
+.card h6 {
+  color: black;
+  text-decoration: line-through;
+}
 
 .btn-agregar {
   background-color: var(--ecommerce-color);
@@ -826,6 +830,10 @@ a {
 .aNomb:active {
   background: var(--color-2);
   color: var(--color-2);
+}
+.aNomb h6 {
+  color: black;
+  text-decoration: line-through;
 }
 
 .img-producto-lista {

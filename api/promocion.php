@@ -5,7 +5,7 @@ include "./db/conexion.php";
 $idProducto = $_GET["id"];
 
 try{
-    $consulta ="SELECT promociones_id FROM productos_has_promociones WHERE productos_id = ". $idProducto ." ORDER BY promociones_id DESC";
+    $consulta ="SELECT promociones_id FROM productos_has_promociones WHERE productos_id IN (". $idProducto .")";
     $res= $con->query("SELECT * FROM promociones WHERE id  in (" .$consulta.");");
     $reg = $res->fetch(PDO::FETCH_ASSOC);
     header("Content-Type: application/json");
