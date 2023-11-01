@@ -129,7 +129,6 @@ body {
 }
 
 input {
-    width: 0px;
     height: 2.3rem;
     outline: none;
     text-indent: .5rem;
@@ -991,42 +990,61 @@ footer img {
     margin: 0 !important;
 }
 /*****DESCARGAS PDFs*****/
+.contenedor-descargas{
+    gap: 1rem 0.1rem;
+}
+
 .div-descarga{
-    background-color: #5e5959;
-    height: 10rem;
-    border-radius: .5rem;
-    display: flex;
+    background-color: #ffffff2b;
+    height: 9rem;
+    border-radius: 1rem;
+    border: 1px solid var(--bytebusters-color);
     margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.div-descarga div{
-    background-color: #000000;
 
-}
 .div-descarga form{
+    display: contents;
+}
 
-    display:block;
-     width: 18.1rem;
-    height: 2rem;
-    
+.div-descarga button{
+    border: 1px solid;
+    border-radius: 1rem;
+    background: var(--color-dark-green);
+    width: 5rem;
+    height: 6rem;
+}
+
+.div-descarga button:hover{
+    border: none;
+    scale: 105%;
+    filter: drop-shadow(0 6px 2px var(--color-4));
+
+}
+
+.div-descarga h4 {
+    color: var(--color-3);
+    font-size: 1.2rem;
+}
+
+.lbl-fecha-descarga{
+    color: var(--color-3);
+    margin-right: .2rem;
+}
+
+.icono-descarga{
+    scale: 200%;
 }
 .secl-fecha{
     width: 9rem;
     margin-right: .5rem;
 }
+
 .submitinput{
     width: 10rem;
 }
-/*.a-descarga{
-    position: relative;
-    top: 7rem;
-    right: 6rem;
-    color: var(--primary-text-color);
-    border-radius: .3rem;
-    background-color: var(--background-color-light);
-    padding: .4rem 1.2rem;
-    height:2.3rem;
-}*/
-
 
 /* --------- TABLET -------- */
 @media only screen and (min-width: 992px) {
