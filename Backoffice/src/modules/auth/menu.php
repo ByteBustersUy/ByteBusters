@@ -14,7 +14,7 @@ $cardsList = [
         'action' => $actions['gestionar-permisos'],
         'i' => '<i class="fa-solid fa-shield"></i>',
         'h4' => '<h4>PERMISOS</h4>',
-        'p' =>  '<p>Asignar permisos a roles</p>',
+        'p' =>  '<p>Agregar o eliminar permisos a roles</p>',
     ],
     "productos" => [
         'action' => $actions['gestionar-productos'],
