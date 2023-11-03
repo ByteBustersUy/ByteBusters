@@ -1,5 +1,5 @@
 <?php
-require realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
+require_once realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
 require realpath(dirname(__FILE__)) . "/../../utils/actions.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

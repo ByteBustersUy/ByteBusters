@@ -3,7 +3,7 @@
 function checkPermissionss(string $action)
 {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
-    require realpath(dirname(__FILE__)) . "/../../../repository/users.repository.php";
+    require_once realpath(dirname(__FILE__)) . "/../../../repository/users.repository.php";
 
     $validActions = findActionsByRolesId($_SESSION['userRolesIds']);
 

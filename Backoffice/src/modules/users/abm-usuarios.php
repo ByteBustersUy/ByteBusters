@@ -3,7 +3,7 @@ require realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/isValidPass.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/isValidEmail.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
-require realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
+require_once realpath(dirname(__FILE__)) . "/../../repository/users.repository.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
