@@ -803,6 +803,7 @@ border-radius: .3rem;
 a {
   outline: none;
   text-decoration: none;
+  color: black;
 }
 
 .aNomb:link {

@@ -1,5 +1,8 @@
 <?php
-require './guards/active-session.php';
+require '../src/modules/auth/guards/active-session.php';
+require '../src/modules/auth/guards/check-permissions.php';
+require '../src/utils/actions.php';
+checkPermissionss($actions["gestionar-productos"]);
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +19,7 @@ require './guards/active-session.php';
     <link rel="stylesheet" href="../styles/style.css">
     <title>Ecommerce Manager</title>
 </head>
+
 <body>
     <div>
         <div class="link-options-div">
@@ -65,7 +69,7 @@ require './guards/active-session.php';
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th onclick="sortTable(0, 'str')"class="user-select-none first-in-table" scope="col">Nombre del producto</th>
+                                <th onclick="sortTable(0, 'str')" class="user-select-none first-in-table" scope="col">Nombre del producto</th>
                                 <th onclick="sortTable(1, 'str')" class="user-select-none" scope="col">Categoría</th>
                                 <th onclick="sortTable(2, 'int')" class="user-select-none" scope="col">Precio $</th>
                                 <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Promo</th>

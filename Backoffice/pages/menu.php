@@ -1,5 +1,5 @@
 <?php
-require './guards/active-session.php';
+require '../src/modules/auth/guards/active-session.php';
 ?>
 
 <!DOCTYPE html>
