@@ -302,13 +302,42 @@ btnPromocionar.addEventListener("click", async () => {
 				options[i].setAttribute("selected", true);
 			}
 		}
-		console.log(productId);
+		const promoId = document.getElementById("promocionar").value;
+		
 		const formPromocionar = document.getElementById("formPromocionar");
-		formPromocionar.addEventListener("submit", () => {
+		formPromocionar.addEventListener("submit", (event) => {
 			formPromocionar.attributes.item(2).value += `&productId=${productId}`;
+			console.log(event)
+		});
+
+		//eliminar promocion a producto
+		const btnDeleteDiscount = document.getElementById("btnDeleteDiscount");
+
+		btnDeleteDiscount.addEventListener("click",async  () => {
+			const data = new URLSearchParams();
+			data.append("promoId", promoId);
+			data.append("productId", productId);
+				fetch(`../src/modules/products/abm-productos.php?action=deleteDiscount`,
+				{
+					method: "POST",
+					headers: {
+						"Content-type": "application/x-www-form-urlencoded",
+					},
+					body: data
+				}).then(response => response.status)
+				.then(status => {
+					if(status == 200){
+						setTimeout(() => {
+							alert("Descuento eliminado con éxito");
+							location.reload(true);
+						},400);
+					}
+				}).catch(error => console.log(error));
 		});
 	}
 });
+
+
 
 // REQUEST's
 async function getProductData(productId) {

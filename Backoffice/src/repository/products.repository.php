@@ -217,7 +217,23 @@ function setPromoToProduct(int $productId, int $promoId): bool
         echo ("ERROR SQL in setPromoToProduct(): " . $e->getMessage());
         return false;
     }
+}
 
+function deletePromoToProduct(int $productId, int $promoId): bool
+{
+    require realpath(dirname(__FILE__)) . "/../db/conexion.php";
+
+    try {
+        $statement = $con->prepare("DELETE FROM PRODUCTOS_has_PROMOCIONES WHERE PRODUCTOS_id = :productId AND PROMOCIONES_id = :promoId");
+        $statement->execute([
+            ':productId' => $productId,
+            ':promoId' => $promoId,
+        ]);
+        return true;
+    } catch (Exception $e) {
+        echo ("ERROR SQL in setPromoToProduct(): " . $e->getMessage());
+        return false;
+    }
 }
 
 function checkproductHasValidPromotion(int $productId): bool

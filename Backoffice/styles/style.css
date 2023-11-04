@@ -617,6 +617,28 @@ thead tr .roles {
     margin-top: 2.5rem;
 }
 
+#btnDeleteDiscount{
+    width: 40%;
+    height: 2.5rem;
+    background-color: var(--error-color);
+    color: var(--color-3)
+}
+
+#btnDeleteDiscount:hover{
+    filter: brightness(80%);
+}
+
+#btnSubmitModaldiscount{
+    width: 40%;
+    height: 2.5rem;
+    background-color: var(--color-dark-green);
+    color: var(--color-3)
+}
+
+#btnDeleteDiscount:hover{
+    filter: brightness(80%);
+}
+
 .buttons button {
     width: 8rem;
     height: 2rem;

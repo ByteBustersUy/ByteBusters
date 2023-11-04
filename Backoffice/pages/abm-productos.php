@@ -154,9 +154,10 @@ checkPermissionss($actions["gestionar-productos"]);
                                         ?>
                                     </select>
                                 </div>
+                                <label id="errorMessageModal"></label>
                                 <div class="buttons">
-                                    <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
-                                    <button id="btnSubmitModaldiscount" type="submit">ACEPTAR</button>
+                                    <button id="btnDeleteDiscount" type="button">Quitar promoción</button>
+                                    <button id="btnSubmitModaldiscount" type="submit">Agregar promoción</button>
                                 </div>
                             </form>
                             <div class="modal-body">
