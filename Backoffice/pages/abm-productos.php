@@ -61,6 +61,7 @@ checkPermissionss($actions["gestionar-productos"]);
                     <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
                     <select class="filter-list" name="filter" id="filter" onchange="filterProductByPromo();">
                         <option selected hidden value="">Filtrar</option>
+                        <option value="">Todo</option>
                         <option value="%">Promocionado</option>
                         <option value="-">No Promocionado</option>
                     </select>
