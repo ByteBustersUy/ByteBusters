@@ -1,14 +1,14 @@
 <?php
 require_once realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
-require realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
+require_once realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_status() === PHP_SESSION_ACTIVE ?: session_start();
-
+    
     if (isset($_GET['action'])) {
-
+        
         switch ($_GET['action']) {
             case "add":
                 addProduct();
@@ -24,6 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 break;
             case "addDiscount":
                 addPromotionToProduct($_GET["productId"], $_POST['promocionar']);
+                break;
+            case "deleteDiscount":
+                deletePromotionToProduct($_POST["productId"], $_POST["promoId"]);
                 break;
             default: 
                 die("Invalid action requested");
@@ -190,11 +193,15 @@ function detailProduct(int $productId)
 
     $promoId = findPromoIdByProductId($productId);
     $discount = 0;
+    $fechaInicio = "";
+    $fechaFin = "";
 
     if (hasData($promoId) && $promoId > 0) {
         $promo = findOnePromoById($promoId);
         if (hasData($promo)) {
             $discount = $promo["descuento"];
+            $fechaInicio = $promo["fechaInicio"];
+            $fechaFin = $promo["fechaFin"];
         }
     }
 
@@ -204,16 +211,17 @@ function detailProduct(int $productId)
         "descripcion" => $product['descripcion'],
         "precio" => $product['precio'],
         "descuento" => $discount,
+        "fechaInicio" => $fechaInicio,
+        "fechaFin" => $fechaFin,
     ];
 
     header("Content-Type: application/json");
     echo json_encode($productData, JSON_PRETTY_PRINT);
 }
 
-function addPromotionToProduct(int $productId, int $promoId)
+function addPromotionToProduct(int $productId, int $promoId): void
 {
     require realpath(dirname(__FILE__)) . "/../../utils/messages/msg.php";
-
     if(!$productId){
         die("ERROR: " . $error_messages['!exist_product']);
     }
@@ -223,13 +231,28 @@ function addPromotionToProduct(int $productId, int $promoId)
     }
 
     if(checkPromoIsAlreadyAssigned($productId, $promoId)){
-        die("ya esta asignada la misma promo");
+        header("Location:../../../pages/abm-productos.php?http=412&msg=isSame");
+        return;
     }
 
     if(checkproductHasValidPromotion($productId)){
-        die("ya tiene una promo vigente");
+        header("Location:../../../pages/abm-productos.php?http=412&msg=alreadyPromoted");
+        return;
     }
 
     setPromoToProduct($productId, $promoId);
     header("Location:../../../pages/abm-productos.php");
+}
+
+function deletePromotionToProduct(int $productId, $promoId): bool
+{    
+    if(!$productId){
+        throw new Error();
+    }
+
+    if(!$promoId){
+        throw new Error();
+    }
+
+    return deletePromoToProduct($productId, $promoId);
 }

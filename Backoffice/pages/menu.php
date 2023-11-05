@@ -1,5 +1,5 @@
 <?php
-require './guards/active-session.php';
+require '../src/modules/auth/guards/active-session.php';
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +39,7 @@ require './guards/active-session.php';
             ?>
         </div>
     </div>
+    <div class="space4Footer"></div>
     <footer>
         <?php
         require "./components/footer.php";

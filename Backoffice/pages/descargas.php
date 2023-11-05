@@ -1,5 +1,8 @@
 <?php
-require './guards/active-session.php';
+require '../src/modules/auth/guards/active-session.php';
+require '../src/modules/auth/guards/check-permissions.php';
+require '../src/utils/actions.php';
+checkPermissionss($actions["descargar-documentos"]);
 ?>
 
 <!DOCTYPE html>
@@ -46,16 +49,16 @@ require './guards/active-session.php';
                 <form action="./../src/modules/downloads/catalogoProducPromo.php" method="get">
 
                     <div class='d-flex'></div>
-                        <label class="lbl-fecha-descarga">Desde: </label>
-                            <input name="fechaInicio" type="date" class="secl-fecha">
-                        <label class="lbl-fecha-descarga">Hasta: </label>
-                            <input name="fechaFin" type="date" class="secl-fecha">
-                            <button class="submitinput" type="submit" value="Descargar"><i class="fa-solid fa-angles-down icono-descarga"></i></button>
-                    </div>
-
-                </form>
+                    <label class="lbl-fecha-descarga">Desde: </label>
+                    <input name="fechaInicio" type="date" class="secl-fecha">
+                    <label class="lbl-fecha-descarga">Hasta: </label>
+                    <input name="fechaFin" type="date" class="secl-fecha">
+                    <button class="submitinput" type="submit" value="Descargar"><i class="fa-solid fa-angles-down icono-descarga"></i></button>
             </div>
+
+            </form>
         </div>
+    </div>
     </div>
     <footer>
         <?php

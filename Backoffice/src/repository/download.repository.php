@@ -23,12 +23,9 @@ function findProductDataByDateOfPromotion($fechaInicio,$fechaFin)
                                     IN(
                                         SELECT PRODUCTOS_id 
                                         FROM `productos_has_promociones` 
-                                        WHERE PROMOCIONES_id 
-                                        IN (
-                                            SELECT id 
-                                            FROM PROMOCIONES 
-                                            WHERE fechaInicio >= '$fechaInicio' 
-                                            AND fechaFin <= '$fechaFin'))");
+                                        WHERE fecha >= '$fechaInicio'  
+                                        AND fecha <= '$fechaFin')
+                                        ");
         $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
        return $registros;
     }catch(Exception $e) {

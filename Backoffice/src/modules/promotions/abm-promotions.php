@@ -34,7 +34,9 @@ function getPromotionsHtml()
     $promotions = findActiveAndValidPromos();
     $options = '';
     foreach ($promotions as $promo) {
-        $options .= '<option value="' . $promo['id'] . '">' . $promo['descuento'] . '%</option>';
+        // $options .= '<option value="' . $promo['id'] . '">' . $promo['descuento'] . '%</option>';
+        $options .= '<option value="' . $promo['id'] . '">' . $promo['descuento'] . '% ('.formatDates($promo['fechaInicio']) . ' - ' . formatDates($promo['fechaFin']) . ')'.'</option>';
+        
     }
     return $options;
 }

@@ -55,14 +55,14 @@ button:active {
     display: none;
 }
 
-  #btnUploadImageEmp::before {
+#btnUploadImageEmp::before {
     content: 'Seleccionar imagen';
     display: inline-block;
     border-radius: 3px;
     padding: 5px 5px;
     cursor: pointer;
     color: var(--color-placeholder)
-  }
+}
 
 
 #userName {
@@ -297,7 +297,7 @@ thead tr {
     text-align: center;
     width: 10rem;
     height: 2.5rem;
-    margin: 3rem auto 2rem;
+    margin: 2rem auto 2rem;
     cursor: pointer;
     color: var(--text-button-color);
     background-color: var(--bytebusters-color);
@@ -342,8 +342,7 @@ thead tr {
 /* --------- MENU --------- */
 
 .menu-cards {
-    /* height: 15rem;
-    min-width: 13rem; */
+    margin-bottom: 3rem;
     max-width: 15rem;
     text-align: center;
     border-radius: .7rem;
@@ -382,6 +381,11 @@ thead tr {
     font-size: .8rem;
     margin-top: 1rem;
     padding: 0 2rem;
+}
+
+.space4Footer{
+    width: 100%;
+    height: 5rem;
 }
 
 /*---------ABM PERMISSIONS-----*/
@@ -597,8 +601,8 @@ thead tr .roles {
 }
 
 #promocionar{
-    width: 12rem;
-    height: 2rem;
+    height: 2.4rem;
+    width: 17rem;
 }
 
 .promo-content{
@@ -611,6 +615,28 @@ thead tr .roles {
 .promo-modal{
     display: flex;
     margin-top: 2.5rem;
+}
+
+#btnDeleteDiscount{
+    width: 40%;
+    height: 2.5rem;
+    background-color: var(--error-color);
+    color: var(--color-3)
+}
+
+#btnDeleteDiscount:hover{
+    filter: brightness(80%);
+}
+
+#btnSubmitModaldiscount{
+    width: 40%;
+    height: 2.5rem;
+    background-color: var(--color-dark-green);
+    color: var(--color-3)
+}
+
+#btnDeleteDiscount:hover{
+    filter: brightness(80%);
 }
 
 .buttons button {
@@ -904,6 +930,10 @@ thead tr .roles {
 .center {
     display: flex;
     justify-content: center;
+}
+
+.text-center{
+    text-align: center;
 }
 
 .absolute {

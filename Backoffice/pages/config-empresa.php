@@ -1,5 +1,8 @@
 <?php
-require './guards/active-session.php';
+require '../src/modules/auth/guards/active-session.php';
+require '../src/modules/auth/guards/check-permissions.php';
+require '../src/utils/actions.php';
+checkPermissionss($actions["configurar-empresa"]);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +36,7 @@ require './guards/active-session.php';
     </div>
     <div class="container frame">
         <div class="row">
-            <div class="col-xl-8 center"> 
+            <div class="col-xl-8 center">
                 <form class="form-emp" action="../src/modules/settings/config.php" method="post" enctype="multipart/form-data">
                     <div>
                         <label>Nombre:<input type="text" name="nombre" placeholder="ej: Digital Market" autocomplete="off"></label>
@@ -52,7 +55,7 @@ require './guards/active-session.php';
                         <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="ej: 1234DIGITAL" autocomplete="off"></label>
                         <label>Comentario de venta:<input type="text" name="comentario" placeholder="ej: precios en pesos Uruguayos" autocomplete="off"></label>
                         <label>Logo de empresa:<input id="btnUploadImageEmp" type="file" name="logo" class="btn-logo-empresa" accept="image/*"></label>
-                        
+
                     </div>
                     <div class="buttons absolute bottom-10">
                         <button class="btn-emp" type="submit">ACEPTAR</button>
