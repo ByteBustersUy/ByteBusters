@@ -4,7 +4,7 @@ include "./db/conexion.php";
 $nombre = urldecode($_GET['nombre']);
 
 
-$consulta ="SELECT * FROM productos WHERE nombre LIKE '%".$nombre."%'";
+$consulta ="SELECT id,nombre,imagen,precio FROM productos WHERE nombre LIKE '%".$nombre."%'";
 
 $res= $con->query($consulta);
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);

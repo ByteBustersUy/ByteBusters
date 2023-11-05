@@ -36,7 +36,9 @@ window.addEventListener("DOMContentLoaded", function () {
 		.then((response) => response.json())
 		.then((data) => {
 			let cards = ``;
+			
 			for (let i = 0; i < data.length; i++) {
+				let precioDescueto=Math.round(data[i].descuento*data[i].precio/100)
 				cards += `
     			<div>
         			<div class="card produc-promo">
@@ -47,7 +49,8 @@ window.addEventListener("DOMContentLoaded", function () {
             				<img src="./images/${data[i].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
 								<h5>${limitarNombres(data[i].nombre)}</h5>
-                				<h4>$${data[i].precio}</h4>
+                				<h4>$${data[i].precio-precioDescueto}</h4>
+								<h6>$${data[i].precio}</h6>
             				</div>
 						</a>
             			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
