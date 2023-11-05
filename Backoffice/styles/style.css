@@ -297,7 +297,7 @@ thead tr {
     text-align: center;
     width: 10rem;
     height: 2.5rem;
-    margin: 3rem auto 2rem;
+    margin: 2rem auto 2rem;
     cursor: pointer;
     color: var(--text-button-color);
     background-color: var(--bytebusters-color);
@@ -601,8 +601,8 @@ thead tr .roles {
 }
 
 #promocionar{
-    width: 12rem;
-    height: 2rem;
+    height: 2.4rem;
+    width: 17rem;
 }
 
 .promo-content{
@@ -930,6 +930,10 @@ thead tr .roles {
 .center {
     display: flex;
     justify-content: center;
+}
+
+.text-center{
+    text-align: center;
 }
 
 .absolute {

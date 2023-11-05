@@ -193,11 +193,15 @@ function detailProduct(int $productId)
 
     $promoId = findPromoIdByProductId($productId);
     $discount = 0;
+    $fechaInicio = "";
+    $fechaFin = "";
 
     if (hasData($promoId) && $promoId > 0) {
         $promo = findOnePromoById($promoId);
         if (hasData($promo)) {
             $discount = $promo["descuento"];
+            $fechaInicio = $promo["fechaInicio"];
+            $fechaFin = $promo["fechaFin"];
         }
     }
 
@@ -207,6 +211,8 @@ function detailProduct(int $productId)
         "descripcion" => $product['descripcion'],
         "precio" => $product['precio'],
         "descuento" => $discount,
+        "fechaInicio" => $fechaInicio,
+        "fechaFin" => $fechaFin,
     ];
 
     header("Content-Type: application/json");

@@ -298,10 +298,22 @@ btnPromocionar.addEventListener("click", async () => {
 		//preseleccionar la promo existente
 		const options = modalProductsPromotion.getElementsByTagName("option");
 		for (let i = 0; i < options.length; i++) {
-			if (options[i].innerHTML == productData.descuento + "%") {
+			const { descuento, fechaInicio, fechaFin } = productData;
+
+			const fechaInicioSplitted = fechaInicio.split("-");
+			const fechaInicioFormatted = fechaInicioSplitted.reverse().join("/");
+
+			const fechaFinSplitted = fechaFin.split("-");
+			const fechaFinFormatted = fechaFinSplitted.reverse().join("/");
+
+			const currentPromo = `${descuento}% (${fechaInicioFormatted} - ${fechaFinFormatted})`; 
+			console.log(options[i].innerHTML +"-->"+currentPromo)
+
+			if (options[i].innerHTML == currentPromo) {
 				options[i].setAttribute("selected", true);
 			}
 		}
+
 		const promoId = document.getElementById("promocionar").value;
 		
 		const formPromocionar = document.getElementById("formPromocionar");
