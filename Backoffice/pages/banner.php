@@ -31,7 +31,7 @@
 
 
 
-    <form action="" method="post">
+    <form action="../src/modules/settings/bannersubm.php" method="post" enctype="multipart/form-data">
         <div class="container-lg">
             <div class="row center">
                 <div class="col-12 col-sm-8 col-md-6">
