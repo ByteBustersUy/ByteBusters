@@ -53,9 +53,10 @@ window.addEventListener("DOMContentLoaded", function () {
 								<h6>$${data[i].precio}</h6>
             				</div>
 						</a>
-            			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+            			<a id="${data[i].id}" promo"1" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
+
 
 				divProducPromo.innerHTML = cards;
 			}
@@ -83,7 +84,7 @@ function cargarCardsProductosNoPromo() {
 							<h4>$${data[i].precio}</h4>
             				</div>
 						</a>
-            			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+            			<a id="${data[i].id}" promo="0" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 			}

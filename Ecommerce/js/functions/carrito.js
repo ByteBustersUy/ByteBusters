@@ -169,7 +169,8 @@ function generarPDF() {
     let alto=20;
         doc.text("Producto",20,10)
         doc.text("Cantidad",120,10)
-        doc.text("Precio",150,10)
+        doc.text("Precio uni",150,10)
+        doc.text("Precio total",180,10)
     for (let indi = 0; indi < jsonCarrito.length; indi++) { 
          if((indi==28)||(indi==56)||(indi==84)||(indi==112)){
         doc.addPage()
@@ -179,7 +180,8 @@ function generarPDF() {
         let cantidad=idsProductos[indi].cantidad.toString()
         doc.text(nombre, 10,alto);
         doc.text(cantidad,130,alto);
-        doc.text("$"+jsonCarrito[indi].precio,150,alto);
+        doc.text("$"+jsonCarrito[indi].precio,155,alto);
+        doc.text("$"+jsonCarrito[indi].precio*cantidad,185,alto);
         alto+=10;  
     }
     alto+=10;

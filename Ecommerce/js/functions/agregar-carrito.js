@@ -3,11 +3,16 @@ function comparar(a,b) {
 }
 document.addEventListener("mousedown", function () {
 	let carrito = [];
+	let value;
+	let id;
 	//Guarda el carrito en el LocalStorage
 	document.querySelectorAll(".agregar-carrito").forEach((btn) => {
 		btn.addEventListener("click", () => {
-			let id = parseInt(btn.id);
-			agregarProducoAlCarrito(id);
+			console.log( btn.promo);
+			console.log( btn.id);
+			value =parseInt(btn.promo)
+			id = parseInt(btn.id)
+			agregarProducoAlCarrito(id,value);
 		});
 	});
 
@@ -17,11 +22,21 @@ document.addEventListener("mousedown", function () {
 		carrito = JSON.parse(carritoGuardado);
 	}
 
-	function agregarProducoAlCarrito(id) {
-		carrito.push({
+	function agregarProducoAlCarrito(id,value) {
+		if (value==1) {
+			carrito.push({
 			id,
 			cantidad: 1,
+			promo: true
 		});
+		}else{
+			carrito.push({
+				id,
+				cantidad: 1,
+				promo: false
+			});
+		}
+		
 		carrito.sort(comparar);
 		localStorage.setItem("id", JSON.stringify(carrito));
 	}

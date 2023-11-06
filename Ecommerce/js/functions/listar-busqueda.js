@@ -41,8 +41,10 @@ function cargarBotonesPaginacion(totalProductos) {
   const divBtnPages = document.getElementById("div-btns-pages");
   divBtnPages.innerHTML = botones;
 }
+let indi;
+let ids=[];
 function listarBusqueda(nombreProductoABuscar,numPage) {
-  let ids=[];
+  
   fetch("../../api/listar-busqueda.php?nombre=" + nombreProductoABuscar, {
     method: "GET",
     headers: {
@@ -53,11 +55,11 @@ function listarBusqueda(nombreProductoABuscar,numPage) {
     .then((response) => response.json())
     .then((data) => {
       totalProductos=data.length;
-
+console.log(data);
       cargarBotonesPaginacion(totalProductos);
 
       const container = document.querySelector(".container-sm");
-      let indi = limit * numPage - limit;
+       indi = limit * numPage - limit;
       
       let contenidoLista='';
       for (let id = indi ; id < indi+10; id++) {
@@ -87,19 +89,65 @@ function listarBusqueda(nombreProductoABuscar,numPage) {
         container.innerHTML=contenidoLista;
         
       }
-      e(ids);
+      fetch("../../api/promocion.php?id=" + ids, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+    .then((respuesta)=> respuesta.json())
+    .then((ata) => {
+          console.log(ata);
+          let identi=[];
+    for (let i = 0; i < ata.length; i++) { 
+      if (i==ata.length-1) {
+        identi+=ata[i].idproduc;
+      } else {
+        identi+=ata[i].idproduc+",";
+      }
+    }console.log(identi);  
+    for (let d = indi ; d < indi+10; d++) {
+    
+      if (data[d].id===identi) {
+        console.log("promocionado");
+      }else{
+        console.log()
+      }
+     
+    }
+       
+      })
+      
+      //e(ids);
     });
 }
 function e(ids) {
   console.log(ids)
-let ruta =`../../api/promocion.php?id=`+ids;
-        fetch(ruta)
-        .then((response) => response.json())
-        .then((ata) => {
-          for (let id = 0; id <ata.length; id++) {
-            console.log(ata[id].descuento);
-            
-          }
+
+      fetch("../../api/promocion.php?id=" + ids, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      .then((respuesta)=> respuesta.json())
+      .then((ata) => {
+            console.log(ata);
+            let identi=[];
+      for (let i = 0; i < ata.length; i++) { 
+        if (i==ata.length-1) {
+          identi+=ata[i].idproduc;
+        } else {
+          identi+=ata[i].idproduc+",";
+        }
+         
+      
+       /*
+        if (ata[i].idproduc==data[i].id) {
+          console.log("promocionado");
+        }*/
+      } console.log(identi);
+         
          
         })
 }
