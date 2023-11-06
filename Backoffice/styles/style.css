@@ -930,6 +930,13 @@ thead tr .roles {
     color: var(--color-1);
 }
 
+
+/* MODIFICAR BANNERS */
+
+.ecommerce-images-config label{
+    color: var(--color-3);
+}
+
 /* --------- GENERICS --------- */
 .align-end {
     align-items: end;
@@ -1241,4 +1248,3 @@ footer img {
         transform: rotate(-360deg);
     }
 }
-/*-----------Banner Backoffice----------*/
