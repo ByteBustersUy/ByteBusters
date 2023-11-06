@@ -26,65 +26,48 @@
         ?>
         <h1>MODIFICAR BANNER</h1>
     </div>
-<<<<<<< HEAD
-
-
-
-
-
     <form action="../src/modules/settings/bannersubm.php" method="post" enctype="multipart/form-data">
-        <div class="container-lg">
-            <div class="row center">
-                <div class="col-12 col-sm-8 col-md-6">
+        <div class="container text-center mt-5">
+            <div class="row ecommerce-images-config">
+                <div class="col-12 col-md-6">
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-=======
-    <form action="" method="post">
-    <div class="container text-center mt-5">
-        <div class="row ecommerce-images-config">
-            <div class="col-12 col-md-6">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../../Ecommerce/assets/Screenshot_493.png" class="d-block w-100" alt="...">
->>>>>>> 0949c27965370172abb09b710d9dd92a959af7ac
                         </div>
-                        <div class="carousel-item">
-                            <img src="../../Ecommerce/assets/Screenshot_494.png" class="d-block w-100" alt="...">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../../Ecommerce/assets/banneruno.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../../Ecommerce/assets/bannerdos.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../../Ecommerce/assets/bannertres.png" class="d-block w-100" alt="...">
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <img src="../../Ecommerce/assets/Screenshot_495.png" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span> -->
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span> -->
-                    </button>
-                </div>
-                <div class="btn-group-horizontal w-75 m-auto" role="group" aria-label="Vertical button group">
-                    <div class="mt-5 mb-5">
-                        <label for="formFile" class="form-label">Seleccionar primer banner</label>
-                        <input class="form-control" type="file" id="formFile">
+                        </button>
+                    </div>
+                    <div class="btn-group-horizontal w-75 m-auto" role="group" aria-label="Vertical button group">
+                        <div class="mt-5 mb-5">
+                            <label for="formFile" class="form-label">Seleccionar primer banner</label>
+                            <input class="form-control" type="file" id="formFile" name="banneruno" accept="image/*">
+                        </div>
+                      <div class="mt-5 mb-5">
+                        <label for="formFile" class="form-label">Seleccionar segundo banner</label>
+                        <input class="form-control" type="file" id="formFile" name="bannerdos">
                     </div>
                     <div class="mt-5 mb-5">
-                        <label for="formFile" class="form-label">Seleccionar primer banner</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
-                    <div class="mt-5 mb-5">
-                        <label for="formFile" class="form-label">Seleccionar primer banner</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <label for="formFile" class="form-label">Seleccionar tercer banner</label>
+                        <input class="form-control" type="file" id="formFile" name="bannertres">
                     </div>
                     <div class="mt-5 mb-5">
                     </div>
@@ -92,21 +75,21 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="banner">
-                    <img src="../../Ecommerce/assets/banner2.webp" class="d-block w-100" alt="...">
+                    <img src="../../Ecommerce/assets/bannercuatro.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="btn-group-horizontal w-75 m-auto" role="group" aria-label="Vertical button group">
                     <div class="mt-5 mb-5">
                         <label for="formFile" class="form-label">Imagen para banner:</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="bannercuatro">
                     </div>
                 </div>
-                <div class="d-block w-50 m-auto">
-                    <input class="form-control mt-2" type="submit" id="formFile">
-                    <input class="form-control mt-2" type="reset" id="formFile">
+                        <div class="d-block w-50 m-auto">
+                            <input class="form-control mt-2" type="submit" id="formFile">
+                            <input class="form-control mt-2" type="reset" id="formFile">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
     </form>
     <footer>
         <?php

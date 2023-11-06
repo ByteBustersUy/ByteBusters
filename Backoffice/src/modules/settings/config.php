@@ -14,8 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $comentario = htmlspecialchars($_POST['comentario']);
     $logo = htmlspecialchars($_FILE['logo']);
     $email = htmlspecialchars($_POST['email']);
-    $pwd_email = htmlspecialchars($_POST['pwd_email']);
-
+    $pwd_email = htmlspecialchars($_POST['pwd_email']); 
     $nameLogo = "logo-empresa.png";
     $destinoEcommerce = "../../../../Ecommerce/assets/".$nameLogo;
     $fileTmpPath = $_FILES['logo']['tmp_name'];
