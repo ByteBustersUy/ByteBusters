@@ -8,18 +8,18 @@ divBtnPages.addEventListener("click", function (event) {
 			.then((response) => response.json())
 			.then((data) => {
 				let card = "";
-				for (let id = 0; id < data.length; id++) {
+				for (let i = 0; i < data.length; i++) {
 					card += `
     			<div>
         			<div class="card h-100 produc-promo" >
 						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
-            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<img src="./images/${data[i].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
-                				<h4>$${data[id].precio}</h4>
-                				<h5>${data[id].nombre}</h5>
+                				<h4>$${data[i].precio}</h4>
+                				<h5>${data[i].nombre}</h5>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+            			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 				}
@@ -30,37 +30,35 @@ divBtnPages.addEventListener("click", function (event) {
 
 window.addEventListener("DOMContentLoaded", function () {
 	const divProducPromo = document.getElementById("tarjetas");
+
 	//Productos promocionados
 	fetch("../api/productos-promo.php")
 		.then((response) => response.json())
 		.then((data) => {
-			let cards = "";
-			for (let id = 0; id < data.length; id++) {
-				fetch("../api/promocion.php?id=" + data[id].id)
-					.then((response2) => response2.json())
-					.then((promo) => {
-						cards += `
+			let cards = ``;
+			
+			for (let i = 0; i < data.length; i++) {
+				let precioDescueto=Math.round(data[i].descuento*data[i].precio/100)
+				cards += `
     			<div>
-        			<div class="card produc-promo" >
-						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${data[id].id}">
+        			<div class="card produc-promo">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${data[i].id}">
 						<div class="promo-tag">
-						<span>${promo.descuento}% OFF</span>
+						<span>${data[i].descuento}% OFF</span>
 						</div>
-            				<img src="./images/${data[id].imagen} " class="card-img-top" alt="...">
+            				<img src="./images/${data[i].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
-								<h5>${limitarNombres(data[id].nombre)}</h5>
-                				<h4>$${data[id].precio}</h4>
+								<h5>${limitarNombres(data[i].nombre)}</h5>
+                				<h4>$${data[i].precio-precioDescueto}</h4>
+								<h6>$${data[i].precio}</h6>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+            			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 
 				divProducPromo.innerHTML = cards;
-					}).catch((error) => { });
-					
 			}
-
 		});
 	cargarCardsProductosNoPromo();
 });
@@ -74,33 +72,30 @@ function cargarCardsProductosNoPromo() {
 		.then((response) => response.json())
 		.then((data) => {
 			let cards = "";
-			for (let id = 0; id < data.length; id++) {
+			for (let i = 0; i < data.length; i++) {
 				cards += `
     			<div>
         			<div class="card producto-no-promo" >
-						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${id}">
-            				<img src="./images/${data[id].imagen} " class="card-img-top no-promo" alt="...">
+						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${i}">
+            				<img src="./images/${data[i].imagen} " class="card-img-top no-promo" alt="...">
             				<div class="card-body">
-							<h5>${limitarNombres(data[id].nombre)}</h5>
-							<h4>$${data[id].precio}</h4>
+							<h5>${limitarNombres(data[i].nombre)}</h5>
+							<h4>$${data[i].precio}</h4>
             				</div>
 						</a>
-            			<a id="${data[id].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+            			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
 			}
-
 			divProductoNoPromo.innerHTML = cards;
-
-
 		});
-
 }
 
-
 function limitarNombres(nombre) {
-	if (nombre.length > 30) {
-		nombre = nombre.slice(0, 30);
+	if(!nombre) return '';
+	
+	if (nombre.length > 10) {
+		nombre = nombre.slice(0, 10);
 		if (!nombre.endsWith(" ")) {
 			indiceUltimaPalabra = nombre.lastIndexOf(" ");
 			nombre = nombre.slice(0, indiceUltimaPalabra);
@@ -108,4 +103,3 @@ function limitarNombres(nombre) {
 	}
 	return nombre;
 }
-

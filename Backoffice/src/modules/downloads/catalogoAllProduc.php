@@ -11,8 +11,6 @@ class pdfDownload extends FPDF
 // Cabecera de página
 function Header()
 {
-    // Logo
-    //$this->Image('logo.png',10,8,33);
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     // Movernos a la derecha
@@ -45,7 +43,7 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 
 //$data = findAllDataProduct();
-$registros = findAllDataProduct();
+$registros = findAllProductData();
 foreach($registros as $reg) { 
     $productname = '';
     $productdesc = '';

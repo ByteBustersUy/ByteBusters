@@ -1,3 +1,10 @@
+<?php
+require '../src/modules/auth/guards/active-session.php';
+require '../src/modules/auth/guards/check-permissions.php';
+require '../src/utils/actions.php';
+checkPermissionss($actions["gestionar-permisos"]);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

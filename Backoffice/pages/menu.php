@@ -1,3 +1,7 @@
+<?php
+require '../src/modules/auth/guards/active-session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,6 +39,7 @@
             ?>
         </div>
     </div>
+    <div class="space4Footer"></div>
     <footer>
         <?php
         require "./components/footer.php";

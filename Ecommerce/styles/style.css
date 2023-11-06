@@ -9,7 +9,7 @@
   --color-5: #ffffff;
   --color-6: #0000ff;
   --color-7: #eeeded;
-  --color-8: #ffe000;
+  --color-8: #ffec5f;
   --color-background: #fdfbfb;
 }
 
@@ -24,7 +24,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  margin: auto 1rem;
+  margin: 1rem auto auto -.5rem;
   padding: 1rem;
 }
 
@@ -196,6 +196,10 @@ span {
 .card h5 {
   color: black;
 }
+.card h6 {
+  color: black;
+  text-decoration: line-through;
+}
 
 .btn-agregar {
   background-color: var(--ecommerce-color);
@@ -235,13 +239,14 @@ span {
 
 .titulo-descuentos-home{
   font-family: monospace;
-  margin-top: 3rem;
+  margin-top: 2rem;
   font-size: 2.5rem;
   font-style: normal;
   font-weight: bolder;
+  padding: 0.5rem;
   outline-style: auto;
-  filter: drop-shadow(1px 1px 1px var(--color-8));
-  background-color: cornsilk;
+  filter: drop-shadow(0 0 0.5rem var(--color-2));
+  background-color: rgb(255 255 255 / 88%);
 }
 /* banner */
 
@@ -802,6 +807,7 @@ border-radius: .3rem;
 a {
   outline: none;
   text-decoration: none;
+  color: black;
 }
 
 .aNomb:link {
@@ -825,6 +831,10 @@ a {
 .aNomb:active {
   background: var(--color-2);
   color: var(--color-2);
+}
+.aNomb h6 {
+  color: black;
+  text-decoration: line-through;
 }
 
 .img-producto-lista {

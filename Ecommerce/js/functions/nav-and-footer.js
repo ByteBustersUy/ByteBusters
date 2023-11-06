@@ -95,24 +95,6 @@ document.getElementById("navSearch").addEventListener("keypress", (event) => {
   }
 });
 
-/*document.getElementById("btnNavSearch").addEventListener("click", function(event){
-  event.preventDefault(); 
-  const inputSearch = document.getElementById("navSearch");
-  const searchValue = inputSearch.value;
-  console.log(searchValue);
-  if(searchValue === ""){
-    return;
-  }
-  window.location.href = `${relativePath}/pages/listar.html?search=${searchValue}`;
-});*/
-
-
-
-
-
-
-
-
 	//Datos de empresa
 	fetch(`${relativePath}/../api/datos-empresa.php`)
 		.then((response) => response.json())

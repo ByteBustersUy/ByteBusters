@@ -27,7 +27,7 @@ btnAddProduct.addEventListener("click", () => {
 	} else {
 		btnSubmitModal.disabled = false;
 		btnSubmitModal.setAttribute("style", "filter:brightness(100%);");
-		document.getElementById("btnUploadImage").setAttribute("required");
+		document.getElementById("btnUploadImage").setAttribute("required", "");
 	}
 	formAbm.attributes.item(
 		2
@@ -47,6 +47,7 @@ btnUploadImage.addEventListener("change", () => {
 //Editar Producto
 btnEditProduct.addEventListener("click", async () => {
 	if (!btnEditProduct.classList.contains("disabled")) {
+		document.getElementById("btnUploadImage").removeAttribute("required");
 		btnEditProduct.setAttribute("class", "enabled-button");
 		const productId = document.getElementsByClassName("selected")[0].id;
 
@@ -66,9 +67,8 @@ btnEditProduct.addEventListener("click", async () => {
 			categoria: selectedRow.getElementsByTagName("td")[1].id,
 			precio: parseFloat(
 				selectedRow.getElementsByTagName("td")[2].innerHTML.replace("$", "")
-			)
+			),
 		};
-		
 
 		inputsForm.nombre.value = selectedUserData.nombre;
 		inputsForm.precio.value = selectedUserData.precio;
@@ -83,10 +83,8 @@ btnEditProduct.addEventListener("click", async () => {
 			}
 		}
 		const productData = await getProductData(productId);
-		console.log(productData.descripcion)
 		inputsForm.descripcion.value = productData.descripcion;
 		document.getElementById("uploadLabel").innerHTML = "Cambiar imágen";
-		document.getElementById("btnUploadImage").removeAttribute("required");
 
 		formAbm.attributes.item(
 			2
@@ -116,7 +114,7 @@ btnDeleteProduct.addEventListener("click", () => {
 	}
 });
 
-// detalle producto 
+// detalle producto
 const buttonsProductDetail = document.getElementsByClassName("btn-eye");
 for (let btn of buttonsProductDetail) {
 	btn.addEventListener("click", async () => {
@@ -216,11 +214,7 @@ formAbm.addEventListener("change", () => {
 			validForm = false;
 		}
 
-		if (
-			isEmpty(descripcion.value) ||
-			isEmpty(categoria.value) ||
-			isEmpty(imagen.value)
-		) {
+		if (isEmpty(descripcion.value) || isEmpty(categoria.value)) {
 			messageError.innerHTML = "Todos los campos son obligatorios";
 			validForm = false;
 		}
@@ -300,35 +294,60 @@ btnPromocionar.addEventListener("click", async () => {
 				<img src="../../Ecommerce/images/${productData.imagen}">`;
 		const nombreProducto = modalBody.getElementsByTagName("h4")[0];
 		nombreProducto.innerHTML = productData.nombre;
-		const checkbox = document.getElementById("checkPromocion");
-		const promoId = selectedRow
-			.getElementsByTagName("td")[3]
-			.getAttribute("promoId");
-		if (promoId != 0) {
-			checkbox.checked = true;
-		} else {
-			checkbox.checked = false;
-		}
 
+		//preseleccionar la promo existente
 		const options = modalProductsPromotion.getElementsByTagName("option");
 		for (let i = 0; i < options.length; i++) {
-			if (options[i].innerHTML == productData.descuento+"%") {
+			const { descuento, fechaInicio, fechaFin } = productData;
+
+			const fechaInicioSplitted = fechaInicio.split("-");
+			const fechaInicioFormatted = fechaInicioSplitted.reverse().join("/");
+
+			const fechaFinSplitted = fechaFin.split("-");
+			const fechaFinFormatted = fechaFinSplitted.reverse().join("/");
+
+			const currentPromo = `${descuento}% (${fechaInicioFormatted} - ${fechaFinFormatted})`; 
+			console.log(options[i].innerHTML +"-->"+currentPromo)
+
+			if (options[i].innerHTML == currentPromo) {
 				options[i].setAttribute("selected", true);
 			}
 		}
 
-
+		const promoId = document.getElementById("promocionar").value;
+		
 		const formPromocionar = document.getElementById("formPromocionar");
-		formPromocionar.addEventListener("submit", () => {
-			formPromocionar.attributes.item(
-				2
-			).value += `&productId=${productId}&status=${checkbox.checked? 1 : 0}`;
-		})
+		formPromocionar.addEventListener("submit", (event) => {
+			formPromocionar.attributes.item(2).value += `&productId=${productId}`;
+			console.log(event)
+		});
 
+		//eliminar promocion a producto
+		const btnDeleteDiscount = document.getElementById("btnDeleteDiscount");
+
+		btnDeleteDiscount.addEventListener("click",async  () => {
+			const data = new URLSearchParams();
+			data.append("promoId", promoId);
+			data.append("productId", productId);
+				fetch(`../src/modules/products/abm-productos.php?action=deleteDiscount`,
+				{
+					method: "POST",
+					headers: {
+						"Content-type": "application/x-www-form-urlencoded",
+					},
+					body: data
+				}).then(response => response.status)
+				.then(status => {
+					if(status == 200){
+						setTimeout(() => {
+							alert("Descuento eliminado con éxito");
+							location.reload(true);
+						},400);
+					}
+				}).catch(error => console.log(error));
+		});
 	}
 });
-
-
 
 
 
@@ -389,7 +408,15 @@ async function deleteProduct(productId) {
 }
 
 function sortTable(n, type) {
-	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	var table,
+		rows,
+		switching,
+		i,
+		x,
+		y,
+		shouldSwitch,
+		dir,
+		switchcount = 0;
 
 	table = document.getElementById("datos");
 	switching = true;
@@ -398,17 +425,25 @@ function sortTable(n, type) {
 	while (switching) {
 		switching = false;
 		rows = table.rows;
-		for (i = 0; i < (rows.length - 1); i++) {
+		for (i = 0; i < rows.length - 1; i++) {
 			shouldSwitch = false;
 			x = rows[i].getElementsByTagName("TD")[n];
 			y = rows[i + 1].getElementsByTagName("TD")[n];
 			if (dir == "asc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
+				if (
+					(type == "str" &&
+						x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
+					(type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))
+				) {
 					shouldSwitch = true;
 					break;
 				}
 			} else if (dir == "desc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
+				if (
+					(type == "str" &&
+						x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) ||
+					(type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))
+				) {
 					shouldSwitch = true;
 					break;
 				}
@@ -429,15 +464,14 @@ function sortTable(n, type) {
 
 function filterProductByPromo() {
 	const selectedValue = document.getElementById("filter").value;
-	console.log(selectedValue);
 	if (selectedValue === "-" || "%") {
-		const tableReg = document.getElementById('datos');
-		const searchText = document.getElementById('filter').value.toLowerCase();
+		const tableReg = document.getElementById("datos");
+		const searchText = document.getElementById("filter").value.toLowerCase();
 		let total = 0;
 		// Recorremos todas las filas con contenido de la tabla
 		for (let i = 0; i < tableReg.rows.length; i++) {
 			let found = false;
-			const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+			const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
 			// Recorremos todas las celdas
 			const compareWith = cellsOfRow[3].innerHTML.toLowerCase();
 			// Buscamos el texto en el contenido de la celda
@@ -447,15 +481,14 @@ function filterProductByPromo() {
 			}
 
 			if (found) {
-				tableReg.rows[i].style.display = '';
+				tableReg.rows[i].style.display = "";
 			} else {
 				// si no ha encontrado ninguna coincidencia, esconde la
 				// fila de la tabla
-				tableReg.rows[i].style.display = 'none';
+				tableReg.rows[i].style.display = "none";
 			}
 		}
 	} else {
 		getUsersTableDataHTML();
 	}
-
 }

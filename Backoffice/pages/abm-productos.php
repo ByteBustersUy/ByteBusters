@@ -1,3 +1,10 @@
+<?php
+require '../src/modules/auth/guards/active-session.php';
+require '../src/modules/auth/guards/check-permissions.php';
+require '../src/utils/actions.php';
+checkPermissionss($actions["gestionar-productos"]);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,6 +19,7 @@
     <link rel="stylesheet" href="../styles/style.css">
     <title>Ecommerce Manager</title>
 </head>
+
 <body>
     <div>
         <div class="link-options-div">
@@ -53,6 +61,7 @@
                     <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
                     <select class="filter-list" name="filter" id="filter" onchange="filterProductByPromo();">
                         <option selected hidden value="">Filtrar</option>
+                        <option value="">Todo</option>
                         <option value="%">Promocionado</option>
                         <option value="-">No Promocionado</option>
                     </select>
@@ -61,7 +70,7 @@
                     <table class="table table-dark table-hover">
                         <thead class="sticky-top">
                             <tr>
-                                <th onclick="sortTable(0, 'str')"class="user-select-none first-in-table" scope="col">Nombre del producto</th>
+                                <th onclick="sortTable(0, 'str')" class="user-select-none first-in-table" scope="col">Nombre del producto</th>
                                 <th onclick="sortTable(1, 'str')" class="user-select-none" scope="col">Categoría</th>
                                 <th onclick="sortTable(2, 'int')" class="user-select-none" scope="col">Precio $</th>
                                 <th onclick="sortTable(3, 'str')" class="user-select-none" scope="col">Promo</th>
@@ -138,10 +147,6 @@
                             </div>
                             <form id="formPromocionar" class="form-promo" action="../src/modules/products/abm-productos.php?action=addDiscount" method="post" enctype="multipart/form-data">
                                 <div class='promo-content promo-modal'>
-                                    <div>
-                                        <label for="status">Habilitar promoción</label>
-                                        <input type="checkbox" class="chkbox" name="status" id="checkPromocion">
-                                    </div>
                                     <select name="promocionar" id="promocionar" required>
                                         <option selected hidden value="">Elige una promoción</option>
                                         <?php
@@ -150,9 +155,10 @@
                                         ?>
                                     </select>
                                 </div>
+                                <label id="errorMessageModal"></label>
                                 <div class="buttons">
-                                    <button id="btnCancelModal" type="button" data-bs-dismiss="modal" aria-label="Close">CANCELAR</button>
-                                    <button id="btnSubmitModaldiscount" type="submit">ACEPTAR</button>
+                                    <button id="btnDeleteDiscount" type="button">Quitar promoción</button>
+                                    <button id="btnSubmitModaldiscount" type="submit">Agregar promoción</button>
                                 </div>
                             </form>
                             <div class="modal-body">

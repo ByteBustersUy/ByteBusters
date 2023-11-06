@@ -1,3 +1,10 @@
+<?php
+require '../src/modules/auth/guards/active-session.php';
+require '../src/modules/auth/guards/check-permissions.php';
+require '../src/utils/actions.php';
+checkPermissionss($actions["gestionar-usuarios"]);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -50,7 +57,7 @@
             </div>
             <div class="col-lg-9">
                 <div class="table-options">
-                <input id="searchTerm" type="text" placeholder="Buscar usuario" onkeyup="doSearch()" />
+                    <input id="searchTerm" type="text" placeholder="Buscar usuario" onkeyup="doSearch()" />
                     <select class="filter-list" name="filter" id="filter" onchange="filterUserByRol();">
                         <option selected hidden value="">Roles</option>
                         <option value="|">Todos</option>

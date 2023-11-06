@@ -42,7 +42,7 @@ function cargarBotonesPaginacion(totalProductos) {
   divBtnPages.innerHTML = botones;
 }
 function listarBusqueda(nombreProductoABuscar,numPage) {
-  
+  let ids=[];
   fetch("../../api/listar-busqueda.php?nombre=" + nombreProductoABuscar, {
     method: "GET",
     headers: {
@@ -64,18 +64,42 @@ function listarBusqueda(nombreProductoABuscar,numPage) {
         contenidoLista+= `
         <div class="row cardProd">
         <div class="col-md-12 d-flex">
-          <a href=""><img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt=""></a>
+          <a href="detalleProducto.html?id=${data[id].id}">
+          <img src="../images/${data[id].imagen}" class="card-img-top img-producto-lista" alt="10"></a>
           <div>
-            <a class="aNomb" href="">
+            <a class="aNomb" href="detalleProducto.html?id=${data[id].id}">
               <h3>${data[id].nombre}</h3>
+              <h4>$${data[id].precio}</h4>
             </a>
-            <h4>$${data[id].precio}</h4>
-            <a id="1" href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
+            <a id=${data[id].id} href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
           </div>
         </div>
         </div>
         `;
+        if (id==indi+10-1) {
+          ids+=data[id].id
+        } else {
+          ids+=data[id].id+",";
+        }
+        
+        //console.log(ids);
+        
         container.innerHTML=contenidoLista;
+        
       }
+      e(ids);
     });
+}
+function e(ids) {
+  console.log(ids)
+let ruta =`../../api/promocion.php?id=`+ids;
+        fetch(ruta)
+        .then((response) => response.json())
+        .then((ata) => {
+          for (let id = 0; id <ata.length; id++) {
+            console.log(ata[id].descuento);
+            
+          }
+         
+        })
 }
