@@ -1,12 +1,8 @@
 <?php 
 require "./db/conexion.php";
 
-$idProducto = $_GET["id"];
-
-/*
-1: obtener los ids de las promos vigentes y activas 
-2: obtener los ids de productos
-3: obtener todos los productos que tengan promo vigente y activa */
+if(isset($_GET["id"])){
+    $idProducto = $_GET["id"];
 try{
     $consultaRelacion ="SELECT promociones_id AS idpromo,  productos_id AS idproduc  
                         FROM `productos_has_promociones` 
@@ -21,5 +17,17 @@ try{
 }catch(Exception $e){
     die("ERROR SQL in promociones.php: " . $e->getMessage());
 }
-
+}
+else if(isset($_GET["idPromo"]))
+{
+    $idPromo = $_GET["idPromo"];
+try{
+    $res=$con->query("SELECT descuento FROM promociones WHERE id IN(".$idPromo.")"." AND vigente = 1 AND activo = 1 ");
+    $reg = $res->fetchAll(PDO::FETCH_ASSOC);
+    header("Content-Type: application/json");
+    echo json_encode($reg,JSON_PRETTY_PRINT);
+}catch(Exception $e){
+    die("ERROR SQL in promociones.php: " . $e->getMessage());
+}
+}
 ?>
