@@ -39,21 +39,21 @@ checkPermissionss($actions["configurar-empresa"]);
             <div class="col-xl-8 center">
                 <form class="form-emp" action="../src/modules/settings/config.php" method="post" enctype="multipart/form-data">
                     <div>
-                        <label>Nombre:<input type="text" name="nombre" placeholder="ej: Digital Market" autocomplete="off"></label>
-                        <label>Rubro:<input type="text" name="rubro" placeholder="ej: Supermercado" autocomplete="off"></label>
-                        <label>Calle:<input type="text" name="calle" placeholder="ej: Giannasstassio" autocomplete="off"></label>
-                        <label>Número:<input type="number" name="numero" placeholder="ej: 102" autocomplete="off"></label>
+                        <label>Nombre:<input type="text" name="nombre" placeholder="Digital Market" autocomplete="off"></label>
+                        <label>Rubro:<input type="text" name="rubro" placeholder="Supermercado" autocomplete="off"></label>
+                        <label>Calle:<input type="text" name="calle" placeholder="Giannasstassio" autocomplete="off"></label>
+                        <label>Número:<input type="number" name="numero" placeholder="102" autocomplete="off"></label>
                     </div>
                     <div>
-                        <label>Ciudad:<input type="text" name="ciudad" placeholder="ej: Solymar" autocomplete="off"></label>
-                        <label>Teléfono:<input type="text" name="telefono" placeholder="ej: 26961234" autocomplete="off"></label>
+                        <label>Ciudad:<input type="text" name="ciudad" placeholder="Solymar" autocomplete="off"></label>
+                        <label>Teléfono:<input type="text" name="telefono" placeholder="26961234" autocomplete="off"></label>
                         <label>Instagram:<input type="text" name="instagram" placeholder="@digital.market" autocomplete="off"></label>
                         <label>Whatsapp:<input type="text" name="whatsapp" placeholder="+59896123456" autocomplete="off"></label>
                     </div>
                     <div>
-                        <label>Email:<input type="emial" name="email" placeholder="ej: dmarket@gmail.com" autocomplete="off"></label>
-                        <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="ej: 1234DIGITAL" autocomplete="off"></label>
-                        <label>Comentario de venta:<input type="text" name="comentario" placeholder="ej: precios en pesos Uruguayos" autocomplete="off"></label>
+                        <label>Email:<input type="emial" name="email" placeholder="dmarket@gmail.com" autocomplete="off"></label>
+                        <label>Contraseña de email:<input type="text" name="pwd_email" placeholder="1234DIGITAL" autocomplete="off"></label>
+                        <label>Comentario de venta:<input type="text" name="comentario" placeholder="precios en pesos Uruguayos" autocomplete="off"></label>
                         <label>Logo de empresa:<input id="btnUploadImageEmp" type="file" name="logo" class="btn-logo-empresa" accept="image/*"></label>
 
                     </div>

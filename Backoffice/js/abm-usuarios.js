@@ -11,6 +11,9 @@ const validEmails = [
 	"gmail.com",
 	"hotmail.com",
 	"bytebusters.com",
+	"icloud.com",
+	"outlook.com",
+	"yahoo.com",
 ];
 
 const validators = {
