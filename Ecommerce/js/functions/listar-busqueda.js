@@ -41,12 +41,10 @@ function cargarBotonesPaginacion(totalProductos) {
   divBtnPages.innerHTML = botones;
 }
 
-let indi;
-let ids = [];
-let idsPromociones =[];
 const container = document.querySelector(".container-sm");
+
 function listarBusqueda(nombreProductoABuscar, numPage) {
-  ids = [];
+  let indice;
   let contenidoLista = '';
   fetch("../../api/listar-busqueda.php?nombre=" + nombreProductoABuscar, {
     method: "GET",
@@ -55,64 +53,94 @@ function listarBusqueda(nombreProductoABuscar, numPage) {
     },
   })
     .then((response) => response.json())
-    .then((jsonProductos) => {
+    .then(async (jsonProductos) => {
       totalProductos = jsonProductos.length;
       cargarBotonesPaginacion(totalProductos);
-      indi = limit * numPage - limit;
+      indice = limit * numPage - limit;
+        for (let i = indice; i < indice + 10; i++) {
+          const idProducto = jsonProductos[i].id;
+          const idPromo = (await obtenerIdPromo(idProducto))[0]?.promociones_id;
+          let descuento;
 
-      for (let i = 0; i < jsonProductos.length; i++) {
-        ids.push(jsonProductos[i].id);
-      }
-      console.log(ids)
-      fetch("../../api/promocion.php?id=" + ids.join(','), {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((respuesta) => respuesta.json())
-        .then((jsonProducPromo) => {
-          console.log(jsonProducPromo);
-          for (let i = 0; i < jsonProducPromo.length; i++) {
-            idsPromociones.push(jsonProducPromo[i].idpromo);
+          if(idPromo){
+            descuento = (await obtenerDescuento(idProducto, idPromo))[0].descuento
           }
-          fetch("../../api/promocion.php?idPromo=" + idsPromociones.join(','), {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((response) => response.json())
-            .then((jsonPromocion) => {
-              console.log(jsonPromocion)
-            })
-        })
-        for (let i = indi; i < indi + 10; i++) {
-          contenidoLista += `
-          <div class="row cardProd">
-            <div class="col-md-12 d-flex">
-              <a href="detalleProducto.html?id=${jsonProductos[i].id}">
-                <img src="../images/${jsonProductos[i].imagen}" class="card-img-top img-producto-lista" alt="10"></a>
-                <div>
-                  <a id=${jsonProductos[i].id} class="aNomb" href="detalleProducto.html?id=${jsonProductos[i].id}">
-                    <h3>${jsonProductos[i].nombre}</h3>
-                    <h6>${jsonProductos[i].precio}</h6>
-                    <h4>$${jsonProductos[i].precio}</h4>
-                  </a> 
-                  <a id=${jsonProductos[i].id} href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
-                </div>
-            </div>
-          </div>
-          `;
-          container.innerHTML = contenidoLista;
+          
+          if(descuento) {
+            contenidoLista += renderizarListado(jsonProductos[i], descuento);
+          }else{
+            contenidoLista += renderizarListado(jsonProductos[i]);
+          }
         }
+        container.innerHTML = contenidoLista;
 
     })
 }
 
+async function obtenerIdPromo(idProduct){
+  const response = await fetch("../../api/promocion.php?id=" + idProduct, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if(response.ok){
+    const data = await response.json();
+    return data;
+  }else{
+    return null;
+  }
+}
 
-/*const precio = await namess(10,100);
-async function namess(descuento,precioReal) {
-  return 25;
-}*/
+function renderizarListado(jsonProductos, descuento){
 
+  if(descuento){
+    return `
+    <div class="row cardProd">
+      <div class="col-md-12 d-flex">
+        <a href="detalleProducto.html?id=${jsonProductos.id}">
+          <img src="../images/${jsonProductos.imagen}" class="card-img-top img-producto-lista" alt="10"></a>
+          <div>
+            <a id=${jsonProductos.id} class="aNomb" href="detalleProducto.html?id=${jsonProductos.id}">
+              <h3>${jsonProductos.nombre}</h3>
+              <h6>${jsonProductos.precio}</h6>
+              <h4>$${jsonProductos.precio * (100 - descuento) / 100}</h4>
+            </a>
+            <a id=${jsonProductos.id} href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
+          </div>
+      </div>
+    </div>
+    `;
+  }else{
+    return `
+    <div class="row cardProd">
+      <div class="col-md-12 d-flex">
+        <a href="detalleProducto.html?id=${jsonProductos.id}">
+          <img src="../images/${jsonProductos.imagen}" class="card-img-top img-producto-lista" alt="10"></a>
+          <div>
+            <a id=${jsonProductos.id} class="aNomb" href="detalleProducto.html?id=${jsonProductos.id}">
+              <h3>${jsonProductos.nombre}</h3>
+              <h4>$${jsonProductos.precio}</h4>
+            </a>
+            <a id=${jsonProductos.id} href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
+          </div>
+      </div>
+    </div>
+    `;
+  }
+}
+async function obtenerDescuento(idProduct, idPromo){
+  const response = await fetch("../../api/promocion.php?idPromo=" + idPromo, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if(response.ok){
+    const data = await response.json();
+    return data;
+  }else{
+    return null;
+  }
+}
