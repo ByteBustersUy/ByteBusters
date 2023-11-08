@@ -8,7 +8,10 @@ function isValidEmail(string $var): bool
         'gmail.com',
         'hotmail.com',
         'bytebusters.com',
-    ];
+        'outlook.com',
+        'yahoo.com',
+        'icloud.com'
+        ];
     foreach ($validEmails as $email) {
         $regex = "/^[a-z0-9\._-]+@(?:" . $email . ")$/";
         if (preg_match($regex, $var)) {
