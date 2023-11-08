@@ -63,9 +63,9 @@ function listarBusqueda(nombreProductoABuscar, numPage) {
           let descuento;
 
           if(idPromo){
-            descuento = (await obtenerDescuento(idProducto, idPromo))[0].descuento
+            descuento = (await obtenerDescuento(idPromo))[0].descuento
           }
-          
+
           if(descuento) {
             contenidoLista += renderizarListado(jsonProductos[i], descuento);
           }else{
@@ -84,8 +84,9 @@ async function obtenerIdPromo(idProduct){
       "Content-Type": "application/json",
     },
   });
+
   if(response.ok){
-    const data = await response.json();
+    const data = response.json();
     return data;
   }else{
     return null;
@@ -129,7 +130,7 @@ function renderizarListado(jsonProductos, descuento){
     `;
   }
 }
-async function obtenerDescuento(idProduct, idPromo){
+async function obtenerDescuento(idPromo){
   const response = await fetch("../../api/promocion.php?idPromo=" + idPromo, {
     method: "GET",
     headers: {
@@ -138,7 +139,7 @@ async function obtenerDescuento(idProduct, idPromo){
   });
 
   if(response.ok){
-    const data = await response.json();
+    const data = response.json();
     return data;
   }else{
     return null;
