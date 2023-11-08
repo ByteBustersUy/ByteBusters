@@ -129,6 +129,7 @@ body {
 }
 
 input {
+    width: 0px;
     height: 2.3rem;
     outline: none;
     text-indent: .5rem;
@@ -172,6 +173,10 @@ th {
     border: 1px solid var(--secondary-border-color);
     background-color: var(--primary-background-color) !important;
     filter: contrast(80%);
+}
+
+th:hover{
+    background-color: #167800;
 }
 
 td {
@@ -678,6 +683,9 @@ thead tr .roles {
     text-align: center;
     color: var(--light-text-color);
 }
+.form-emp input{
+    width: 0;
+}
 
 .btn-emp {
     margin: .2rem;
@@ -920,6 +928,13 @@ thead tr .roles {
 .card-buttons button:active {
     border: 0 solid  var(--color-1) !important;
     color: var(--color-1);
+}
+
+
+/* MODIFICAR BANNERS */
+
+.ecommerce-images-config label{
+    color: var(--color-3);
 }
 
 /* --------- GENERICS --------- */
