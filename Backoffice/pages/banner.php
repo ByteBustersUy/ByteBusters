@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6" style="margin-bottom: 10rem;">
                 <div class="banner">
                     <img src="../../Ecommerce/assets/bannercuatro.png" class="d-block w-100" alt="...">
                 </div>

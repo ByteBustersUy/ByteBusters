@@ -514,6 +514,11 @@ thead tr .roles {
     filter: drop-shadow(.1rem .1rem .6rem var(--bytebusters-color)) brightness(110%);
 }
 
+.carousel-item img,
+.banner img{
+    height: 8rem;
+}
+
 .btn-abm i {
     scale: 300%;
     padding-top: 1px;
