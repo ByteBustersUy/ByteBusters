@@ -58,7 +58,6 @@ checkPermissionss($actions["gestionar-productos"]);
             <div class="col-lg-9">
                 <div class="table-options">
                     <input id="searchTerm" type="text" placeholder="Buscar producto" onkeyup="doSearch()" />
-                    <button id="btnBanners" class="btn-banners enabled-button" onclick="location.href='banner.php'">Editar banners</button>
                     <button id="btnPromocionar" class="btn-promocionar disabled enabled-button" data-bs-toggle="modal" data-bs-target="#moddalProductsPromotion">Promocionar</button>
                     <select class="filter-list" name="filter" id="filter" onchange="filterProductByPromo();">
                         <option selected hidden value="">Filtrar</option>

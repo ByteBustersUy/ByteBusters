@@ -500,6 +500,9 @@ thead tr .roles {
 }
 
 .btn-banners{
+    position:absolute;
+    right: 5rem;
+    bottom:10rem;
     margin:auto;
     margin-top: 0;
     margin-bottom: 0;
