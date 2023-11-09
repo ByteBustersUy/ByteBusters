@@ -58,22 +58,25 @@ function listarBusqueda(nombreProductoABuscar, numPage) {
       cargarBotonesPaginacion(totalProductos);
       indice = limit * numPage - limit;
         for (let i = indice; i < indice + 10; i++) {
-          const idProducto = jsonProductos[i].id;
-          const idPromo = (await obtenerIdPromo(idProducto))[0]?.promociones_id;
-          let descuento;
-
-          if(idPromo){
-            descuento = (await obtenerDescuento(idPromo))[0].descuento
-          }
-
-          if(descuento) {
-            contenidoLista += renderizarListado(jsonProductos[i], descuento);
-          }else{
-            contenidoLista += renderizarListado(jsonProductos[i]);
-          }
+          try {
+            const idProducto = jsonProductos[i].id;
+            const idPromo = (await obtenerIdPromo(idProducto))[0]?.promociones_id;
+            let descuento;
+  
+            if(idPromo){
+              descuento = (await obtenerDescuento(idPromo))[0].descuento
+            }
+  
+            if(descuento) {
+              contenidoLista += renderizarListado(jsonProductos[i], descuento);
+            }else{
+              contenidoLista += renderizarListado(jsonProductos[i]);
+            }
+          
+          container.innerHTML = contenidoLista;
+            
+          } catch (error) {}
         }
-        container.innerHTML = contenidoLista;
-
     })
 }
 
