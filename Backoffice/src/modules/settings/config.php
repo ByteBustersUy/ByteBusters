@@ -20,8 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fileTmpPath = $_FILES['logo']['tmp_name'];
     if (move_uploaded_file($fileTmpPath, $destinoEcommerce)) {
         echo "Fue guardado";
+        header("Location:../../../pages/config-empresa.php");
     } else {
         echo "Error";
+        header("Location:../../../pages/config-empresa.php");
     }
 
     //TODO: hacer validaciones del formulario
@@ -74,5 +76,7 @@ function getDataEmpresa(): array
     $dataEmpresa = findAllDataEmpresa();
     return $dataEmpresa ? $dataEmpresa : die("Error: " . $error_messages['!data_empresa']);
 }
+
+
 
 ?>

@@ -499,6 +499,17 @@ thead tr .roles {
     background-color: var(--background-color-light);
 }
 
+.btn-banners{
+    position:absolute;
+    right: 5rem;
+    bottom:10rem;
+    margin:auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.btn-banners:hover{
+    filter: drop-shadow(.1rem .1rem 1rem var(--bytebusters-color)) brightness(120%);
+}
 .enabled-button {
     filter: drop-shadow(.1rem .1rem .6rem var(--bytebusters-color)) brightness(110%);
 }
