@@ -15,33 +15,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $destinoBanner = "../../../../Ecommerce/assets/" . $nombreBanner[1];
         $fileTmpPath = $_FILES['banneruno']['tmp_name'];
         if (move_uploaded_file($fileTmpPath, $destinoBanner)) {
-            echo "Fue guardado el banner uno";
+            // echo "Fue guardado el banner uno";
         } else {
-            echo "Error banner uno";
+            // echo "Error banner uno";
         }
 
         $destinoBanner = "../../../../Ecommerce/assets/" . $nombreBanner[2];
         $fileTmpPath = $_FILES['bannerdos']['tmp_name'];
         if (move_uploaded_file($fileTmpPath, $destinoBanner)) {
-            echo "Fue guardado el banner dos";
+            // echo "Fue guardado el banner dos";
         } else {
-            echo "Error banner dos";
+            // echo "Error banner dos";
         }
 
         $destinoBanner = "../../../../Ecommerce/assets/" . $nombreBanner[3];
         $fileTmpPath = $_FILES['bannertres']['tmp_name'];
         if (move_uploaded_file($fileTmpPath, $destinoBanner)) {
-            echo "Fue guardado el banner tres";
+            // echo "Fue guardado el banner tres";
         } else {
-            echo "Error banner tres";
+            // echo "Error banner tres";
         }
         $destinoBanner = "../../../../Ecommerce/assets/" . $nombreBanner[4];
         $fileTmpPath = $_FILES['bannercuatro']['tmp_name'];
         if (move_uploaded_file($fileTmpPath, $destinoBanner)) {
-            echo "Fue guardado el banner cuatro";
+            // echo "Fue guardado el banner cuatro";
         } else {
-            echo "Error banner cuatro";
+            // echo "Error banner cuatro";
         }
+
+        header("Location: ../../../pages/banner.php");
     }
 
 ?>
