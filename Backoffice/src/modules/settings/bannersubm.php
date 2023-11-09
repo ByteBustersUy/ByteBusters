@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         3    => "bannertres.png",
         4    => "bannercuatro.png",
     );
-
         $destinoBanner = "../../../../Ecommerce/assets/" . $nombreBanner[1];
         $fileTmpPath = $_FILES['banneruno']['tmp_name'];
         if (move_uploaded_file($fileTmpPath, $destinoBanner)) {

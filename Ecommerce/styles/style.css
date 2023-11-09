@@ -794,14 +794,6 @@ border-radius: .3rem;
 
 }
 
-.subFoot {
-  text-align: right;
-  background-color: var(--color-5);
-  margin-top: 0%;
-  box-shadow: 2.5px 2.5px 5px var(--color-3);
-  width: 100.5%;
-}
-
 .result {
   margin-top: 3%;
 }
@@ -827,7 +819,7 @@ a {
 
 .aNomb:hover {
   border-bottom: 1px solid;
-  background: var(--color-2);
+  /*background: var(--color-2);*/
 }
 
 .aNomb:active {
@@ -838,11 +830,11 @@ a {
   color: black;
   text-decoration: line-through;
 }
-
+.promocionado h3 {
+text-decoration: line-through;  
+color: var(--ecommerce-color);
+}
 .img-producto-lista {
-  border-color: brown;
-  border-width: 1px;
-  border-style: dotted;
   width: 9rem;
   height: 9rem;
   margin: 0.5rem;

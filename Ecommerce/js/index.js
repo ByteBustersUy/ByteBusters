@@ -49,13 +49,15 @@ window.addEventListener("DOMContentLoaded", function () {
             				<img src="./images/${data[i].imagen} " class="card-img-top" alt="...">
             				<div class="card-body">
 								<h5>${limitarNombres(data[i].nombre)}</h5>
+								<h6>$${data[i].precio}</h6>s
                 				<h4>$${data[i].precio-precioDescueto}</h4>
-								<h6>$${data[i].precio}</h6>
+								
             				</div>
 						</a>
             			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
     			</div>`;
+
 
 				divProducPromo.innerHTML = cards;
 			}
