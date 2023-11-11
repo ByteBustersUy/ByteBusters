@@ -26,8 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location:../../../pages/config-empresa.php");
     }
 
-    //TODO: hacer validaciones del formulario
-
     $currentDataEmpresa = getDataEmpresa();
 
     $dataToUpdate = [

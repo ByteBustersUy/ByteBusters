@@ -47,7 +47,7 @@ function addProduct()
         $idFileName = intval(findLastProductId()) + 1 . ".jpg";
 
         $dir = '../../../../Ecommerce/images/';
-        echo $destino = $dir . $idFileName; //TODO: id de producto
+        echo $destino = $dir . $idFileName;
         echo $idFileName;
 
         print_r(move_uploaded_file($fileTmpPath, $destino));
