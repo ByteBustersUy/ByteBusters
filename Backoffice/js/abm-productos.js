@@ -307,7 +307,6 @@ btnPromocionar.addEventListener("click", async () => {
 			const fechaFinFormatted = fechaFinSplitted.reverse().join("/");
 
 			const currentPromo = `${descuento}% (${fechaInicioFormatted} - ${fechaFinFormatted})`; 
-			console.log(options[i].innerHTML +"-->"+currentPromo)
 
 			if (options[i].innerHTML == currentPromo) {
 				options[i].setAttribute("selected", true);
@@ -319,7 +318,6 @@ btnPromocionar.addEventListener("click", async () => {
 		const formPromocionar = document.getElementById("formPromocionar");
 		formPromocionar.addEventListener("submit", (event) => {
 			formPromocionar.attributes.item(2).value += `&productId=${productId}`;
-			console.log(event)
 		});
 
 		//eliminar promocion a producto

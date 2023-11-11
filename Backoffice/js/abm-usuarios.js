@@ -157,7 +157,8 @@ btnDeleteUser.addEventListener("click", async () => {
 							alert("No se puede eliminar el usuario actual");
 							location.reload(true);
 						} else {
-							alert("Error inesperado al intentar de eliminar usuario");
+							alert("Error inesperado al intentar eliminar un usuario");
+							window.location.reload(true);
 						}
 					}, 1200);
 				})

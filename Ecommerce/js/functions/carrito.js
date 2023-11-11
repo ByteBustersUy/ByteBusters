@@ -137,7 +137,6 @@ btnComprar.addEventListener("click", function () {
         carritoVacio=[];
         localStorage.setItem("id", JSON.stringify(carritoVacio));
         generarPDF();
-        console.log("comprado");
         alert("su compra fue realizada corectamente")
         cargarCarrito()
        
