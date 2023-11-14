@@ -158,7 +158,7 @@ btnDeleteUser.addEventListener("click", async () => {
 							location.reload(true);
 						} else {
 							alert("Error inesperado al intentar eliminar un usuario");
-							window.location.reload(true);
+							location.reload(true);
 						}
 					}, 1200);
 				})

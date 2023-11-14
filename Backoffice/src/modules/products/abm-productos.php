@@ -2,6 +2,7 @@
 require_once realpath(dirname(__FILE__)) . "/../../utils/validators/hasData.php";
 require_once realpath(dirname(__FILE__)) . "/../../repository/products.repository.php";
 require realpath(dirname(__FILE__)) . "/../../utils/validators/db_types.php";
+error_reporting(0);
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
