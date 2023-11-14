@@ -170,16 +170,6 @@ const modalProductsPromotion = document.getElementById(
 	"moddalProductsPromotion"
 );
 
-modalProductsPromotion.addEventListener("click", (event) => {
-	if (
-		event.target.id === modalProductsPromotion.id ||
-		event.target.id === "btnCloseModal" ||
-		event.target.id === "btnCancelModal"
-	) {
-		location.reload(true);
-	}
-});
-
 formAbm.addEventListener("change", () => {
 	const btnSubmitModal = document.getElementById("btnSubmitModal");
 	const messageError = document.getElementById("errorMessageModal");
@@ -267,9 +257,6 @@ function doSearch() {
 // Promocionar producto
 btnPromocionar.addEventListener("click", async () => {
 	if (selectedRow) {
-		document
-			.getElementById("btnPromocionar")
-			.setAttribute("class", "enabled-button");
 
 		const productId = selectedRow.id;
 		const productData = await getProductData(productId);
