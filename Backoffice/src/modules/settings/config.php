@@ -18,13 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nameLogo = "logo-empresa.png";
     $destinoEcommerce = "../../../../Ecommerce/assets/".$nameLogo;
     $fileTmpPath = $_FILES['logo']['tmp_name'];
-    if (move_uploaded_file($fileTmpPath, $destinoEcommerce)) {
-        echo "Fue guardado";
-        header("Location:../../../pages/config-empresa.php");
-    } else {
-        echo "Error";
-        header("Location:../../../pages/config-empresa.php");
-    }
+    move_uploaded_file($fileTmpPath, $destinoEcommerce);
+   
 
     $currentDataEmpresa = getDataEmpresa();
 
@@ -45,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $result = saveDataEmpresa($dataToUpdate);
 
-    if ($result == 1) {
-        header("Location:../../../pages/config-empresa.php");
-    } else {
+    if ($result != 1) {
         die('Error al guardar en db');
     }
+
+    header("Location:../../../pages/config-empresa.php");
 }
 
 function getLabelsEmpresaHTML(): string

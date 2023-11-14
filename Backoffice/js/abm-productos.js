@@ -166,16 +166,6 @@ modalProducts.addEventListener("click", (event) => {
 
 const modalProductsDetail = document.getElementById("moddalProductsDetail");
 
-modalProductsDetail.addEventListener("click", (event) => {
-	if (
-		event.target.id === modalProductsDetail.id ||
-		event.target.id === "btnCloseModal" ||
-		event.target.id === "btnCancelModal"
-	) {
-		location.reload(true);
-	}
-});
-
 const modalProductsPromotion = document.getElementById(
 	"moddalProductsPromotion"
 );
@@ -196,7 +186,6 @@ formAbm.addEventListener("change", () => {
 	const nombre = document.getElementById("nombre");
 	const descripcion = document.getElementById("descripcion");
 	const categoria = document.getElementById("categoria");
-	const imagen = document.getElementById("btnUploadImage");
 
 	messageError.innerHTML = "";
 

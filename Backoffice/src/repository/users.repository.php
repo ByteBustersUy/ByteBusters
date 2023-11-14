@@ -84,16 +84,18 @@ function findPathByAction(string $action, array $rolesId): string
                                     ON p.accion = rp.PERMISOS_accion
                                     WHERE p.accion = :accion");
         $statement->execute(array(':accion' => $action));
-        $reg = $statement->fetch(PDO::FETCH_ASSOC);
+        $reg = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         $isValidRol = false;
-        foreach ($rolesId as $rolId) {
-            if ($rolId == $reg['ROLES_id']) {
-                $isValidRol = true;
+        foreach ($reg as $registro) {
+            foreach ($rolesId as $rolId) {
+                if ($rolId == $registro["ROLES_id"]) {
+                    $isValidRol = true;
+                }
             }
         }
 
-        return $reg['ruta'] && $isValidRol ? $reg['ruta'] : '';
+        return $registro['ruta'] && $isValidRol ? $registro['ruta'] : '';
     } catch (Exception $e) {
         $con->close();
         die("ERROR SQL in findPathByAction(): " . $e->getMessage());
