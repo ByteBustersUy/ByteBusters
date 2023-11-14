@@ -129,6 +129,7 @@ body {
 }
 
 input {
+    width: 0px;
     height: 2.3rem;
     outline: none;
     text-indent: .5rem;
@@ -172,6 +173,10 @@ th {
     border: 1px solid var(--secondary-border-color);
     background-color: var(--primary-background-color) !important;
     filter: contrast(80%);
+}
+
+th:hover{
+    background-color: #167800;
 }
 
 td {
@@ -494,8 +499,24 @@ thead tr .roles {
     background-color: var(--background-color-light);
 }
 
+.btn-banners{
+    position:absolute;
+    right: 5rem;
+    bottom:10rem;
+    margin:auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.btn-banners:hover{
+    filter: drop-shadow(.1rem .1rem 1rem var(--bytebusters-color)) brightness(120%);
+}
 .enabled-button {
     filter: drop-shadow(.1rem .1rem .6rem var(--bytebusters-color)) brightness(110%);
+}
+
+.carousel-item img,
+.banner img{
+    height: 8rem;
 }
 
 .btn-abm i {
@@ -677,6 +698,9 @@ thead tr .roles {
     font-weight: 600;
     text-align: center;
     color: var(--light-text-color);
+}
+.form-emp input{
+    width: 0;
 }
 
 .btn-emp {
@@ -920,6 +944,13 @@ thead tr .roles {
 .card-buttons button:active {
     border: 0 solid  var(--color-1) !important;
     color: var(--color-1);
+}
+
+
+/* MODIFICAR BANNERS */
+
+.ecommerce-images-config label{
+    color: var(--color-3);
 }
 
 /* --------- GENERICS --------- */

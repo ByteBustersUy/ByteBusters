@@ -11,6 +11,9 @@ const validEmails = [
 	"gmail.com",
 	"hotmail.com",
 	"bytebusters.com",
+	"outlook.com",
+	"yahoo.com",
+	"icloud.com",
 ];
 
 const validators = {
@@ -26,7 +29,8 @@ const validators = {
 	isValidCi: (str) =>
 		new RegExp("^[1-9]{1}[0-9]{7}$").test(str) ? true : false,
 	isValidPass: (str) =>
-		new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+").test(str) && str.length >= 8
+		new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+").test(str) &&
+		str.length >= 8
 			? true
 			: false,
 };
@@ -153,7 +157,8 @@ btnDeleteUser.addEventListener("click", async () => {
 							alert("No se puede eliminar el usuario actual");
 							location.reload(true);
 						} else {
-							alert("Error inesperado al intentar de eliminar usuario");
+							alert("Error inesperado al intentar eliminar un usuario");
+							location.reload(true);
 						}
 					}, 1200);
 				})
@@ -222,7 +227,7 @@ formAbm.addEventListener("click", () => {
 		}
 
 		if (selectedModal == "add") {
-			if(pass.value.length > 0){
+			if (pass.value.length > 0) {
 				if (!isValidPass(pass.value)) {
 					validForm = false;
 					messageError.innerHTML = `La contraseña no es válida.
@@ -234,7 +239,7 @@ formAbm.addEventListener("click", () => {
 						Números y 8 caractéres.
 						`;
 				}
-			}else{
+			} else {
 				validForm = false;
 				messageError.innerHTML = "Todos los campos son obligatorios";
 			}
@@ -274,14 +279,14 @@ function selectUserRow(userCi) {
 }
 
 function doSearch() {
-	const tableReg = document.getElementById('bodyUsersTable');
-	const searchText = document.getElementById('searchTerm').value.toLowerCase();
+	const tableReg = document.getElementById("bodyUsersTable");
+	const searchText = document.getElementById("searchTerm").value.toLowerCase();
 
 	let total = 0;
 	// Recorremos todas las filas con contenido de la tabla
 	for (let i = 0; i < tableReg.rows.length; i++) {
 		let found = false;
-		const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+		const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
 		// Recorremos todas las celdas
 		for (let j = 0; j < cellsOfRow.length && !found; j++) {
 			const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
@@ -292,11 +297,11 @@ function doSearch() {
 			}
 		}
 		if (found) {
-			tableReg.rows[i].style.display = '';
+			tableReg.rows[i].style.display = "";
 		} else {
 			// si no ha encontrado ninguna coincidencia, esconde la
 			// fila de la tabla
-			tableReg.rows[i].style.display = 'none';
+			tableReg.rows[i].style.display = "none";
 		}
 	}
 }
@@ -305,13 +310,13 @@ function filterUserByRol() {
 	const selectedValue = document.getElementById("filter").value;
 
 	if (selectedValue === "vendedor" || "admin") {
-		const tableReg = document.getElementById('bodyUsersTable');
-		const searchText = document.getElementById('filter').value.toLowerCase();
+		const tableReg = document.getElementById("bodyUsersTable");
+		const searchText = document.getElementById("filter").value.toLowerCase();
 		let total = 0;
 		// Recorremos todas las filas con contenido de la tabla
 		for (let i = 0; i < tableReg.rows.length; i++) {
 			let found = false;
-			const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+			const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
 			// Recorremos todas las celdas
 			const compareWith = cellsOfRow[3].innerHTML.toLowerCase();
 			// Buscamos el texto en el contenido de la celda
@@ -321,20 +326,27 @@ function filterUserByRol() {
 			}
 
 			if (found) {
-				tableReg.rows[i].style.display = '';
+				tableReg.rows[i].style.display = "";
 			} else {
 				// si no ha encontrado ninguna coincidencia, esconde la
 				// fila de la tabla
-				tableReg.rows[i].style.display = 'none';
+				tableReg.rows[i].style.display = "none";
 			}
 		}
 	} else {
 		getUsersTableDataHTML();
 	}
-
 }
 function sortTable(n, type) {
-	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	var table,
+		rows,
+		switching,
+		i,
+		x,
+		y,
+		shouldSwitch,
+		dir,
+		switchcount = 0;
 
 	table = document.getElementById("bodyUsersTable");
 	switching = true;
@@ -343,17 +355,25 @@ function sortTable(n, type) {
 	while (switching) {
 		switching = false;
 		rows = table.rows;
-		for (i = 0; i < (rows.length - 1); i++) {
+		for (i = 0; i < rows.length - 1; i++) {
 			shouldSwitch = false;
 			x = rows[i].getElementsByTagName("TD")[n];
 			y = rows[i + 1].getElementsByTagName("TD")[n];
 			if (dir == "asc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
+				if (
+					(type == "str" &&
+						x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
+					(type == "int" && parseInt(x.innerHTML) > parseInt(y.innerHTML))
+				) {
 					shouldSwitch = true;
 					break;
 				}
 			} else if (dir == "desc") {
-				if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
+				if (
+					(type == "str" &&
+						x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) ||
+					(type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))
+				) {
 					shouldSwitch = true;
 					break;
 				}
@@ -371,6 +391,3 @@ function sortTable(n, type) {
 		}
 	}
 }
-
-
-

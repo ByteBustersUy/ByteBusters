@@ -43,18 +43,23 @@ window.addEventListener("DOMContentLoaded", function () {
     			<div>
         			<div class="card produc-promo">
 						<a class="ir-detalle-producto" href="pages/detalleProducto.html?id=${data[i].id}">
-						<div class="promo-tag">
-						<span>${data[i].descuento}% OFF</span>
-						</div>
-            				<img src="./images/${data[i].imagen} " class="card-img-top" alt="...">
-            				<div class="card-body">
-								<h5>${limitarNombres(data[i].nombre)}</h5>
-                				<h4>$${data[i].precio-precioDescueto}</h4>
-								<h6>$${data[i].precio}</h6>
-            				</div>
+							<div class="promo-tag">
+								<span>${data[i].descuento}% OFF</span>
+								</div>
+            						<img src="./images/${data[i].imagen} " class="card-img-top" alt="...">
+            						<div class="card-body">
+									<h5>${limitarNombres(data[i].nombre)}</h5>
+									<h6>$${data[i].precio}</h6>s
+								</div>
+								<h4 style="position: absolute; bottom: 3rem">$${data[i].precio-precioDescueto}</h4>
 						</a>
+<<<<<<< HEAD
             			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
         			</div>
+=======
+						<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
+					</div>
+>>>>>>> 00aad4caaa8bc15491db8dceba1486ef752041f7
     			</div>`;
 
 				divProducPromo.innerHTML = cards;

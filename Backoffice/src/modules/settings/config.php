@@ -14,18 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $comentario = htmlspecialchars($_POST['comentario']);
     $logo = htmlspecialchars($_FILE['logo']);
     $email = htmlspecialchars($_POST['email']);
-    $pwd_email = htmlspecialchars($_POST['pwd_email']);
-
+    $pwd_email = htmlspecialchars($_POST['pwd_email']); 
     $nameLogo = "logo-empresa.png";
     $destinoEcommerce = "../../../../Ecommerce/assets/".$nameLogo;
     $fileTmpPath = $_FILES['logo']['tmp_name'];
-    if (move_uploaded_file($fileTmpPath, $destinoEcommerce)) {
-        echo "Fue guardado";
-    } else {
-        echo "Error";
-    }
-
-    //TODO: hacer validaciones del formulario
+    move_uploaded_file($fileTmpPath, $destinoEcommerce);
+   
 
     $currentDataEmpresa = getDataEmpresa();
 
@@ -46,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $result = saveDataEmpresa($dataToUpdate);
 
-    if ($result == 1) {
-        header("Location:../../../pages/config-empresa.php");
-    } else {
+    if ($result != 1) {
         die('Error al guardar en db');
     }
+
+    header("Location:../../../pages/config-empresa.php");
 }
 
 function getLabelsEmpresaHTML(): string
@@ -75,3 +69,7 @@ function getDataEmpresa(): array
     $dataEmpresa = findAllDataEmpresa();
     return $dataEmpresa ? $dataEmpresa : die("Error: " . $error_messages['!data_empresa']);
 }
+
+
+
+?>

@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 <a id="${data[id].id}" href="#" class="btn btn-agregar agregar-carrito buttonAdd">Agregar al carrito</a>
               </div>
             </div>
-          `;
+            `;
 
 				container.appendChild(divPrducPromo);
 			}

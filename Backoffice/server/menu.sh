@@ -76,7 +76,6 @@ option=0
     echo "{9}---Reiniciar MySQL"
     echo "{10}--Configuración"
     echo "{11}--Información del sistema"
-    echo "{12}--"
     echo
     echo "INGRESE UNA DE LAS OPCIONES"
     read -r option

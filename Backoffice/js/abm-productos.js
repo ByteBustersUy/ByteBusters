@@ -166,16 +166,6 @@ modalProducts.addEventListener("click", (event) => {
 
 const modalProductsDetail = document.getElementById("moddalProductsDetail");
 
-modalProductsDetail.addEventListener("click", (event) => {
-	if (
-		event.target.id === modalProductsDetail.id ||
-		event.target.id === "btnCloseModal" ||
-		event.target.id === "btnCancelModal"
-	) {
-		location.reload(true);
-	}
-});
-
 const modalProductsPromotion = document.getElementById(
 	"moddalProductsPromotion"
 );
@@ -196,7 +186,6 @@ formAbm.addEventListener("change", () => {
 	const nombre = document.getElementById("nombre");
 	const descripcion = document.getElementById("descripcion");
 	const categoria = document.getElementById("categoria");
-	const imagen = document.getElementById("btnUploadImage");
 
 	messageError.innerHTML = "";
 
@@ -307,7 +296,6 @@ btnPromocionar.addEventListener("click", async () => {
 			const fechaFinFormatted = fechaFinSplitted.reverse().join("/");
 
 			const currentPromo = `${descuento}% (${fechaInicioFormatted} - ${fechaFinFormatted})`; 
-			console.log(options[i].innerHTML +"-->"+currentPromo)
 
 			if (options[i].innerHTML == currentPromo) {
 				options[i].setAttribute("selected", true);
@@ -319,7 +307,6 @@ btnPromocionar.addEventListener("click", async () => {
 		const formPromocionar = document.getElementById("formPromocionar");
 		formPromocionar.addEventListener("submit", (event) => {
 			formPromocionar.attributes.item(2).value += `&productId=${productId}`;
-			console.log(event)
 		});
 
 		//eliminar promocion a producto
