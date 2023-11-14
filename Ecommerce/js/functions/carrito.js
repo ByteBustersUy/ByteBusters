@@ -1,5 +1,6 @@
 const divProductoCarrito = document.getElementById("region-producto");
 const textoPrecioTotal = document.getElementById("text-precio");
+let idPromocion;
 let listadoCantidades = [];
 let resultadoTotal;
 let totalPagar=0;
@@ -47,12 +48,11 @@ function cargarCarrito() {
                 cantidadProductoLocal= productos[i]["cantidad"]
                 precioProducto=data[i].precio
                 const idProducto=data[i].id;
-                const idPromocion =(await producHasPromo(idProducto))[0]?.promociones_id;
+                idPromocion =(await producHasPromo(idProducto))[0]?.promociones_id;
                 
                 
                 if(idPromocion){
-                    descuentoDB = (await adquirirDescuento(idPromocion))[0].descuento
-                    
+                    descuentoDB = (await adquirirDescuento(idPromocion))[0].descuento                   
                 }
                 
                 if((descuentoDB)&&(idPromocion)) {
@@ -138,12 +138,16 @@ btnComprar.addEventListener("click", function () {
     
         carritoVacio=[];
         localStorage.setItem("id", JSON.stringify(carritoVacio));
+        console.log(totalPagar);
         generarPDF();
         alert("su compra fue realizada corectamente")
-        cargarCarrito()
+        
        
         resultadoTotal = 0;
         textoPrecioTotal.innerHTML ='$'+resultadoTotal;
+        setTimeout(() => {
+            cargarCarrito()
+        },1250);
         
 })
 function sumarProducoAlCarrito(id) {
@@ -162,7 +166,7 @@ function restarProducoAlCarrito(id) {
     } 
     localStorage.setItem("id", JSON.stringify(dataByLocaStorage));
 }
-function generarPDF() {
+async function generarPDF() {
     let doc = new jsPDF({
         orientation: 'p',
         unit: 'mm',
@@ -180,17 +184,32 @@ function generarPDF() {
         doc.addPage()
         alto=10;
         }
-        let nombre = limitarNombres(jsonCarrito[indi].nombre)
-        let cantidad=dataByLocaStorage[indi].cantidad.toString()
-        doc.text(nombre, 10,alto);
-        doc.text(cantidad,130,alto);
-        doc.text("$"+jsonCarrito[indi].precio,155,alto);
-        doc.text("$"+jsonCarrito[indi].precio*cantidad,185,alto);
-        alto+=10;  
+        idPromocion=(await producHasPromo(jsonCarrito[indi].id))[0]?.promociones_id
+        if(idPromocion){
+            descuentoDB = (await adquirirDescuento(idPromocion))[0].descuento                   
+        }
+        if((descuentoDB)&&(idPromocion)) {
+            let nombre = limitarNombres(jsonCarrito[indi].nombre)
+            let precidescontado=(Math.round(jsonCarrito[indi].precio * (100 - descuentoDB) / 100))
+            let cantidad=dataByLocaStorage[indi].cantidad.toString()
+            doc.text(nombre, 10,alto);
+            doc.text(cantidad,130,alto);
+            doc.text("$"+precidescontado,155,alto);
+            doc.text("$"+precidescontado*cantidad,185,alto);
+        alto+=10;
+        }else{
+            let nombre = limitarNombres(jsonCarrito[indi].nombre)
+            let cantidad=dataByLocaStorage[indi].cantidad.toString()
+            doc.text(nombre, 10,alto);
+            doc.text(cantidad,130,alto);
+            doc.text("$"+jsonCarrito[indi].precio,155,alto);
+            doc.text("$"+jsonCarrito[indi].precio*cantidad,185,alto);
+            alto+=10; 
+        }  
     }
     alto+=10;
     let precioTotal= resultadoTotal.toString();
-    doc.text("Total a Pagar: $"+precioTotal,140,alto);
+    doc.text("Total a Pagar: $"+totalPagar,140,alto);
     doc.save('boleta.pdf')
 }
 function limitarNombres(nombre){
