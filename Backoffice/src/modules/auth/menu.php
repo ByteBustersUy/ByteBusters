@@ -55,7 +55,7 @@ foreach ($cardsList as $cardData) {
             . $cardData['i']
             . $cardData['h4']
             . $cardData['p'] .
-            "</div>
+        "</div>
         </a>
         </div>
         </div>";
