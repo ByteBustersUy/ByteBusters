@@ -53,13 +53,8 @@ window.addEventListener("DOMContentLoaded", function () {
 								</div>
 								<h4 style="position: absolute; bottom: 3rem">$${data[i].precio-precioDescueto}</h4>
 						</a>
-<<<<<<< HEAD
-            			<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
-        			</div>
-=======
 						<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
 					</div>
->>>>>>> 00aad4caaa8bc15491db8dceba1486ef752041f7
     			</div>`;
 
 				divProducPromo.innerHTML = cards;
