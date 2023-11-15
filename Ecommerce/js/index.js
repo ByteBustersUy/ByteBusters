@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", function () {
 			let cards = ``;
 			
 			for (let i = 0; i < data.length; i++) {
-				let precioDescueto=Math.round(data[i].descuento*data[i].precio/100)
+				let precioDescueto=Math.round(data[i].precio*(100-data[i].descuento)/100)
 				cards += `
     			<div>
         			<div class="card produc-promo">
@@ -51,12 +51,11 @@ window.addEventListener("DOMContentLoaded", function () {
 									<h5>${limitarNombres(data[i].nombre)}</h5>
 									<h6>$${data[i].precio}</h6>s
 								</div>
-								<h4 style="position: absolute; bottom: 3rem">$${data[i].precio-precioDescueto}</h4>
+								<h4 style="position: absolute; bottom: 3rem">$${precioDescueto}</h4>
 						</a>
 						<a id="${data[i].id}" class="btn btn-agregar agregar-carrito">Agregar al carrito</a>
 					</div>
     			</div>`;
-
 
 				divProducPromo.innerHTML = cards;
 			}

@@ -13,19 +13,21 @@ window.addEventListener("DOMContentLoaded", async function () {
 const botonesPaginacion = document.getElementById("div-btns-pages");
 botonesPaginacion.addEventListener("click", function (event) {
   if (event.target.className === "btn btn-pages") {
-    numPage = event.target.id
+    numPage = event.target.id;
     const urlParams = new URLSearchParams(window.location.search);
     nombreProductoABuscar = urlParams.get('search');
     listarBusqueda(nombreProductoABuscar, numPage);
+
+
+    scrollToTop();
   }
-})
+});
 
 let limit = 10;
 function cargarBotonesPaginacion(totalProductos) {
-
   let cantidadPaginas = totalProductos / limit;
-  if (totalProductos % limit != 0) {
-    cantidadPaginas = Math.ceil(cantidadPaginas)
+  if (totalProductos % limit !== 0) {
+    cantidadPaginas = Math.ceil(cantidadPaginas);
   }
   if (cantidadPaginas <= 0) {
     cantidadPaginas = 1;
@@ -34,8 +36,8 @@ function cargarBotonesPaginacion(totalProductos) {
   let botones = "";
   for (let i = 1; i <= cantidadPaginas; i++) {
     botones += `
-		<button id=${i} type="button" class="btn btn-pages">${i}</button>
-        `;
+          <button id=${i} type="button" class="btn btn-pages">${i}</button>
+      `;
   }
   const divBtnPages = document.getElementById("div-btns-pages");
   divBtnPages.innerHTML = botones;

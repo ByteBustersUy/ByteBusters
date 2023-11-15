@@ -342,7 +342,6 @@ INSERT INTO `bytebusters2_db`.`CATEGORIAS` (`id`, `nombre`) VALUES ('12', 'Fresc
 ---------------------------------
 */
 
-INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `imagen`,`precio`,`usuario_ci`,`activo`) VALUES ('0', 'Whisky escocés JOHNNIE WALKER Blue edición limitada 750 ml','Blue Label de JOHNNIE WALKER es un elixir','0.jpg','16900','55271656',1);
 INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `imagen`,`precio`,`usuario_ci`,`activo`) VALUES ('1', 'Pack 3 Rollos de Cocina NOVA Clásico', 'Rollos de papel doble hoja con alta absorción que permite retener mayor cantidad de líquido y aseguran un rendimiento más económico en todas las necesidades del hogar.', '1.jpg','100','55271656',1);
 INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `imagen`,`precio`,`usuario_ci`,`activo`) VALUES ('2', 'Tijera MAPED Sensoft 13 cm mango de goma', 'Los Mejores útiles para escolares encontralos en la web', '2.jpg','170','55271656',1);
 INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `imagen`,`precio`,`usuario_ci`,`activo`) VALUES ('3','Lubricante WD-40 flexi tapa 220g','Lubricante WD-40 flexi tapa 220g, producto de excelente calidad.', '3.jpg','550','55271656',1);
@@ -433,13 +432,13 @@ INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `image
 INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `imagen`,`precio`,`usuario_ci`,`activo`) VALUES ('88','Roll De Cuero Denucio','Roll De Cuero Denucio','88.jpg','160','55271656',1);
 
 /*
+INSERT INTO `bytebusters2_db`.`PRODUCTOS` (`id`, `nombre`, `descripcion`, `imagen`,`precio`,`usuario_ci`,`activo`) VALUES ('89', 'Whisky escocés JOHNNIE WALKER Blue edición limitada 750 ml','Blue Label de JOHNNIE WALKER es un elixir','89.jpg','16900','55271656',1);
 -----------------------------------------------
 --INSERTS RELACIONANDO PRODUCTOS CON CATEGORIAS--
 -----------------------------------------------
 
 */
 
-INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('0', '11');
 INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('1', '1');
 INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('2', '2');
 INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('3', '3');
@@ -529,10 +528,8 @@ INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEG
 INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('87', '8');
 INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('88', '8');
 
-
-
-
 /*
+INSERT INTO `bytebusters2_db`.`PRODUCTOS_has_CATEGORIAS` (`PRODUCTOS_id`, `CATEGORIAS_id`) VALUES ('89', '11');
 ----------------------------------
 --INSERT DE LA TABLA PROMOCIONES--
 ----------------------------------

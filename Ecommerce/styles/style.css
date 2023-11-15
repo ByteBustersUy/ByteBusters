@@ -354,6 +354,7 @@ span {
 }
 
 .div-producto {
+  background-color: rgb(250, 250, 250);
   border-color: var(--ecommerce-color);
   border-width: 2px;
   border-style: solid;
@@ -421,6 +422,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .btn-eliminar{
+  background-color: rgb(250, 250, 250);
   position:absolute;
   right:0.5rem;
   border-radius: 50%;
@@ -441,7 +443,12 @@ input[type=number]::-webkit-outer-spin-button {
   display: inline-flex;
   align-items: center;
 }
-
+.cantidad h6{
+  position: absolute;
+  bottom: 1.5rem;
+  color: black;
+  text-decoration: line-through;
+}
 .div-nombre-produc {
   display: flex;
   text-align: start;
@@ -470,7 +477,7 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 600;
   position: absolute;
   bottom: 0.8rem; 
-  background-color: #d5c8c836;;
+  background-color: #d5c8c859;;
   width:5.5rem;
   border-radius: 1rem;
   text-align: center;
@@ -482,6 +489,9 @@ input[type=number]::-webkit-outer-spin-button {
   position: absolute;
   left: 5%;
   top: 5%;
+}
+.producto-nom-promo{
+  color: green;
 }
 #btn-comprar{
   margin:auto;

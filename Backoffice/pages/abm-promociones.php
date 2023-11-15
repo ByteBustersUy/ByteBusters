@@ -47,7 +47,7 @@ checkPermissionss($actions["gestionar-promociones"]);
             echo getAllPromotionCards();
             ?>
         </div>
-        <button id="btnBanners" class="btn-banners" onclick="location.href='banner.php'">Configurar publicidad</button>
+        <button id="btnBanners" class="btn-banners link-options" onclick="location.href='banner.php'">Configurar publicidad</button>
         <footer>
             <?php
             require "./components/footer.php";
