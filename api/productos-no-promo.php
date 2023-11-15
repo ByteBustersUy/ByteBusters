@@ -5,7 +5,8 @@ $res = $con-> query("SELECT P.*
                     FROM PRODUCTOS P
                     LEFT JOIN PRODUCTOS_has_PROMOCIONES PP ON P.id = PP.PRODUCTOS_id
                     WHERE P.activo = 1
-                    AND PP.PRODUCTOS_id IS NULL;"
+                    AND PP.PRODUCTOS_id IS NULL
+                    LIMIT 15"
                     );
 $reg = $res->fetchAll(PDO::FETCH_ASSOC);
 
