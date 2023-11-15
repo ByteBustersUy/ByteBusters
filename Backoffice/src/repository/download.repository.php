@@ -3,7 +3,7 @@ function findAllProductData(): array
 {
     require realpath(dirname(__FILE__)) . "/../db/conexion.php";
     try {
-        $resultado = $con->query("SELECT nombre,descripcion,precio FROM PRODUCTOS");
+        $resultado = $con->query("SELECT nombre,descripcion,precio FROM PRODUCTOS ORDER BY nombre");
         $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
         
         return $registros;
@@ -24,12 +24,12 @@ function findProductDataByDateOfPromotion($fechaInicio,$fechaFin)
                                         SELECT PRODUCTOS_id 
                                         FROM `productos_has_promociones` 
                                         WHERE fecha >= '$fechaInicio'  
-                                        AND fecha <= '$fechaFin')
+                                        AND fecha <= '$fechaFin') ORDER BY `PRODUCTOS`.`nombre` 
                                         ");
         $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $registros;
     }catch(Exception $e) {
-        $con->close();
+        
         die("ERROR SQL in findProductDataByDateOfPromotion(): " . $e->getMessage());
     }
 }

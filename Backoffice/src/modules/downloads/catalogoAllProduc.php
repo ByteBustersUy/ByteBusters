@@ -16,13 +16,13 @@ function Header()
     // Movernos a la derecha
     $this->Cell(60);
     // Título
-    $this->Cell(20,10,utf8_decode('Reporte de Productos'),0,0);
+    $this->Cell(20,10,mb_convert_encoding('Reporte de Productos','ISO-8859-1','UTF-8'),0,0);
     // Salto de línea
     $this->Ln(20);
     
-    $this->Cell(80,10,utf8_decode('Nombre'),1,0,'C');
-    $this->Cell(95,10,utf8_decode('Descripcion'),1,0,'C');
-    $this->Cell(20,10,utf8_decode('Precio'),1,1,'C');
+    $this->Cell(80,10,mb_convert_encoding('Nombre','ISO-8859-1','UTF-8'),1,0,'C');
+    $this->Cell(95,10,mb_convert_encoding('Descripcion','ISO-8859-1','UTF-8'),1,0,'C');
+    $this->Cell(20,10,mb_convert_encoding('Precio','ISO-8859-1','UTF-8'),1,1,'C');
 }
 
 // Pie de página
@@ -58,6 +58,6 @@ foreach($registros as $reg) {
    
     $pdf->Cell(80,10,mb_convert_encoding($productname,'ISO-8859-1','UTF-8'),1,0);
     $pdf->Cell(95,10,mb_convert_encoding($productdesc,'ISO-8859-1','UTF-8'),1,0,);
-    $pdf->Cell(20,10,mb_convert_encoding($productpresi,'ISO-8859-1','UTF-8'),1,0,'C');
+    $pdf->Cell(20,10,mb_convert_encoding('$'.$productpresi,'ISO-8859-1','UTF-8'),1,0,'C');
 }
 $pdf->Output();
