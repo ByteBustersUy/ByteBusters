@@ -116,9 +116,9 @@ function loadCategoriesDesktop() {
 		.then((data) => {
 			const listCategories = document.getElementById("list-categories-desk");
 			listCategories.innerHTML = "";
-			for (let id = 0; id < data.length; id++) {
+			for (let i = 0; i < data.length; i++) {
 				listCategories.innerHTML += `<li class="nav-item">
-            <a class="nav-link active" aria-current="page" id="${data[id].id}" href="./${relativePath}/pages/listar.html?cat=${id}">${data[id].nombre}</a>
+            <a class="nav-link active" aria-current="page" id="${data[i].id}" href="./${relativePath}/pages/listar.html?cat=${i+1}">${data[i].nombre}</a>
           </li>`;
 			}
 		});
