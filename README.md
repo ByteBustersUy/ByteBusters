@@ -43,6 +43,15 @@ para el ecommerce ingrese:
 
 ##### DATOS DE PRUEBA:
 
+ - Usuario con ambos roles
 ```Usuario: 91827364```
 ```Contraseña: Aa123456```
+
+ - Usuario vendedor
+ ```Usuario: 91685073``` 
+ ```Contraseña: Aa123456``` 
+
+ - Usuario Administrador
+ ```Usuario: 16850794``` 
+ ```Contraseña: Aa123456``` 
 
