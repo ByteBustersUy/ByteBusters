@@ -265,7 +265,7 @@ function modificarContentCarrito(data,descuento) {
                     <p class="nombre-produc producto-nom-promo">${data.nombre}</p>
                 </div>
                 <div class="cantidad">
-                    <h6>$${data.precio} </h6>
+                    <h6 id="precio-tachado-carrito">$${data.precio} </h6>
                     <p class="precio-produc">$${precioDescuento}</p>
                     <div class="btns-cantidad">
                         <button class="input-btn-menos" id="${data.id}" type="button">

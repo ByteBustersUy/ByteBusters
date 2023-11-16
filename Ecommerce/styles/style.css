@@ -135,6 +135,10 @@ span {
   margin: 0 1rem;
 }
 
+#precio-tachado-carrito{
+  display: none;
+}
+
 
 
 /* carrousel */
@@ -742,6 +746,10 @@ border-radius: .3rem;
 
   .btns-cantidad {
     right: 30%;
+  }
+
+  #precio-tachado-carrito{
+    display: block;
   }
 
   .nombre-produc {
