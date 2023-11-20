@@ -57,7 +57,6 @@ window.addEventListener("DOMContentLoaded", function () {
 					</div>
     			</div>`;
 
-
 				divProducPromo.innerHTML = cards;
 			}
 		});
